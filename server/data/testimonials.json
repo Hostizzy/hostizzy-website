@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "name": "Mugdha",
+        "text": "Staying at a Hostizzy property was an absolute delight. The attention to detail was impeccable.",
+        "rating": 5,
+        "role": "Guest"
+    },
+    {
+        "id": 2,
+        "name": "Priya Malhotra",
+        "text": "As a property owner, I've seen my revenue double since switching to Hostizzy. Truly professional.",
+        "rating": 5,
+        "role": "Property Owner"
+    },
+    {
+        "id": 3,
+        "name": "Snigdha",
+        "text": "The team went above and beyond to make our family vacation special. Highly recommended!",
+        "rating": 5,
+        "role": "Guest"
+    },
+    {
+        "id": 4,
+        "name": "Rahul S.",
+        "text": "Seamless booking process and the property looked exactly like the photos.",
+        "rating": 4,
+        "role": "Guest"
+    },
+    {
+        "id": 5,
+        "name": "Amit K.",
+        "text": "Best management company in Goa. My apartment is always booked.",
+        "rating": 5,
+        "role": "Property Owner"
+    },
+    {
+        "id": 6,
+        "name": "Sarah J.",
+        "text": "Loved the local recommendations provided by the concierge. Made our trip unique.",
+        "rating": 5,
+        "role": "Guest"
+    }
+]

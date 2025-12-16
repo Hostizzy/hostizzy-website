@@ -1,0 +1,26 @@
+# Hostizzy: Premier Vacation Rental Management in India
+
+## Overview
+Hostizzy is a leading property management company for vacation rentals, Airbnb, and villas in India. 
+We specialize in maximizing revenue for luxury homes in Goa, Uttarakhand, Rajasthan, and Himachal Pradesh.
+
+## Services for Property Owners
+- **Full-Service Management**: Marketing, guest communication, maintenance, and revenue management.
+- **Revenue Optimization**: Dynamic pricing strategies to maximize occupancy and yield.
+- **Multichannel Distribution**: Listing on Airbnb, Booking.com, Agoda, and more (OTA Expert).
+- **Transparency**: Real-time dashboard for owners to track earnings and bookings.
+
+## Guest Experience
+- **Luxury Stays**: Curated collection of villas, farmstays, and apartments.
+- **Concierge Services**: Personalized itineraries, meal planning, and local experiences.
+- **Quality Assurance**: Every property is vetted for comfort, style, and amenities.
+
+## Key Markets
+- Goa (North & South)
+- Mukteshwar & Nainital (Uttarakhand)
+- Jaipur & Udaipur (Rajasthan)
+- Kasauli & Shimla (Himachal Pradesh)
+
+## Contact
+- Website: https://hostizzy.com
+- Email: contact@hostizzy.com

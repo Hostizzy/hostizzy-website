@@ -1,0 +1,155 @@
+[
+    {
+        "id": 1,
+        "title": "The Glasshouse: Luxury Hillside Villa",
+        "location": "Mashobra, Shimla",
+        "type": "Villa",
+        "price": 45000,
+        "guests": 8,
+        "bedrooms": 4,
+        "bathrooms": 5,
+        "rating": 4.98,
+        "reviews": 124,
+        "superhost": true,
+        "image": "https://images.unsplash.com/photo-1542718610-a1d656d1884c?auto=format&fit=crop&q=80&w=1600",
+        "gallery": [
+            "https://images.unsplash.com/photo-1542718610-a1d656d1884c?auto=format&fit=crop&q=80&w=1600",
+            "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=80&w=1600",
+            "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=1600",
+            "https://images.unsplash.com/photo-1613545325278-f24b0cae1224?auto=format&fit=crop&q=80&w=1600",
+            "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&q=80&w=1600"
+        ],
+        "description": "Perched on a cliff edge in Mashobra, The Glasshouse offers 360-degree views of the Himalayas. This architectural marvel features floor-to-ceiling windows, heated flooring, and a private butler service. Perfect for families looking for an exclusive mountain getaway.",
+        "amenities_grouped": {
+            "Essentials": [
+                "Wi-Fi",
+                "Heating",
+                "Washer",
+                "Dryer",
+                "Hot Water"
+            ],
+            "Kitchen": [
+                "Full Kitchen",
+                "Microwave",
+                "Coffee Maker",
+                "Dishwasher"
+            ],
+            "Features": [
+                "Mountain View",
+                "Private Balcony",
+                "Fireplace",
+                "BBQ Grill"
+            ],
+            "Services": [
+                "Private Butler",
+                "Daily Housekeeping",
+                "Chef on Call"
+            ]
+        },
+        "house_rules": [
+            "Check-in: 2:00 PM - 8:00 PM",
+            "Checkout: 11:00 AM",
+            "No smoking inside",
+            "No parties or events",
+            "Pets allowed with prior notice"
+        ],
+        "cancellation_policy": "Full refund for cancellations made within 48 hours of booking, if the check-in date is at least 14 days away. 50% refund for cancellations made at least 7 days before check-in.",
+        "map_coordinates": {
+            "lat": 31.123,
+            "lng": 77.234
+        }
+    },
+    {
+        "id": 2,
+        "title": "Rani Vilas Heritage Farmstay",
+        "location": "Jaipur, Rajasthan",
+        "type": "Farmstay",
+        "price": 18500,
+        "guests": 12,
+        "bedrooms": 6,
+        "bathrooms": 6,
+        "rating": 4.92,
+        "reviews": 89,
+        "superhost": false,
+        "image": "https://images.unsplash.com/photo-1587595431973-160d0d94add1?auto=format&fit=crop&q=80&w=1600",
+        "gallery": [
+            "https://images.unsplash.com/photo-1587595431973-160d0d94add1?auto=format&fit=crop&q=80&w=1600",
+            "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?auto=format&fit=crop&q=80&w=1600",
+            "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&q=80&w=1600"
+        ],
+        "description": "A 200-year-old restored havelli set amidst 50 acres of organic farmland. Enjoy farm-to-table meals, tractor rides, and pottery workshops. A true taste of rural Rajasthani luxury.",
+        "amenities_grouped": {
+            "Essentials": [
+                "Wi-Fi",
+                "AC",
+                "Essentials"
+            ],
+            "Outdoor": [
+                "Private Pool",
+                "Organic Garden",
+                "Bonfire Pit"
+            ],
+            "Activities": [
+                "Pottery Wheel",
+                "Tractor Rides",
+                "Folk Music Evenings"
+            ]
+        },
+        "house_rules": [
+            "Quiet hours after 10:00 PM",
+            "Vegetarian meals only on premises",
+            "ID proof mandatory for all guests"
+        ],
+        "cancellation_policy": "Free cancellation up to 5 days before check-in.",
+        "map_coordinates": {
+            "lat": 26.912,
+            "lng": 75.787
+        }
+    },
+    {
+        "id": 3,
+        "title": "Azure: Modern Beachfront Penthouse",
+        "location": "Candolim, Goa",
+        "type": "Apartment",
+        "price": 12000,
+        "guests": 4,
+        "bedrooms": 2,
+        "bathrooms": 2,
+        "rating": 4.85,
+        "reviews": 210,
+        "superhost": true,
+        "image": "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&q=80&w=1600",
+        "gallery": [
+            "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&q=80&w=1600",
+            "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&q=80&w=1600",
+            "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&q=80&w=1600"
+        ],
+        "description": "Steps away from the Candolim beach, this penthouse offers the perfect blend of relaxation and nightlife accessibility. Features a jacuzzi on the terrace and premium sound system.",
+        "amenities_grouped": {
+            "Essentials": [
+                "High-speed Wi-Fi",
+                "AC",
+                "Workplace"
+            ],
+            "Luxury": [
+                "Jacuzzi",
+                "Marshall Speakers",
+                "Smart TV"
+            ],
+            "Location": [
+                "Beach Access",
+                "Sea View",
+                "Walking distance to clubs"
+            ]
+        },
+        "house_rules": [
+            "No glass bottles near jacuzzi",
+            "Music volume low after 11 PM"
+        ],
+        "cancellation_policy": "Strict. 50% refund up to 7 days prior to arrival.",
+        "map_coordinates": {
+            "lat": 15.518,
+            "lng": 73.762
+        }
+    }
+]

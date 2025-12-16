@@ -1,0 +1,126 @@
+[
+    {
+        "id": "nextstop-manali-nye",
+        "title": "NextStop: Manali Mountain Escape",
+        "subtitle": "New Year Himalayan Bash 2025",
+        "dates": "Dec 28 - Jan 02",
+        "price": 24999,
+        "image": "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&q=80&w=1600",
+        "rating": 4.95,
+        "reviews": 142,
+        "duration": "6 Days",
+        "location": "Manali, Himachal Pradesh",
+        "description": "Welcome 2025 in the mountains! A curated group trip featuring a stay at 'Into the Wilds', Solang Valley adventures, Atal Tunnel excursion, and an exclusive NYE Gala Dinner.",
+        "tags": [
+            "Group Trip",
+            "Adventure",
+            "New Year Special",
+            "Hiking"
+        ],
+        "itinerary": [
+            {
+                "day": 1,
+                "title": "Delhi Departure",
+                "desc": "Assemble at Majnu Ka Tilla (7:00 PM). Meet your trip captain and fellow travelers. Board the Force Urbania for an overnight journey to the mountains."
+            },
+            {
+                "day": 2,
+                "title": "Arrival & Old Manali Vibes",
+                "desc": "Check into 'Into the Wilds'. Freshen up and explore the charming lanes of Old Manali. Visit Manu Temple and café hop. Evening bonfire and ice-breaking session."
+            },
+            {
+                "day": 3,
+                "title": "Solang Valley Adventure",
+                "desc": "Full day excursion to the adventure capital! Try paragliding, ATV rides, or zorbing. Return for a cozy dinner under the stars."
+            },
+            {
+                "day": 4,
+                "title": "Atal Tunnel & Sissu",
+                "desc": "Drive through the world's longest highway tunnel to Lahaul Valley. Witness frozen waterfalls in Sissu. Evening preparation for the big night."
+            },
+            {
+                "day": 5,
+                "title": "NYE Gala & Celebration",
+                "desc": "The Big Night! Gala dinner, DJ, bonfire, and fireworks to welcome 2025 with your new travel squad."
+            },
+            {
+                "day": 6,
+                "title": "Departure",
+                "desc": "Farewell breakfast. Optional rafting in Kullu on the way back. Arrive in Delhi by late evening (10 PM) with a bag full of memories."
+            }
+        ],
+        "inclusions": [
+            "Delhi-Manali-Delhi Transfer (Force Urbania)",
+            "Stay at 'Into the Wilds' (Twin Sharing)",
+            "5 Breakfasts & 4 Dinners",
+            "NYE Gala Dinner & Party",
+            "Sightseeing as per itinerary",
+            "Trip Captain & First Aid"
+        ],
+        "exclusions": [
+            "Lunch (to explore local cafes)",
+            "Adventure activities (Paragliding/ATV)",
+            "Personal expenses"
+        ],
+        "meeting_point": "Majnu Ka Tila, New Delhi"
+    },
+    {
+        "id": "goa-coastal-calm",
+        "title": "Coastal Calm: Goa Wellness Retreat",
+        "subtitle": "Yoga, Surf & Soul",
+        "dates": "Feb 14 - Feb 18",
+        "price": 18500,
+        "image": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&q=80&w=1600",
+        "rating": 4.88,
+        "reviews": 96,
+        "duration": "5 Days",
+        "location": "North Goa, India",
+        "description": "A mindful escape to the sunny side of life. Reconnect with yourself through daily yoga, surf lessons, and organic culinary experiences in a boutique heritage villa.",
+        "tags": [
+            "Wellness",
+            "Yoga",
+            "Beach",
+            "Women Only"
+        ],
+        "itinerary": [
+            {
+                "day": 1,
+                "title": "Welcome Circle",
+                "desc": "Airport pickup and check-in. Sunset intention setting circle followed by a vegan welcome dinner."
+            },
+            {
+                "day": 2,
+                "title": "Surf & Sand",
+                "desc": "Morning surf lesson at Ashwem Beach. Afternoon free for leisure. Evening restorative yoga."
+            },
+            {
+                "day": 3,
+                "title": "Spice Farm & Culture",
+                "desc": "Visit an organic spice plantation. Learn Goan cooking secrets. Evening sound healing session."
+            },
+            {
+                "day": 4,
+                "title": "Sunset Cruise",
+                "desc": "Morning flow. Free time for shopping. Private sunset cruise on the Chapora river."
+            },
+            {
+                "day": 5,
+                "title": "Gratitude & Departure",
+                "desc": "Closing circle and breakfast. Transfers to Mopa Airport."
+            }
+        ],
+        "inclusions": [
+            "Airport Transfers",
+            "Boutique Villa Stay",
+            "All Vegan Meals (Breakfast + Dinner)",
+            "Daily Yoga & 1 Surf Lesson",
+            "Sound Healing Session"
+        ],
+        "exclusions": [
+            "Flights",
+            "Alcohol (Wellness Trip)",
+            "Personal Shopping"
+        ],
+        "meeting_point": "Mopa Airport (GOX), Goa"
+    }
+]
