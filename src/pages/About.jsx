@@ -6,7 +6,18 @@ import VideoSection from '../components/VideoSection';
 const About = () => {
     return (
         <>
-            <SEO title="About Us - Hostizzy" description="Founded in 2019 by ex-Airbnb experts, Hostizzy is revolutionizing vacation rental management in India." />
+            <SEO
+                title="About Hostizzy | India's Premier Vacation Rental Management Company"
+                description="Founded by ex-Airbnb experts, Hostizzy specializes in vacation rental management India, property management for second homes, and professional hosting services since 2019."
+                keywords={[
+                    'vacation rental management India',
+                    'property management for second homes',
+                    'professional hosting services',
+                    'Airbnb alternative hosting',
+                    'vacation rental compliance India'
+                ]}
+                image="https://hostizzy.com/og-about.jpg"
+            />
 
             {/* Hero Section */}
             <section className="section bg-primary text-white text-center" style={{
