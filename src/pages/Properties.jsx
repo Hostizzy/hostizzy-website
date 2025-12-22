@@ -36,8 +36,15 @@ const Properties = () => {
     return (
         <>
             <SEO
-                title="Luxury Villas & Vacation Rentals in India - Hostizzy"
-                description="Discover handpicked luxury villas, farmstays, and apartments across India. From Mukteshwar to Goa, book homes managed by hospitality experts."
+                title="Managed Properties | Hostizzy Vacation Rentals India"
+                description="Browse our portfolio of professionally managed vacation rentals across India. Villa management, homestay management, and short-term rental properties."
+                keywords={[
+                    'vacation rental properties India',
+                    'villa management company',
+                    'homestay management services India',
+                    'short term rental properties'
+                ]}
+                image="https://hostizzy.com/og-properties.jpg"
             />
 
             <section className="section bg-secondary" style={{ padding: '6rem 0 4rem' }}>

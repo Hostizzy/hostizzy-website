@@ -6,7 +6,17 @@ import { TrendingUp, ShieldCheck, PieChart, ArrowUpRight, CheckCircle2, Layout, 
 const Invest = () => {
     return (
         <>
-            <SEO title="Invest in Hostizzy | Pre-Seed Round" description="Join India's first integrated vacation rental ecosystem. We're raising a pre-seed round to scale." />
+            <SEO
+                title="Invest in Hostizzy | Vacation Rental Management Growth Opportunity"
+                description="Join India's fastest-growing vacation rental management company. Property management for second homes, passive income opportunities, and hospitality innovation."
+                keywords={[
+                    'vacation rental management investment',
+                    'property management for second homes',
+                    'passive income from property India',
+                    'hospitality investment India'
+                ]}
+                image="https://hostizzy.com/og-invest.jpg"
+            />
 
             <section className="section bg-primary text-white" style={{ padding: '10rem 0 8rem', position: 'relative', overflow: 'hidden', background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)' }}>
                 <div className="container" style={{ position: 'relative', zIndex: 1 }}>

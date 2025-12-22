@@ -9,8 +9,16 @@ const Technology = () => {
     return (
         <>
             <SEO
-                title="Technology & Innovation"
-                description="Explore the Hostizzy SaaS suite: HostOS, ResIQ, JuxTravel, and TravelCRM - proprietary hospitality technology."
+                title="Hostizzy Platform | Vacation Rental Management Technology & Tools"
+                description="Explore HostOS, ResIQ, and our proprietary vacation rental management technology. Revenue optimization, automation, and Airbnb marketing services powered by innovation."
+                keywords={[
+                    'vacation rental management technology',
+                    'Airbnb marketing services',
+                    'revenue optimization tools',
+                    'property management software India',
+                    'passive income from property India'
+                ]}
+                image="https://hostizzy.com/og-technology.jpg"
             />
 
             <section className="section" style={{

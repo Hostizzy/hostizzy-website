@@ -83,7 +83,19 @@ const Calculator = () => {
 
     return (
         <>
-            <SEO title="Airbnb Investment Calculator - Hostizzy Market Intelligence" description="Advanced real-estate investment analysis for short-term rentals in India." />
+            <SEO
+                title="Vacation Rental Earnings Calculator India | Airbnb Income Estimator"
+                description="Calculate your potential income from Airbnb property management in India. Free vacation rental earnings calculator for villas, farmhouses, and apartments across 20+ markets."
+                keywords={[
+                    'vacation rental earnings calculator',
+                    'Airbnb income calculator India',
+                    'rental property income estimator',
+                    'vacation rental ROI calculator',
+                    'passive income from property India',
+                    'Airbnb revenue calculator'
+                ]}
+                image="https://hostizzy.com/og-calculator.jpg"
+            />
 
             <section className="bg-secondary" style={{ padding: '6rem 0 3rem' }}>
                 <div className="container">
