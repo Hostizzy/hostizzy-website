@@ -6,43 +6,38 @@ This guide outlines the steps to deploy the Hostizzy application. The project is
 
 # Deployment Steps
 
-## 1. Prerequisites
-Ensure the target environment includes:
-- **Node.js**: v18 or higher
-- **NPM**: v9 or higher
+# Deployment: Vercel (Frontend) + Render (Backend)
 
-## 2. Environment Variables
-Configure the following environment variables in your production dashboard (e.g., Render, Vercel, Railway):
+The user-preferred strategy is to host the Frontend on Vercel and the Backend on Render.
 
-```bash
-NODE_ENV=production
-PORT=3001
-ADMIN_PASSWORD=your_secure_password
-```
+## ⚠️ Important Data Persistence Warning
+The current backend saves data (Properties, Bookings, Settings) to **local JSON files** (`server/data/*.json`).
+- **On Render:** These files are ephemeral. **All data will be reset** every time you deploy or if the server restarts, unless you attach a **Render Persistent Disk**.
+- **Recommendation:** modifying the backend to use a database (MongoDB/Postgres) is recommended for production. For now, be aware that data is temporary.
 
-## 3. Build & Run Commands
+## Part 1: Backend (Render.com)
+1.  Connect your GitHub repo to Render.
+2.  Create a **"Web Service"**.
+3.  Settings:
+    - **Build Command:** `npm install`
+    - **Start Command:** `npm run server`
+    - **Environment Variables:**
+        - `ADMIN_PASSWORD`: (Your secure password)
+4.  **Wait for deployment**: specific URL will be assigned (e.g., `https://hostizzy-backend.onrender.com`).
+5.  **Copy this URL**.
 
-Most hosting providers (Render, Heroku, Railway) will automatically detect the settings, but you can explicitly set them:
+## Part 2: Frontend (Vercel)
+1.  In your project root, open `vercel.json`.
+2.  Replace `https://YOUR_BACKEND_URL_ON_RENDER.onrender.com` with your actual Render URL from Part 1.
+3.  Push this change to GitHub.
+4.  Connect your GitHub repo to Vercel.
+5.  Settings:
+    - **Framework Preset:** Vite
+    - **Build Command:** `npm run build`
+    - **Output Directory:** `dist`
+6.  Deploy!
 
+## Alternative: Monolithic Deployment (Render Only)
+If you prefer a single service, you can deploy everything to Render:
 - **Build Command:** `npm install && npm run build`
-  - This installs dependencies and builds the optimized Vite frontend to the `/dist` folder.
-
 - **Start Command:** `npm start`
-  - This executes `node server/server.js`, which starts the Express API and serves the `/dist` frontend.
-
-## 4. Platform Specifics
-
-### Render.com (Recommended)
-1.  Connect your GitHub repository.
-2.  Select **"Web Service"**.
-3.  Use the following settings:
-    - **Runtime:** Node
-    - **Build Command:** `npm install && npm run build`
-    - **Start Command:** `npm start`
-4.  Add Environment Variables from Step 2.
-
-### VPS / Manual Deployment
-1.  Clone the repository.
-2.  Run `npm install`.
-3.  Run `npm run build`.
-4.  Run `npm start` (or use PM2: `pm2 start server/server.js --name hostizzy`).
