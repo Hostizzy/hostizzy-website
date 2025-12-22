@@ -3,6 +3,7 @@ import cors from 'cors';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import mongoose from 'mongoose';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -34,6 +35,30 @@ const BLOGS_FILE = path.join(DATA_DIR, 'blogs.json');
 const CONTACTS_FILE = path.join(DATA_DIR, 'contacts.json');
 const SEO_FILE = path.join(DATA_DIR, 'seo.json');
 const SETTINGS_FILE = path.join(DATA_DIR, 'settings.json');
+
+// --- DATABASE CONNECTION ---
+const MONGODB_URI = process.env.MONGODB_URI;
+let isMongoConnected = false;
+
+if (MONGODB_URI) {
+    mongoose.connect(MONGODB_URI)
+        .then(() => {
+            console.log("✅ MongoDB Connected");
+            isMongoConnected = true;
+        })
+        .catch(err => console.error("❌ MongoDB Connection Error:", err));
+} else {
+    console.log("⚠️ No MONGODB_URI found. Using local JSON files for storage.");
+}
+
+// --- MONGOOSE SCHEMAS ---
+const propertySchema = new mongoose.Schema({
+    id: String, // Keep string ID for compatibility
+    title: String,
+    // Add flexible strict: false to allow evolving schema without migration pain right now
+}, { strict: false });
+
+const Property = mongoose.model('Property', propertySchema);
 
 // --- AUTHENTICATION ---
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'hostizzy2025';

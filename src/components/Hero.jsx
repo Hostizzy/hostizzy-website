@@ -76,10 +76,11 @@ const Hero = () => {
                             transition={{ delay: 0.2, duration: 0.8 }}
                             style={{
                                 fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-                                fontWeight: 800,
+                                fontWeight: 900,
                                 lineHeight: 1.1,
                                 marginBottom: '1.5rem',
-                                textShadow: '0 2px 10px rgba(0,0,0,0.3)',
+                                color: '#FFFFFF',
+                                textShadow: '0 0 20px rgba(255,255,255,0.3), 0 2px 10px rgba(0,0,0,0.5)',
                                 textAlign: 'left',
                                 letterSpacing: '-0.02em'
                             }}

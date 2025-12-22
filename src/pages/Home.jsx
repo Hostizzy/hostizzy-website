@@ -15,16 +15,40 @@ const Home = () => {
     return (
         <>
             <SEO
-                title="Hostizzy | Premier Airbnb & Vacation Rental Management India"
-                description="Expert Airbnb Property Management & Vacation Rental services in India. We maximize revenue for villas in Goa, Uttarakhand & beyond. Your trusted OTA expert."
+                title="Premier Vacation Rental Management Company India | Airbnb Property Management"
+                description="Expert Airbnb property management India. End-to-end vacation rental management services for villas in Goa, Uttarakhand & beyond. Professional hosting services with 4.8★ rating."
+                keywords={[
+                    'vacation rental management company',
+                    'Airbnb property management India',
+                    'villa management company India',
+                    'short term rental management',
+                    'professional hosting services India',
+                    'vacation rental management India',
+                    'Airbnb management services'
+                ]}
+                image="https://hostizzy.com/og-home.jpg"
             />
             <script type="application/ld+json">
                 {JSON.stringify({
                     "@context": "https://schema.org",
-                    "@type": "Organization",
+                    "@type": "LocalBusiness",
                     "name": "Hostizzy",
+                    "description": "Premier vacation rental management company in India specializing in Airbnb property management and professional hosting services",
                     "url": "https://hostizzy.com",
-                    "logo": "https://hostizzy.com/logo.png",
+                    "logo": "https://hostizzy.com/images/logo.jpg",
+                    "image": "https://hostizzy.com/og-home.jpg",
+                    "priceRange": "₹₹₹",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "addressCountry": "IN"
+                    },
+                    "aggregateRating": {
+                        "@type": "AggregateRating",
+                        "ratingValue": "4.8",
+                        "reviewCount": "150",
+                        "bestRating": "5",
+                        "worstRating": "1"
+                    },
                     "sameAs": [
                         "https://www.facebook.com/hostizzy",
                         "https://www.instagram.com/hostizzy_official",
@@ -32,8 +56,18 @@ const Home = () => {
                     ],
                     "contactPoint": {
                         "@type": "ContactPoint",
-                        "telephone": "+91-9876543210",
-                        "contactType": "customer service"
+                        "telephone": "+91-95604-94001",
+                        "contactType": "customer service",
+                        "areaServed": "IN",
+                        "availableLanguage": ["English", "Hindi"]
+                    },
+                    "serviceArea": {
+                        "@type": "GeoCircle",
+                        "geoMidpoint": {
+                            "@type": "GeoCoordinates",
+                            "latitude": "28.6139",
+                            "longitude": "77.2090"
+                        }
                     }
                 })}
             </script>

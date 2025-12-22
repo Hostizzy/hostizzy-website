@@ -87,6 +87,12 @@ img {
   padding: 6rem 0;
 }
 
+@media (max-width: 767px) {
+  .section {
+    padding: 3rem 0;
+  }
+}
+
 .section-sm {
   padding: 4rem 0;
 }
@@ -94,6 +100,12 @@ img {
 .grid {
   display: grid;
   gap: 2rem;
+}
+
+@media (max-width: 767px) {
+  .grid {
+    gap: 1.5rem;
+  }
 }
 
 .text-center {
@@ -118,6 +130,12 @@ img {
 
 .mb-lg {
   margin-bottom: 4rem;
+}
+
+@media (min-width: 640px) {
+  .tablet-2-col {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (min-width: 768px) {
@@ -242,4 +260,39 @@ img {
 
 html {
   scroll-behavior: smooth;
+}
+
+/* New Utility Classes */
+.mobile-center {
+  text-align: left;
+}
+
+@media (max-width: 767px) {
+  .mobile-center {
+    text-align: center;
+  }
+}
+
+.mobile-stack {
+  display: flex;
+}
+
+@media (max-width: 767px) {
+  .mobile-stack {
+    flex-direction: column;
+  }
+}
+
+.page-header {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: #0F172A;
+}
+
+.section-subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--color-muted);
+  max-width: 700px;
+  margin: 0 auto;
 }
