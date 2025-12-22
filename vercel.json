@@ -2,7 +2,7 @@
     "rewrites": [
         {
             "source": "/api/:match*",
-            "destination": "https://YOUR_BACKEND_URL_ON_RENDER.onrender.com/api/:match*"
+            "destination": "https://hostizzy-backend.onrender.com/api/:match*"
         },
         {
             "source": "/(.*)",
