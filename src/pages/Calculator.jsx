@@ -97,167 +97,172 @@ const Calculator = () => {
                 image="https://hostizzy.com/og-calculator.jpg"
             />
 
-            <section className="bg-secondary" style={{ padding: '6rem 0 3rem' }}>
-                <div className="container">
+            {/* Page Header - Standardized */}
+            <section className="section-sm bg-secondary">
+                <div className="container text-center">
                     <ScrollReveal>
-                        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-                            <div className="badge badge-primary" style={{ marginBottom: '1rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-                                <TrendingUp size={14} /> Market Intelligence Tool
-                            </div>
-                            <h1 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '0.5rem' }}>Investment Potential Analysis</h1>
-                            <p style={{ color: '#64748b' }}>Data-driven insights for 20+ top Indian leisure markets.</p>
+                        <div className="badge badge-primary" style={{ marginBottom: '1rem' }}>
+                            <TrendingUp size={14} style={{ marginRight: '0.5rem' }} /> Market Intelligence Tool
                         </div>
+                        <h1 className="page-header">Vacation Rental Earnings Calculator</h1>
+                        <p className="section-subtitle">
+                            Data-driven insights for 20+ top Indian leisure markets. Calculate your potential income from professional Airbnb property management.
+                        </p>
                     </ScrollReveal>
+                </div>
+            </section>
 
-                    <div className="card shadow-premium" style={{ background: 'white', padding: '2rem', borderRadius: '1.5rem' }}>
+            {/* Calculator Section */}
+            <section className="section container">
 
-                        {/* CONTROLS ROW */}
-                        <div className="grid desktop-4-col" style={{ gap: '1.5rem', alignItems: 'end', paddingBottom: '2rem', borderBottom: '1px solid #f1f5f9' }}>
-                            <div>
-                                <label className="label-strong">Market</label>
-                                <div style={{ position: 'relative' }}>
-                                    <MapPin size={18} style={{ position: 'absolute', top: '50%', left: '1rem', transform: 'translateY(-50%)', color: 'var(--color-primary)' }} />
-                                    <select
-                                        className="form-input"
-                                        style={{ paddingLeft: '2.8rem' }}
-                                        value={selectedCity}
-                                        onChange={(e) => setSelectedCity(e.target.value)}
-                                    >
-                                        {Object.keys(marketData).sort().map(city => <option key={city} value={city}>{city}</option>)}
-                                    </select>
-                                </div>
-                            </div>
-                            <div>
-                                <label className="label-strong">Property Type</label>
-                                <select className="form-input" value={propertyType} onChange={(e) => setPropertyType(e.target.value)}>
-                                    <option value="villa">Private Villa</option>
-                                    <option value="apartment">Apartment / Flat</option>
-                                    <option value="farmhouse">Farmhouse</option>
-                                    <option value="cottage">Cottage</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label className="label-strong">Configuration</label>
-                                <select className="form-input" value={bedrooms} onChange={(e) => setBedrooms(parseInt(e.target.value))}>
-                                    {[1, 2, 3, 4, 5, 6, 7, 8].map(n => <option key={n} value={n}>{n} BHK</option>)}
-                                </select>
-                            </div>
-                            <div>
-                                <label className="label-strong">Finish Level</label>
-                                <select className="form-input" value={finishes} onChange={(e) => setFinishes(e.target.value)}>
-                                    <option value="standard">Standard</option>
-                                    <option value="premium">Premium</option>
-                                    <option value="luxury">Luxury (+25% ADR)</option>
+                <div className="card shadow-premium" style={{ background: 'white', padding: '2rem', borderRadius: '1.5rem' }}>
+
+                    {/* CONTROLS ROW */}
+                    <div className="grid desktop-4-col" style={{ gap: '1.5rem', alignItems: 'end', paddingBottom: '2rem', borderBottom: '1px solid #f1f5f9' }}>
+                        <div>
+                            <label className="label-strong">Market</label>
+                            <div style={{ position: 'relative' }}>
+                                <MapPin size={18} style={{ position: 'absolute', top: '50%', left: '1rem', transform: 'translateY(-50%)', color: 'var(--color-primary)' }} />
+                                <select
+                                    className="form-input"
+                                    style={{ paddingLeft: '2.8rem' }}
+                                    value={selectedCity}
+                                    onChange={(e) => setSelectedCity(e.target.value)}
+                                >
+                                    {Object.keys(marketData).sort().map(city => <option key={city} value={city}>{city}</option>)}
                                 </select>
                             </div>
                         </div>
+                        <div>
+                            <label className="label-strong">Property Type</label>
+                            <select className="form-input" value={propertyType} onChange={(e) => setPropertyType(e.target.value)}>
+                                <option value="villa">Private Villa</option>
+                                <option value="apartment">Apartment / Flat</option>
+                                <option value="farmhouse">Farmhouse</option>
+                                <option value="cottage">Cottage</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label className="label-strong">Configuration</label>
+                            <select className="form-input" value={bedrooms} onChange={(e) => setBedrooms(parseInt(e.target.value))}>
+                                {[1, 2, 3, 4, 5, 6, 7, 8].map(n => <option key={n} value={n}>{n} BHK</option>)}
+                            </select>
+                        </div>
+                        <div>
+                            <label className="label-strong">Finish Level</label>
+                            <select className="form-input" value={finishes} onChange={(e) => setFinishes(e.target.value)}>
+                                <option value="standard">Standard</option>
+                                <option value="premium">Premium</option>
+                                <option value="luxury">Luxury (+25% ADR)</option>
+                            </select>
+                        </div>
+                    </div>
 
-                        {/* DASHBOARD GRID */}
-                        <div className="grid desktop-3-col" style={{ marginTop: '2rem', gap: '2rem' }}>
+                    {/* DASHBOARD GRID */}
+                    <div className="grid desktop-3-col" style={{ marginTop: '2rem', gap: '2rem' }}>
 
-                            {/* COL 1: SCORECARD */}
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                                <div className="card bg-secondary" style={{ padding: '1.5rem', textAlign: 'center' }}>
-                                    <div style={{ fontSize: '0.9rem', color: '#64748b', marginBottom: '0.5rem' }}>Market Grade</div>
-                                    <div style={{ fontSize: '3rem', fontWeight: 800, color: 'var(--color-primary)', lineHeight: 1 }}>{metrics.marketGrade}</div>
-                                    <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '0.5rem' }}>Based on demand stability</div>
+                        {/* COL 1: SCORECARD */}
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                            <div className="card bg-secondary" style={{ padding: '1.5rem', textAlign: 'center' }}>
+                                <div style={{ fontSize: '0.9rem', color: '#64748b', marginBottom: '0.5rem' }}>Market Grade</div>
+                                <div style={{ fontSize: '3rem', fontWeight: 800, color: 'var(--color-primary)', lineHeight: 1 }}>{metrics.marketGrade}</div>
+                                <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '0.5rem' }}>Based on demand stability</div>
+                            </div>
+
+                            <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                                <div className="card border-light" style={{ padding: '1rem', textAlign: 'center' }}>
+                                    <div style={{ fontSize: '0.8rem', color: '#64748b' }}>Occupancy</div>
+                                    <div style={{ fontSize: '1.25rem', fontWeight: 700 }}>{metrics.occupancy}%</div>
                                 </div>
-
-                                <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                                    <div className="card border-light" style={{ padding: '1rem', textAlign: 'center' }}>
-                                        <div style={{ fontSize: '0.8rem', color: '#64748b' }}>Occupancy</div>
-                                        <div style={{ fontSize: '1.25rem', fontWeight: 700 }}>{metrics.occupancy}%</div>
-                                    </div>
-                                    <div className="card border-light" style={{ padding: '1rem', textAlign: 'center' }}>
-                                        <div style={{ fontSize: '0.8rem', color: '#64748b' }}>RevPAR</div>
-                                        <div style={{ fontSize: '1.25rem', fontWeight: 700 }}>₹{metrics.revpar}</div>
-                                    </div>
-                                </div>
-
-                                <div className="card bg-primary text-white" style={{ padding: '2rem', marginTop: 'auto' }}>
-                                    <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>Projected Net Income (NOI)</div>
-                                    <div style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '0.5rem' }}>₹{metrics.netIncome.toLocaleString()}</div>
-                                    <div style={{ fontSize: '0.8rem', opacity: 0.8 }}>Does not include taxes</div>
+                                <div className="card border-light" style={{ padding: '1rem', textAlign: 'center' }}>
+                                    <div style={{ fontSize: '0.8rem', color: '#64748b' }}>RevPAR</div>
+                                    <div style={{ fontSize: '1.25rem', fontWeight: 700 }}>₹{metrics.revpar}</div>
                                 </div>
                             </div>
 
-                            {/* COL 2: FINANCIAL BREAKDOWN */}
-                            <div className="card border-light" style={{ padding: '1.5rem' }}>
-                                <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                    <IndianRupee size={18} /> Financial Breakdown
-                                </h3>
-
-                                <div style={{ marginBottom: '1.5rem' }}>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', fontWeight: 600 }}>
-                                        <span>Gross Revenue</span>
-                                        <span>₹{metrics.grossRevenue.toLocaleString()}</span>
-                                    </div>
-                                    <div style={{ height: '8px', width: '100%', background: '#e2e8f0', borderRadius: '4px' }}>
-                                        <div style={{ height: '100%', width: '100%', background: '#22c55e', borderRadius: '4px' }}></div>
-                                    </div>
-                                </div>
-
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                    <ExpenseItem label="Hostizzy Mgmt (20%)" amount={metrics.breakdown?.fee} color="#3b82f6" />
-                                    <ExpenseItem label="OTA Commissions (15%)" amount={metrics.breakdown?.ota} color="#f59e0b" />
-                                    <ExpenseItem label="Ops & Maintenance (12%)" amount={metrics.breakdown?.ops} color="#ef4444" />
-                                </div>
-
-                                <div style={{ marginTop: '2rem', paddingTop: '1rem', borderTop: '1px solid #f1f5f9' }}>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, fontSize: '1.1rem', color: 'var(--color-primary)' }}>
-                                        <span>Net Operating Income</span>
-                                        <span>₹{metrics.netIncome.toLocaleString()}</span>
-                                    </div>
-                                </div>
+                            <div className="card bg-primary text-white" style={{ padding: '2rem', marginTop: 'auto' }}>
+                                <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>Projected Net Income (NOI)</div>
+                                <div style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '0.5rem' }}>₹{metrics.netIncome.toLocaleString()}</div>
+                                <div style={{ fontSize: '0.8rem', opacity: 0.8 }}>Does not include taxes</div>
                             </div>
-
-                            {/* COL 3: SEASONALITY */}
-                            <div className="card border-light" style={{ padding: '1.5rem' }}>
-                                <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                    <Calendar size={18} /> Seasonality Curve
-                                </h3>
-                                <div style={{ display: 'flex', alignItems: 'flex-end', height: '200px', gap: '6px' }}>
-                                    {metrics.seasonality.map((val, i) => (
-                                        <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
-                                            <motion.div
-                                                initial={{ height: 0 }}
-                                                whileInView={{ height: `${val}%` }}
-                                                transition={{ duration: 0.5, delay: i * 0.05 }}
-                                                style={{
-                                                    width: '100%',
-                                                    background: val > 80 ? '#22c55e' : (val > 50 ? '#3b82f6' : '#cbd5e1'),
-                                                    borderRadius: '4px 4px 0 0',
-                                                    opacity: 0.8
-                                                }}
-                                            />
-                                            <span style={{ fontSize: '0.65rem', color: '#64748b' }}>{['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'][i]}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                                <div style={{ marginTop: '1.5rem', fontSize: '0.9rem', color: '#64748b', lineHeight: 1.5 }}>
-                                    <Info size={14} style={{ display: 'inline', marginRight: '4px' }} />
-                                    <strong>{selectedCity}</strong> experiences {metrics.seasonality.filter(x => x > 80).length} peak months. Revenue strategy adjusts pricing dynamically during these windows.
-                                </div>
-                            </div>
-
                         </div>
 
-                        {/* CTA */}
-                        <div style={{ marginTop: '2rem', textAlign: 'center', padding: '2rem', background: '#f8fafc', borderRadius: '1rem' }}>
-                            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem' }}>Want this exact performance?</h3>
-                            <p style={{ marginBottom: '1.5rem', color: '#64748b' }}>Get a verified audit from our revenue management team.</p>
-                            <Link
-                                to={`/contact?type=owner&loc=${selectedCity}&rev=${metrics.grossRevenue}`}
-                                className="btn btn-primary"
-                                style={{ padding: '1rem 3rem' }}
-                            >
-                                Get Verified Property Audit <ArrowRight size={18} style={{ marginLeft: '0.5rem' }} />
-                            </Link>
+                        {/* COL 2: FINANCIAL BREAKDOWN */}
+                        <div className="card border-light" style={{ padding: '1.5rem' }}>
+                            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                <IndianRupee size={18} /> Financial Breakdown
+                            </h3>
+
+                            <div style={{ marginBottom: '1.5rem' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', fontWeight: 600 }}>
+                                    <span>Gross Revenue</span>
+                                    <span>₹{metrics.grossRevenue.toLocaleString()}</span>
+                                </div>
+                                <div style={{ height: '8px', width: '100%', background: '#e2e8f0', borderRadius: '4px' }}>
+                                    <div style={{ height: '100%', width: '100%', background: '#22c55e', borderRadius: '4px' }}></div>
+                                </div>
+                            </div>
+
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                <ExpenseItem label="Hostizzy Mgmt (20%)" amount={metrics.breakdown?.fee} color="#3b82f6" />
+                                <ExpenseItem label="OTA Commissions (15%)" amount={metrics.breakdown?.ota} color="#f59e0b" />
+                                <ExpenseItem label="Ops & Maintenance (12%)" amount={metrics.breakdown?.ops} color="#ef4444" />
+                            </div>
+
+                            <div style={{ marginTop: '2rem', paddingTop: '1rem', borderTop: '1px solid #f1f5f9' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, fontSize: '1.1rem', color: 'var(--color-primary)' }}>
+                                    <span>Net Operating Income</span>
+                                    <span>₹{metrics.netIncome.toLocaleString()}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* COL 3: SEASONALITY */}
+                        <div className="card border-light" style={{ padding: '1.5rem' }}>
+                            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                <Calendar size={18} /> Seasonality Curve
+                            </h3>
+                            <div style={{ display: 'flex', alignItems: 'flex-end', height: '200px', gap: '6px' }}>
+                                {metrics.seasonality.map((val, i) => (
+                                    <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+                                        <motion.div
+                                            initial={{ height: 0 }}
+                                            whileInView={{ height: `${val}%` }}
+                                            transition={{ duration: 0.5, delay: i * 0.05 }}
+                                            style={{
+                                                width: '100%',
+                                                background: val > 80 ? '#22c55e' : (val > 50 ? '#3b82f6' : '#cbd5e1'),
+                                                borderRadius: '4px 4px 0 0',
+                                                opacity: 0.8
+                                            }}
+                                        />
+                                        <span style={{ fontSize: '0.65rem', color: '#64748b' }}>{['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'][i]}</span>
+                                    </div>
+                                ))}
+                            </div>
+                            <div style={{ marginTop: '1.5rem', fontSize: '0.9rem', color: '#64748b', lineHeight: 1.5 }}>
+                                <Info size={14} style={{ display: 'inline', marginRight: '4px' }} />
+                                <strong>{selectedCity}</strong> experiences {metrics.seasonality.filter(x => x > 80).length} peak months. Revenue strategy adjusts pricing dynamically during these windows.
+                            </div>
                         </div>
 
                     </div>
+
+                    {/* CTA */}
+                    <div style={{ marginTop: '2rem', textAlign: 'center', padding: '2rem', background: '#f8fafc', borderRadius: '1rem' }}>
+                        <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem' }}>Want this exact performance?</h3>
+                        <p style={{ marginBottom: '1.5rem', color: '#64748b' }}>Get a verified audit from our revenue management team.</p>
+                        <Link
+                            to={`/contact?type=owner&loc=${selectedCity}&rev=${metrics.grossRevenue}`}
+                            className="btn btn-primary"
+                            style={{ padding: '1rem 3rem' }}
+                        >
+                            Get Verified Property Audit <ArrowRight size={18} style={{ marginLeft: '0.5rem' }} />
+                        </Link>
+                    </div>
+
                 </div>
-            </section>
+        </section >
         </>
     );
 };
