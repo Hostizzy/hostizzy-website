@@ -114,7 +114,7 @@ const ExperienceDetails = () => {
                     <div className="card shadow-premium" style={{ padding: '2rem' }}>
                         <div style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem' }}>₹{exp.price.toLocaleString()} <span style={{ fontSize: '1rem', fontWeight: 400, color: '#64748b' }}>/ person</span></div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '1.5rem', color: '#64748b' }}>
-                            <Star size={16} fill="black" color="black" /> <b>{exp.rating}</b> ({exp.reviews} reviews)
+                            <Star size={16} fill="var(--color-foreground)" color="var(--color-foreground)" /> <b>{exp.rating}</b> ({exp.reviews} reviews)
                         </div>
 
                         <div style={{ background: '#f8fafc', padding: '1rem', borderRadius: '0.5rem', marginBottom: '1.5rem' }}>

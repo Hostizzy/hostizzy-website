@@ -41,10 +41,23 @@ const HowItWorks = () => {
                 </div>
             </ScrollReveal>
 
-            <div className="grid desktop-4-col" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem', position: 'relative' }}>
+            <div className="grid desktop-4-col" style={{ gap: '2rem', position: 'relative' }}>
+                {/* Connecting Line - Desktop Only */}
+                <div className="desktop-only" style={{
+                    position: 'absolute',
+                    top: '40px',
+                    left: '10%',
+                    right: '10%',
+                    height: '2px',
+                    background: 'linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899, #10b981)',
+                    opacity: 0.2,
+                    zIndex: 0
+                }} />
+
                 {steps.map((step, i) => (
                     <ScrollReveal key={i} delay={i * 0.2}>
                         <div className="text-center" style={{ position: 'relative', zIndex: 1 }}>
+
                             <div style={{
                                 width: '80px',
                                 height: '80px',

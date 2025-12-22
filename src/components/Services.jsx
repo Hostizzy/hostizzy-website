@@ -43,24 +43,10 @@ const Services = () => {
                     <p style={{ color: 'var(--color-muted)', fontSize: '1.125rem' }}>Comprehensive solutions for modern property management</p>
                 </div>
 
-                <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2.5rem' }}>
+                <div className="grid desktop-3-col" style={{ gap: '2.5rem' }}>
                     {services.map((service, index) => (
-                        <div key={index} className="card" style={{
-                            padding: '2.5rem',
-                            borderRadius: '1rem',
-                            border: '1px solid var(--color-border)',
-                            backgroundColor: 'white',
-                            transition: 'transform 0.2s, box-shadow 0.2s'
-                        }}
-                            onMouseEnter={e => {
-                                e.currentTarget.style.transform = 'translateY(-5px)';
-                                e.currentTarget.style.boxShadow = '0 10px 30px -10px rgba(0,0,0,0.1)';
-                            }}
-                            onMouseLeave={e => {
-                                e.currentTarget.style.transform = 'translateY(0)';
-                                e.currentTarget.style.boxShadow = 'none';
-                            }}
-                        >
+                        <div key={index} className="card" style={{ padding: '2.5rem' }}>
+
                             <div style={{
                                 width: '64px',
                                 height: '64px',

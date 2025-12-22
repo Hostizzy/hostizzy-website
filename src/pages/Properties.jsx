@@ -67,9 +67,9 @@ const Properties = () => {
                                 background: 'transparent',
                                 padding: '0.5rem 0',
                                 marginRight: '1.5rem',
-                                color: filterCategory === cat ? 'black' : '#64748b',
+                                color: filterCategory === cat ? 'var(--color-foreground)' : '#64748b',
                                 fontWeight: filterCategory === cat ? 700 : 500,
-                                borderBottom: filterCategory === cat ? '2px solid black' : '2px solid transparent',
+                                borderBottom: filterCategory === cat ? '2px solid var(--color-foreground)' : '2px solid transparent',
                                 cursor: 'pointer',
                                 whiteSpace: 'nowrap',
                                 fontSize: '0.95rem'
@@ -98,7 +98,8 @@ const Properties = () => {
                                                     whileHover={{ scale: 1.02 }}
                                                     transition={{ duration: 0.3 }}
                                                     src={property.image}
-                                                    alt={property.title}
+                                                    alt={property.title || "Property Image"}
+                                                    loading="lazy"
                                                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                                 />
                                                 <button style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'transparent', border: 'none', cursor: 'pointer', zIndex: 10 }}>
@@ -114,14 +115,12 @@ const Properties = () => {
                                             {/* Details */}
                                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                                                 <h3 style={{ fontSize: '1rem', fontWeight: 600, margin: 0, lineHeight: 1.4, maxWidth: '85%' }}>{property.location}, India</h3>
-                                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.9rem' }}>
-                                                    <Star size={14} fill="black" />
-                                                    <span>{property.rating}</span>
-                                                </div>
+                                                <Star size={14} fill="var(--color-foreground)" />
+                                                <span>{property.rating}</span>
                                             </div>
                                             <p style={{ color: '#64748b', fontSize: '0.95rem', margin: '2px 0' }}>{property.type} · {property.views || 'Mountain'} views</p>
                                             <p style={{ color: '#64748b', fontSize: '0.95rem', margin: '2px 0' }}>{property.dates || 'Available now'}</p>
-                                            <div style={{ marginTop: '0.5rem', fontSize: '1rem', color: 'black' }}>
+                                            <div style={{ marginTop: '0.5rem', fontSize: '1rem', color: 'var(--color-foreground)' }}>
                                                 <span style={{ fontWeight: 700 }}>₹{property.price.toLocaleString()}</span> <span style={{ fontWeight: 400 }}>night</span>
                                             </div>
                                         </Link>

@@ -41,15 +41,24 @@ const TheHostizzyDifference = () => {
                         <a href="/properties" className="btn btn-primary">Find Your Happy Place</a>
                     </ScrollReveal>
 
-                    <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+                    <div className="grid desktop-2-col" style={{ gap: '1.5rem' }}>
                         {features.map((f, i) => (
                             <ScrollReveal key={i} delay={i * 0.1}>
-                                <div className="glass" style={{ padding: '1.5rem', borderRadius: '1rem', background: 'white' }}>
-                                    <div style={{ marginBottom: '1rem', background: '#fef9c3', width: 'fit-content', padding: '0.5rem', borderRadius: '0.5rem' }}>
+                                <div className="card glass card-feature" style={{ padding: '1.5rem' }}>
+                                    <div style={{
+                                        marginBottom: '1rem',
+                                        background: 'rgba(202, 138, 4, 0.1)',
+                                        width: '40px',
+                                        height: '40px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        borderRadius: '0.75rem'
+                                    }}>
                                         {f.icon}
                                     </div>
                                     <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem' }}>{f.title}</h3>
-                                    <p style={{ fontSize: '0.9rem', color: 'var(--color-muted)', lineHeight: 1.5 }}>
+                                    <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)', lineHeight: 1.5 }}>
                                         {f.desc}
                                     </p>
                                 </div>

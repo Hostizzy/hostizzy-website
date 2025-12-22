@@ -40,7 +40,7 @@ const PropertyDetails = () => {
                     <div>
                         <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{property.title}</h1>
                         <div style={{ display: 'flex', gap: '1rem', color: '#64748b', fontSize: '0.95rem' }}>
-                            <span style={{ display: 'flex', alignItems: 'center', gap: '4px', textDecoration: 'underline', fontWeight: 600, color: 'black' }}><Star size={16} fill="black" /> {property.rating} · {property.reviews} reviews</span>
+                            <span style={{ display: 'flex', alignItems: 'center', gap: '4px', textDecoration: 'underline', fontWeight: 600, color: 'var(--color-foreground)' }}><Star size={16} fill="var(--color-foreground)" /> {property.rating} · {property.reviews} reviews</span>
                             <span>{property.location}</span>
                             {property.superhost && <span style={{ color: '#64748b' }}>· Superhost</span>}
                         </div>
@@ -154,7 +154,7 @@ const PropertyDetails = () => {
                     <div className="card shadow-premium" style={{ padding: '1.5rem', border: '1px solid rgba(0,0,0,0.08)' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
                             <div><span style={{ fontSize: '1.5rem', fontWeight: 700 }}>₹{property.price.toLocaleString()}</span> <span style={{ color: '#64748b' }}>night</span></div>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.9rem' }}><Star size={14} fill="black" /> <span>{property.rating}</span></div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.9rem' }}><Star size={14} fill="var(--color-foreground)" /> <span>{property.rating}</span></div>
                         </div>
 
                         <div style={{ border: '1px solid #cbd5e1', borderRadius: '0.5rem', overflow: 'hidden', marginBottom: '1rem' }}>

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Instagram } from 'lucide-react';
+import { useSettings } from '../context/SettingsContext';
 
 const InstagramFeed = () => {
+    const { settings } = useSettings();
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
@@ -30,6 +32,7 @@ const InstagramFeed = () => {
                             <img
                                 src={post.image}
                                 alt={post.caption || "Instagram Post"}
+                                loading="lazy"
                                 style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }}
                                 className="group-hover:scale-110"
                             />
@@ -45,7 +48,7 @@ const InstagramFeed = () => {
                 </div>
 
                 <div style={{ marginTop: '3rem' }}>
-                    <a href="https://instagram.com" target="_blank" className="btn btn-outline" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <a href={settings.instagramUrl} target="_blank" rel="noreferrer" className="btn btn-outline" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
                         <Instagram size={18} /> View More on Instagram
                     </a>
                 </div>

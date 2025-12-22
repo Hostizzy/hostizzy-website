@@ -1,8 +1,7 @@
 
 import React, { useRef } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, IndianRupee } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import EarningsCalculator from './EarningsCalculator'; // Import Calculator
 
 const Hero = () => {
     const ref = useRef(null);
@@ -27,7 +26,7 @@ const Hero = () => {
             paddingTop: 'var(--header-height)'
         }}>
             {/* Parallax Background */}
-            {/* Background Video */}
+            {/* Background Image - Premium Property */}
             <div style={{
                 position: 'absolute',
                 top: 0,
@@ -36,20 +35,15 @@ const Hero = () => {
                 height: '100%',
                 zIndex: -1
             }}>
-                <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
+                <img
+                    src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=2400"
+                    alt="Luxury Hospitality"
                     style={{
                         width: '100%',
                         height: '100%',
                         objectFit: 'cover'
                     }}
-                >
-                    <source src="https://videos.pexels.com/video-files/7515833/7515833-uhd_2560_1440_25fps.mp4" type="video/mp4" />
-                    Your browser does not support the video tag.
-                </video>
+                />
             </div>
 
             {/* Overlay */}
@@ -133,9 +127,55 @@ const Hero = () => {
                         </motion.div>
                     </motion.div>
 
-                    {/* Right Column: Earnings Calculator */}
+                    {/* Right Column: Calculator CTA */}
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
-                        <EarningsCalculator />
+                        <motion.div
+                            initial={{ opacity: 0, x: 30 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            className="card"
+                            style={{
+                                padding: '3rem',
+                                textAlign: 'center',
+                                background: 'rgba(255, 255, 255, 0.98)',
+                                borderRadius: '2rem',
+                                boxShadow: 'var(--shadow-premium)',
+                                maxWidth: '450px',
+                                border: '1px solid var(--color-border)'
+                            }}
+                        >
+                            <div style={{
+                                width: '72px',
+                                height: '72px',
+                                background: 'linear-gradient(135deg, var(--color-primary), #FF7D7D)',
+                                borderRadius: '1.5rem',
+                                display: 'grid',
+                                placeItems: 'center',
+                                margin: '0 auto 2.5rem',
+                                color: 'white',
+                                boxShadow: '0 10px 20px rgba(254, 88, 88, 0.3)'
+                            }}>
+                                <IndianRupee size={36} />
+                            </div>
+                            <h3 style={{ fontSize: '1.85rem', fontWeight: 800, marginBottom: '1.25rem', color: '#0f172a', letterSpacing: '-0.5px' }}>
+                                Unlock Your Property's Potential
+                            </h3>
+                            <p style={{ color: '#64748b', marginBottom: '2.5rem', lineHeight: 1.7, fontSize: '1.1rem' }}>
+                                Ever wondered how much your vacation rental could earn? Our AI-driven market analysis tool estimates your income based on location, size, and seasonal demand.
+                            </p>
+                            <a href="/calculator" className="btn btn-primary" style={{
+                                width: '100%',
+                                padding: '1.25rem',
+                                fontSize: '1.1rem',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                gap: '0.75rem',
+                                borderRadius: '1rem'
+                            }}>
+                                Try ROI Calculator <ArrowRight size={20} />
+                            </a>
+                        </motion.div>
                     </div>
                 </div>
             </div>

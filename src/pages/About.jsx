@@ -1,7 +1,6 @@
 import React from 'react';
 import SEO from '../components/SEO';
 import ScrollReveal from '../components/ScrollReveal';
-
 import VideoSection from '../components/VideoSection';
 
 const About = () => {
@@ -10,11 +9,14 @@ const About = () => {
             <SEO title="About Us - Hostizzy" description="Founded in 2019 by ex-Airbnb experts, Hostizzy is revolutionizing vacation rental management in India." />
 
             {/* Hero Section */}
-            <section className="section bg-primary text-white text-center" style={{ padding: '6rem 0' }}>
+            <section className="section bg-primary text-white text-center" style={{
+                background: 'linear-gradient(135deg, var(--color-primary) 0%, #E54F4F 100%)',
+                padding: '8rem 0 6rem'
+            }}>
                 <div className="container">
                     <ScrollReveal>
-                        <h1 style={{ fontSize: '3.5rem', marginBottom: '1.5rem', fontWeight: 800 }}>India's Trusted Vacation Rental Management Experts</h1>
-                        <p style={{ fontSize: '1.25rem', opacity: 0.9, maxWidth: '800px', margin: '0 auto', fontStyle: 'italic' }}>
+                        <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '1.5rem', fontWeight: 800 }}>India's Trusted Vacation Rental<br />Management Experts</h1>
+                        <p style={{ fontSize: '1.25rem', opacity: 0.9, maxWidth: '800px', margin: '0 auto', fontStyle: 'italic', fontWeight: 500 }}>
                             "Elevating properties into profitable brands. We are the Airbnb management experts you've been looking for."
                         </p>
                     </ScrollReveal>
@@ -24,36 +26,45 @@ const About = () => {
             {/* Our Story */}
             <section className="section container">
                 <ScrollReveal>
-                    <div className="grid desktop-2-col" style={{ alignItems: 'center', gap: '4rem' }}>
+                    <div className="grid desktop-2-col" style={{ alignItems: 'center', gap: '5rem' }}>
                         <div>
-                            <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem' }}>About Hostizzy</h2>
-                            <p style={{ marginBottom: '1.5rem', lineHeight: 1.7, color: '#334155' }}>
+                            <div className="badge mb-sm" style={{ backgroundColor: 'rgba(254, 88, 88, 0.1)', color: 'var(--color-primary)' }}>Our Vision</div>
+                            <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem' }}>The Hostizzy Story</h2>
+                            <p style={{ marginBottom: '1.5rem', lineHeight: 1.8, color: 'var(--color-muted)', fontSize: '1.1rem' }}>
                                 When guests stay at a property we manage, they remember the breathtaking sunrise from that Mukteshwar villa, the warm hospitality of that Rajasthan haveli, or the serene mornings at that Goa beachfront home. They don’t remember us.
                             </p>
-                            <p style={{ marginBottom: '1.5rem', lineHeight: 1.7, color: '#334155' }}>
+                            <p style={{ marginBottom: '1.5rem', lineHeight: 1.8, color: 'var(--color-muted)', fontSize: '1.1rem' }}>
                                 <strong>Meet the Minds Behind Hostizzy</strong><br />
                                 Ethan Barman and Ashutosh Karn, both ex-Airbnb professionals, founded Hostizzy in 2019 with a radical idea: What if property management wasn’t about building the management company’s brand, but about elevating each property’s unique identity?
                             </p>
-                            <p style={{ lineHeight: 1.7, color: '#334155' }}>
+                            <p style={{ lineHeight: 1.8, color: 'var(--color-muted)', fontSize: '1.1rem' }}>
                                 Since our inception, we have been committed to elevating the standards of vacation rentals, making us the go-to choice for Airbnb hosts across India. Join the Hostizzy revolution today.
                             </p>
                         </div>
-                        <div className="card glass shadow-premium" style={{ height: '400px', background: 'url("/images/founders.jpg") center/cover', borderRadius: '1.5rem' }}></div>
+                        <div className="card shadow-premium" style={{
+                            height: '500px',
+                            background: 'url("https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&q=80&w=800") center/cover',
+                            borderRadius: '2rem',
+                            border: '8px solid white'
+                        }}></div>
                     </div>
                 </ScrollReveal>
             </section>
 
             <VideoSection
-                url="https://www.youtube.com/watch?v=9z8KA_NI_qQ"
+                url="https://www.youtube.com/watch?v=Z7-NlFyVMz4"
                 title="Our Vision"
                 subtitle="Redefining Hospitality in India."
             />
 
-            {/* What Makes Us Different (Scraped Content) */}
+            {/* What Makes Us Different */}
             <section className="section bg-secondary">
                 <div className="container">
                     <ScrollReveal>
-                        <h2 className="text-center" style={{ marginBottom: '3rem', fontSize: '2.5rem' }}>What Makes Hostizzy Different?</h2>
+                        <div className="text-center mb-lg">
+                            <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>The Hostizzy Advantage</h2>
+                            <p style={{ color: 'var(--color-muted)', fontSize: '1.1rem' }}>Why homeowners trust us with their most valuable assets.</p>
+                        </div>
                     </ScrollReveal>
                     <div className="grid desktop-2-col" style={{ gap: '2rem' }}>
                         {[
@@ -75,9 +86,9 @@ const About = () => {
                             }
                         ].map((item, i) => (
                             <ScrollReveal key={i} delay={i * 0.1}>
-                                <div className="card" style={{ padding: '2rem', height: '100%' }}>
+                                <div className="card" style={{ padding: '2.5rem', height: '100%', background: 'white' }}>
                                     <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--color-primary)' }}>{item.title}</h3>
-                                    <p style={{ lineHeight: 1.6, color: '#64748b' }}>{item.text}</p>
+                                    <p style={{ lineHeight: 1.7, color: 'var(--color-muted)' }}>{item.text}</p>
                                 </div>
                             </ScrollReveal>
                         ))}
@@ -88,9 +99,12 @@ const About = () => {
             {/* Growth & Milestones Timeline */}
             <section className="section container">
                 <ScrollReveal>
-                    <h2 className="text-center mb-lg" style={{ fontSize: '2.5rem' }}>Growth & Milestones</h2>
+                    <div className="text-center mb-lg">
+                        <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Growth & Milestones</h2>
+                        <p style={{ color: 'var(--color-muted)' }}>Our journey from a startup to India's leading management firm.</p>
+                    </div>
                 </ScrollReveal>
-                <div style={{ maxWidth: '800px', margin: '0 auto', borderLeft: '3px solid #e2e8f0', paddingLeft: '3rem' }}>
+                <div style={{ maxWidth: '800px', margin: '0 auto', borderLeft: '3px solid var(--color-border)', paddingLeft: '4rem', position: 'relative' }}>
                     {[
                         { year: '2019', title: "Hostizzy® is Born", text: "Ethan and Ashutosh started managing 3 properties in Delhi NCR to deeply understand the market." },
                         { year: '2021', title: "Expansion", text: "Formally registered as Hostsphere India Pvt. Ltd. and expanded portfolio to 10 properties." },
@@ -98,16 +112,16 @@ const About = () => {
                         { year: '2024', title: "Celebrating Success", text: "Managing over 100 properties (55 active + 45 pipeline in Goa). Hosted over 25,000 guests." }
                     ].map((m, i) => (
                         <ScrollReveal key={i} delay={i * 0.1}>
-                            <div style={{ marginBottom: '4rem', position: 'relative' }}>
+                            <div style={{ marginBottom: '5rem', position: 'relative' }}>
                                 <div style={{
-                                    position: 'absolute', left: '-3.9rem', top: '0.25rem',
-                                    width: '1.5rem', height: '1.5rem', background: 'var(--color-primary)',
-                                    borderRadius: '50%', border: '4px solid white', boxShadow: '0 0 0 4px #f1f5f9'
+                                    position: 'absolute', left: '-5.1rem', top: '0.25rem',
+                                    width: '2rem', height: '2rem', background: 'var(--color-primary)',
+                                    borderRadius: '50%', border: '6px solid white', boxShadow: 'var(--shadow-md)'
                                 }}></div>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                                    <span style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--color-muted)', letterSpacing: '2px' }}>{m.year}</span>
-                                    <h3 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#1e293b' }}>{m.title}</h3>
-                                    <p style={{ color: '#64748b', fontSize: '1.05rem', lineHeight: 1.6 }}>{m.text}</p>
+                                    <span style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '2px' }}>{m.year}</span>
+                                    <h3 style={{ fontSize: '1.8rem', fontWeight: 700, color: 'var(--color-foreground)' }}>{m.title}</h3>
+                                    <p style={{ color: 'var(--color-muted)', fontSize: '1.1rem', lineHeight: 1.7 }}>{m.text}</p>
                                 </div>
                             </div>
                         </ScrollReveal>
@@ -119,7 +133,7 @@ const About = () => {
             <section className="section bg-secondary">
                 <div className="container text-center">
                     <ScrollReveal>
-                        <h2 className="mb-lg" style={{ fontSize: '2.5rem' }}>Meet Our Team</h2>
+                        <h2 className="mb-lg" style={{ fontSize: '2.5rem' }}>Meet the Leadership</h2>
                     </ScrollReveal>
                     <div className="grid desktop-4-col" style={{ gap: '2rem' }}>
                         {[
@@ -129,15 +143,15 @@ const About = () => {
                             { name: "Rishi Tripathi", role: "Operations", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400" }
                         ].map((member, i) => (
                             <ScrollReveal key={i} delay={i * 0.1}>
-                                <div className="card card-feature" style={{ padding: '2rem', textAlign: 'center', alignItems: 'center', justifyContent: 'center' }}>
+                                <div className="card" style={{ padding: '2.5rem', textAlign: 'center', background: 'white' }}>
                                     <div style={{
-                                        width: '140px', height: '140px', borderRadius: '50%', overflow: 'hidden',
-                                        marginBottom: '1.5rem', border: '5px solid #f8fafc', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)'
+                                        width: '120px', height: '120px', borderRadius: '50%', overflow: 'hidden',
+                                        margin: '0 auto 1.5rem', border: '4px solid white', boxShadow: 'var(--shadow-md)'
                                     }}>
                                         <img src={member.img} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                     </div>
                                     <h3 style={{ fontSize: '1.25rem', marginBottom: '0.25rem', fontWeight: 700 }}>{member.name}</h3>
-                                    <p style={{ color: 'var(--color-primary)', fontWeight: 600, fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>{member.role}</p>
+                                    <p style={{ color: 'var(--color-primary)', fontWeight: 600, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px' }}>{member.role}</p>
                                 </div>
                             </ScrollReveal>
                         ))}

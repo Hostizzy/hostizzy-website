@@ -1,22 +1,29 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import ScrollReveal from '../components/ScrollReveal';
-import { MonitorPlay, Smartphone, Database, Lock, Check } from 'lucide-react';
+import { MonitorPlay, Smartphone, Database, Lock, Check, Globe, Users, ArrowRight, AppWindow, CheckCircle2, TrendingUp } from 'lucide-react';
+import ChannelCarousel from '../components/ChannelCarousel';
 
 const Technology = () => {
     return (
         <>
             <SEO
                 title="Technology & Innovation"
-                description="Explore HostOS and ResIQ - Hostizzy's proprietary technology stack for advanced property management and real-time analytics."
+                description="Explore the Hostizzy SaaS suite: HostOS, ResIQ, JuxTravel, and TravelCRM - proprietary hospitality technology."
             />
 
-            <section className="section" style={{ background: 'linear-gradient(to right, var(--color-primary), #1e40af)', color: 'white', padding: '6rem 0' }}>
+            <section className="section" style={{
+                background: 'linear-gradient(135deg, #1E293B 0%, #0F172A 100%)',
+                color: 'white',
+                padding: '10rem 0 8rem'
+            }}>
                 <div className="container text-center">
                     <ScrollReveal>
-                        <h1 style={{ fontSize: '3.5rem', marginBottom: '1.5rem', fontWeight: 800 }}>Technology at Hostizzy</h1>
-                        <p style={{ maxWidth: '800px', margin: '0 auto', fontSize: '1.25rem', opacity: 0.9 }}>
-                            We don't just manage properties; we engineer success. Our proprietary SaaS platforms perform heavy lifting so you don't have to.
+                        <div className="badge mb-sm" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', color: 'white' }}>The Platform Ecosystem</div>
+                        <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '1.5rem', fontWeight: 800 }}>Engineered Excellence</h1>
+                        <p style={{ maxWidth: '800px', margin: '0 auto', fontSize: '1.25rem', opacity: 0.9, lineHeight: 1.6 }}>
+                            The Hostizzy Platform is a vertically integrated suite of hospitality technologies. From management to marketplaces, we build the tools that empower modern hosts.
                         </p>
                     </ScrollReveal>
                 </div>
@@ -24,62 +31,57 @@ const Technology = () => {
 
             {/* HostOS Section */}
             <section className="section container">
-                <div className="grid desktop-2-col" style={{ alignItems: 'center', gap: '5rem' }}>
+                <div className="grid desktop-2-col" style={{ alignItems: 'center', gap: '6rem' }}>
                     <ScrollReveal x={-30}>
                         <div>
-                            <div style={{ textTransform: 'uppercase', color: 'var(--color-primary)', fontWeight: 700, letterSpacing: '1px', marginBottom: '1rem', fontSize: '0.9rem' }}>
-                                Property Management System
-                            </div>
-                            <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', lineHeight: 1.2 }}>HostOS Platform</h2>
-                            <p style={{ fontSize: '1.125rem', color: 'var(--color-muted)', marginBottom: '2rem', lineHeight: 1.6 }}>
-                                The central nervous system of our operations. HostOS integrates every aspect of vacation rental management into one seamless interface.
+                            <div className="badge mb-sm" style={{ backgroundColor: 'rgba(254, 88, 88, 0.1)', color: 'var(--color-primary)' }}>HostOS v2.0</div>
+                            <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', lineHeight: 1.2 }}>The Central Nervous System of Hospitality</h2>
+                            <p style={{ fontSize: '1.125rem', color: 'var(--color-muted)', marginBottom: '2.5rem', lineHeight: 1.8 }}>
+                                HostOS integrates every aspect of vacation rental management into one seamless interface. From dynamic pricing to guest communications, everything is automated.
                             </p>
 
-                            <ul style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                            <ul style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '3rem' }}>
                                 {[
-                                    "Unified Calendar for all channels (Airbnb, Booking.com, etc.)",
-                                    "Automated Guest Communication workflows",
-                                    "Digital Guest Welcome Books & Local Guides",
-                                    "Maintenance Tracking & Vendor Management"
+                                    "Unified Calendar for all channels",
+                                    "Automated Guest Communication with AI",
+                                    "Digital Guest Welcome Books",
+                                    "Smart Maintenance Tracking"
                                 ].map((item, i) => (
-                                    <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '1.05rem', color: '#334155' }}>
-                                        <div style={{ background: '#dbeafe', padding: '4px', borderRadius: '50%' }}><Check size={16} color="var(--color-primary)" /></div>
+                                    <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '1rem', fontSize: '1.1rem', color: 'var(--color-foreground)', fontWeight: 500 }}>
+                                        <div style={{ background: 'rgba(254, 88, 88, 0.1)', padding: '6px', borderRadius: '50%', display: 'flex' }}>
+                                            <Check size={18} color="var(--color-primary)" />
+                                        </div>
                                         {item}
                                     </li>
                                 ))}
                             </ul>
+                            <Link to="/products/hostos" className="btn btn-primary">Explore HostOS <ArrowRight size={18} style={{ marginLeft: '0.5rem' }} /></Link>
                         </div>
                     </ScrollReveal>
 
-                    {/* Visual Representation */}
                     <ScrollReveal x={30} delay={0.2}>
-                        <div className="glass" style={{
-                            borderRadius: '1.5rem',
-                            padding: '2.5rem',
-                            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-                            background: 'rgba(255,255,255,0.8)',
-                            transform: 'rotateY(-5deg) rotateX(5deg)',
-                            perspective: '1000px'
-                        }}>
-                            <div style={{ background: 'white', borderRadius: '1rem', padding: '1.5rem', marginBottom: '1.5rem', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)', borderLeft: '4px solid #16a34a' }}>
+                        <div className="card shadow-premium" style={{ borderRadius: '2rem', padding: '3rem', background: 'white', border: '1px solid var(--color-border)', position: 'relative' }}>
+                            <div className="card" style={{ padding: '1.5rem', marginBottom: '2rem', borderLeft: '5px solid #16a34a', boxShadow: 'var(--shadow-md)' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
                                     <div style={{ fontWeight: 700, color: '#1e293b' }}>Reservation #1284</div>
-                                    <div style={{ padding: '0.25rem 0.75rem', background: '#dcfce7', color: '#166534', borderRadius: '1rem', fontSize: '0.75rem', fontWeight: 600 }}>Confirmed</div>
+                                    <div className="badge" style={{ backgroundColor: '#dcfce7', color: '#166534' }}>Confirmed</div>
                                 </div>
                                 <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                                    <div style={{ width: '48px', height: '48px', background: '#f1f5f9', borderRadius: '50%' }}></div>
+                                    <div style={{ width: '48px', height: '48px', background: 'var(--color-secondary)', borderRadius: '50%', display: 'grid', placeItems: 'center', fontWeight: 600 }}>SJ</div>
                                     <div>
-                                        <div style={{ fontWeight: 600, fontSize: '1rem' }}>Sarah Jenkins</div>
-                                        <div style={{ fontSize: '0.85rem', color: '#64748b' }}>Check-in: Today, 2:00 PM</div>
+                                        <div style={{ fontWeight: 700, fontSize: '1rem' }}>Sarah Jenkins</div>
+                                        <div style={{ fontSize: '0.85rem', color: 'var(--color-muted)' }}>Check-in: Today, 2:00 PM</div>
                                     </div>
                                 </div>
                             </div>
-                            <div style={{ background: 'white', borderRadius: '1rem', padding: '1.5rem', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)', borderLeft: '4px solid #ef4444' }}>
+                            <div className="card" style={{ padding: '1.5rem', borderLeft: '5px solid #ef4444', boxShadow: 'var(--shadow-md)' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
                                     <div style={{ fontWeight: 700, color: '#1e293b' }}>Maintenance Alert</div>
-                                    <div style={{ padding: '0.25rem 0.75rem', background: '#fee2e2', color: '#991b1b', borderRadius: '1rem', fontSize: '0.75rem', fontWeight: 600 }}>High Priority</div>
+                                    <div className="badge" style={{ backgroundColor: '#fee2e2', color: '#991b1b' }}>Urgent</div>
                                 </div>
-                                <div style={{ fontSize: '0.9rem', color: '#334155' }}>AC Service required for Villa 4B - Master Bedroom</div>
+                                <div style={{ fontSize: '0.95rem', color: '#334155', fontWeight: 500 }}>
+                                    AC Service required for <span style={{ color: 'var(--color-primary)' }}>Villa 4B</span>
+                                </div>
                             </div>
                         </div>
                     </ScrollReveal>
@@ -87,37 +89,21 @@ const Technology = () => {
             </section>
 
             {/* ResIQ Section */}
-            <section className="section" style={{ backgroundColor: '#f8fafc' }}>
+            <section className="section bg-secondary">
                 <div className="container">
-                    <div className="grid desktop-2-col" style={{ alignItems: 'center', gap: '5rem' }}>
-                        {/* Visual */}
+                    <div className="grid desktop-2-col" style={{ alignItems: 'center', gap: '6rem' }}>
                         <ScrollReveal x={-30}>
                             <div style={{ order: 1 }}>
-                                <div className="glass" style={{
-                                    borderRadius: '1.5rem',
-                                    padding: '2.5rem',
-                                    border: '1px solid rgba(255,255,255,0.6)',
-                                    boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)',
-                                    background: 'white'
-                                }}>
-                                    <div style={{ marginBottom: '2rem' }}>
-                                        <div style={{ fontSize: '0.9rem', color: 'var(--color-muted)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Total Revenue (This Month)</div>
-                                        <div style={{ fontSize: '2.5rem', fontWeight: 800, color: '#0f172a', margin: '0.5rem 0' }}>₹ 4,25,000</div>
-                                        <div style={{ fontSize: '0.9rem', color: '#16a34a', fontWeight: 600 }}>+12.5% vs Last Month</div>
+                                <div className="card shadow-premium" style={{ borderRadius: '2rem', padding: '3rem', background: 'white', border: '1px solid var(--color-border)' }}>
+                                    <div style={{ marginBottom: '2.5rem' }}>
+                                        <div style={{ fontSize: '0.9rem', color: 'var(--color-muted)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 700 }}>Total Revenue</div>
+                                        <div style={{ fontSize: '3rem', fontWeight: 800, color: '#0f172a', margin: '0.5rem 0', letterSpacing: '-1px' }}>₹ 4,25,000</div>
+                                        <div style={{ fontSize: '1rem', color: '#16a34a', fontWeight: 700 }}>↑ 12.5% vs Last Month</div>
                                     </div>
-                                    <div style={{ height: '200px', display: 'flex', alignItems: 'flex-end', gap: '12px', paddingBottom: '1rem', borderBottom: '1px solid #e2e8f0' }}>
+                                    <div style={{ height: '140px', display: 'flex', alignItems: 'flex-end', gap: '10px' }}>
                                         {[40, 60, 45, 70, 50, 80, 65].map((h, i) => (
-                                            <div key={i} style={{
-                                                flex: 1,
-                                                backgroundColor: i === 6 ? 'var(--color-primary)' : '#e2e8f0',
-                                                borderRadius: '6px 6px 0 0',
-                                                height: `${h}%`,
-                                                transition: 'height 1s ease-out'
-                                            }}></div>
+                                            <div key={i} style={{ flex: 1, background: i === 6 ? 'var(--color-primary)' : '#e2e8f0', borderRadius: '4px', height: `${h}%` }}></div>
                                         ))}
-                                    </div>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem', fontSize: '0.8rem', color: '#94a3b8' }}>
-                                        <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
                                     </div>
                                 </div>
                             </div>
@@ -125,30 +111,123 @@ const Technology = () => {
 
                         <ScrollReveal x={30} delay={0.2}>
                             <div style={{ order: 2 }}>
-                                <div style={{ textTransform: 'uppercase', color: 'var(--color-primary)', fontWeight: 700, letterSpacing: '1px', marginBottom: '1rem', fontSize: '0.9rem' }}>
-                                    Analytics & Intelligence
-                                </div>
-                                <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', lineHeight: 1.2 }}>ResIQ Dashboard</h2>
-                                <p style={{ fontSize: '1.125rem', color: 'var(--color-muted)', marginBottom: '2.5rem', lineHeight: 1.6 }}>
-                                    Data is power. ResIQ provides property owners with transparent, real-time access to financial performance, occupancy trends, and future projections.
+                                <div className="badge mb-sm" style={{ backgroundColor: 'rgba(254, 88, 88, 0.1)', color: 'var(--color-primary)' }}>ResIQ Analytics</div>
+                                <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', lineHeight: 1.2 }}>Intelligence That Drives Revenue</h2>
+                                <p style={{ fontSize: '1.125rem', color: 'var(--color-muted)', marginBottom: '3rem', lineHeight: 1.8 }}>
+                                    Dynamic insights for property owners. Real-time access to financial performance, occupancy trends, and future projections.
                                 </p>
-                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '3rem' }}>
                                     {[
-                                        { icon: <MonitorPlay size={32} color="var(--color-primary)" />, title: "Real-time Data", desc: "Instant visibility into bookings." },
-                                        { icon: <Smartphone size={32} color="var(--color-primary)" />, title: "Mobile First", desc: "Access from anywhere." },
-                                        { icon: <Database size={32} color="var(--color-primary)" />, title: "Market Insights", desc: "Competitive analysis." },
-                                        { icon: <Lock size={32} color="var(--color-primary)" />, title: "Secure & Private", desc: "Bank-grade security." }
+                                        { icon: <MonitorPlay size={24} />, title: "Real-time" },
+                                        { icon: <Database size={24} />, title: "Market Data" },
+                                        { icon: <Lock size={24} />, title: "Encrypted" },
+                                        { icon: <Smartphone size={24} />, title: "Owners App" }
                                     ].map((f, i) => (
-                                        <div key={i}>
-                                            <div style={{ marginBottom: '0.75rem' }}>{f.icon}</div>
-                                            <h4 style={{ fontSize: '1.1rem', marginBottom: '0.5rem' }}>{f.title}</h4>
-                                            <p style={{ fontSize: '0.9rem', color: 'var(--color-muted)' }}>{f.desc}</p>
+                                        <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                            <div style={{ color: 'var(--color-primary)' }}>{f.icon}</div>
+                                            <div style={{ fontWeight: 700 }}>{f.title}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                                <Link to="/products/resiq" className="btn btn-primary">Deep Dive into ResIQ <ArrowRight size={18} style={{ marginLeft: '0.5rem' }} /></Link>
+                            </div>
+                        </ScrollReveal>
+                    </div>
+                </div>
+            </section>
+
+            {/* Global Distribution Carousel */}
+            <ChannelCarousel />
+
+            {/* Mobile App Previews */}
+            <section className="section" style={{ backgroundColor: '#0f172a', color: 'white', padding: '8rem 0', overflow: 'hidden' }}>
+                <div className="container">
+                    <div className="grid desktop-2-col" style={{ alignItems: 'center', gap: '6rem' }}>
+                        <ScrollReveal x={-30}>
+                            <div>
+                                <div className="badge mb-sm" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', color: 'white' }}>Hostizzy Mobile</div>
+                                <h2 style={{ fontSize: '3rem', fontWeight: 800, marginBottom: '2rem', lineHeight: 1.1 }}>Management at Your Fingertips</h2>
+                                <p style={{ fontSize: '1.2rem', opacity: 0.8, lineHeight: 1.8, marginBottom: '3rem' }}>
+                                    Stay connected to your business from anywhere. Our mobile apps for iOS and Android give owners and staff real-time visibility and control.
+                                </p>
+
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                                    {[
+                                        { title: "Real-time Notifications", desc: "Never miss a booking inquiry or maintenance alert." },
+                                        { title: "Live Revenue Tracker", desc: "Watch your earnings grow in real-time with daily payouts." },
+                                        { title: "Staff Coordination", desc: "Assign tasks to housekeeping and maintenance instantly." }
+                                    ].map((f, i) => (
+                                        <div key={i} style={{ display: 'flex', gap: '1.5rem' }}>
+                                            <div style={{ color: 'var(--color-primary)', marginTop: '4px' }}><CheckCircle2 size={24} /></div>
+                                            <div>
+                                                <div style={{ fontWeight: 700, fontSize: '1.1rem', marginBottom: '4px' }}>{f.title}</div>
+                                                <div style={{ opacity: 0.7, fontSize: '0.95rem' }}>{f.desc}</div>
+                                            </div>
                                         </div>
                                     ))}
                                 </div>
                             </div>
                         </ScrollReveal>
+
+                        <ScrollReveal x={30} delay={0.2}>
+                            <div style={{ position: 'relative' }}>
+                                {/* Floating Glass Card */}
+                                <div style={{
+                                    position: 'absolute', top: '20%', left: '-10%', zIndex: 10,
+                                    background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)',
+                                    padding: '1.5rem', borderRadius: '1.5rem', border: '1px solid rgba(255,255,255,0.2)',
+                                    boxShadow: '0 20px 40px rgba(0,0,0,0.5)'
+                                }}>
+                                    <TrendingUp size={32} color="var(--color-primary)" style={{ marginBottom: '1rem' }} />
+                                    <div style={{ fontSize: '0.8rem', opacity: 0.6, textTransform: 'uppercase', letterSpacing: '1px' }}>Daily Bookings</div>
+                                    <div style={{ fontSize: '1.5rem', fontWeight: 800 }}>+128%</div>
+                                </div>
+
+                                <img
+                                    src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=800"
+                                    alt="Hostizzy Mobile App"
+                                    style={{
+                                        width: '100%',
+                                        maxWidth: '400px',
+                                        borderRadius: '3rem',
+                                        boxShadow: '0 50px 100px -20px rgba(0,0,0,0.5)',
+                                        border: '10px solid #1e293b',
+                                        margin: '0 auto',
+                                        display: 'block'
+                                    }}
+                                />
+                            </div>
+                        </ScrollReveal>
                     </div>
+                </div>
+            </section>
+
+            {/* JuxTravel & TravelCRM Cards */}
+            <section className="section container">
+                <div className="grid desktop-2-col" style={{ gap: '3rem' }}>
+                    <ScrollReveal y={30}>
+                        <div className="card shadow-premium" style={{ padding: '4rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '2.5rem' }}>
+                            <div className="badge mb-sm" style={{ background: '#8b5cf6', color: 'white' }}>COMING SOON</div>
+                            <Globe size={48} color="#8b5cf6" style={{ marginBottom: '2rem' }} />
+                            <h2 style={{ fontSize: '2.25rem', marginBottom: '1.5rem' }}>JuxTravel Marketplace</h2>
+                            <p style={{ fontSize: '1.1rem', color: 'var(--color-muted)', marginBottom: '2.5rem', lineHeight: 1.7 }}>
+                                Direct bookings, AI-powered travel recommendations, and a community-driven travel marketplace for India's best villas.
+                            </p>
+                            <Link to="/products/juxtravel" className="btn" style={{ background: 'white', border: '1px solid #e2e8f0', padding: '1rem 2rem' }}>Experience JuxTravel</Link>
+                        </div>
+                    </ScrollReveal>
+
+                    <ScrollReveal y={30} delay={0.2}>
+                        <div className="card shadow-premium" style={{ padding: '4rem', background: '#0f172a', color: 'white', borderRadius: '2.5rem' }}>
+                            <div className="badge mb-sm" style={{ background: '#10b981', color: 'white' }}>LEAD MANAGEMENT</div>
+                            <Users size={48} color="#10b981" style={{ marginBottom: '2rem' }} />
+                            <h2 style={{ fontSize: '2.25rem', marginBottom: '1.5rem' }}>TravelCRM</h2>
+                            <p style={{ fontSize: '1.1rem', opacity: 0.8, marginBottom: '2.5rem', lineHeight: 1.7 }}>
+                                The "Missing Middle" solution for vacation rentals. Track leaks, convert WhatsApp inquiries, and build guest loyalty.
+                            </p>
+                            <Link to="/products/travelcrm" className="btn btn-primary" style={{ background: '#10b981', border: 'none', padding: '1rem 2rem' }}>Deep Dive into CRM</Link>
+                        </div>
+                    </ScrollReveal>
                 </div>
             </section>
         </>

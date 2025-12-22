@@ -1,9 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import SEO from '../components/SEO';
-import { LayoutDashboard, Home, Mountain, Calendar, LogOut, Plus, Trash2, Edit, BookOpen, Search, X, Quote, Instagram } from 'lucide-react';
+import { useSettings } from '../context/SettingsContext';
+import {
+    LayoutDashboard,
+    Home,
+    MapPin,
+    FileText,
+    MessageCircle,
+    Settings,
+    LogOut,
+    Plus,
+    Search,
+    Edit,
+    Trash2,
+    ExternalLink,
+    Calendar,
+    Instagram,
+    Mail,
+    Globe
+} from 'lucide-react';
 import ImageArrayInput from '../components/admin/ImageArrayInput';
 import ItineraryBuilder from '../components/admin/ItineraryBuilder';
-import TagInput from '../components/admin/TagInput';
 
 const Admin = () => {
     const [activeTab, setActiveTab] = useState('overview');
@@ -15,62 +32,93 @@ const Admin = () => {
         { label: 'Avg Rating', value: '4.9', trend: '+2%' }
     ];
 
+    const handleLogout = () => {
+        localStorage.removeItem('adminToken');
+        window.location.reload();
+    };
+
     return (
         <>
             <SEO title="Admin Console" description="Hostizzy Management Dashboard" />
-            <div style={{ display: 'flex', minHeight: 'calc(100vh - var(--header-height))', background: '#f8fafc' }}>
-
+            <div style={{ display: 'flex', minHeight: '100vh', background: '#f8fafc' }}>
                 {/* Sidebar */}
-                <aside style={{ width: '260px', background: 'white', borderRight: '1px solid #e2e8f0', padding: '2rem 1.5rem', display: 'flex', flexDirection: 'column', height: '100vh', position: 'sticky', top: 0 }}>
+                <aside style={{ width: '280px', background: 'white', borderRight: '1px solid #e2e8f0', padding: '2rem', display: 'flex', flexDirection: 'column', position: 'sticky', top: 0, height: '100vh' }}>
                     <div style={{ marginBottom: '3rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <div style={{ width: '32px', height: '32px', background: 'var(--color-primary)', borderRadius: '8px' }}></div>
-                        <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#1e293b' }}>Hostizzy</h2>
+                        <div style={{ width: '32px', height: '32px', background: 'var(--color-primary)', borderRadius: '0.5rem' }}></div>
+                        <span style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-primary)' }}>HOSTIZZY</span>
                     </div>
 
                     <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flex: 1 }}>
                         <NavButton icon={<LayoutDashboard size={20} />} label="Overview" active={activeTab === 'overview'} onClick={() => setActiveTab('overview')} />
-                        <div style={{ height: '1px', background: '#e2e8f0', margin: '1rem 0' }}></div>
-                        <p style={{ fontSize: '0.75rem', fontWeight: 600, color: '#94a3b8', paddingLeft: '0.75rem', marginBottom: '0.5rem' }}>MANAGEMENT</p>
                         <NavButton icon={<Home size={20} />} label="Properties" active={activeTab === 'properties'} onClick={() => setActiveTab('properties')} />
-                        <NavButton icon={<Mountain size={20} />} label="Experiences" active={activeTab === 'experiences'} onClick={() => setActiveTab('experiences')} />
-                        <NavButton icon={<BookOpen size={20} />} label="Blogs" active={activeTab === 'blogs'} onClick={() => setActiveTab('blogs')} />
-                        <NavButton icon={<Quote size={20} />} label="Testimonials" active={activeTab === 'testimonials'} onClick={() => setActiveTab('testimonials')} />
+                        <NavButton icon={<MapPin size={20} />} label="Experiences" active={activeTab === 'experiences'} onClick={() => setActiveTab('experiences')} />
+                        <NavButton icon={<FileText size={20} />} label="Blogs" active={activeTab === 'blogs'} onClick={() => setActiveTab('blogs')} />
+                        <NavButton icon={<MessageCircle size={20} />} label="Testimonials" active={activeTab === 'testimonials'} onClick={() => setActiveTab('testimonials')} />
                         <NavButton icon={<Instagram size={20} />} label="Social Info" active={activeTab === 'social'} onClick={() => setActiveTab('social')} />
                         <NavButton icon={<Calendar size={20} />} label="Bookings" active={activeTab === 'bookings'} onClick={() => setActiveTab('bookings')} />
+                        <NavButton icon={<Mail size={20} />} label="Messages" active={activeTab === 'messages'} onClick={() => setActiveTab('messages')} />
+                        <NavButton icon={<Globe size={20} />} label="SEO Settings" active={activeTab === 'seo'} onClick={() => setActiveTab('seo')} />
+                        <NavButton icon={<Settings size={20} />} label="Brand Settings" active={activeTab === 'settings'} onClick={() => setActiveTab('settings')} />
+                        <div style={{ margin: '1rem 0', borderTop: '1px solid #f1f5f9' }}></div>
+                        <NavButton icon={<LogOut size={20} />} label="Logout" onClick={handleLogout} />
                     </nav>
 
-                    <button style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.75rem', color: '#64748b', background: 'transparent', border: 'none', cursor: 'pointer', fontWeight: 500 }}>
-                        <LogOut size={20} /> Logout
-                    </button>
+                    <div style={{ marginTop: 'auto', padding: '1rem', background: '#f1f5f9', borderRadius: '1rem' }}>
+                        <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '0.5rem', fontWeight: 600 }}>PRO PLAN</p>
+                        <div style={{ fontSize: '0.85rem', fontWeight: 700 }}>Hostizzy Enterprise</div>
+                    </div>
                 </aside>
 
-                {/* ... (Main Content) ... */}
-                <main style={{ flex: 1, padding: '2.5rem', overflowY: 'auto' }}>
-                    {/* ... (Header) ... */}
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
+                {/* Main Content */}
+                <main style={{ flex: 1, padding: '3rem', background: '#f8fafc', overflowY: 'auto' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem' }}>
                         <div>
-                            <h1 style={{ fontSize: '1.8rem', fontWeight: 700, color: '#1e293b' }}>{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}</h1>
-                            <p style={{ color: '#64748b' }}>Here's what's happening with your business today.</p>
+                            <h1 style={{ fontSize: '2rem', fontWeight: 800, color: '#0f172a' }}>{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}</h1>
+                            <p style={{ color: '#64748b' }}>Welcome to your Hostizzy management console.</p>
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                            <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: '#e2e8f0', display: 'grid', placeItems: 'center' }}>A</div>
+                            <div style={{ width: '48px', height: '48px', borderRadius: '1rem', background: 'var(--color-primary)', color: 'white', display: 'grid', placeItems: 'center', fontWeight: 700 }}>H</div>
                         </div>
                     </div>
 
                     {activeTab === 'overview' && (
-                        /* ... (Stats Grid & Chart - omitted for brevity in replace, effectively keeping them if I target correctly) ... */
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
                             {/* Stats Grid */}
-                            <div className="grid desktop-4-col" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem' }}>
+                            <div className="grid desktop-4-col" style={{ gap: '1.5rem' }}>
                                 {stats.map((stat, i) => (
-                                    <div key={i} style={{ background: 'white', padding: '1.5rem', borderRadius: '1rem', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}>
-                                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                                            <span style={{ color: '#64748b', fontSize: '0.9rem', fontWeight: 500 }}>{stat.label}</span>
-                                            <span style={{ color: stat.trend.includes('+') ? '#10b981' : '#ef4444', fontSize: '0.8rem', fontWeight: 600, background: stat.trend.includes('+') ? '#d1fae5' : '#fee2e2', padding: '2px 6px', borderRadius: '4px' }}>{stat.trend}</span>
+                                    <div key={i} style={{ background: 'white', padding: '2rem', borderRadius: '1.25rem', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                                            <span style={{ color: '#64748b', fontSize: '0.9rem', fontWeight: 600 }}>{stat.label}</span>
+                                            <span style={{ color: stat.trend.includes('+') ? '#10b981' : '#ef4444', fontSize: '0.75rem', fontWeight: 700, background: stat.trend.includes('+') ? '#d1fae5' : '#fee2e2', padding: '2px 8px', borderRadius: '100px' }}>{stat.trend}</span>
                                         </div>
-                                        <h3 style={{ fontSize: '2rem', fontWeight: 700, color: '#1e293b' }}>{stat.value}</h3>
+                                        <h3 style={{ fontSize: '2rem', fontWeight: 800, color: '#0f172a', letterSpacing: '-1px' }}>{stat.value}</h3>
                                     </div>
                                 ))}
+                            </div>
+
+                            {/* Revenue Chart Mockup */}
+                            <div style={{ background: 'white', padding: '2.5rem', borderRadius: '1.5rem', border: '1px solid #e2e8f0' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
+                                    <h3 style={{ fontSize: '1.25rem', fontWeight: 800 }}>Revenue Performance</h3>
+                                    <select style={{ padding: '0.5rem 1rem', borderRadius: '0.75rem', border: '1px solid #e2e8f0', fontSize: '0.85rem' }}>
+                                        <option>Last 7 Days</option>
+                                        <option>Last 30 Days</option>
+                                    </select>
+                                </div>
+                                <div style={{ height: '240px', display: 'flex', alignItems: 'flex-end', gap: '2.5rem', paddingBottom: '1rem', borderBottom: '2px solid #f1f5f9' }}>
+                                    {[30, 50, 40, 90, 60, 80, 70].map((h, i) => (
+                                        <div key={i} style={{
+                                            flex: 1,
+                                            background: i === 3 ? 'var(--color-primary)' : '#e2e8f0',
+                                            height: `${h}%`,
+                                            borderRadius: '0.75rem 0.75rem 0 0',
+                                            transition: 'height 1s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+                                        }}></div>
+                                    ))}
+                                </div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem', fontSize: '0.8rem', color: '#94a3b8', fontWeight: 600 }}>
+                                    <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                                </div>
                             </div>
                         </div>
                     )}
@@ -79,15 +127,16 @@ const Admin = () => {
                     {activeTab === 'experiences' && <DataManager key="exp" endpoint="/api/experiences" title="Experience" fields={['title', 'location', 'duration', 'price']} />}
                     {activeTab === 'blogs' && <DataManager key="blogs" endpoint="/api/blogs" title="Blog" fields={['title', 'date', 'excerpt']} />}
                     {activeTab === 'testimonials' && <DataManager key="testi" endpoint="/api/testimonials" title="Testimonial" fields={['name', 'role', 'rating']} />}
-
-                    {activeTab === 'bookings' && <DataManager key="bookings" endpoint="/api/bookings" title="Booking" fields={['itemTitle', 'name', 'date', 'status']} />}
+                    {activeTab === 'social' && <DataManager key="social" endpoint="/api/social/instagram" title="Social Post" fields={['caption', 'platform']} />}
+                    {activeTab === 'bookings' && <DataManager key="bookings" endpoint="/api/bookings" title="Enquiry" fields={['itemTitle', 'name', 'checkIn', 'totalPrice', 'status']} />}
+                    {activeTab === 'messages' && <DataManager key="msgs" endpoint="/api/contacts" title="Message" fields={['name', 'email', 'subject', 'timestamp']} />}
+                    {activeTab === 'seo' && <DataManager key="seo" endpoint="/api/seo" title="SEO Page" fields={['path', 'title', 'description']} />}
+                    {activeTab === 'settings' && <DataManager key="settings" endpoint="/api/settings" title="Setting" fields={['siteName', 'supportEmail', 'supportPhone']} isSingleObject={true} />}
                 </main>
             </div>
         </>
     );
 };
-
-// --- Helper Components ---
 
 const NavButton = ({ icon, label, active, onClick }) => (
     <button
@@ -97,13 +146,13 @@ const NavButton = ({ icon, label, active, onClick }) => (
             alignItems: 'center',
             gap: '0.75rem',
             width: '100%',
-            padding: '0.75rem',
+            padding: '0.85rem 1rem',
             border: 'none',
-            background: active ? '#f1f5f9' : 'transparent',
+            background: active ? 'rgba(254, 88, 88, 0.1)' : 'transparent',
             color: active ? 'var(--color-primary)' : '#64748b',
-            borderRadius: '0.5rem',
+            borderRadius: '0.75rem',
             cursor: 'pointer',
-            fontWeight: active ? 600 : 500,
+            fontWeight: active ? 700 : 500,
             transition: 'all 0.2s'
         }}
     >
@@ -112,19 +161,23 @@ const NavButton = ({ icon, label, active, onClick }) => (
     </button>
 );
 
-const DataManager = ({ endpoint, title, fields }) => {
+const DataManager = ({ endpoint, title, fields, isSingleObject = false }) => {
     const [data, setData] = useState([]);
     const [view, setView] = useState('list'); // 'list' | 'add' | 'edit'
     const [formData, setFormData] = useState({});
     const [loading, setLoading] = useState(false);
+    const { refreshSettings } = useSettings();
 
     // Fetch Data
     const fetchData = React.useCallback(async () => {
         setLoading(true);
         try {
-            const res = await fetch(endpoint);
+            const token = localStorage.getItem('adminToken');
+            const res = await fetch(endpoint, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
             const json = await res.json();
-            setData(Array.isArray(json) ? json : []);
+            setData(isSingleObject ? [json] : (Array.isArray(json) ? json : []));
         } catch (err) {
             console.error(err);
         } finally {
@@ -149,30 +202,43 @@ const DataManager = ({ endpoint, title, fields }) => {
 
     const handleDelete = async (id) => {
         if (!window.confirm('Are you sure?')) return;
-        await fetch(`${endpoint}/${id}`, { method: 'DELETE' });
-        fetchData();
+        const token = localStorage.getItem('adminToken');
+        await fetch(`${endpoint}/${id}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (!isSingleObject) fetchData();
+        else setView('list');
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const method = view === 'add' ? 'POST' : 'PUT';
-        const url = view === 'add' ? endpoint : `${endpoint}/${formData.id}`;
+        const method = isSingleObject ? 'PUT' : (view === 'add' ? 'POST' : 'PUT');
+        const url = (isSingleObject || view === 'add') ? endpoint : `${endpoint}/${formData.id}`;
 
         try {
+            const token = localStorage.getItem('adminToken');
             await fetch(url, {
                 method,
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify(formData)
             });
+            if (title === 'Setting') refreshSettings();
             setView('list');
-            fetchData();
+            if (isSingleObject) {
+                setData([formData]);
+            } else {
+                fetchData();
+            }
         } catch (err) {
             console.error(err);
             alert('Failed to save');
         }
     };
 
-    // Airbnb Import Handler
     const handleImport = async () => {
         const url = prompt("Enter Airbnb or Website URL to import details from:");
         if (!url) return;
@@ -189,13 +255,36 @@ const DataManager = ({ endpoint, title, fields }) => {
                     ...prev,
                     title: meta.title,
                     description: meta.description,
-                    image: meta.image
+                    image: meta.image,
+                    price: meta.price || prev.price
                 }));
                 alert("Imported! Review details in the form.");
             }
         } catch (e) {
             console.error(e);
-            alert("Import failed. Check console.");
+            alert("Import failed.");
+        }
+    };
+
+    const handleMagicPaste = async () => {
+        const text = prompt("Paste full listing description/details here (AI will parse it):");
+        if (!text) return;
+
+        try {
+            const res = await fetch('/api/parse-listing', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text })
+            });
+            const data = await res.json();
+            setFormData(prev => ({
+                ...prev,
+                ...data
+            }));
+            alert("Magic Paste successful! Please review the details.");
+        } catch (e) {
+            console.error(e);
+            alert("Parsing failed.");
         }
     };
 
@@ -210,48 +299,50 @@ const DataManager = ({ endpoint, title, fields }) => {
                         <Search size={20} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
                         <input
                             placeholder={`Search ${title}s...`}
-                            style={{ padding: '0.75rem 1rem 0.75rem 3rem', borderRadius: '0.5rem', border: '1px solid #e2e8f0', width: '300px', outline: 'none' }}
+                            style={{ padding: '0.75rem 1rem 0.75rem 3.25rem', borderRadius: '0.75rem', border: '1px solid #e2e8f0', width: '320px', outline: 'none' }}
                         />
                     </div>
-                    <button className="btn btn-primary" onClick={handleAdd} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <Plus size={20} /> Add {title}
-                    </button>
-                    {/* Only show import for properties/experiences if needed, simplified here */}
-                    {view === 'add' && title === 'Property' && (
-                        <button className="btn" onClick={handleImport} style={{ marginLeft: '1rem', border: '1px solid #e2e8f0' }}>Import from URL</button>
+                    {title !== 'Message' && title !== 'Enquiry' && !isSingleObject && (
+                        <button className="btn btn-primary" onClick={handleAdd} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <Plus size={20} /> Add {title}
+                        </button>
                     )}
                 </div>
             )}
 
             {/* List View */}
             {view === 'list' ? (
-                <div style={{ background: 'white', borderRadius: '1rem', border: '1px solid #e2e8f0', overflow: 'hidden' }}>
+                <div style={{ background: 'white', borderRadius: '1.25rem', border: '1px solid #e2e8f0', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}>
                     <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                         <thead style={{ background: '#f8fafc', borderBottom: '1px solid #e2e8f0' }}>
                             <tr>
                                 {fields.map(f => (
-                                    <th key={f} style={{ padding: '1rem', textAlign: 'left', fontSize: '0.85rem', fontWeight: 600, color: '#64748b', textTransform: 'capitalize' }}>{f}</th>
+                                    <th key={f} style={{ padding: '1.25rem 1rem', textAlign: 'left', fontSize: '0.85rem', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{f}</th>
                                 ))}
-                                <th style={{ padding: '1rem', textAlign: 'right' }}>Actions</th>
+                                <th style={{ padding: '1.25rem 1rem', textAlign: 'right' }}>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             {data.map(item => (
                                 <tr key={item.id} style={{ borderBottom: '1px solid #f1f5f9' }}>
                                     {fields.map(f => (
-                                        <td key={f} style={{ padding: '1rem', color: '#334155' }}>
-                                            {typeof item[f] === 'object' ? JSON.stringify(item[f]).substring(0, 30) + '...' : item[f]}
+                                        <td key={f} style={{ padding: '1.25rem 1rem', color: '#334155', fontWeight: 500 }}>
+                                            {f === 'totalPrice' ? `₹${(item[f] || 0).toLocaleString()}` :
+                                                (f === 'checkIn' || f === 'checkOut') && item[f] ? new Date(item[f]).toLocaleDateString() :
+                                                    typeof item[f] === 'object' ? JSON.stringify(item[f]).substring(0, 30) + '...' : String(item[f] || 'N/A')}
                                         </td>
                                     ))}
-                                    <td style={{ padding: '1rem', textAlign: 'right' }}>
-                                        <button onClick={() => handleEdit(item)} style={{ marginRight: '0.75rem', color: '#3b82f6', background: 'none', border: 'none', cursor: 'pointer' }}><Edit size={18} /></button>
+                                    <td style={{ padding: '1.25rem 1rem', textAlign: 'right' }}>
+                                        {title !== 'Message' && title !== 'Enquiry' && (
+                                            <button onClick={() => handleEdit(item)} style={{ marginRight: '1rem', color: '#3b82f6', background: 'none', border: 'none', cursor: 'pointer' }}><Edit size={18} /></button>
+                                        )}
                                         <button onClick={() => handleDelete(item.id)} style={{ color: '#ef4444', background: 'none', border: 'none', cursor: 'pointer' }}><Trash2 size={18} /></button>
                                     </td>
                                 </tr>
                             ))}
                             {data.length === 0 && (
                                 <tr>
-                                    <td colSpan={fields.length + 1} style={{ padding: '3rem', textAlign: 'center', color: '#94a3b8' }}>No {title.toLowerCase()}s found.</td>
+                                    <td colSpan={fields.length + 1} style={{ padding: '4rem', textAlign: 'center', color: '#94a3b8' }}>No {title.toLowerCase()}s found.</td>
                                 </tr>
                             )}
                         </tbody>
@@ -259,10 +350,15 @@ const DataManager = ({ endpoint, title, fields }) => {
                 </div>
             ) : (
                 /* Form View */
-                <div style={{ background: 'white', padding: '2rem', borderRadius: '1rem', border: '1px solid #e2e8f0' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2rem' }}>
-                        <h2 style={{ fontSize: '1.5rem', fontWeight: 700 }}>{view === 'add' ? 'Add New' : 'Edit'} {title}</h2>
-                        {view === 'add' && <button onClick={handleImport} style={{ color: 'var(--color-primary)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 600 }}>✨ Auto-Fill from URL</button>}
+                <div style={{ background: 'white', padding: '2.5rem', borderRadius: '1.5rem', border: '1px solid #e2e8f0' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2.5rem' }}>
+                        <h2 style={{ fontSize: '1.5rem', fontWeight: 800 }}>{view === 'add' ? 'Add New' : 'Edit'} {title}</h2>
+                        {view === 'add' && title === 'Property' && (
+                            <div style={{ display: 'flex', gap: '1rem' }}>
+                                <button onClick={handleImport} style={{ color: 'var(--color-primary)', background: '#fff1f1', padding: '0.5rem 1rem', borderRadius: '0.5rem', border: '1px solid var(--color-primary)', cursor: 'pointer', fontWeight: 700 }}>✨ Auto-Fill URL</button>
+                                <button onClick={handleMagicPaste} style={{ color: '#10b981', background: '#f0fdf4', padding: '0.5rem 1rem', borderRadius: '0.5rem', border: '1px solid #10b981', cursor: 'pointer', fontWeight: 700 }}>🪄 Magic Paste</button>
+                            </div>
+                        )}
                     </div>
                     <FormTabs
                         formData={formData}
@@ -277,45 +373,44 @@ const DataManager = ({ endpoint, title, fields }) => {
     );
 };
 
-// FormTabs Update below
 const FormTabs = ({ formData, setFormData, title, onSubmit, onCancel }) => {
     const [activeTab, setActiveTab] = useState(0);
 
-    // Dynamic Tabs based on Content Type
     const tabs = title === 'Property' ? [
         { name: 'Basic Info', fields: ['title', 'price', 'type', 'guests', 'bedrooms', 'bathrooms'] },
-        { name: 'Location', fields: ['location', 'map_coordinates', 'video_url'] },
+        { name: 'Location', fields: ['location', 'video_url'] },
         { name: 'Photos', fields: ['image', 'gallery'] },
-        { name: 'Details', fields: ['description', 'amenities_grouped'] },
-        { name: 'Policies', fields: ['house_rules', 'cancellation_policy'] }
+        { name: 'Details', fields: ['description'] },
+        { name: 'Policies', fields: ['cancellation_policy'] }
     ] : title === 'Experience' ? [
         { name: 'Overview', fields: ['title', 'subtitle', 'price', 'dates', 'duration', 'location', 'video_url'] },
         { name: 'Media', fields: ['image'] },
-        { name: 'Itinerary', fields: ['itinerary'] },
-        { name: 'Inclusions', fields: ['inclusions', 'exclusions'] }
+        { name: 'Itinerary', fields: ['itinerary'] }
     ] : title === 'Testimonial' ? [
         { name: 'Details', fields: ['name', 'role', 'rating', 'text'] }
-    ] : [ // Default (Blogs, etc)
-        { name: 'Content', fields: Object.keys(formData).length > 0 ? Object.keys(formData) : ['title', 'excerpt', 'image', 'content', 'date'] }
+    ] : title === 'SEO Page' ? [
+        { name: 'Settings', fields: ['path', 'title', 'description', 'keywords'] }
+    ] : [
+        { name: 'Content', fields: Object.keys(formData).length > 0 ? Object.keys(formData) : ['title', 'excerpt', 'image', 'content'] }
     ];
 
     return (
         <form onSubmit={onSubmit}>
-            <div style={{ display: 'flex', gap: '1rem', borderBottom: '1px solid #e2e8f0', marginBottom: '2rem' }}>
+            <div style={{ display: 'flex', gap: '2rem', borderBottom: '1px solid #f1f5f9', marginBottom: '2.5rem' }}>
                 {tabs.map((tab, index) => (
                     <button
                         key={index}
                         type="button"
                         onClick={() => setActiveTab(index)}
                         style={{
-                            padding: '0.75rem 0',
-                            marginRight: '1rem',
+                            padding: '1rem 0',
                             border: 'none',
                             background: 'transparent',
-                            borderBottom: activeTab === index ? '2px solid var(--color-primary)' : '2px solid transparent',
-                            color: activeTab === index ? 'var(--color-primary)' : '#64748b',
-                            fontWeight: 600,
-                            cursor: 'pointer'
+                            borderBottom: activeTab === index ? '3px solid var(--color-primary)' : '3px solid transparent',
+                            color: activeTab === index ? 'var(--color-primary)' : '#94a3b8',
+                            fontWeight: 700,
+                            cursor: 'pointer',
+                            fontSize: '0.95rem'
                         }}
                     >
                         {tab.name}
@@ -329,79 +424,39 @@ const FormTabs = ({ formData, setFormData, title, onSubmit, onCancel }) => {
                 ))}
             </div>
 
-            <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem', paddingTop: '1rem', borderTop: '1px solid #f1f5f9' }}>
-                <button type="submit" className="btn btn-primary" style={{ flex: 1 }}>Save {title}</button>
-                <button type="button" className="btn" onClick={onCancel} style={{ flex: 1, background: '#f1f5f9' }}>Cancel</button>
+            <div style={{ display: 'flex', gap: '1.5rem', marginTop: '3rem', paddingTop: '1.5rem', borderTop: '1px solid #f1f5f9' }}>
+                <button type="submit" className="btn btn-primary" style={{ flex: 1, padding: '1rem' }}>Save {title}</button>
+                <button type="button" className="btn" onClick={onCancel} style={{ flex: 1, background: '#f1f5f9', padding: '1rem' }}>Cancel</button>
             </div>
         </form>
     );
 };
 
 const FormField = ({ name, value, onChange }) => {
-    // Custom Builders
-    if (name === 'gallery') {
-        return (
-            <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500, color: '#334155' }}>Gallery Images</label>
-                <ImageArrayInput value={value || []} onChange={onChange} />
-            </div>
-        );
-    }
+    if (name === 'gallery') return <div style={{ marginBottom: '1.5rem' }}><label style={{ display: 'block', marginBottom: '0.75rem', fontWeight: 700, color: '#0f172a' }}>Gallery Images</label><ImageArrayInput value={value || []} onChange={onChange} /></div>;
+    if (name === 'itinerary') return <div style={{ marginBottom: '1.5rem' }}><label style={{ display: 'block', marginBottom: '0.75rem', fontWeight: 700, color: '#0f172a' }}>Itinerary</label><ItineraryBuilder value={value || []} onChange={onChange} /></div>;
 
-    if (name === 'itinerary') {
+    if (name === 'description' || name === 'content' || name === 'text') {
         return (
             <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500, color: '#334155' }}>Itinerary</label>
-                <ItineraryBuilder value={value || []} onChange={onChange} />
-            </div>
-        );
-    }
-
-    // JSON Fields
-    if (['amenities_grouped', 'house_rules', 'tags', 'inclusions', 'exclusions', 'map_coordinates'].includes(name)) {
-        return (
-            <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500, color: '#334155', textTransform: 'capitalize' }}>
-                    {name.replace('_', ' ')} <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>(JSON Format)</span>
-                </label>
+                <label style={{ display: 'block', marginBottom: '0.75rem', fontWeight: 700, color: '#0f172a', textTransform: 'capitalize' }}>{name.replace('_', ' ')}</label>
                 <textarea
-                    className="form-input"
-                    value={typeof value === 'object' ? JSON.stringify(value, null, 2) : value || ''}
-                    onChange={e => {
-                        try { onChange(JSON.parse(e.target.value)); } catch { /* Allow typing */ }
-                    }}
-                    rows={6}
-                    style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #cbd5e1', outline: 'none', fontFamily: 'monospace', fontSize: '0.85rem' }}
-                />
-            </div>
-        );
-    }
-
-    // Long Text
-    if (name === 'description' || name === 'cancellation_policy' || name === 'content' || name === 'excerpt') {
-        return (
-            <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500, color: '#334155', textTransform: 'capitalize' }}>{name.replace('_', ' ')}</label>
-                <textarea
-                    className="form-input"
                     value={value || ''}
                     onChange={e => onChange(e.target.value)}
-                    rows={4}
-                    style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #cbd5e1', outline: 'none' }}
+                    rows={6}
+                    style={{ width: '100%', padding: '1rem', borderRadius: '0.75rem', border: '1px solid #e2e8f0', outline: 'none', fontSize: '1rem' }}
                 />
             </div>
         );
     }
 
-    // Default Input
     return (
         <div style={{ marginBottom: '1.5rem' }}>
-            <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500, color: '#334155', textTransform: 'capitalize' }}>{name.replace('_', ' ')}</label>
+            <label style={{ display: 'block', marginBottom: '0.75rem', fontWeight: 700, color: '#0f172a', textTransform: 'capitalize' }}>{name.replace('_', ' ')}</label>
             <input
-                className="form-input"
                 value={value || ''}
                 onChange={e => onChange(e.target.value)}
-                style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #cbd5e1', outline: 'none' }}
+                style={{ width: '100%', padding: '1rem', borderRadius: '0.75rem', border: '1px solid #e2e8f0', outline: 'none', fontSize: '1rem' }}
             />
         </div>
     );

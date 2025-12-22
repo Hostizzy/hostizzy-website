@@ -1,0 +1,98 @@
+[
+    {
+        "path": "/",
+        "title": "Hostizzy | India's #1 Property Management Ecosystem",
+        "description": "Premium vacation rental management for owners. We maximize your ROI with technology and hospitality excellence.",
+        "keywords": "vacation rental, property management, Airbnb India, villa management"
+    },
+    {
+        "path": "/properties",
+        "title": "Luxury Stays & Villas | Hostizzy Collection",
+        "description": "Explore our handpicked collection of premium villas and apartments across India. Quality guaranteed.",
+        "keywords": "luxury villas india, airbnb manali, staycation near delhi"
+    },
+    {
+        "path": "/nextstop",
+        "title": "NextStop by Hostizzy | Curated Travel Experiences",
+        "description": "Beyond just a stay. Discover curated itineraries and travel experiences designed for the modern explorer.",
+        "keywords": "travel experiences, boutique stays, curated travel"
+    },
+    {
+        "path": "/technology",
+        "title": "Hospitality Tech Stack | Hostizzy Innovations",
+        "description": "Explore the tech powering the next generation of property management. From ResIQ to HostOS.",
+        "keywords": "proptech, hospitality software, pms india"
+    },
+    {
+        "path": "/about",
+        "title": "Our Story | The Vision Behind Hostizzy",
+        "description": "Learn how we're redefining vacation rental management in India with a focus on branding and trust.",
+        "keywords": "about hostizzy, hospitality startup, india property management"
+    },
+    {
+        "path": "/services",
+        "title": "Management Plans & Services | Hostizzy",
+        "description": "From DIY support to Full-Service management. Choose the plan that fits your property goals.",
+        "keywords": "property management services, airbnb management fees"
+    },
+    {
+        "path": "/career",
+        "title": "Join the Team | Careers at Hostizzy",
+        "description": "Build the future of hospitality with us. Explore open roles in operations, tech, and marketing.",
+        "keywords": "hospitality jobs, startup careers, work at hostizzy"
+    },
+    {
+        "path": "/blogs",
+        "title": "Hostizzy Blog | Insights & Travel Tips",
+        "description": "Expert advice on property management and curated travel guides for your next Indian getaway.",
+        "keywords": "travel blog india, rental management tips"
+    },
+    {
+        "path": "/invest",
+        "title": "Invest in Hostizzy | Pre-Seed Round Opportunity",
+        "description": "Join India's fastest-growing vacation rental ecosystem. We're raising ₹1.5 Cr to scale our tech stack.",
+        "keywords": "invest in startup, proptech india, vacation rental investment"
+    },
+    {
+        "path": "/contact",
+        "title": "Contact Us | Hostizzy Support & Inquiries",
+        "description": "Have questions? Reach out to our team for property management audits or guest support.",
+        "keywords": "contact hostizzy, guest support, property audit"
+    },
+    {
+        "path": "/testimonials",
+        "title": "Guest Reviews & Impact | Hostizzy Trust",
+        "description": "See what our guests and property owners are saying about their Hostizzy experience.",
+        "keywords": "hostizzy reviews, guest feedback"
+    },
+    {
+        "path": "/experiences",
+        "title": "Handcrafted Experiences | Hostizzy Stays",
+        "description": "More than a room. Each stay is a curated experience designed to wow and inspire.",
+        "keywords": "boutique stays india, luxury experiences"
+    },
+    {
+        "path": "/calculator",
+        "title": "Airbnb Revenue Calculator | Estimate Your ROI",
+        "description": "Use our AI-driven tool to estimate your property's potential earnings in the vacation rental market.",
+        "keywords": "earnings calculator, investment roi, airbnb estimator"
+    },
+    {
+        "path": "/faq",
+        "title": "Frequently Asked Questions | Hostizzy Help",
+        "description": "Everything you need to know about partnering with Hostizzy or booking a stay with us.",
+        "keywords": "hostizzy faq, property management help"
+    },
+    {
+        "path": "/terms",
+        "title": "Terms of Service | Hostizzy Legal",
+        "description": "The rules and regulations for using the Hostizzy platform and services.",
+        "keywords": "terms of service, legal"
+    },
+    {
+        "path": "/privacy",
+        "title": "Privacy Policy | Your Data Security",
+        "description": "How we handle and protect your personal information at Hostizzy.",
+        "keywords": "privacy policy, data protection"
+    }
+]

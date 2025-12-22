@@ -1,114 +1,122 @@
 import React from 'react';
 import SEO from '../components/SEO';
 import ScrollReveal from '../components/ScrollReveal';
-import { TrendingUp, ShieldCheck, PieChart } from 'lucide-react';
+import { TrendingUp, ShieldCheck, PieChart, ArrowUpRight, CheckCircle2, Layout, BarChart, Globe } from 'lucide-react';
 
 const Invest = () => {
     return (
         <>
-            <SEO title="Invest in Hostizzy" description="Join the fastest growing hospitality network." />
+            <SEO title="Invest in Hostizzy | Pre-Seed Round" description="Join India's first integrated vacation rental ecosystem. We're raising a pre-seed round to scale." />
 
-            <section className="section bg-primary text-white text-center" style={{ padding: '6rem 0', position: 'relative', overflow: 'hidden' }}>
+            <section className="section bg-primary text-white" style={{ padding: '10rem 0 8rem', position: 'relative', overflow: 'hidden', background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)' }}>
                 <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-                    <h1 style={{ fontSize: '3.5rem', marginBottom: '1.5rem' }}>Invest in Hostizzy</h1>
-                    <p style={{ fontSize: '1.25rem', opacity: 0.9, maxWidth: '700px', margin: '0 auto' }}>
-                        High-growth potential in India's alternative accommodation market driven by technology.
-                    </p>
+                    <ScrollReveal>
+                        <div className="badge mb-sm" style={{ backgroundColor: 'var(--color-primary)', color: 'white', border: 'none' }}>Pre-Seed Round Now Open</div>
+                        <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '1.5rem', fontWeight: 800, lineHeight: 1.1, color: 'white' }}>
+                            Building India's <span style={{ color: 'var(--color-primary)' }}>Integrated</span><br />
+                            Vacation Rental Ecosystem
+                        </h1>
+                        <p style={{ fontSize: '1.25rem', opacity: 0.9, maxWidth: '700px', marginBottom: '3rem', lineHeight: 1.6, color: 'white' }}>
+                            Hostizzy is raising a <strong>₹1–1.5 Cr pre-seed round</strong> to scale our operations and proprietary technology stack. Join us in capturing India's high-growth hospitality market.
+                        </p>
+                        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                            <a href="https://hostizzy.site/" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ padding: '1rem 2.5rem', fontSize: '1.1rem' }}>
+                                View Investor Deck <ArrowUpRight size={20} />
+                            </a>
+                            <a href="/contact?type=investor" className="btn btn-outline" style={{ padding: '1rem 2.5rem', fontSize: '1.1rem', color: 'white', borderColor: 'rgba(255,255,255,0.3)' }}>
+                                Contact Founder
+                            </a>
+                        </div>
+                    </ScrollReveal>
                 </div>
-                {/* Background Image Overlay */}
-                <div style={{
-                    position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
-                    backgroundImage: 'url("/images/invest.png")',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    opacity: 0.2,
-                    zIndex: 0
-                }}></div>
+
+                {/* Background Decor */}
+                <div style={{ position: 'absolute', top: '-10%', right: '-10%', width: '500px', height: '500px', background: 'var(--color-primary)', filter: 'blur(150px)', opacity: 0.1, pointerEvents: 'none' }}></div>
             </section>
 
             <section className="section container">
-                <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem' }}>
-                    <div>
-                        <TrendingUp size={48} color="var(--color-primary)" style={{ marginBottom: '1rem' }} />
-                        <h3>High-Growth Market</h3>
-                        <p style={{ color: 'var(--color-muted)', lineHeight: 1.6 }}>
-                            Capitalize on the booming staycation and alternative accommodation sector in India.
-                        </p>
-                    </div>
-                    <div>
-                        <ShieldCheck size={48} color="var(--color-primary)" style={{ marginBottom: '1rem' }} />
-                        <h3>Proven Track Record</h3>
-                        <p style={{ color: 'var(--color-muted)', lineHeight: 1.6 }}>
-                            Experienced team with specific expertise in hospitality and technology.
-                        </p>
-                    </div>
-                    <div>
-                        <PieChart size={48} color="var(--color-primary)" style={{ marginBottom: '1rem' }} />
-                        <h3>Transparent Models</h3>
-                        <p style={{ color: 'var(--color-muted)', lineHeight: 1.6 }}>
-                            Clear revenue models and a future-ready roadmap for expansion.
-                        </p>
-                    </div>
+                <div className="grid desktop-2-col" style={{ gap: '6rem', alignItems: 'center' }}>
+                    <ScrollReveal>
+                        <div>
+                            <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem' }}>A Message from the Founder</h2>
+                            <p style={{ fontSize: '1.15rem', lineHeight: 1.8, color: 'var(--color-muted)', marginBottom: '1.5rem' }}>
+                                "I am Ethan — founder of Hostizzy. We're building more than just a property management firm; we're creating an end-to-end ecosystem that empowers owners and delights guests through technology."
+                            </p>
+                            <p style={{ fontSize: '1.15rem', lineHeight: 1.8, color: 'var(--color-muted)' }}>
+                                Our platform integrates <strong>VRM Operations</strong>, the <strong>HostOS PMS</strong>, <strong>ResIQ Analytics</strong>, and our upcoming <strong>JuxTravel Marketplace</strong> into a single, seamless powerhouse.
+                            </p>
+                        </div>
+                    </ScrollReveal>
+
+                    <ScrollReveal delay={0.2}>
+                        <div className="card glass shadow-premium" style={{ padding: '3rem', borderLeft: '6px solid var(--color-primary)' }}>
+                            <h3 style={{ marginBottom: '2rem', fontSize: '1.5rem' }}>Ticket Sizes & Participation</h3>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                                {[
+                                    { label: "Individuals", range: "₹5L – ₹25L" },
+                                    { label: "Angels / Syndicates", range: "₹25L – ₹75L" },
+                                    { label: "Funds", range: "₹75L – ₹1.5 Cr" },
+                                    { label: "Strategic Partners", range: "Flexible Equity" }
+                                ].map((ticket, i) => (
+                                    <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--color-border)', paddingBottom: '1rem' }}>
+                                        <span style={{ fontWeight: 600, color: '#1e293b' }}>{ticket.label}</span>
+                                        <span style={{ fontWeight: 800, color: 'var(--color-primary)' }}>{ticket.range}</span>
+                                    </div>
+                                ))}
+                            </div>
+                            <p style={{ marginTop: '2rem', fontSize: '0.9rem', color: 'var(--color-muted)', fontStyle: 'italic' }}>
+                                * Equity flexibility is available for the right strategic investor who brings more than just capital to the table.
+                            </p>
+                        </div>
+                    </ScrollReveal>
                 </div>
             </section>
 
             <section className="section bg-secondary">
                 <div className="container">
                     <ScrollReveal>
-                        <h2 className="text-center" style={{ marginBottom: '3rem', fontSize: '2.5rem' }}>Exponential Growth</h2>
+                        <div className="text-center mb-lg">
+                            <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>The Four Pillars of Hostizzy</h2>
+                            <p style={{ color: 'var(--color-muted)' }}>Our integrated ecosystem designed for scale.</p>
+                        </div>
                     </ScrollReveal>
 
-                    <div className="card glass" style={{ padding: '3rem', maxWidth: '900px', margin: '0 auto' }}>
-                        <h3 className="text-center" style={{ marginBottom: '2rem' }}>Properties Under Management (2019 - 2024)</h3>
-
-                        {/* Custom CSS/SVG Chart */}
-                        <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', height: '300px', paddingBottom: '1rem', borderBottom: '2px solid #cbd5e1' }}>
-                            {[
-                                { year: '2019', count: 3, height: '10%' },
-                                { year: '2022', count: 10, height: '25%' },
-                                { year: '2023', count: 25, height: '45%' },
-                                { year: '2024', count: 100, height: '100%' }
-                            ].map((d, i) => (
-                                <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '15%' }}>
-                                    <ScrollReveal delay={0.2 + (i * 0.2)} width="100%" y={100}>
-                                        <div style={{
-                                            height: '250px',
-                                            display: 'flex',
-                                            alignItems: 'flex-end',
-                                            justifyContent: 'center',
-                                            width: '100%'
-                                        }}>
-                                            <div style={{
-                                                width: '100%',
-                                                height: d.height,
-                                                background: 'linear-gradient(to top, var(--color-primary), #fbbf24)',
-                                                borderRadius: '0.5rem 0.5rem 0 0',
-                                                position: 'relative',
-                                                transition: 'height 1s ease-out'
-                                            }}>
-                                                <span style={{ position: 'absolute', top: '-1.5rem', left: '50%', transform: 'translateX(-50%)', fontWeight: 'bold' }}>{d.count}</span>
-                                            </div>
-                                        </div>
-                                    </ScrollReveal>
-                                    <span style={{ marginTop: '1rem', fontWeight: 600, color: 'var(--color-muted)' }}>{d.year}</span>
+                    <div className="grid desktop-4-col" style={{ gap: '1.5rem' }}>
+                        {[
+                            { icon: <TrendingUp size={32} />, title: "VRM Ops", desc: "Expert on-ground management for premium properties." },
+                            { icon: <Layout size={32} />, title: "HostOS", desc: "Proprietary PMS handling complex operations." },
+                            { icon: <BarChart size={32} />, title: "ResIQ", desc: "Data-driven revenue management & analytics." },
+                            { icon: <Globe size={32} />, title: "JuxTravel", desc: "Our exclusive marketplace for curated stays." }
+                        ].map((pillar, i) => (
+                            <ScrollReveal key={i} delay={i * 0.1}>
+                                <div className="card" style={{ padding: '2rem', textAlign: 'center', height: '100%' }}>
+                                    <div style={{ color: 'var(--color-primary)', marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}>{pillar.icon}</div>
+                                    <h4 style={{ marginBottom: '1rem', fontWeight: 700 }}>{pillar.title}</h4>
+                                    <p style={{ fontSize: '0.9rem', color: 'var(--color-muted)', lineHeight: 1.6 }}>{pillar.desc}</p>
                                 </div>
-                            ))}
-                        </div>
-                        <p className="text-center" style={{ marginTop: '2rem', color: 'var(--color-muted)' }}>
-                            From 3 pilot properties to over 100 premium stays across India.
-                        </p>
-                    </div>
-
-                    <div className="text-center" style={{ marginTop: '4rem' }}>
-                        <div style={{ padding: '3rem', backgroundColor: '#f8fafc', borderRadius: '1rem', display: 'inline-block' }}>
-                            <h2>Ready to join us?</h2>
-                            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginTop: '1.5rem' }}>
-                                <button className="btn btn-primary">Download Pitch Deck</button>
-                                <button className="btn btn-outline">Contact Investment Team</button>
-                            </div>
-                        </div>
+                            </ScrollReveal>
+                        ))}
                     </div>
                 </div>
+            </section>
+
+            <section className="section container text-center">
+                <ScrollReveal>
+                    <div className="card glass shadow-premium" style={{ padding: '5rem 2rem', background: 'linear-gradient(135deg, #FE5858, #ffbaba)', color: 'white' }}>
+                        <h2 style={{ fontSize: '3rem', fontWeight: 800, marginBottom: '1.5rem', color: 'white' }}>Shape the Future of Indian Hospitality</h2>
+                        <p style={{ fontSize: '1.25rem', maxWidth: '800px', margin: '0 auto 3rem', opacity: 0.9 }}>
+                            We are currently reviewing applications for our pre-seed round. Secure your stake in the next generation of vacation rentals.
+                        </p>
+                        <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                            <a href="https://hostizzy.site/" target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ background: 'white', border: 'none', color: 'var(--color-primary)', padding: '1rem 3rem' }}>
+                                Download Deck
+                            </a>
+                            <a href="/contact?type=investor" className="btn" style={{ background: 'transparent', border: '2px solid white', color: 'white', padding: '1rem 3rem' }}>
+                                Schedule Call
+                            </a>
+                        </div>
+                    </div>
+                </ScrollReveal>
             </section>
         </>
     );

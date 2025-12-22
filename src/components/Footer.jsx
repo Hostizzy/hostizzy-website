@@ -2,8 +2,11 @@ import React from 'react';
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import TrustBadges from './TrustBadges';
+import { useSettings } from '../context/SettingsContext';
 
 const Footer = () => {
+    const { settings } = useSettings();
+
     return (
         <footer style={{ backgroundColor: '#1e293b', color: '#f8fafc' }}>
             <TrustBadges />
@@ -11,16 +14,16 @@ const Footer = () => {
                 <div className="container">
                     <div className="grid desktop-4-col" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '3rem', marginBottom: '3rem' }}>
 
-                        {/* Brand & Subscribe */}
+                        {/* Brand & Social */}
                         <div>
-                            <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: '#f8fafc' }}>Hostizzy</h3>
-                            <p style={{ opacity: 0.7, marginBottom: '1.5rem', lineHeight: 1.6 }}>
-                                Your trusted partner in hospitality management across India.
+                            <h3 style={{ fontSize: '1.75rem', marginBottom: '1.25rem', color: 'var(--color-primary)', fontWeight: 800 }}>{settings.siteName}</h3>
+                            <p style={{ opacity: 0.8, marginBottom: '2rem', lineHeight: 1.7, fontSize: '0.95rem' }}>
+                                {settings.footerTagline}
                             </p>
-                            <div style={{ display: 'flex', gap: '1rem' }}>
-                                <a href="https://www.facebook.com/hostizzyhomes/" target="_blank" rel="noopener noreferrer" style={{ color: 'white', opacity: 0.8 }}><Facebook size={20} /></a>
-                                <a href="https://www.instagram.com/hostizy/" target="_blank" rel="noopener noreferrer" style={{ color: 'white', opacity: 0.8 }}><Instagram size={20} /></a>
-                                <a href="https://www.linkedin.com/company/hostizzy" target="_blank" rel="noopener noreferrer" style={{ color: 'white', opacity: 0.8 }}><Linkedin size={20} /></a>
+                            <div style={{ display: 'flex', gap: '1.25rem' }}>
+                                <a href={settings.facebookUrl || "https://facebook.com/hostizzy"} target="_blank" rel="noopener noreferrer" style={{ color: 'white', opacity: 0.6 }}><Facebook size={22} /></a>
+                                <a href={settings.instagramUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'white', opacity: 0.6 }}><Instagram size={22} /></a>
+                                <a href={settings.linkedinUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'white', opacity: 0.6 }}><Linkedin size={22} /></a>
                             </div>
                         </div>
 
@@ -46,11 +49,11 @@ const Footer = () => {
                                 </li>
                                 <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
                                     <Mail size={18} />
-                                    <a href="mailto:stay@hostizzy.com">stay@hostizzy.com</a>
+                                    <a href={`mailto:${settings.supportEmail}`}>{settings.supportEmail}</a>
                                 </li>
                                 <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
                                     <Phone size={18} />
-                                    <a href="tel:+919560494001">+91 9560494001</a>
+                                    <a href={`tel:${(settings.supportPhone || '').replace(/\s+/g, '')}`}>{settings.supportPhone}</a>
                                 </li>
                             </ul>
                         </div>

@@ -29,10 +29,10 @@ const EarningsCalculator = () => {
     }, [location, bedrooms, occupancy, nightlyRate]);
 
     return (
-        <div className="card" style={{ padding: '2rem', background: 'white', border: '1px solid #e2e8f0', boxShadow: '0 20px 40px -10px rgba(0,0,0,0.1)' }}>
-            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                <h2 style={{ fontSize: '1.8rem', fontWeight: 800, marginBottom: '0.5rem' }}>How much could you earn?</h2>
-                <p style={{ color: '#64748b' }}>Estimate your potential earnings with Hostizzy management.</p>
+        <div className="card shadow-premium" style={{ padding: '2.5rem', background: 'white' }}>
+            <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+                <h2 style={{ fontSize: '2rem', fontWeight: 800, marginBottom: '0.75rem' }}>How much could you earn?</h2>
+                <p style={{ color: 'var(--color-muted)' }}>Estimate your potential earnings with Hostizzy management.</p>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem' }}>
@@ -41,13 +41,23 @@ const EarningsCalculator = () => {
 
                     {/* Location */}
                     <div>
-                        <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.9rem' }}>Property Location</label>
+                        <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.75rem', fontSize: '0.95rem' }}>Property Location</label>
                         <div style={{ position: 'relative' }}>
-                            <MapPin size={18} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-primary)' }} />
+                            <MapPin size={18} style={{ position: 'absolute', left: '1.2rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-primary)', zIndex: 2 }} />
                             <select
                                 value={location}
                                 onChange={(e) => setLocation(e.target.value)}
-                                style={{ width: '100%', padding: '0.8rem 1rem 0.8rem 2.8rem', borderRadius: '0.5rem', border: '1px solid #cbd5e1', fontSize: '1rem', appearance: 'none', background: 'white' }}
+                                style={{
+                                    width: '100%',
+                                    padding: '0.9rem 1rem 0.9rem 3rem',
+                                    borderRadius: '1rem',
+                                    border: '1px solid var(--color-border)',
+                                    fontSize: '1rem',
+                                    appearance: 'none',
+                                    background: 'var(--color-secondary)',
+                                    cursor: 'pointer',
+                                    fontWeight: 500
+                                }}
                             >
                                 {Object.keys(locationMultipliers).map(loc => <option key={loc} value={loc}>{loc}</option>)}
                             </select>
@@ -56,8 +66,8 @@ const EarningsCalculator = () => {
 
                     {/* Bedroom Count (Slider) */}
                     <div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                            <label style={{ fontWeight: 600, fontSize: '0.9rem' }}>Bedrooms</label>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+                            <label style={{ fontWeight: 600, fontSize: '0.95rem' }}>Bedrooms</label>
                             <span style={{ fontWeight: 700, color: 'var(--color-primary)' }}>{bedrooms} BHK</span>
                         </div>
                         <input
@@ -67,14 +77,21 @@ const EarningsCalculator = () => {
                             step="1"
                             value={bedrooms}
                             onChange={(e) => setBedrooms(parseInt(e.target.value))}
-                            style={{ width: '100%', accentColor: 'var(--color-primary)' }}
+                            style={{
+                                width: '100%',
+                                accentColor: 'var(--color-primary)',
+                                height: '6px',
+                                borderRadius: '3px',
+                                appearance: 'none',
+                                background: 'var(--color-border)'
+                            }}
                         />
                     </div>
 
                     {/* Occupancy (Slider) */}
                     <div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                            <label style={{ fontWeight: 600, fontSize: '0.9rem' }}>Expected Occupancy</label>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+                            <label style={{ fontWeight: 600, fontSize: '0.95rem' }}>Expected Occupancy</label>
                             <span style={{ fontWeight: 700, color: 'var(--color-primary)' }}>{occupancy}%</span>
                         </div>
                         <input
@@ -84,14 +101,21 @@ const EarningsCalculator = () => {
                             step="5"
                             value={occupancy}
                             onChange={(e) => setOccupancy(parseInt(e.target.value))}
-                            style={{ width: '100%', accentColor: 'var(--color-primary)' }}
+                            style={{
+                                width: '100%',
+                                accentColor: 'var(--color-primary)',
+                                height: '6px',
+                                borderRadius: '3px',
+                                appearance: 'none',
+                                background: 'var(--color-border)'
+                            }}
                         />
                     </div>
 
                     {/* Nightly Rate (Slider) */}
                     <div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                            <label style={{ fontWeight: 600, fontSize: '0.9rem' }}>Avg. Nightly Rate</label>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+                            <label style={{ fontWeight: 600, fontSize: '0.95rem' }}>Avg. Nightly Rate</label>
                             <span style={{ fontWeight: 700, color: 'var(--color-primary)' }}>₹{nightlyRate.toLocaleString()}</span>
                         </div>
                         <input
@@ -101,7 +125,14 @@ const EarningsCalculator = () => {
                             step="1000"
                             value={nightlyRate}
                             onChange={(e) => setNightlyRate(parseInt(e.target.value))}
-                            style={{ width: '100%', accentColor: 'var(--color-primary)' }}
+                            style={{
+                                width: '100%',
+                                accentColor: 'var(--color-primary)',
+                                height: '6px',
+                                borderRadius: '3px',
+                                appearance: 'none',
+                                background: 'var(--color-border)'
+                            }}
                         />
                     </div>
 
@@ -109,31 +140,34 @@ const EarningsCalculator = () => {
 
                 {/* Result Display */}
                 <div style={{
-                    background: 'var(--color-secondary)',
-                    borderRadius: '1.5rem',
-                    padding: '2rem',
+                    background: 'linear-gradient(135deg, #FFF1F1 0%, #FFF 100%)',
+                    borderRadius: '2rem',
+                    padding: '3rem 2rem',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
-                    textAlign: 'center'
+                    textAlign: 'center',
+                    border: '1px solid rgba(254, 88, 88, 0.1)',
+                    position: 'relative',
+                    overflow: 'hidden'
                 }}>
-                    <div style={{ fontSize: '1rem', color: '#64748b', marginBottom: '0.5rem' }}>Potential Annual Revenue</div>
+                    <div style={{ fontSize: '1rem', color: 'var(--color-muted)', marginBottom: '0.75rem' }}>Potential Annual Revenue</div>
                     <motion.div
                         key={annualRevenue}
-                        initial={{ scale: 0.9, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        className="text-primary"
-                        style={{ fontSize: '2.5rem', fontWeight: 800, lineHeight: 1.2 }}
+                        initial={{ scale: 0.9, opacity: 0, y: 10 }}
+                        animate={{ scale: 1, opacity: 1, y: 0 }}
+                        style={{ fontSize: '3rem', fontWeight: 800, lineHeight: 1, color: 'var(--color-primary)' }}
                     >
                         ₹{(annualRevenue).toLocaleString()}
                     </motion.div>
-                    <div style={{ fontSize: '0.85rem', color: '#94a3b8', marginTop: '1rem' }}>
-                        *Estimate based on {location} market data. <br />Actual earnings may vary.
+
+                    <div style={{ fontSize: '0.85rem', color: '#94a3b8', marginTop: '1.5rem' }}>
+                        Estimate based on <strong>{location}</strong> market data with professional Hostizzy management.
                     </div>
 
-                    <button className="btn btn-primary" style={{ marginTop: '2rem', width: '100%', justifyContent: 'center' }}>
-                        Get Free Audit
-                    </button>
+                    <a href="#contact" className="btn btn-primary" style={{ marginTop: '2.5rem', width: '100%', padding: '1.1rem' }}>
+                        Get Free Property Audit
+                    </a>
                 </div>
             </div>
         </div>

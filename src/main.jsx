@@ -17,12 +17,19 @@ if (import.meta.env.VITE_API_BASE_URL) {
   };
 }
 
+import { ToastProvider } from './components/Toast';
+import { SettingsProvider } from './context/SettingsContext';
+
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <HelmetProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <SettingsProvider>
+        <ToastProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ToastProvider>
+      </SettingsProvider>
     </HelmetProvider>
   </React.StrictMode>,
 )
