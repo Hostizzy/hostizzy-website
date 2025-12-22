@@ -459,7 +459,7 @@ app.post('/api/contact', (req, res) => {
 });
 
 // --- CATCH ALL FOR SPA ---
-app.get('/*', (req, res) => {
+app.get(/(.*)/, (req, res) => {
     const distPath = path.join(__dirname, '../dist');
     if (fs.existsSync(path.join(distPath, 'index.html'))) {
         res.sendFile(path.join(distPath, 'index.html'));
