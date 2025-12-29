@@ -85,8 +85,9 @@ const Hero = () => {
                                 letterSpacing: '-0.02em'
                             }}
                         >
-                            Empowering Owners,<br />
-                            <span style={{ color: '#FFD700' }}>Enriching Experiences</span>
+                            Empowering Owners.<br />
+                            <span style={{ color: '#FFD700' }}>Enriching Guests.</span><br />
+                            <span style={{ color: 'white', opacity: 0.8 }}>Engineering the Future.</span>
                         </motion.h1>
 
                         <motion.p
@@ -98,12 +99,12 @@ const Hero = () => {
                                 color: 'rgba(255,255,255,0.9)',
                                 maxWidth: '600px',
                                 marginBottom: '2.5rem',
-                                lineHeight: 1.6,
-                                textShadow: '0 1px 5px rgba(0,0,0,0.3)',
+                                lineHeight: '1.6',
+                                textShadow: '0 2px 4px rgba(0,0,0,0.5)',
                                 textAlign: 'left'
                             }}
                         >
-                            Hostizzy transforms vacation rentals into high-performing assets with premium management, exclusively branded experiences, and advanced technology.
+                            Hostizzy is building the world's first fully vertically integrated hospitality ecosystem. From HostOS for owners to JuxTravel for guests—we are redefining how the world stays.
                         </motion.p>
 
                         <motion.div

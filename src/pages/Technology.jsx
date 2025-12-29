@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import ScrollReveal from '../components/ScrollReveal';
-import { MonitorPlay, Smartphone, Database, Lock, Check, Globe, Users, ArrowRight, AppWindow, CheckCircle2, TrendingUp } from 'lucide-react';
+import { MonitorPlay, Smartphone, Database, Lock, Check, Globe, Users, ArrowRight, AppWindow, CheckCircle2, TrendingUp, BrainCircuit } from 'lucide-react';
 import ChannelCarousel from '../components/ChannelCarousel';
 import ProductDemo from '../components/ProductDemo';
 
@@ -55,6 +55,220 @@ const Technology = () => {
                             A vertically integrated suite of hospitality technologies. From high-touch management to data-driven marketplaces, we build the tools that empower modern hospitality.
                         </p>
                     </ScrollReveal>
+                </div>
+            </section>
+
+            {/* Ecosystem Blueprint - Solar System Layout */}
+            <section className="section" style={{ padding: '6rem 0', background: 'white', overflow: 'hidden' }}>
+                <div className="container">
+                    <ScrollReveal>
+                        <div className="text-center mb-lg">
+                            <h2 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '1rem' }}>The Connected Marketplace</h2>
+                            <p style={{ fontSize: '1.25rem', color: '#64748b', maxWidth: '700px', margin: '0 auto' }}>
+                                A unified universe where smart supply meets verified demand.
+                            </p>
+                        </div>
+                    </ScrollReveal>
+
+                    <div style={{ position: 'relative', maxWidth: '1000px', margin: '2rem auto' }}>
+
+                        {/* SVG Connector Layer - Behind everything */}
+                        <svg viewBox="0 0 1000 800" preserveAspectRatio="none" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, overflow: 'visible' }}>
+                            {/* Define gradients */}
+                            <defs>
+                                <linearGradient id="grad-supply" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.1" />
+                                    <stop offset="50%" stopColor="#3b82f6" stopOpacity="0.6" />
+                                    <stop offset="100%" stopColor="#22c55e" stopOpacity="0.1" />
+                                </linearGradient>
+                                <linearGradient id="grad-intel" x1="100%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" stopColor="#0f172a" stopOpacity="0.1" />
+                                    <stop offset="50%" stopColor="#64748b" stopOpacity="0.6" />
+                                    <stop offset="100%" stopColor="#22c55e" stopOpacity="0.1" />
+                                </linearGradient>
+                                <linearGradient id="grad-guest" x1="0%" y1="100%" x2="100%" y2="0%">
+                                    <stop offset="0%" stopColor="#ec4899" stopOpacity="0.1" />
+                                    <stop offset="50%" stopColor="#ec4899" stopOpacity="0.6" />
+                                    <stop offset="100%" stopColor="#22c55e" stopOpacity="0.1" />
+                                </linearGradient>
+                                <linearGradient id="grad-ai" x1="100%" y1="100%" x2="0%" y2="0%">
+                                    <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.1" />
+                                    <stop offset="50%" stopColor="#8b5cf6" stopOpacity="0.6" />
+                                    <stop offset="100%" stopColor="#22c55e" stopOpacity="0.1" />
+                                </linearGradient>
+                            </defs>
+
+                            {/* Connection Lines (Desktop Only) */}
+                            <g className="desktop-only" strokeWidth="3" fill="none">
+                                {/* Top Left (HostOS) -> Center */}
+                                <path d="M250,150 C250,250 400,350 500,400" stroke="url(#grad-supply)" className="animate-pulse-slow" />
+
+                                {/* Top Right (ResIQ) -> Center */}
+                                <path d="M750,150 C750,250 600,350 500,400" stroke="url(#grad-intel)" className="animate-pulse-slow" style={{ animationDelay: '0.5s' }} />
+
+                                {/* Bottom Left (TravelCRM) -> Center */}
+                                <path d="M250,650 C250,550 400,450 500,400" stroke="url(#grad-guest)" className="animate-pulse-slow" style={{ animationDelay: '1s' }} />
+
+                                {/* Bottom Right (TripMind AI) -> Center */}
+                                <path d="M750,650 C750,550 600,450 500,400" stroke="url(#grad-ai)" className="animate-pulse-slow" style={{ animationDelay: '1.5s' }} />
+                            </g>
+                        </svg>
+
+                        {/* CSS Grid Layout */}
+                        <div className="grid-ecosystem" style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(12, 1fr)',
+                            gridTemplateRows: 'auto 1fr auto',
+                            gap: '2rem',
+                            position: 'relative',
+                            zIndex: 1,
+                            padding: '3rem 0'
+                        }}>
+
+                            {/* -- TOP ROW -- */}
+
+                            {/* HostOS (Top Left) */}
+                            <div style={{ gridColumn: '2 / span 4', display: 'flex', justifyContent: 'center' }}>
+                                <ScrollReveal delay={0.1}>
+                                    <div className="card glass-hover" style={{
+                                        width: '100%', maxWidth: '280px', padding: '2rem', borderRadius: '1.5rem',
+                                        background: 'white', border: '1px solid #eff6ff',
+                                        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)',
+                                        textAlign: 'center', transition: 'all 0.3s ease'
+                                    }}>
+                                        <div style={{ margin: '0 auto 1.5rem', background: '#eff6ff', width: '64px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '1rem' }}>
+                                            <MonitorPlay size={32} color="#3b82f6" />
+                                        </div>
+                                        <h4 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '0.5rem' }}>HostOS</h4>
+                                        <p style={{ fontSize: '0.9rem', color: '#64748b', lineHeight: 1.5 }}>
+                                            The operating system for suppliers. Manages inventory, pricing, and operations.
+                                        </p>
+                                    </div>
+                                </ScrollReveal>
+                            </div>
+
+                            {/* ResIQ (Top Right) */}
+                            <div style={{ gridColumn: '8 / span 4', display: 'flex', justifyContent: 'center' }}>
+                                <ScrollReveal delay={0.2}>
+                                    <div className="card glass-hover" style={{
+                                        width: '100%', maxWidth: '280px', padding: '2rem', borderRadius: '1.5rem',
+                                        background: '#0f172a', color: 'white',
+                                        textAlign: 'center', transition: 'all 0.3s ease',
+                                        boxShadow: '0 20px 25px -5px rgba(15, 23, 42, 0.3)'
+                                    }}>
+                                        <div style={{ margin: '0 auto 1.5rem', background: 'rgba(255,255,255,0.1)', width: '64px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '1rem' }}>
+                                            <Database size={32} color="white" />
+                                        </div>
+                                        <h4 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '0.5rem', color: 'white' }}>ResIQ</h4>
+                                        <p style={{ fontSize: '0.9rem', color: '#94a3b8', lineHeight: 1.5 }}>
+                                            Intelligence engine processing millions of data points to optimize yield.
+                                        </p>
+                                    </div>
+                                </ScrollReveal>
+                            </div>
+
+
+                            {/* -- MIDDLE ROW (CENTER) -- */}
+                            <div style={{ gridColumn: '5 / span 4', gridRow: '2', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '4rem 0' }}>
+                                <ScrollReveal>
+                                    <div className="card shadow-premium animate-float" style={{
+                                        width: '320px', height: '320px', borderRadius: '50%',
+                                        background: 'white',
+                                        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                                        border: '1px solid #f0fdf4',
+                                        position: 'relative',
+                                        zIndex: 10
+                                    }}>
+                                        {/* Outer pulsing ring */}
+                                        <div style={{
+                                            position: 'absolute', inset: '-20px', borderRadius: '50%',
+                                            border: '1px dashed #22c55e', opacity: 0.2, animation: 'spin 60s linear infinite'
+                                        }}></div>
+
+                                        <div style={{ marginBottom: '1.5rem', background: '#f0fdf4', padding: '1.5rem', borderRadius: '50%' }}>
+                                            <Globe size={64} color="#16a34a" />
+                                        </div>
+                                        <h3 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '0.5rem', color: '#0f172a', letterSpacing: '-1px' }}>JuxTravel</h3>
+                                        <div className="badge" style={{ background: '#16a34a', color: 'white', fontSize: '0.8rem', padding: '0.5rem 1.25rem', borderRadius: '100px', fontWeight: 600 }}>MARKETPLACE</div>
+                                    </div>
+                                </ScrollReveal>
+                            </div>
+
+
+                            {/* -- BOTTOM ROW -- */}
+
+                            {/* TravelCRM (Bottom Left) */}
+                            <div style={{ gridColumn: '2 / span 4', gridRow: '3', display: 'flex', justifyContent: 'center' }}>
+                                <ScrollReveal delay={0.3}>
+                                    <div className="card glass-hover" style={{
+                                        width: '100%', maxWidth: '280px', padding: '2rem', borderRadius: '1.5rem',
+                                        background: 'white', border: '1px solid #fdf2f8',
+                                        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)',
+                                        textAlign: 'center', transition: 'all 0.3s ease'
+                                    }}>
+                                        <div style={{ margin: '0 auto 1.5rem', background: '#fdf2f8', width: '64px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '1rem' }}>
+                                            <Users size={32} color="#db2777" />
+                                        </div>
+                                        <h4 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '0.5rem' }}>TravelCRM</h4>
+                                        <p style={{ fontSize: '0.9rem', color: '#64748b', lineHeight: 1.5 }}>
+                                            Unified guest profiles and communication hub for seamless experiences.
+                                        </p>
+                                    </div>
+                                </ScrollReveal>
+                            </div>
+
+                            {/* TripMind AI (Bottom Right) */}
+                            <div style={{ gridColumn: '8 / span 4', gridRow: '3', display: 'flex', justifyContent: 'center' }}>
+                                <ScrollReveal delay={0.4}>
+                                    <div className="card glass-hover" style={{
+                                        width: '100%', maxWidth: '280px', padding: '2rem', borderRadius: '1.5rem',
+                                        background: 'white', border: '1px solid #f5f3ff',
+                                        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)',
+                                        textAlign: 'center', transition: 'all 0.3s ease'
+                                    }}>
+                                        <div style={{ margin: '0 auto 1.5rem', background: '#f5f3ff', width: '64px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '1rem' }}>
+                                            <BrainCircuit size={32} color="#7c3aed" />
+                                        </div>
+                                        <h4 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '0.5rem' }}>TripMind AI</h4>
+                                        <p style={{ fontSize: '0.9rem', color: '#64748b', lineHeight: 1.5 }}>
+                                            Neural concierge that predicts guest needs before they happen.
+                                        </p>
+                                    </div>
+                                </ScrollReveal>
+                            </div>
+
+                        </div>
+
+                        {/* CSS Style for Responsive Grid */}
+                        <style>{`
+                            .glass-hover:hover {
+                                transform: translateY(-5px);
+                                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+                            }
+                            .animate-pulse-slow {
+                                animation: pulse-line 3s infinite ease-in-out;
+                            }
+                            @keyframes pulse-line {
+                                0%, 100% { stroke-opacity: 0.3; stroke-width: 2; }
+                                50% { stroke-opacity: 0.8; stroke-width: 3; }
+                            }
+                            @media (max-width: 1024px) {
+                                .grid-ecosystem {
+                                    grid-template-columns: 1fr !important;
+                                    grid-template-rows: auto !important;
+                                    gap: 3rem !important;
+                                }
+                                .grid-ecosystem > div {
+                                    grid-column: 1 / -1 !important;
+                                    grid-row: auto !important;
+                                }
+                                 /* Hide SVG lines on mobile as they don't map to stacked layout */
+                                .desktop-only {
+                                    display: none;
+                                }
+                            }
+                        `}</style>
+                    </div>
                 </div>
             </section>
 

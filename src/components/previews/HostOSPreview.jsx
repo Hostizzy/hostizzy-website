@@ -122,31 +122,33 @@ const HostOSPreview = () => {
                             </div>
 
                             {/* Dummy Calendar Grid */}
-                            <div style={{ display: 'grid', gridTemplateColumns: '80px 1fr', gap: '1px', background: '#e2e8f0', border: '1px solid #e2e8f0', borderRadius: '0.75rem', overflow: 'hidden' }}>
-                                <div style={{ background: '#f8fafc', padding: '1rem', fontWeight: 800, fontSize: '0.75rem' }}>Property</div>
-                                <div style={{ background: '#f8fafc', display: 'flex' }}>
-                                    {[20, 21, 22, 23, 24, 25, 26].map(d => (
-                                        <div key={d} style={{ flex: 1, textAlign: 'center', padding: '1rem', fontSize: '0.75rem', fontWeight: 800, borderLeft: '1px solid #e2e8f0' }}>Dec {d}</div>
-                                    ))}
-                                </div>
+                            <div style={{ overflowX: 'auto', paddingBottom: '1rem' }}>
+                                <div style={{ display: 'grid', gridTemplateColumns: '80px 1fr', gap: '1px', background: '#e2e8f0', border: '1px solid #e2e8f0', borderRadius: '0.75rem', overflow: 'hidden', minWidth: '600px' }}>
+                                    <div style={{ background: '#f8fafc', padding: '1rem', fontWeight: 800, fontSize: '0.75rem' }}>Property</div>
+                                    <div style={{ background: '#f8fafc', display: 'flex' }}>
+                                        {[20, 21, 22, 23, 24, 25, 26].map(d => (
+                                            <div key={d} style={{ flex: 1, textAlign: 'center', padding: '1rem', fontSize: '0.75rem', fontWeight: 800, borderLeft: '1px solid #e2e8f0' }}>Dec {d}</div>
+                                        ))}
+                                    </div>
 
-                                <div style={{ background: '#fff', padding: '1rem', fontSize: '0.75rem', fontWeight: 700 }}>Villa Azure</div>
-                                <div style={{ background: '#fff', position: 'relative', borderLeft: '1px solid #e2e8f0' }}>
-                                    <div style={{ position: 'absolute', left: '10%', right: '35%', top: '20%', bottom: '20%', background: 'rgba(254, 88, 88, 0.15)', border: '1px solid var(--color-primary)', borderRadius: '4px', display: 'flex', alignItems: 'center', padding: '0 0.5rem', fontSize: '0.65rem', fontWeight: 800, color: 'var(--color-primary)' }}>
-                                        Booking: #8291 (Airbnb)
+                                    <div style={{ background: '#fff', padding: '1rem', fontSize: '0.75rem', fontWeight: 700 }}>Villa Azure</div>
+                                    <div style={{ background: '#fff', position: 'relative', borderLeft: '1px solid #e2e8f0' }}>
+                                        <div style={{ position: 'absolute', left: '10%', right: '35%', top: '20%', bottom: '20%', background: 'rgba(254, 88, 88, 0.15)', border: '1px solid var(--color-primary)', borderRadius: '4px', display: 'flex', alignItems: 'center', padding: '0 0.5rem', fontSize: '0.65rem', fontWeight: 800, color: 'var(--color-primary)' }}>
+                                            Booking: #8291 (Airbnb)
+                                        </div>
+                                        <div style={{ display: 'flex', height: '100%' }}>
+                                            {[1, 2, 3, 4, 5, 6, 7].map(i => <div key={i} style={{ flex: 1, borderLeft: i === 1 ? 'none' : '1px solid #f1f5f9' }}></div>)}
+                                        </div>
                                     </div>
-                                    <div style={{ display: 'flex', height: '100%' }}>
-                                        {[1, 2, 3, 4, 5, 6, 7].map(i => <div key={i} style={{ flex: 1, borderLeft: i === 1 ? 'none' : '1px solid #f1f5f9' }}></div>)}
-                                    </div>
-                                </div>
 
-                                <div style={{ background: '#fff', padding: '1rem', fontSize: '0.75rem', fontWeight: 700 }}>Sky Loft</div>
-                                <div style={{ background: '#fff', position: 'relative', borderLeft: '1px solid #e2e8f0' }}>
-                                    <div style={{ position: 'absolute', left: '45%', right: '10%', top: '20%', bottom: '20%', background: 'rgba(59, 130, 246, 0.15)', border: '1px solid #3b82f6', borderRadius: '4px', display: 'flex', alignItems: 'center', padding: '0 0.5rem', fontSize: '0.65rem', fontWeight: 800, color: '#3b82f6' }}>
-                                        Booking: #8304 (Direct)
-                                    </div>
-                                    <div style={{ display: 'flex', height: '100%' }}>
-                                        {[1, 2, 3, 4, 5, 6, 7].map(i => <div key={i} style={{ flex: 1, borderLeft: i === 1 ? 'none' : '1px solid #f1f5f9' }}></div>)}
+                                    <div style={{ background: '#fff', padding: '1rem', fontSize: '0.75rem', fontWeight: 700 }}>Sky Loft</div>
+                                    <div style={{ background: '#fff', position: 'relative', borderLeft: '1px solid #e2e8f0' }}>
+                                        <div style={{ position: 'absolute', left: '45%', right: '10%', top: '20%', bottom: '20%', background: 'rgba(59, 130, 246, 0.15)', border: '1px solid #3b82f6', borderRadius: '4px', display: 'flex', alignItems: 'center', padding: '0 0.5rem', fontSize: '0.65rem', fontWeight: 800, color: '#3b82f6' }}>
+                                            Booking: #8304 (Direct)
+                                        </div>
+                                        <div style={{ display: 'flex', height: '100%' }}>
+                                            {[1, 2, 3, 4, 5, 6, 7].map(i => <div key={i} style={{ flex: 1, borderLeft: i === 1 ? 'none' : '1px solid #f1f5f9' }}></div>)}
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -64,16 +64,16 @@ const ProductDemo = () => {
                     </div>
 
                     {/* Content Area */}
-                    <div className="grid desktop-12-col" style={{ gridTemplateColumns: '300px 1fr', minHeight: '650px' }}>
+                    <div className="product-demo-layout">
                         {/* Sidebar Navigation */}
-                        <div style={{
+                        <div className="product-demo-sidebar" style={{
                             background: '#f1f5f9',
                             borderRight: '1px solid #e2e8f0',
                             padding: '2rem 1.5rem'
                         }}>
                             <div style={{ marginBottom: '2rem' }}>
                                 <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '1.5rem' }}>Platform Suite</div>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                                <div className="demo-nav-items" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                                     {tabs.map(tab => (
                                         <button
                                             key={tab.id}
@@ -90,14 +90,16 @@ const ProductDemo = () => {
                                                 cursor: 'pointer',
                                                 textAlign: 'left',
                                                 transition: 'all 0.3s ease',
-                                                boxShadow: activeTab === tab.id ? '0 10px 15px -3px rgba(0, 0, 0, 0.1)' : 'none'
+                                                boxShadow: activeTab === tab.id ? '0 10px 15px -3px rgba(0, 0, 0, 0.1)' : 'none',
+                                                width: '100%'
                                             }}
                                         >
                                             <div style={{
                                                 background: activeTab === tab.id ? 'rgba(254, 88, 88, 0.1)' : '#cbd5e1',
                                                 padding: '0.6rem',
                                                 borderRadius: '0.75rem',
-                                                color: activeTab === tab.id ? 'var(--color-primary)' : '#fff'
+                                                color: activeTab === tab.id ? 'var(--color-primary)' : '#fff',
+                                                display: 'flex', alignItems: 'center', justifyContent: 'center'
                                             }}>
                                                 {tab.icon}
                                             </div>
@@ -110,7 +112,7 @@ const ProductDemo = () => {
                                 </div>
                             </div>
 
-                            <div style={{ marginTop: 'auto', paddingTop: '2rem' }}>
+                            <div className="demo-cta" style={{ marginTop: 'auto', paddingTop: '2rem' }}>
                                 <div style={{
                                     padding: '1.5rem',
                                     background: 'var(--color-primary)',
@@ -136,7 +138,7 @@ const ProductDemo = () => {
                         </div>
 
                         {/* Simulator Content */}
-                        <div style={{ background: '#fff', position: 'relative', overflow: 'hidden' }}>
+                        <div className="product-demo-content" style={{ background: '#fff', position: 'relative', overflow: 'hidden' }}>
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={activeTab}
@@ -153,6 +155,48 @@ const ProductDemo = () => {
                     </div>
                 </div>
             </div>
+
+            <style>{`
+                .product-demo-layout {
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    min-height: auto;
+                }
+                .product-demo-sidebar {
+                    border-right: none !important;
+                    border-bottom: 1px solid #e2e8f0;
+                }
+                .demo-nav-items {
+                    flex-direction: row !important;
+                    overflow-x: auto;
+                    padding-bottom: 4px;
+                }
+                 .demo-cta {
+                    display: none;
+                 }
+                 .product-demo-content {
+                    min-height: 500px;
+                 }
+
+                @media (min-width: 1024px) {
+                    .product-demo-layout {
+                        grid-template-columns: 300px 1fr;
+                        min-height: 650px;
+                    }
+                    .product-demo-sidebar {
+                        border-right: 1px solid #e2e8f0 !important;
+                        border-bottom: none !important;
+                    }
+                    .demo-nav-items {
+                        flex-direction: column !important;
+                        overflow-x: visible;
+                        padding-bottom: 0;
+                    }
+                    .demo-cta {
+                        display: block;
+                    }
+                }
+            `}</style>
         </section>
     );
 };

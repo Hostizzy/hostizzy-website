@@ -64,7 +64,24 @@ h6 {
   font-family: var(--font-display);
   line-height: 1.2;
   color: #0F172A;
+  /* Fallback for light mode */
   text-wrap: balance;
+}
+
+/* Fix for black text in dark sections */
+section[style*="background: #0f172a"] h1,
+section[style*="background: #0f172a"] h2,
+section[style*="background: #0f172a"] h3,
+section[style*="background: #0f172a"] h4,
+section[style*="background: #0f172a"] h5,
+section[style*="background: #0f172a"] p,
+section[style*="background: #000"] h1,
+section[style*="background: #000"] h2,
+section[style*="background: #000"] h3,
+section[style*="background: #000"] h4,
+section[style*="background: #000"] h5,
+section[style*="background: #000"] p {
+  color: white !important;
 }
 
 a {
@@ -336,4 +353,44 @@ html {
   color: var(--color-muted);
   max-width: 700px;
   margin: 0 auto;
+}
+
+@keyframes line-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes float-node {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float-node 6s ease-in-out infinite;
+}
+
+.animate-float-delay-1 {
+  animation: float-node 6s ease-in-out infinite 1s;
+}
+
+.animate-float-delay-2 {
+  animation: float-node 6s ease-in-out infinite 2s;
+}
+
+.animate-float-delay-3 {
+  animation: float-node 6s ease-in-out infinite 3s;
 }

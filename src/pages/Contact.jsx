@@ -60,63 +60,40 @@ const Contact = () => {
             <SEO title="Concierge Desk | Contact Hostizzy" />
 
             {/* Premium Immersive Hero */}
+            {/* Premium Immersive Hero */}
             <section style={{
                 position: 'relative',
-                height: '35vh',
-                minHeight: '350px',
-                display: 'flex',
-                alignItems: 'center',
-                overflow: 'hidden',
-                background: '#000',
-                paddingTop: 'var(--header-height)'
+                padding: 'calc(var(--header-height) + 4rem) 0 6rem',
+                background: '#0f172a',
+                color: 'white',
+                overflow: 'hidden'
             }}>
-                <img
-                    src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=2000"
-                    alt="Luxury Hospitality"
-                    style={{
-                        position: 'absolute',
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        opacity: 0.6,
-                        filter: 'brightness(0.7) contrast(1.1)'
-                    }}
-                />
-                <div style={{
-                    position: 'absolute',
-                    inset: 0,
-                    background: 'linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, transparent 100%)'
-                }}></div>
+                {/* Background Blobs */}
+                <div style={{ position: 'absolute', top: '-20%', right: '-10%', width: '600px', height: '600px', background: 'radial-gradient(circle, rgba(254, 88, 88, 0.15) 0%, transparent 70%)', borderRadius: '50%', pointerEvents: 'none' }} />
+                <div style={{ position: 'absolute', bottom: '-20%', left: '-10%', width: '500px', height: '500px', background: 'radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%)', borderRadius: '50%', pointerEvents: 'none' }} />
+
                 <div className="container" style={{ position: 'relative', zIndex: 1 }}>
                     <ScrollReveal>
-                        <div style={{ maxWidth: '750px' }}>
-                            <div className="badge badge-primary" style={{ marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '2px', boxShadow: '0 4px 15px rgba(254, 88, 88, 0.4)' }}>Personalized Excellence</div>
+                        <div style={{ maxWidth: '800px' }}>
+                            <div className="badge badge-primary" style={{ marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '2px', background: 'rgba(254, 88, 88, 0.1)', color: 'var(--color-primary)', border: 'none' }}>Personalized Excellence</div>
                             <h1 style={{
-                                fontSize: '4.2rem',
+                                fontSize: 'clamp(3rem, 5vw, 4.5rem)',
                                 fontWeight: 900,
-                                marginBottom: '1.2rem',
+                                marginBottom: '1.5rem',
                                 lineHeight: 1.1,
-                                color: 'white',
-                                textShadow: '0 4px 20px rgba(0,0,0,0.8)'
+                                color: 'white'
                             }}>Concierge Services</h1>
                             <p style={{
-                                fontSize: '1.4rem',
-                                color: 'rgba(255,255,255,0.95)',
+                                fontSize: '1.25rem',
+                                color: '#94a3b8',
                                 lineHeight: 1.6,
-                                maxWidth: '600px',
-                                textShadow: '0 2px 10px rgba(0,0,0,0.6)'
-                            }}>How can our specialists assist you today?</p>
+                                maxWidth: '600px'
+                            }}>
+                                Whether you're a host, a guest, or a partner—our specialists are here to assist you.
+                            </p>
                         </div>
                     </ScrollReveal>
                 </div>
-                <div style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '120px',
-                    background: 'linear-gradient(to top, #fafafa, transparent)'
-                }}></div>
             </section>
 
             {/* Main Content Area */}
@@ -236,8 +213,8 @@ const Contact = () => {
                                                 {role.id === 'owner'
                                                     ? 'List your property with us'
                                                     : role.id === 'guest'
-                                                    ? 'Find your perfect stay'
-                                                    : 'Explore partnership opportunities'}
+                                                        ? 'Find your perfect stay'
+                                                        : 'Explore partnership opportunities'}
                                             </p>
                                         </div>
 
@@ -276,13 +253,17 @@ const Contact = () => {
                             <h3 style={{ fontSize: '2.8rem', marginBottom: '1.2rem', fontWeight: 900, color: '#0f172a', lineHeight: 1.1 }}>
                                 {userType === 'owner' ? 'Maximize Your Property Yield' : userType === 'guest' ? 'Elite Guest Experience' : 'Strategic Growth Network'}
                             </h3>
-                            <p style={{ lineHeight: 1.8, color: '#64748b', marginBottom: '2.5rem', fontSize: '1.1rem' }}>
-                                {userType === 'owner'
-                                    ? "Our specialized growth team handles end-to-end asset optimization for luxury villas and high-end apartments across India."
-                                    : userType === 'guest'
-                                        ? "From chauffeur services to private villa setups, our concierge desk is dedicated to your absolute comfort."
-                                        : "Join forces with the technology leader in Indian alternative accommodation. Our partners are eager to explore visionary projects."}
-                            </p>
+                            <div style={{ lineHeight: 1.8, color: '#64748b', marginBottom: '2.5rem', fontSize: '1.1rem' }}>
+                                {userType === 'owner' ? (
+                                    <>
+                                        Our specialized growth team handles end-to-end asset optimization for luxury villas and high-end apartments across India. <br /><span style={{ color: 'var(--color-primary)', fontWeight: 700 }}>New:</span> Ask us about our <a href="/certification" style={{ color: 'var(--color-primary)', textDecoration: 'underline' }}>Host Certification Program</a>.
+                                    </>
+                                ) : userType === 'guest' ? (
+                                    "From chauffeur services to private villa setups, our concierge desk is dedicated to your absolute comfort."
+                                ) : (
+                                    "Join forces with the technology leader in Indian alternative accommodation. Our partners are eager to explore visionary projects."
+                                )}
+                            </div>
 
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                 {userType === 'business' ? (
@@ -299,16 +280,16 @@ const Contact = () => {
                                                 transition: 'all 0.3s',
                                                 cursor: 'pointer'
                                             }}
-                                            onMouseEnter={(e) => {
-                                                e.currentTarget.style.borderColor = '#3b82f6';
-                                                e.currentTarget.style.boxShadow = '0 10px 25px -5px rgba(59, 130, 246, 0.2)';
-                                                e.currentTarget.style.transform = 'translateY(-2px)';
-                                            }}
-                                            onMouseLeave={(e) => {
-                                                e.currentTarget.style.borderColor = '#e2e8f0';
-                                                e.currentTarget.style.boxShadow = 'none';
-                                                e.currentTarget.style.transform = 'translateY(0)';
-                                            }}>
+                                                onMouseEnter={(e) => {
+                                                    e.currentTarget.style.borderColor = '#3b82f6';
+                                                    e.currentTarget.style.boxShadow = '0 10px 25px -5px rgba(59, 130, 246, 0.2)';
+                                                    e.currentTarget.style.transform = 'translateY(-2px)';
+                                                }}
+                                                onMouseLeave={(e) => {
+                                                    e.currentTarget.style.borderColor = '#e2e8f0';
+                                                    e.currentTarget.style.boxShadow = 'none';
+                                                    e.currentTarget.style.transform = 'translateY(0)';
+                                                }}>
                                                 <div style={{ background: '#eff6ff', padding: '1rem', borderRadius: '0.875rem', color: '#3b82f6', flexShrink: 0 }}><Mail size={22} /></div>
                                                 <div style={{ flex: 1 }}>
                                                     <div style={{ fontWeight: 700, fontSize: '0.75rem', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '0.25rem' }}>{dept.title}</div>
@@ -393,9 +374,9 @@ const Contact = () => {
                                                         transition: 'all 0.2s',
                                                         outline: 'none'
                                                     }}
-                                                    onFocus={(e) => e.target.style.borderColor = 'var(--color-primary)'}
-                                                    onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
-                                                    placeholder="John Doe" />
+                                                        onFocus={(e) => e.target.style.borderColor = 'var(--color-primary)'}
+                                                        onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
+                                                        placeholder="John Doe" />
                                                 </div>
                                                 <div>
                                                     <label htmlFor="inquiryType" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 700, fontSize: '0.8rem', color: '#0f172a' }}>Inquiry Type *</label>
@@ -409,8 +390,8 @@ const Contact = () => {
                                                         transition: 'all 0.2s',
                                                         outline: 'none'
                                                     }}
-                                                    onFocus={(e) => e.target.style.borderColor = 'var(--color-primary)'}
-                                                    onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}>
+                                                        onFocus={(e) => e.target.style.borderColor = 'var(--color-primary)'}
+                                                        onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}>
                                                         <option value="">Select Category</option>
                                                         {userType === 'guest' ? (
                                                             <>
@@ -441,9 +422,9 @@ const Contact = () => {
                                                         transition: 'all 0.2s',
                                                         outline: 'none'
                                                     }}
-                                                    onFocus={(e) => e.target.style.borderColor = 'var(--color-primary)'}
-                                                    onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
-                                                    placeholder="john@example.com" />
+                                                        onFocus={(e) => e.target.style.borderColor = 'var(--color-primary)'}
+                                                        onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
+                                                        placeholder="john@example.com" />
                                                 </div>
                                                 <div>
                                                     <label htmlFor="phone" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 700, fontSize: '0.8rem', color: '#0f172a' }}>Phone Number</label>
@@ -457,9 +438,9 @@ const Contact = () => {
                                                         transition: 'all 0.2s',
                                                         outline: 'none'
                                                     }}
-                                                    onFocus={(e) => e.target.style.borderColor = 'var(--color-primary)'}
-                                                    onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
-                                                    placeholder="+91 98765 43210" />
+                                                        onFocus={(e) => e.target.style.borderColor = 'var(--color-primary)'}
+                                                        onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
+                                                        placeholder="+91 98765 43210" />
                                                 </div>
                                             </div>
                                             <div>
@@ -476,9 +457,9 @@ const Contact = () => {
                                                     outline: 'none',
                                                     fontFamily: 'inherit'
                                                 }}
-                                                onFocus={(e) => e.target.style.borderColor = 'var(--color-primary)'}
-                                                onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
-                                                placeholder="How can we assist you?"></textarea>
+                                                    onFocus={(e) => e.target.style.borderColor = 'var(--color-primary)'}
+                                                    onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
+                                                    placeholder="How can we assist you?"></textarea>
                                             </div>
                                             <button className="btn btn-primary" type="submit" disabled={status === 'sending'} style={{
                                                 padding: '1.25rem',
