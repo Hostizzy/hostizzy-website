@@ -4,6 +4,7 @@ import SEO from '../components/SEO';
 import ScrollReveal from '../components/ScrollReveal';
 import { MonitorPlay, Smartphone, Database, Lock, Check, Globe, Users, ArrowRight, AppWindow, CheckCircle2, TrendingUp } from 'lucide-react';
 import ChannelCarousel from '../components/ChannelCarousel';
+import ProductDemo from '../components/ProductDemo';
 
 const Technology = () => {
     return (
@@ -56,6 +57,9 @@ const Technology = () => {
                     </ScrollReveal>
                 </div>
             </section>
+
+            {/* Interactive Product Demo Section */}
+            <ProductDemo />
 
             {/* HostOS Section */}
             <section className="section container">

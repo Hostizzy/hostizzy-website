@@ -29,6 +29,7 @@ const Privacy = lazy(() => import('./pages/Privacy'));
 const Terms = lazy(() => import('./pages/Terms'));
 const FAQ = lazy(() => import('./pages/FAQ'));
 const Calculator = lazy(() => import('./pages/Calculator'));
+const Certification = lazy(() => import('./pages/Certification'));
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -86,6 +87,7 @@ function App() {
             <Route path="/terms" element={<Terms />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/calculator" element={<Calculator />} />
+            <Route path="/certification" element={<Certification />} />
           </Routes>
         </Suspense>
       </main>

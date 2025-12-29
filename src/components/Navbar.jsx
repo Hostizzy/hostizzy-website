@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ArrowUpRight, ChevronDown, Zap, TrendingUp } from 'lucide-react';
+import { Menu, X, ArrowUpRight, ChevronDown, Zap, TrendingUp, BadgeCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { useSettings } from '../context/SettingsContext';
@@ -53,7 +53,7 @@ const Navbar = () => {
                     position: 'fixed',
                     left: '50%',
                     zIndex: 1000,
-                    maxWidth: isScrolled ? '1320px' : '100%',
+                    maxWidth: isScrolled ? '1440px' : '100%',
                     backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.8)' : 'rgba(255, 255, 255, 0.98)',
                     backdropFilter: 'blur(25px) saturate(200%)',
                     WebkitBackdropFilter: 'blur(25px) saturate(200%)',
@@ -67,7 +67,7 @@ const Navbar = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    padding: '0 2.5rem',
+                    padding: '0 1.5rem',
                     height: isScrolled ? '64px' : '84px',
                     transition: 'height 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
                 }}>
@@ -80,7 +80,7 @@ const Navbar = () => {
                     {/* Desktop Menu - Centered */}
                     <ul className="desktop-menu" style={{
                         display: 'flex',
-                        gap: '0.75rem',
+                        gap: '0.25rem',
                         alignItems: 'center',
                         margin: 0,
                         padding: 0,
@@ -97,7 +97,7 @@ const Navbar = () => {
                                 onMouseLeave={() => setHoveredPath(null)}
                                 style={{
                                     position: 'relative',
-                                    padding: '0.6rem 1rem',
+                                    padding: '0.6rem 0.75rem',
                                     color: 'var(--color-foreground)',
                                     fontWeight: 500,
                                     fontSize: '0.9rem',
@@ -125,7 +125,7 @@ const Navbar = () => {
                             <span
                                 style={{
                                     cursor: 'pointer',
-                                    padding: '0.6rem 1rem',
+                                    padding: '0.6rem 0.75rem',
                                     color: 'var(--color-foreground)',
                                     fontWeight: 500,
                                     fontSize: '0.9rem',
@@ -204,7 +204,7 @@ const Navbar = () => {
                                 onMouseLeave={() => setHoveredPath(null)}
                                 style={{
                                     position: 'relative',
-                                    padding: '0.6rem 1rem',
+                                    padding: '0.6rem 0.75rem',
                                     color: 'var(--color-foreground)',
                                     fontWeight: 500,
                                     fontSize: '0.9rem',
@@ -233,7 +233,7 @@ const Navbar = () => {
                             <span
                                 style={{
                                     cursor: 'pointer',
-                                    padding: '0.6rem 1rem',
+                                    padding: '0.6rem 0.75rem',
                                     color: 'var(--color-foreground)',
                                     fontWeight: 500,
                                     fontSize: '0.9rem',
@@ -279,7 +279,7 @@ const Navbar = () => {
                                 onMouseLeave={() => setHoveredPath(null)}
                                 style={{
                                     position: 'relative',
-                                    padding: '0.6rem 1rem',
+                                    padding: '0.6rem 0.75rem',
                                     color: 'var(--color-foreground)',
                                     fontWeight: 500,
                                     fontSize: '0.9rem',
@@ -299,6 +299,36 @@ const Navbar = () => {
                             </Link>
                         </li>
 
+                        {/* Certification Link */}
+                        <li>
+                            <Link
+                                to="/certification"
+                                onMouseEnter={() => setHoveredPath('/certification')}
+                                onMouseLeave={() => setHoveredPath(null)}
+                                style={{
+                                    position: 'relative',
+                                    padding: '0.6rem 0.75rem',
+                                    color: 'var(--color-primary)',
+                                    fontWeight: 700,
+                                    fontSize: '0.9rem',
+                                    transition: 'color 0.2s',
+                                    textDecoration: 'none',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '6px'
+                                }}
+                            >
+                                {hoveredPath === '/certification' && (
+                                    <motion.div
+                                        layoutId="nav-pill"
+                                        style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(254, 88, 88, 0.08)', borderRadius: '2rem', zIndex: -1 }}
+                                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                    />
+                                )}
+                                <BadgeCheck size={16} /> Host Certified
+                            </Link>
+                        </li>
+
                         {/* Company Dropdown */}
                         <li
                             onMouseEnter={() => setHoveredPath('company')}
@@ -308,7 +338,7 @@ const Navbar = () => {
                             <span
                                 style={{
                                     cursor: 'pointer',
-                                    padding: '0.6rem 1rem',
+                                    padding: '0.6rem 0.75rem',
                                     color: 'var(--color-foreground)',
                                     fontWeight: 500,
                                     fontSize: '0.9rem',
@@ -369,6 +399,9 @@ const Navbar = () => {
                                                 onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
                                             >
                                                 {subLink.name}
+                                                {subLink.path === '/certification' && (
+                                                    <span style={{ fontSize: '0.65rem', marginLeft: '0.5rem', background: '#FFD700', color: '#000', padding: '0.1rem 0.4rem', borderRadius: '4px', fontWeight: 800 }}>NEW</span>
+                                                )}
                                             </Link>
                                         ))}
                                     </motion.div>

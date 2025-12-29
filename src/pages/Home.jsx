@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { BadgeCheck, ArrowRight } from 'lucide-react';
 import Hero from '../components/Hero';
 import HowItWorks from '../components/HowItWorks';
 import TheHostizzyDifference from '../components/TheHostizzyDifference';
@@ -137,6 +139,50 @@ const Home = () => {
             </section>
 
             <TheHostizzyDifference />
+
+            {/* Certification Teaser */}
+            <section className="section" style={{ background: '#0f172a', color: 'white' }}>
+                <div className="container">
+                    <div className="grid desktop-2-col" style={{ alignItems: 'center', gap: '4rem' }}>
+                        <div>
+                            <div className="badge mb-sm" style={{ backgroundColor: 'rgba(255, 215, 0, 0.15)', color: '#FFD700' }}>NEW PROGRAM</div>
+                            <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', fontWeight: 900 }}>Hostizzy Certified</h2>
+                            <p style={{ fontSize: '1.2rem', opacity: 0.8, marginBottom: '2rem', lineHeight: 1.7 }}>
+                                Join an elite network of hosts committed to quality. Earn your badge, build guest trust, and unlock premium benefits.
+                            </p>
+                            <Link to="/certification" className="btn btn-primary" style={{ background: '#FFD700', color: '#0f172a', border: 'none' }}>
+                                Get Certified <ArrowRight size={18} style={{ marginLeft: '0.5rem' }} />
+                            </Link>
+                        </div>
+                        <div style={{ position: 'relative', display: 'flex', justifyContent: 'center' }}>
+                            <div style={{
+                                width: '250px',
+                                height: '250px',
+                                background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
+                                borderRadius: '50%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                boxShadow: '0 0 100px rgba(255, 215, 0, 0.3)'
+                            }}>
+                                <div style={{
+                                    width: '210px',
+                                    height: '210px',
+                                    background: '#0f172a',
+                                    borderRadius: '50%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    flexDirection: 'column'
+                                }}>
+                                    <BadgeCheck size={64} color="#FFD700" />
+                                    <span style={{ fontSize: '0.9rem', fontWeight: 900, color: '#FFD700', marginTop: '0.5rem', letterSpacing: '2px' }}>CERTIFIED</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <Services />
 
