@@ -3,6 +3,7 @@ import SEO from '../components/SEO';
 import ScrollReveal from '../components/ScrollReveal';
 import { IndianRupee, MapPin, Home, Users, Check, TrendingUp, Calendar, ArrowRight, Star, PieChart, BarChart3, Info } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, BarChart, Bar, Legend } from 'recharts';
 import { Link } from 'react-router-dom';
 
 // --- MOCK DATABASE (Airdna Style) ---
@@ -121,6 +122,15 @@ const Calculator = () => {
 
     }, [selectedCity, propertyType, bedrooms, finishes]);
 
+    // Prepare chart data
+    const seasonalityData = cityData.seas.map((val, idx) => ({ month: idx + 1, revenue: val }));
+    const revenueBreakdown = [
+        { name: 'Revenue', value: metrics.revenue },
+        { name: 'Hostizzy Fee', value: metrics.hostizzyFee },
+        { name: 'OTA Commission', value: metrics.ota },
+        { name: 'Ops & Maintenance', value: metrics.ops }
+    ];
+
 
     return (
         <>
@@ -193,6 +203,34 @@ const Calculator = () => {
 
             {/* Calculator Section */}
             <section className="section container">
+                {/* Charts Section */}
+                <div className="grid desktop-2-col" style={{ gap: '2rem', marginTop: '2rem' }}>
+                    {/* Seasonality Line Chart */}
+                    <div className="card bg-white" style={{ padding: '1rem', borderRadius: '1rem' }}>
+                        <h2 className="section-subtitle" style={{ marginBottom: '1rem' }}>Seasonality Trend</h2>
+                        <ResponsiveContainer width="100%" height={200}>
+                            <LineChart data={seasonalityData}>
+                                <XAxis dataKey="month" tickFormatter={m => `${m}`} />
+                                <YAxis />
+                                <Tooltip />
+                                <Line type="monotone" dataKey="revenue" stroke="#2563eb" strokeWidth={2} dot={false} />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </div>
+                    {/* Revenue Breakdown Bar Chart */}
+                    <div className="card bg-white" style={{ padding: '1rem', borderRadius: '1rem' }}>
+                        <h2 className="section-subtitle" style={{ marginBottom: '1rem' }}>Revenue Breakdown</h2>
+                        <ResponsiveContainer width="100%" height={200}>
+                            <BarChart data={revenueBreakdown} layout="vertical" margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                                <XAxis type="number" />
+                                <YAxis dataKey="name" type="category" width={100} />
+                                <Tooltip />
+                                <Bar dataKey="value" fill="#1e40af" />
+                            </BarChart>
+                        </ResponsiveContainer>
+                    </div>
+                </div>
+
 
                 <div className="card shadow-premium" style={{ background: 'white', padding: '2rem', borderRadius: '1.5rem' }}>
 

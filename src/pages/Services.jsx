@@ -168,8 +168,8 @@ const Services = () => {
             <section className="section bg-secondary text-center" style={{ padding: '6rem 0 4rem' }}>
                 <div className="container">
                     <ScrollReveal>
-                        <h1 style={{ fontSize: '3.5rem', fontWeight: 800, marginBottom: '1.5rem' }}>Plans for Every Stage</h1>
-                        <p style={{ maxWidth: '800px', margin: '0 auto', fontSize: '1.25rem', lineHeight: 1.6, color: '#64748b' }}>
+                        <h1 className="page-header">Plans for Every Stage</h1>
+                        <p className="section-subtitle" style={{ maxWidth: '800px', margin: '0 auto' }}>
                             At Hostizzy®, we understand that different properties cater to different types of guests.
                             That’s why we’ve tailored our services to meet unique needs and enhance experiences.
                         </p>
