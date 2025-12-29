@@ -40,27 +40,66 @@ const Calculator = () => {
     const [bedrooms, setBedrooms] = useState(3);
     const [finishes, setFinishes] = useState('luxury'); // standard, premium, luxury
 
+    // Lead capture state
+    const [showDetailedReport, setShowDetailedReport] = useState(false);
+    const [userEmail, setUserEmail] = useState('');
+    const [showEmailModal, setShowEmailModal] = useState(false);
+
+    // Calculate investment confidence score (0-10) - MUST be before useMemo
+    const calculateConfidenceScore = (cityData, occupancy) => {
+        let score = 0;
+
+        // Market grade contribution (0-4 points)
+        const gradePoints = {
+            'A+': 4, 'A': 3.5, 'A-': 3,
+            'B+': 2.5, 'B': 2, 'B-': 1.5,
+            'C+': 1, 'C': 0.5
+        };
+        score += gradePoints[cityData.grade] || 2;
+
+        // Occupancy contribution (0-3 points)
+        if (occupancy >= 75) score += 3;
+        else if (occupancy >= 65) score += 2.5;
+        else if (occupancy >= 55) score += 2;
+        else score += 1;
+
+        // Seasonality stability (0-3 points)
+        const avgSeason = cityData.seas.reduce((a, b) => a + b, 0) / 12;
+        const variance = cityData.seas.reduce((sum, val) => sum + Math.pow(val - avgSeason, 2), 0) / 12;
+        const stability = Math.max(0, 3 - (variance / 500)); // Lower variance = higher stability
+        score += stability;
+
+        return Math.min(10, Math.max(0, score)).toFixed(1);
+    };
+
     // --- CALCULATION ENGINE (useMemo for valid derived state) ---
     const metrics = React.useMemo(() => {
         const cityData = marketData[selectedCity] || marketData['Manali'];
 
-        // 1. Multipliers
-        const typeMult = propertyType === 'villa' ? 1.5 : (propertyType === 'farmhouse' ? 1.3 : 1.0);
-        const bedMult = 1 + (bedrooms - 1) * 0.3; // +30% per extra room
-        const finishMult = finishes === 'luxury' ? 1.25 : (finishes === 'premium' ? 1.1 : 1.0);
+        // 1. More Conservative Multipliers
+        // Property type: Reduced from 1.5x to 1.2x for villas
+        const typeMult = propertyType === 'villa' ? 1.2 : (propertyType === 'farmhouse' ? 1.15 : 1.0);
+
+        // Bedroom: Reduced from +30% to +15% per extra room (more realistic)
+        const bedMult = 1 + (bedrooms - 1) * 0.15;
+
+        // Finish level: Reduced luxury bonus from +25% to +12%
+        const finishMult = finishes === 'luxury' ? 1.12 : (finishes === 'premium' ? 1.06 : 1.0);
 
         // 2. Core Metrics
         const avgNightlyRate = Math.round(cityData.base * typeMult * bedMult * finishMult);
-        const annualOccupancy = cityData.occ + (finishes === 'luxury' ? 5 : 0); // Luxury gets better occ
+
+        // Occupancy: Reduced luxury bonus from +5% to +3%
+        const annualOccupancy = Math.min(cityData.occ + (finishes === 'luxury' ? 3 : 0), 85); // Cap at 85%
         const daysBooked = 365 * (annualOccupancy / 100);
 
         // 3. Revenue
         const grossRev = avgNightlyRate * daysBooked;
 
-        // 4. Net Income Breakdown (Estimates)
-        const hostizzyFee = grossRev * 0.20; // 20%
-        const otaCommission = grossRev * 0.15; // 15% (Airbnb/Booking)
-        const opsCost = grossRev * 0.12; // 12% (Utilities, Cleaning Supplies, Maintenance)
+        // 4. More Realistic Expense Breakdown
+        const hostizzyFee = grossRev * 0.20; // 20% management fee
+        const otaCommission = grossRev * 0.18; // Increased from 15% to 18% (more realistic)
+        const opsCost = grossRev * 0.15; // Increased from 12% to 15% (utilities, cleaning, maintenance)
         const totalExpenses = hostizzyFee + otaCommission + opsCost;
         const net = grossRev - totalExpenses;
 
@@ -75,7 +114,9 @@ const Calculator = () => {
                 fee: Math.round(hostizzyFee),
                 ota: Math.round(otaCommission),
                 ops: Math.round(opsCost)
-            }
+            },
+            // Confidence score calculation (0-10)
+            confidenceScore: calculateConfidenceScore(cityData, annualOccupancy)
         };
 
     }, [selectedCity, propertyType, bedrooms, finishes]);
@@ -108,6 +149,44 @@ const Calculator = () => {
                         <p className="section-subtitle">
                             Data-driven insights for 20+ top Indian leisure markets. Calculate your potential income from professional Airbnb property management.
                         </p>
+                    </ScrollReveal>
+                </div>
+            </section>
+
+            {/* Confidence Score Banner - AirDNA Style */}
+            <section style={{ background: 'linear-gradient(135deg, #2563eb 0%, #1e40af 100%)', padding: '2rem 0' }}>
+                <div className="container">
+                    <ScrollReveal>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2rem', flexWrap: 'wrap' }}>
+                            <div style={{ textAlign: 'center', color: 'white' }}>
+                                <div style={{ fontSize: '0.9rem', opacity: 0.9, marginBottom: '0.5rem' }}>Investment Confidence Score</div>
+                                <div style={{ fontSize: '3rem', fontWeight: 800, lineHeight: 1 }}>{metrics.confidenceScore}/10</div>
+                            </div>
+                            <div style={{ flex: 1, maxWidth: '400px' }}>
+                                <div style={{
+                                    height: '12px',
+                                    background: 'rgba(255,255,255,0.2)',
+                                    borderRadius: '6px',
+                                    overflow: 'hidden'
+                                }}>
+                                    <motion.div
+                                        initial={{ width: 0 }}
+                                        animate={{ width: `${(metrics.confidenceScore / 10) * 100}%` }}
+                                        transition={{ duration: 1, ease: 'easeOut' }}
+                                        style={{
+                                            height: '100%',
+                                            background: metrics.confidenceScore >= 7.5 ? '#10b981' : metrics.confidenceScore >= 6 ? '#f59e0b' : '#ef4444',
+                                            borderRadius: '6px'
+                                        }}
+                                    />
+                                </div>
+                                <div style={{ color: 'white', fontSize: '0.85rem', marginTop: '0.5rem', opacity: 0.9 }}>
+                                    {metrics.confidenceScore >= 7.5 ? '🟢 Strong Market Opportunity' :
+                                        metrics.confidenceScore >= 6 ? '🟡 Moderate Opportunity' :
+                                            '🔴 Challenging Market'}
+                                </div>
+                            </div>
+                        </div>
                     </ScrollReveal>
                 </div>
             </section>
@@ -205,8 +284,8 @@ const Calculator = () => {
 
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                 <ExpenseItem label="Hostizzy Mgmt (20%)" amount={metrics.breakdown?.fee} color="#3b82f6" />
-                                <ExpenseItem label="OTA Commissions (15%)" amount={metrics.breakdown?.ota} color="#f59e0b" />
-                                <ExpenseItem label="Ops & Maintenance (12%)" amount={metrics.breakdown?.ops} color="#ef4444" />
+                                <ExpenseItem label="OTA Commissions (18%)" amount={metrics.breakdown?.ota} color="#f59e0b" />
+                                <ExpenseItem label="Ops & Maintenance (15%)" amount={metrics.breakdown?.ops} color="#ef4444" />
                             </div>
 
                             <div style={{ marginTop: '2rem', paddingTop: '1rem', borderTop: '1px solid #f1f5f9' }}>
@@ -262,7 +341,7 @@ const Calculator = () => {
                     </div>
 
                 </div>
-        </section >
+            </section >
         </>
     );
 };
