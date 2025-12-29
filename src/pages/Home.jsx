@@ -80,16 +80,16 @@ const Home = () => {
                     <div className="card glass shadow-premium" style={{ padding: '3rem', textAlign: 'center', background: 'linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7))' }}>
                         <div className="grid desktop-3-col" style={{ gap: '2rem', alignItems: 'center' }}>
                             <div>
-                                <div style={{ fontSize: '3rem', fontWeight: 800, color: 'var(--color-primary)', lineHeight: 1 }}>15CR</div>
-                                <div style={{ fontSize: '0.9rem', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', marginTop: '0.5rem' }}>GMV Generated</div>
+                                <div style={{ fontSize: 'clamp(2.5rem, 5vw, 3rem)', fontWeight: 800, color: 'var(--color-primary)', lineHeight: 1 }}>15CR</div>
+                                <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', marginTop: '0.5rem' }}>GMV Generated</div>
                             </div>
-                            <div style={{ borderLeft: '1px solid #e2e8f0', borderRight: '1px solid #e2e8f0', padding: '0 2rem' }}>
-                                <div style={{ fontSize: '3rem', fontWeight: 800, color: '#1e293b', lineHeight: 1 }}>30k+</div>
-                                <div style={{ fontSize: '0.9rem', color: '#64748b', fontWeight: 600, textTransform: 'uppercase', marginTop: '0.5rem' }}>Guests Hosted</div>
+                            <div className="border-left-desktop border-right-desktop" style={{ padding: '0 2rem' }}>
+                                <div style={{ fontSize: 'clamp(2.5rem, 5vw, 3rem)', fontWeight: 800, color: '#1e293b', lineHeight: 1 }}>30k+</div>
+                                <div style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 600, textTransform: 'uppercase', marginTop: '0.5rem' }}>Guests Hosted</div>
                             </div>
                             <div>
-                                <div style={{ fontSize: '3rem', fontWeight: 800, color: '#1e293b', lineHeight: 1 }}>4.8 ★</div>
-                                <div style={{ fontSize: '0.9rem', color: '#64748b', fontWeight: 600, textTransform: 'uppercase', marginTop: '0.5rem' }}>Across All Platforms</div>
+                                <div style={{ fontSize: 'clamp(2.5rem, 5vw, 3rem)', fontWeight: 800, color: '#1e293b', lineHeight: 1 }}>4.8 ★</div>
+                                <div style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 600, textTransform: 'uppercase', marginTop: '0.5rem' }}>Across All Platforms</div>
                             </div>
                         </div>
                         <div style={{ marginTop: '2.5rem', paddingTop: '2rem', borderTop: '1px solid #f1f5f9', display: 'flex', justifyContent: 'center', gap: '3rem', flexWrap: 'wrap' }}>
@@ -312,7 +312,7 @@ const Home = () => {
                 </div>
             </section>
 
-            <InstagramFeed />
+            {/* Instagram Section removed per user request */}
 
             <ChannelCarousel />
 

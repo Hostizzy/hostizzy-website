@@ -62,12 +62,13 @@ const Contact = () => {
             {/* Premium Immersive Hero */}
             <section style={{
                 position: 'relative',
-                height: '45vh',
-                minHeight: '400px',
+                height: '35vh',
+                minHeight: '350px',
                 display: 'flex',
                 alignItems: 'center',
                 overflow: 'hidden',
-                background: '#000'
+                background: '#000',
+                paddingTop: 'var(--header-height)'
             }}>
                 <img
                     src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=2000"
@@ -119,11 +120,11 @@ const Contact = () => {
             </section>
 
             {/* Main Content Area */}
-            <section className="section" style={{ marginTop: '-100px', position: 'relative', zIndex: 2, paddingBottom: '8rem' }}>
+            <section className="section bg-primary text-white" style={{ padding: 'calc(var(--header-height) + 2rem) 0 4rem', position: 'relative', overflow: 'hidden', background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)' }}>
                 <div className="container">
 
                     {/* Concierge Desk Navigation */}
-                    <div className="grid desktop-3-col" style={{ gap: '2rem', marginBottom: '5rem' }}>
+                    <div className="grid desktop-3-col" style={{ gap: '2rem', marginBottom: '3rem' }}>
                         {[
                             { id: 'owner', label: 'Property Owner', image: departments.owner.image, tag: 'Earnings & Growth' },
                             { id: 'guest', label: 'Guest / Traveler', image: departments.guest.image, tag: 'Support & Booking' },
@@ -160,7 +161,7 @@ const Contact = () => {
                                             position: 'absolute',
                                             inset: 0,
                                             background: userType === role.id
-                                                ? 'linear-gradient(to top, var(--color-primary), transparent)'
+                                                ? 'linear-gradient(135deg, var(--color-primary) 0%, #E54F4F 100%)'
                                                 : 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)'
                                         }}></div>
                                         <div style={{ position: 'absolute', bottom: '2rem', left: '2rem', right: '2rem', color: 'white' }}>
@@ -179,7 +180,7 @@ const Contact = () => {
                     </div>
 
                     {/* Funnel Content Grid */}
-                    <div className="grid desktop-2-col" style={{ gap: '5rem', alignItems: 'flex-start' }}>
+                    <div className="grid desktop-2-col" style={{ gap: '3rem', alignItems: 'flex-start' }}>
 
                         {/* Left: Branding & Info */}
                         <div style={{ position: 'sticky', top: '120px' }}>
@@ -187,7 +188,7 @@ const Contact = () => {
                             <h3 style={{ fontSize: '2.8rem', marginBottom: '1.2rem', fontWeight: 900, color: '#1e293b', lineHeight: 1.1 }}>
                                 {userType === 'owner' ? 'Maximize Your Property Yield' : userType === 'guest' ? 'Elite Guest Experience' : 'Strategic Growth Network'}
                             </h3>
-                            <p style={{ lineHeight: 1.8, color: '#64748b', marginBottom: '3.5rem', fontSize: '1.2rem' }}>
+                            <p style={{ lineHeight: 1.8, color: '#64748b', marginBottom: '2rem', fontSize: '1.2rem' }}>
                                 {userType === 'owner'
                                     ? "Our specialized growth team handles end-to-end asset optimization for luxury villas and high-end apartments across India."
                                     : userType === 'guest'

@@ -21,38 +21,58 @@ const ChannelCarousel = () => {
                 <p style={{ color: 'var(--color-muted)', fontSize: '1.1rem' }}>We distribute your property to 20+ major travel channels automatically.</p>
             </div>
 
-            <div style={{ position: 'relative', width: '100%' }}>
+            <div style={{ position: 'relative', width: '100%', padding: '2rem 0' }}>
                 {/* Gradient Masks */}
                 <div style={{
-                    position: 'absolute', left: 0, top: 0, bottom: 0, width: '150px',
+                    position: 'absolute', left: 0, top: 0, bottom: 0, width: '200px',
                     background: 'linear-gradient(to right, white, transparent)', zIndex: 2
                 }}></div>
                 <div style={{
-                    position: 'absolute', right: 0, top: 0, bottom: 0, width: '150px',
+                    position: 'absolute', right: 0, top: 0, bottom: 0, width: '200px',
                     background: 'linear-gradient(to left, white, transparent)', zIndex: 2
                 }}></div>
 
                 <motion.div
-                    style={{ display: 'flex', gap: '5rem', width: 'max-content' }}
-                    animate={{ x: [0, -1500] }}
+                    style={{ display: 'flex', gap: '6rem', width: 'max-content', alignItems: 'center' }}
+                    animate={{ x: [0, -2000] }}
                     transition={{
                         x: {
                             repeat: Infinity,
                             repeatType: "loop",
-                            duration: 30,
+                            duration: 40,
                             ease: "linear"
                         }
                     }}
                 >
-                    {[...channels, ...channels].map((channel, i) => (
-                        <div key={i} style={{ display: 'flex', alignItems: 'center', height: '60px', opacity: 0.6, transition: 'opacity 0.3s' }} onMouseEnter={(e) => e.currentTarget.style.opacity = '1'} onMouseLeave={(e) => e.currentTarget.style.opacity = '0.6'}>
+                    {[...channels, ...channels, ...channels].map((channel, i) => (
+                        <div key={i} style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            height: '80px',
+                            padding: '0 2rem',
+                            opacity: 0.5,
+                            transition: 'all 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
+                            filter: 'grayscale(100%) brightness(0.8)',
+                            cursor: 'pointer'
+                        }}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.opacity = '1';
+                                e.currentTarget.style.filter = 'grayscale(0%) brightness(1)';
+                                e.currentTarget.style.transform = 'scale(1.1)';
+                            }}
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.opacity = '0.5';
+                                e.currentTarget.style.filter = 'grayscale(100%) brightness(0.8)';
+                                e.currentTarget.style.transform = 'scale(1)';
+                            }}
+                        >
                             <img
                                 src={channel.logo}
                                 alt={channel.name}
                                 style={{
-                                    height: channel.name.includes('Airbnb') ? '40px' : '30px',
+                                    height: channel.name === 'Airbnb' ? '32px' : (channel.name === 'Booking.com' ? '24px' : '28px'),
                                     width: 'auto',
-                                    filter: 'grayscale(100%) brightness(0.5)'
+                                    objectFit: 'contain'
                                 }}
                             />
                         </div>

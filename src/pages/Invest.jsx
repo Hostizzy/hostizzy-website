@@ -18,7 +18,7 @@ const Invest = () => {
                 image="https://hostizzy.com/og-invest.jpg"
             />
 
-            <section className="section bg-primary text-white" style={{ padding: '10rem 0 8rem', position: 'relative', overflow: 'hidden', background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)' }}>
+            <section className="section bg-primary text-white" style={{ padding: 'calc(var(--header-height) + 2rem) 0 4rem', position: 'relative', overflow: 'hidden', background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)' }}>
                 <div className="container" style={{ position: 'relative', zIndex: 1 }}>
                     <ScrollReveal>
                         <div className="badge mb-sm" style={{ backgroundColor: 'var(--color-primary)', color: 'white', border: 'none' }}>Pre-Seed Round Now Open</div>
@@ -45,7 +45,7 @@ const Invest = () => {
             </section>
 
             <section className="section container">
-                <div className="grid desktop-2-col" style={{ gap: '6rem', alignItems: 'center' }}>
+                <div className="grid desktop-2-col" style={{ gap: '3rem', alignItems: 'center' }}>
                     <ScrollReveal>
                         <div>
                             <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem' }}>A Message from the Founder</h2>
@@ -59,7 +59,10 @@ const Invest = () => {
                     </ScrollReveal>
 
                     <ScrollReveal delay={0.2}>
-                        <div className="card glass shadow-premium" style={{ padding: '3rem', borderLeft: '6px solid var(--color-primary)' }}>
+                        <div className="card glass shadow-premium" style={{
+                            padding: window.innerWidth < 768 ? '2rem 1.5rem' : '3rem',
+                            borderLeft: '6px solid var(--color-primary)'
+                        }}>
                             <h3 style={{ marginBottom: '2rem', fontSize: '1.5rem' }}>Ticket Sizes & Participation</h3>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                                 {[
@@ -112,8 +115,12 @@ const Invest = () => {
 
             <section className="section container text-center">
                 <ScrollReveal>
-                    <div className="card glass shadow-premium" style={{ padding: '5rem 2rem', background: 'linear-gradient(135deg, #FE5858, #ffbaba)', color: 'white' }}>
-                        <h2 style={{ fontSize: '3rem', fontWeight: 800, marginBottom: '1.5rem', color: 'white' }}>Shape the Future of Indian Hospitality</h2>
+                    <div className="card glass shadow-premium" style={{
+                        padding: window.innerWidth < 768 ? '3rem 1.5rem' : '5rem 2rem',
+                        background: 'linear-gradient(135deg, #FE5858, #ffbaba)',
+                        color: 'white'
+                    }}>
+                        <h2 style={{ fontSize: 'clamp(2rem, 6vw, 3rem)', fontWeight: 800, marginBottom: '1.5rem', color: 'white' }}>Shape the Future of Indian Hospitality</h2>
                         <p style={{ fontSize: '1.25rem', maxWidth: '800px', margin: '0 auto 3rem', opacity: 0.9 }}>
                             We are currently reviewing applications for our pre-seed round. Secure your stake in the next generation of vacation rentals.
                         </p>

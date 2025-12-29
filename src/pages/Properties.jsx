@@ -47,10 +47,10 @@ const Properties = () => {
                 image="https://hostizzy.com/og-properties.jpg"
             />
 
-            <section className="section bg-secondary" style={{ padding: '6rem 0 4rem' }}>
+            <section className="section bg-secondary" style={{ padding: window.innerWidth < 768 ? '4rem 0 2rem' : '6rem 0 4rem' }}>
                 <div className="container text-center">
                     <ScrollReveal>
-                        <h1 style={{ fontSize: '3rem', marginBottom: '1.5rem', fontWeight: 800, letterSpacing: '-0.03em' }}>
+                        <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 3.5rem)', marginBottom: '1.5rem', fontWeight: 800, letterSpacing: '-0.03em' }}>
                             Find Your Perfect <span className="text-primary">Getaway</span>
                         </h1>
                         <p style={{ maxWidth: '700px', margin: '0 auto', fontSize: '1.15rem', color: '#64748b', lineHeight: 1.6 }}>
@@ -62,8 +62,8 @@ const Properties = () => {
             </section>
 
             {/* Filter Bar (Sticky) */}
-            <div style={{ position: 'sticky', top: 'var(--header-height)', zIndex: 40, background: 'white', borderBottom: '1px solid #e2e8f0', padding: '1rem 0', marginTop: 'var(--header-height)' }}>
-                <div className="container" style={{ display: 'flex', gap: '1rem', overflowX: 'auto', paddingBottom: '0.5rem', scrollbarWidth: 'none' }}>
+            <div style={{ position: 'sticky', top: 'var(--header-height)', zIndex: 40, background: 'rgba(255, 255, 255, 0.95)', backdropFilter: 'blur(10px)', borderBottom: '1px solid #e2e8f0', padding: '0.75rem 0', boxShadow: '0 4px 12px rgba(0,0,0,0.03)' }}>
+                <div className="container" style={{ display: 'flex', gap: '1rem', overflowX: 'auto', paddingBottom: '0.25rem', scrollbarWidth: 'none' }}>
                     {/* Category "Chips" */}
                     {categories.map(cat => (
                         <button

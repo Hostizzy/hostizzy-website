@@ -165,13 +165,38 @@ const Services = () => {
             <SEO title="Services & Pricing - Hostizzy" description="Flexible property management plans for every host." />
 
             {/* Hero Section */}
-            <section className="section bg-secondary text-center" style={{ padding: '6rem 0 4rem' }}>
-                <div className="container">
+            <section className="section text-center" style={{
+                padding: '10rem 0 7rem',
+                position: 'relative',
+                background: '#0f172a',
+                overflow: 'hidden',
+                color: 'white'
+            }}>
+                <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    zIndex: 0
+                }}>
+                    <img
+                        src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=2400"
+                        alt="Background"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.4 }}
+                    />
+                    <div style={{
+                        position: 'absolute',
+                        inset: 0,
+                        background: 'linear-gradient(to bottom, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9))'
+                    }} />
+                </div>
+
+                <div className="container" style={{ position: 'relative', zIndex: 1 }}>
                     <ScrollReveal>
-                        <h1 className="page-header">Plans for Every Stage</h1>
-                        <p className="section-subtitle" style={{ maxWidth: '800px', margin: '0 auto' }}>
-                            At Hostizzy®, we understand that different properties cater to different types of guests.
-                            That’s why we’ve tailored our services to meet unique needs and enhance experiences.
+                        <h1 className="page-header" style={{ color: 'white' }}>Property Management, <br /><span style={{ color: 'var(--color-primary)' }}>Evolved.</span></h1>
+                        <p className="section-subtitle" style={{ maxWidth: '800px', margin: '0 auto', color: 'rgba(255,255,255,0.8)' }}>
+                            Hostizzy® blends high-touch hospitality with high-tech optimization to transform your property into a five-star asset. Explore our end-to-end management models.
                         </p>
                     </ScrollReveal>
                 </div>
@@ -182,10 +207,37 @@ const Services = () => {
                 <ScrollReveal>
                     <div className="grid desktop-4-col" style={{ gap: '1.5rem' }}>
                         {propertyCategories.map((cat, i) => (
-                            <div key={i} className="card" style={{ textAlign: 'center', padding: '2rem' }}>
-                                <div style={{ marginBottom: '1rem', display: 'flex', justifyContent: 'center' }}>{cat.icon}</div>
-                                <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.5rem' }}>{cat.title}</h3>
-                                <p style={{ fontSize: '0.9rem', color: '#64748b' }}>{cat.desc}</p>
+                            <div key={i} className="card-feature" style={{
+                                textAlign: 'center',
+                                padding: '3rem 2rem',
+                                borderRadius: '2rem',
+                                transition: 'all 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
+                                border: '1px solid var(--color-border)',
+                                cursor: 'default'
+                            }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(-10px)';
+                                    e.currentTarget.style.boxShadow = '0 25px 50px -12px rgba(0,0,0,0.1)';
+                                    e.currentTarget.style.borderColor = 'var(--color-primary-light)';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(0)';
+                                    e.currentTarget.style.boxShadow = 'none';
+                                    e.currentTarget.style.borderColor = 'var(--color-border)';
+                                }}
+                            >
+                                <div style={{
+                                    marginBottom: '1.5rem',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    padding: '1rem',
+                                    background: 'rgba(254, 88, 88, 0.1)',
+                                    borderRadius: '1.25rem',
+                                    width: 'fit-content',
+                                    margin: '0 auto 1.5rem'
+                                }}>{cat.icon}</div>
+                                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '0.75rem', color: 'var(--color-foreground)' }}>{cat.title}</h3>
+                                <p style={{ fontSize: '0.95rem', color: 'var(--color-muted)', lineHeight: 1.6 }}>{cat.desc}</p>
                             </div>
                         ))}
                     </div>
@@ -238,30 +290,55 @@ const Services = () => {
                                 {plans[activeTab].map((plan, i) => (
                                     <div key={i} className="card" style={{
                                         position: 'relative',
+                                        background: 'white',
+                                        borderRadius: '2rem',
                                         border: plan.popular ? '2px solid var(--color-primary)' : '1px solid #e2e8f0',
                                         transform: plan.popular ? 'scale(1.02)' : 'none',
-                                        boxShadow: plan.popular ? '0 20px 25px -5px rgba(0, 0, 0, 0.1)' : 'none'
+                                        boxShadow: plan.popular ? '0 30px 60px -12px rgba(254, 88, 88, 0.15)' : 'var(--shadow-sm)',
+                                        overflow: 'hidden'
                                     }}>
                                         {plan.popular && (
-                                            <div style={{ position: 'absolute', top: 0, right: 0, background: 'var(--color-primary)', color: 'white', padding: '0.25rem 1rem', fontSize: '0.8rem', fontWeight: 700, borderBottomLeftRadius: '1rem' }}>
-                                                Most Popular
+                                            <div style={{
+                                                position: 'absolute',
+                                                top: 0,
+                                                right: 0,
+                                                background: 'var(--color-primary)',
+                                                color: 'white',
+                                                padding: '0.5rem 1.5rem',
+                                                fontSize: '0.85rem',
+                                                fontWeight: 800,
+                                                borderBottomLeftRadius: '1.5rem',
+                                                letterSpacing: '0.05em'
+                                            }}>
+                                                MOST POPULAR
                                             </div>
                                         )}
-                                        <div style={{ padding: '2.5rem' }}>
-                                            <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem' }}>{plan.name}</h3>
-                                            <div style={{ marginBottom: '2rem' }}>
-                                                <div style={{ fontSize: '2.5rem', fontWeight: 800, color: '#1e293b' }}>{plan.price}</div>
-                                                <div style={{ fontSize: '0.9rem', color: '#64748b' }}>/ {plan.period}</div>
+                                        <div style={{ padding: '3rem' }}>
+                                            <h3 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '0.5rem', color: '#0f172a' }}>{plan.name}</h3>
+                                            <div style={{ marginBottom: '2.5rem' }}>
+                                                <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.2rem' }}>
+                                                    <span style={{ fontSize: '2.5rem', fontWeight: 900, color: 'var(--color-foreground)' }}>{plan.price}</span>
+                                                </div>
+                                                <div style={{ fontSize: '1rem', color: 'var(--color-muted)', fontWeight: 500 }}>{plan.period}</div>
                                             </div>
-                                            <ul style={{ marginBottom: '2.5rem' }}>
+                                            <div style={{ height: '1px', background: '#f1f5f9', marginBottom: '2.5rem' }} />
+                                            <ul style={{ marginBottom: '3rem', listStyle: 'none', padding: 0 }}>
                                                 {plan.features.map((feat, idx) => (
-                                                    <li key={idx} style={{ display: 'flex', gap: '0.75rem', marginBottom: '1rem', fontSize: '0.95rem', color: '#334155' }}>
-                                                        <Check size={18} color="var(--color-primary)" style={{ flexShrink: 0, marginTop: '3px' }} />
-                                                        {feat}
+                                                    <li key={idx} style={{ display: 'flex', gap: '1rem', marginBottom: '1.25rem', fontSize: '1rem', color: '#334155', alignItems: 'flex-start' }}>
+                                                        <div style={{ marginTop: '2px', background: 'rgba(254, 88, 88, 0.1)', borderRadius: '50%', padding: '4px' }}>
+                                                            <Check size={14} color="var(--color-primary)" strokeWidth={3} />
+                                                        </div>
+                                                        <span style={{ lineHeight: 1.4 }}>{feat}</span>
                                                     </li>
                                                 ))}
                                             </ul>
-                                            <Link to="/contact" className={`btn ${plan.popular ? 'btn-primary' : 'btn-outline'}`} style={{ width: '100%', textAlign: 'center', justifyContent: 'center' }}>
+                                            <Link to="/contact" className={`btn ${plan.popular ? 'btn-primary' : 'btn-outline'}`} style={{
+                                                width: '100%',
+                                                padding: '1.25rem',
+                                                borderRadius: '1rem',
+                                                fontSize: '1.1rem',
+                                                fontWeight: 700
+                                            }}>
                                                 {plan.cta}
                                             </Link>
                                         </div>

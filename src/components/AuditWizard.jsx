@@ -78,10 +78,10 @@ const AuditWizard = () => {
         <div className="card shadow-premium" style={{
             maxWidth: '600px',
             margin: '0 auto',
-            padding: '3rem',
-            borderRadius: '2rem',
+            padding: window.innerWidth < 768 ? '2rem 1.5rem' : '3rem',
+            borderRadius: window.innerWidth < 768 ? '1.5rem' : '2rem',
             background: 'white',
-            minHeight: '450px',
+            minHeight: window.innerWidth < 768 ? '400px' : '450px',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',

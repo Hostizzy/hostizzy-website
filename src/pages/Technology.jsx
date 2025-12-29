@@ -22,16 +22,36 @@ const Technology = () => {
             />
 
             <section className="section" style={{
-                background: 'linear-gradient(135deg, #1E293B 0%, #0F172A 100%)',
+                background: '#0f172a',
                 color: 'white',
-                padding: '10rem 0 8rem'
+                padding: 'calc(var(--header-height) + 4rem) 0 6rem',
+                position: 'relative',
+                overflow: 'hidden'
             }}>
-                <div className="container text-center">
+                <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0)`,
+                    backgroundSize: '40px 40px',
+                    opacity: 0.5
+                }} />
+                <div style={{
+                    position: 'absolute',
+                    top: '20%',
+                    right: '10%',
+                    width: '300px',
+                    height: '300px',
+                    background: 'var(--color-primary)',
+                    filter: 'blur(150px)',
+                    opacity: 0.15,
+                    zIndex: 0
+                }} />
+                <div className="container text-center" style={{ position: 'relative', zIndex: 1 }}>
                     <ScrollReveal>
-                        <div className="badge mb-sm" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', color: 'white' }}>The Platform Ecosystem</div>
-                        <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '1.5rem', fontWeight: 800 }}>Engineered Excellence</h1>
-                        <p style={{ maxWidth: '800px', margin: '0 auto', fontSize: '1.25rem', opacity: 0.9, lineHeight: 1.6 }}>
-                            The Hostizzy Platform is a vertically integrated suite of hospitality technologies. From management to marketplaces, we build the tools that empower modern hosts.
+                        <div className="badge mb-sm" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', color: 'white', padding: '0.5rem 1.25rem', borderRadius: '100px', letterSpacing: '1px' }}>THE PLATFORM ECOSYSTEM</div>
+                        <h1 style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', marginBottom: '1.5rem', fontWeight: 900, letterSpacing: '-0.02em', lineHeight: 1.1, color: 'white' }}>Engineering The <br /><span style={{ color: 'var(--color-primary)' }}>Future of Hosting.</span></h1>
+                        <p style={{ maxWidth: '800px', margin: '0 auto', fontSize: '1.25rem', opacity: 0.8, lineHeight: 1.7, fontWeight: 400 }}>
+                            A vertically integrated suite of hospitality technologies. From high-touch management to data-driven marketplaces, we build the tools that empower modern hospitality.
                         </p>
                     </ScrollReveal>
                 </div>
@@ -39,7 +59,7 @@ const Technology = () => {
 
             {/* HostOS Section */}
             <section className="section container">
-                <div className="grid desktop-2-col" style={{ alignItems: 'center', gap: '6rem' }}>
+                <div className="grid desktop-2-col" style={{ alignItems: 'center', gap: '3rem' }}>
                     <ScrollReveal x={-30}>
                         <div>
                             <div className="badge mb-sm" style={{ backgroundColor: 'rgba(254, 88, 88, 0.1)', color: 'var(--color-primary)' }}>HostOS v2.0</div>
@@ -68,27 +88,40 @@ const Technology = () => {
                     </ScrollReveal>
 
                     <ScrollReveal x={30} delay={0.2}>
-                        <div className="card shadow-premium" style={{ borderRadius: '2rem', padding: '3rem', background: 'white', border: '1px solid var(--color-border)', position: 'relative' }}>
-                            <div className="card" style={{ padding: '1.5rem', marginBottom: '2rem', borderLeft: '5px solid #16a34a', boxShadow: 'var(--shadow-md)' }}>
+                        <div className="card shadow-premium" style={{
+                            borderRadius: '2.5rem',
+                            padding: '3rem',
+                            background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
+                            border: '1px solid #e2e8f0',
+                            position: 'relative',
+                            overflow: 'hidden'
+                        }}>
+                            <div style={{ position: 'absolute', top: '-10%', right: '-10%', width: '150px', height: '150px', background: 'rgba(254, 88, 88, 0.05)', borderRadius: '50%', filter: 'blur(30px)' }} />
+
+                            <div className="card" style={{ padding: '1.5rem', marginBottom: '2rem', borderLeft: '6px solid #10b981', background: 'white', boxShadow: '0 10px 30px -5px rgba(0,0,0,0.05)', borderRadius: '1rem' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                                    <div style={{ fontWeight: 700, color: '#1e293b' }}>Reservation #1284</div>
-                                    <div className="badge" style={{ backgroundColor: '#dcfce7', color: '#166534' }}>Confirmed</div>
+                                    <div style={{ fontWeight: 800, color: '#1e293b', fontSize: '0.9rem', letterSpacing: '0.5px' }}>RESERVATION #1284</div>
+                                    <div className="badge" style={{ backgroundColor: '#dcfce7', color: '#059669', fontSize: '0.7rem', border: 'none' }}>ACTIVE</div>
                                 </div>
                                 <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                                    <div style={{ width: '48px', height: '48px', background: 'var(--color-secondary)', borderRadius: '50%', display: 'grid', placeItems: 'center', fontWeight: 600 }}>SJ</div>
+                                    <div style={{ width: '44px', height: '44px', background: 'var(--color-primary)', color: 'white', borderRadius: '50%', display: 'grid', placeItems: 'center', fontWeight: 800, fontSize: '1rem' }}>SJ</div>
                                     <div>
-                                        <div style={{ fontWeight: 700, fontSize: '1rem' }}>Sarah Jenkins</div>
-                                        <div style={{ fontSize: '0.85rem', color: 'var(--color-muted)' }}>Check-in: Today, 2:00 PM</div>
+                                        <div style={{ fontWeight: 800, fontSize: '1rem', color: '#0f172a' }}>Sarah Jenkins</div>
+                                        <div style={{ fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: 500 }}>Villa Escape • Room 4B</div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="card" style={{ padding: '1.5rem', borderLeft: '5px solid #ef4444', boxShadow: 'var(--shadow-md)' }}>
+
+                            <div className="card" style={{ padding: '1.5rem', borderLeft: '6px solid #ef4444', background: 'white', boxShadow: '0 10px 30px -5px rgba(0,0,0,0.05)', borderRadius: '1rem' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                                    <div style={{ fontWeight: 700, color: '#1e293b' }}>Maintenance Alert</div>
-                                    <div className="badge" style={{ backgroundColor: '#fee2e2', color: '#991b1b' }}>Urgent</div>
+                                    <div style={{ fontWeight: 800, color: '#1e293b', fontSize: '0.9rem' }}>MAINTENANCE ALERT</div>
+                                    <div className="badge" style={{ backgroundColor: '#fee2e2', color: '#dc2626', fontSize: '0.7rem' }}>URGENT</div>
                                 </div>
-                                <div style={{ fontSize: '0.95rem', color: '#334155', fontWeight: 500 }}>
-                                    AC Service required for <span style={{ color: 'var(--color-primary)' }}>Villa 4B</span>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                                    <div style={{ width: '8px', height: '8px', background: '#ef4444', borderRadius: '50%', animation: 'pulse 2s infinite' }} />
+                                    <div style={{ fontSize: '1rem', color: '#334155', fontWeight: 600 }}>
+                                        AC Service required: <span style={{ color: 'var(--color-primary)' }}>Luxe Suite 102</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -99,7 +132,7 @@ const Technology = () => {
             {/* ResIQ Section */}
             <section className="section bg-secondary">
                 <div className="container">
-                    <div className="grid desktop-2-col" style={{ alignItems: 'center', gap: '6rem' }}>
+                    <div className="grid desktop-2-col" style={{ alignItems: 'center', gap: '3rem' }}>
                         <ScrollReveal x={-30}>
                             <div style={{ order: 1 }}>
                                 <div className="card shadow-premium" style={{ borderRadius: '2rem', padding: '3rem', background: 'white', border: '1px solid var(--color-border)' }}>
@@ -148,9 +181,9 @@ const Technology = () => {
             <ChannelCarousel />
 
             {/* Mobile App Previews */}
-            <section className="section" style={{ backgroundColor: '#0f172a', color: 'white', padding: '8rem 0', overflow: 'hidden' }}>
+            <section className="section" style={{ backgroundColor: '#0f172a', color: 'white', padding: '6rem 0', overflow: 'hidden' }}>
                 <div className="container">
-                    <div className="grid desktop-2-col" style={{ alignItems: 'center', gap: '6rem' }}>
+                    <div className="grid desktop-2-col" style={{ alignItems: 'center', gap: '3rem' }}>
                         <ScrollReveal x={-30}>
                             <div>
                                 <div className="badge mb-sm" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', color: 'white' }}>Hostizzy Mobile</div>

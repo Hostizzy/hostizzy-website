@@ -43,39 +43,38 @@ const Navbar = () => {
     return (
         <React.Fragment>
             <motion.nav
-                initial={{ y: -100, width: "100%" }}
+                initial={{ y: -100, x: '-50%' }}
                 animate={{
-                    y: isScrolled ? 12 : 0,
-                    width: isScrolled ? "95%" : "100%",
-                    borderRadius: isScrolled ? "100px" : "0px",
+                    y: isScrolled ? 15 : 0,
+                    width: isScrolled ? "94%" : "100%",
                 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 style={{
                     position: 'fixed',
                     left: '50%',
-                    x: '-50%',
                     zIndex: 1000,
-                    maxWidth: isScrolled ? '1280px' : '100%',
-                    backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.7)' : '#fff',
-                    backdropFilter: isScrolled ? 'blur(16px) saturate(180%)' : 'none',
-                    WebkitBackdropFilter: isScrolled ? 'blur(16px) saturate(180%)' : 'none',
-                    boxShadow: isScrolled ? '0 8px 32px 0 rgba(31, 38, 135, 0.07)' : 'none',
-                    border: isScrolled ? '1px solid rgba(255,255,255,0.45)' : 'none',
-                    borderBottom: !isScrolled ? '1px solid var(--color-border)' : 'none',
-                    padding: '0.6rem 0'
+                    maxWidth: isScrolled ? '1320px' : '100%',
+                    backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.8)' : 'rgba(255, 255, 255, 0.98)',
+                    backdropFilter: 'blur(25px) saturate(200%)',
+                    WebkitBackdropFilter: 'blur(25px) saturate(200%)',
+                    boxShadow: isScrolled ? '0 20px 40px -15px rgba(0,0,0,0.1)' : '0 1px 0 rgba(0,0,0,0.05)',
+                    border: isScrolled ? '1px solid rgba(255,255,255,0.4)' : 'none',
+                    borderRadius: isScrolled ? '24px' : '0',
+                    padding: isScrolled ? '0.25rem 0' : '0.5rem 0'
                 }}
             >
                 <div className="container" style={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    padding: isScrolled ? '0 1.5rem' : '0 2rem',
-                    height: '50px'
+                    padding: '0 2.5rem',
+                    height: isScrolled ? '64px' : '84px',
+                    transition: 'height 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
                 }}>
 
                     {/* Brand Logo */}
-                    <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <img src={settings.logoUrl} alt={settings.siteName} style={{ height: '38px', mixBlendMode: 'multiply' }} />
+                    <Link to="/" style={{ display: 'flex', alignItems: 'center', transition: 'transform 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+                        <img src={settings.logoUrl} alt={settings.siteName} style={{ height: isScrolled ? '48px' : '64px', width: 'auto', objectFit: 'contain', transition: 'height 0.3s ease' }} />
                     </Link>
 
                     {/* Desktop Menu - Centered */}

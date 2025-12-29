@@ -35,6 +35,7 @@ const BLOGS_FILE = path.join(DATA_DIR, 'blogs.json');
 const CONTACTS_FILE = path.join(DATA_DIR, 'contacts.json');
 const SEO_FILE = path.join(DATA_DIR, 'seo.json');
 const SETTINGS_FILE = path.join(DATA_DIR, 'settings.json');
+const CALCULATOR_LEADS_FILE = path.join(DATA_DIR, 'calculator-leads.json');
 
 // --- DATABASE CONNECTION ---
 const MONGODB_URI = process.env.MONGODB_URI;
@@ -60,6 +61,19 @@ const propertySchema = new mongoose.Schema({
 
 const Property = mongoose.model('Property', propertySchema);
 
+const calculatorLeadSchema = new mongoose.Schema({
+    email: String,
+    city: String,
+    propertyType: String,
+    bedrooms: Number,
+    finishes: String,
+    revenue: Number,
+    netIncome: Number,
+    createdAt: { type: Date, default: Date.now }
+});
+
+const CalculatorLead = mongoose.model('CalculatorLead', calculatorLeadSchema);
+
 // --- AUTHENTICATION ---
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'hostizzy2025';
 
@@ -76,7 +90,7 @@ app.post('/api/login', (req, res) => {
 const authMiddleware = (req, res, next) => {
     // Skip auth for GET requests (except bookings) and login
     if (req.method === 'GET' && !req.path.includes('/api/bookings')) return next();
-    if (req.path === '/api/login' || req.path === '/api/contact' || (req.method === 'POST' && req.path === '/api/bookings')) return next();
+    if (req.path === '/api/login' || req.path === '/api/contact' || req.path === '/api/calculator-leads' || (req.method === 'POST' && req.path === '/api/bookings')) return next();
 
     const authHeader = req.headers.authorization;
     if (authHeader === 'Bearer hz-admin-token-2025') {
@@ -474,13 +488,25 @@ app.post('/api/contact', (req, res) => {
     console.log(newContact);
     console.log('-------------------');
 
-    // MOCK EMAIL SENDING
-    const RESEND_API_KEY = process.env.RESEND_API_KEY;
-    if (RESEND_API_KEY) {
-        console.log("Email would be sent via Resend API here.");
-    }
-
     res.json({ success: true, message: 'Message received!' });
+});
+
+// Calculator Leads
+app.post('/api/calculator-leads', async (req, res) => {
+    try {
+        if (isMongoConnected) {
+            const newLead = new CalculatorLead(req.body);
+            await newLead.save();
+        } else {
+            const leads = readJson(CALCULATOR_LEADS_FILE);
+            leads.unshift({ id: Date.now().toString(), ...req.body, createdAt: new Date().toISOString() });
+            writeJson(CALCULATOR_LEADS_FILE, leads);
+        }
+        res.json({ success: true, message: 'Lead captured successfully' });
+    } catch (error) {
+        console.error('Calculator lead error:', error);
+        res.status(500).json({ error: 'Failed to capture lead' });
+    }
 });
 
 // --- CATCH ALL FOR SPA ---

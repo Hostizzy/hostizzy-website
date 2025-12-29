@@ -20,13 +20,10 @@ const About = () => {
             />
 
             {/* Hero Section */}
-            <section className="section bg-primary text-white text-center" style={{
-                background: 'linear-gradient(135deg, var(--color-primary) 0%, #E54F4F 100%)',
-                padding: '8rem 0 6rem'
-            }}>
+            <section className="section bg-primary text-white text-center" style={{ padding: 'calc(var(--header-height) + 2rem) 0 4rem', position: 'relative', overflow: 'hidden', background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)' }}>
                 <div className="container">
                     <ScrollReveal>
-                        <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '1.5rem', fontWeight: 800 }}>India's Trusted Vacation Rental<br />Management Experts</h1>
+                        <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '1.5rem', fontWeight: 800, color: 'white' }}>India's Trusted Vacation Rental<br />Management Experts</h1>
                         <p style={{ fontSize: '1.25rem', opacity: 0.9, maxWidth: '800px', margin: '0 auto', fontStyle: 'italic', fontWeight: 500 }}>
                             "Elevating properties into profitable brands. We are the Airbnb management experts you've been looking for."
                         </p>
@@ -37,7 +34,7 @@ const About = () => {
             {/* Our Story */}
             <section className="section container">
                 <ScrollReveal>
-                    <div className="grid desktop-2-col" style={{ alignItems: 'center', gap: '5rem' }}>
+                    <div className="grid desktop-2-col" style={{ alignItems: 'center', gap: '3rem' }}>
                         <div>
                             <div className="badge mb-sm" style={{ backgroundColor: 'rgba(254, 88, 88, 0.1)', color: 'var(--color-primary)' }}>Our Vision</div>
                             <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem' }}>The Hostizzy Story</h2>
@@ -54,9 +51,9 @@ const About = () => {
                         </div>
                         <div className="card shadow-premium" style={{
                             height: '500px',
-                            background: 'url("https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&q=80&w=800") center/cover',
+                            background: 'url("https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=80&w=800") center/cover',
                             borderRadius: '2rem',
-                            border: '8px solid white'
+                            border: '12px solid white'
                         }}></div>
                     </div>
                 </ScrollReveal>
@@ -123,7 +120,7 @@ const About = () => {
                         { year: '2024', title: "Celebrating Success", text: "Managing over 100 properties (55 active + 45 pipeline in Goa). Hosted over 25,000 guests." }
                     ].map((m, i) => (
                         <ScrollReveal key={i} delay={i * 0.1}>
-                            <div style={{ marginBottom: '5rem', position: 'relative' }}>
+                            <div style={{ marginBottom: '3rem', position: 'relative' }}>
                                 <div style={{
                                     position: 'absolute', left: '-5.1rem', top: '0.25rem',
                                     width: '2rem', height: '2rem', background: 'var(--color-primary)',

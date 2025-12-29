@@ -43,6 +43,7 @@ import FloatingConcierge from './components/FloatingConcierge';
 import BookingTicker from './components/BookingTicker';
 
 function App() {
+  const location = useLocation();
   return (
     <div className="app">
       <ScrollToTop />

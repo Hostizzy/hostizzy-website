@@ -23,7 +23,7 @@
 
   /* Spacing */
   --container-padding: 2rem;
-  --header-height: 80px;
+  --header-height: 120px;
 
   /* Animation */
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -50,6 +50,11 @@ body {
   overflow-x: hidden;
 }
 
+h1 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
 h1,
 h2,
 h3,
@@ -58,7 +63,6 @@ h5,
 h6 {
   font-family: var(--font-display);
   line-height: 1.2;
-  font-weight: 700;
   color: #0F172A;
   text-wrap: balance;
 }
@@ -280,6 +284,43 @@ html {
 @media (max-width: 767px) {
   .mobile-stack {
     flex-direction: column;
+  }
+}
+
+/* Responsive Borders */
+.border-right-desktop {
+  border-right: 1px solid var(--color-border);
+}
+
+.border-left-desktop {
+  border-left: 1px solid var(--color-border);
+}
+
+@media (max-width: 767px) {
+
+  .border-right-desktop,
+  .border-left-desktop {
+    border-right: none;
+    border-left: none;
+    border-top: 1px solid var(--color-border);
+    padding-top: 2rem !important;
+    margin-top: 2rem;
+  }
+}
+
+/* Mobile Padding & Spacing */
+@media (max-width: 767px) {
+  .card-feature {
+    padding: 1.5rem !important;
+  }
+
+  .section {
+    padding: 4rem 0 !important;
+  }
+
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 }
 

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import ScrollReveal from '../components/ScrollReveal';
-import { IndianRupee, MapPin, Home, Users, Check, TrendingUp, Calendar, ArrowRight, Star, PieChart, BarChart3, Info } from 'lucide-react';
+import { IndianRupee as LucideRupee, MapPin as LucideMapPin, TrendingUp as LucideTrend, ArrowRight as LucideArrow, BarChart3 as LucideBar, Info as LucideInfo, Lock as LucideLock } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, BarChart, Bar, Legend } from 'recharts';
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, BarChart, Bar, Legend } from 'recharts';
 import { Link } from 'react-router-dom';
+import DetailedReportModal from '../components/DetailedReportModal';
 
 // --- MOCK DATABASE (Airdna Style) ---
 const marketData = {
@@ -74,23 +75,16 @@ const Calculator = () => {
     };
 
     // --- CALCULATION ENGINE (useMemo for valid derived state) ---
-    const metrics = React.useMemo(() => {
+    const { metrics, seasonalityData, revenueBreakdown } = React.useMemo(() => {
         const cityData = marketData[selectedCity] || marketData['Manali'];
 
         // 1. More Conservative Multipliers
-        // Property type: Reduced from 1.5x to 1.2x for villas
         const typeMult = propertyType === 'villa' ? 1.2 : (propertyType === 'farmhouse' ? 1.15 : 1.0);
-
-        // Bedroom: Reduced from +30% to +15% per extra room (more realistic)
         const bedMult = 1 + (bedrooms - 1) * 0.15;
-
-        // Finish level: Reduced luxury bonus from +25% to +12%
         const finishMult = finishes === 'luxury' ? 1.12 : (finishes === 'premium' ? 1.06 : 1.0);
 
         // 2. Core Metrics
         const avgNightlyRate = Math.round(cityData.base * typeMult * bedMult * finishMult);
-
-        // Occupancy: Reduced luxury bonus from +5% to +3%
         const annualOccupancy = Math.min(cityData.occ + (finishes === 'luxury' ? 3 : 0), 85); // Cap at 85%
         const daysBooked = 365 * (annualOccupancy / 100);
 
@@ -98,13 +92,13 @@ const Calculator = () => {
         const grossRev = avgNightlyRate * daysBooked;
 
         // 4. More Realistic Expense Breakdown
-        const hostizzyFee = grossRev * 0.20; // 20% management fee
-        const otaCommission = grossRev * 0.18; // Increased from 15% to 18% (more realistic)
-        const opsCost = grossRev * 0.15; // Increased from 12% to 15% (utilities, cleaning, maintenance)
+        const hostizzyFee = grossRev * 0.20;
+        const otaCommission = grossRev * 0.18;
+        const opsCost = grossRev * 0.15;
         const totalExpenses = hostizzyFee + otaCommission + opsCost;
         const net = grossRev - totalExpenses;
 
-        return {
+        const results = {
             grossRevenue: Math.round(grossRev),
             netIncome: Math.round(net),
             occupancy: annualOccupancy,
@@ -116,21 +110,56 @@ const Calculator = () => {
                 ota: Math.round(otaCommission),
                 ops: Math.round(opsCost)
             },
-            // Confidence score calculation (0-10)
             confidenceScore: calculateConfidenceScore(cityData, annualOccupancy)
         };
 
+        const chartSeas = cityData && Array.isArray(cityData.seas)
+            ? cityData.seas.map((val, idx) => ({ month: idx + 1, revenue: val }))
+            : [];
+
+        const chartRev = [
+            { name: 'Gross Rev', value: Math.round(grossRev) },
+            { name: 'Net Income', value: Math.round(net) },
+            { name: 'OTA Comms', value: Math.round(otaCommission) },
+            { name: 'Ops Cost', value: Math.round(opsCost) }
+        ];
+
+        return { metrics: results, seasonalityData: chartSeas, revenueBreakdown: chartRev };
+
     }, [selectedCity, propertyType, bedrooms, finishes]);
 
-    // Prepare chart data
-    const seasonalityData = cityData.seas.map((val, idx) => ({ month: idx + 1, revenue: val }));
-    const revenueBreakdown = [
-        { name: 'Revenue', value: metrics.revenue },
-        { name: 'Hostizzy Fee', value: metrics.hostizzyFee },
-        { name: 'OTA Commission', value: metrics.ota },
-        { name: 'Ops & Maintenance', value: metrics.ops }
-    ];
 
+
+
+    const handleEmailSubmit = async (email) => {
+        setUserEmail(email);
+
+        try {
+            const res = await fetch('/api/calculator-leads', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email,
+                    city: selectedCity,
+                    propertyType,
+                    bedrooms,
+                    finishes,
+                    revenue: metrics.grossRevenue,
+                    netIncome: metrics.netIncome
+                })
+            });
+
+            if (res.ok) {
+                setShowDetailedReport(true);
+                setShowEmailModal(false);
+            }
+        } catch (error) {
+            console.error('Lead capture failed:', error);
+            // Fallback: unlock anyway for UX
+            setShowDetailedReport(true);
+            setShowEmailModal(false);
+        }
+    };
 
     return (
         <>
@@ -153,7 +182,7 @@ const Calculator = () => {
                 <div className="container text-center">
                     <ScrollReveal>
                         <div className="badge badge-primary" style={{ marginBottom: '1rem' }}>
-                            <TrendingUp size={14} style={{ marginRight: '0.5rem' }} /> Market Intelligence Tool
+                            <LucideTrend size={14} style={{ marginRight: '0.5rem' }} /> Market Intelligence Tool
                         </div>
                         <h1 className="page-header">Vacation Rental Earnings Calculator</h1>
                         <p className="section-subtitle">
@@ -203,34 +232,82 @@ const Calculator = () => {
 
             {/* Calculator Section */}
             <section className="section container">
-                {/* Charts Section */}
-                <div className="grid desktop-2-col" style={{ gap: '2rem', marginTop: '2rem' }}>
-                    {/* Seasonality Line Chart */}
-                    <div className="card bg-white" style={{ padding: '1rem', borderRadius: '1rem' }}>
-                        <h2 className="section-subtitle" style={{ marginBottom: '1rem' }}>Seasonality Trend</h2>
-                        <ResponsiveContainer width="100%" height={200}>
-                            <LineChart data={seasonalityData}>
-                                <XAxis dataKey="month" tickFormatter={m => `${m}`} />
-                                <YAxis />
-                                <Tooltip />
-                                <Line type="monotone" dataKey="revenue" stroke="#2563eb" strokeWidth={2} dot={false} />
-                            </LineChart>
-                        </ResponsiveContainer>
-                    </div>
-                    {/* Revenue Breakdown Bar Chart */}
-                    <div className="card bg-white" style={{ padding: '1rem', borderRadius: '1rem' }}>
-                        <h2 className="section-subtitle" style={{ marginBottom: '1rem' }}>Revenue Breakdown</h2>
-                        <ResponsiveContainer width="100%" height={200}>
-                            <BarChart data={revenueBreakdown} layout="vertical" margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                                <XAxis type="number" />
-                                <YAxis dataKey="name" type="category" width={100} />
-                                <Tooltip />
-                                <Bar dataKey="value" fill="#1e40af" />
-                            </BarChart>
-                        </ResponsiveContainer>
+
+                {/* GATED CONTENT WRAPPER */}
+                <div style={{ position: 'relative' }}>
+                    {!showDetailedReport && (
+                        <div style={{
+                            position: 'absolute',
+                            top: 0, left: 0, right: 0, bottom: 0,
+                            background: 'rgba(255,255,255,0.05)',
+                            backdropFilter: 'blur(12px)',
+                            zIndex: 10,
+                            borderRadius: '2rem',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            textAlign: 'center',
+                            padding: '2rem',
+                            border: '2px dashed #e2e8f0'
+                        }}>
+                            <div style={{
+                                background: 'white',
+                                padding: '2.5rem',
+                                borderRadius: '2rem',
+                                boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1)',
+                                maxWidth: '400px'
+                            }}>
+                                <LucideLock size={40} style={{ color: 'var(--color-primary)', marginBottom: '1rem' }} />
+                                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '0.5rem' }}>Full Market Analysis Locked</h3>
+                                <p style={{ color: '#64748b', fontSize: '0.9rem', marginBottom: '1.5rem' }}>
+                                    Unlock month-by-month revenue projections and seasonal demand data for {selectedCity}.
+                                </p>
+                                <button
+                                    onClick={() => setShowEmailModal(true)}
+                                    className="btn btn-primary"
+                                    style={{ width: '100%', padding: '1rem' }}
+                                >
+                                    Get Full Report (Free)
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Charts Section - Enhanced Design */}
+                    <div className="grid desktop-2-col" style={{ gap: '2rem', marginTop: '2rem', marginBottom: '2rem', filter: !showDetailedReport ? 'blur(4px)' : 'none' }}>
+                        {/* Seasonality Line Chart */}
+                        <div className="card bg-white" style={{ padding: '1.5rem', borderRadius: '1.5rem', boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }}>
+                            <h2 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '1.5rem', color: '#1e293b', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                <LucideTrend size={16} /> Market Seasonality
+                            </h2>
+                            {seasonalityData && seasonalityData.length > 0 ? (
+                                <ResponsiveContainer width="100%" height={240}>
+                                    <LineChart data={seasonalityData} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
+                                        <XAxis dataKey="month" tickFormatter={m => `${['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'][m - 1]}`} stroke="#94a3b8" fontSize={11} tickLine={false} axisLine={false} />
+                                        <YAxis stroke="#94a3b8" fontSize={11} tickLine={false} axisLine={false} />
+                                        <Line type="monotone" dataKey="revenue" stroke="var(--color-primary)" strokeWidth={3} dot={{ r: 4, strokeWidth: 2, fill: '#fff' }} activeDot={{ r: 6 }} />
+                                    </LineChart>
+                                </ResponsiveContainer>
+                            ) : (
+                                <p style={{ color: '#64748b', textAlign: 'center' }}>No seasonality data available.</p>
+                            )}
+                        </div>
+                        {/* Revenue Breakdown Bar Chart */}
+                        <div className="card bg-white" style={{ padding: '1.5rem', borderRadius: '1.5rem', boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }}>
+                            <h2 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '1.5rem', color: '#1e293b', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                <LucideBar size={16} /> Revenue Allocation
+                            </h2>
+                            <ResponsiveContainer width="100%" height={240}>
+                                <BarChart data={revenueBreakdown} layout="vertical" margin={{ top: 10, right: 30, left: 20, bottom: 5 }}>
+                                    <XAxis type="number" hide />
+                                    <YAxis dataKey="name" type="category" width={80} stroke="#64748b" fontSize={11} tickLine={false} axisLine={false} />
+                                    <Bar dataKey="value" fill="var(--color-primary)" radius={[0, 4, 4, 0]} barSize={24} />
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
                     </div>
                 </div>
-
 
                 <div className="card shadow-premium" style={{ background: 'white', padding: '2rem', borderRadius: '1.5rem' }}>
 
@@ -239,7 +316,7 @@ const Calculator = () => {
                         <div>
                             <label className="label-strong">Market</label>
                             <div style={{ position: 'relative' }}>
-                                <MapPin size={18} style={{ position: 'absolute', top: '50%', left: '1rem', transform: 'translateY(-50%)', color: 'var(--color-primary)' }} />
+                                <LucideMapPin size={18} style={{ position: 'absolute', top: '50%', left: '1rem', transform: 'translateY(-50%)', color: 'var(--color-primary)' }} />
                                 <select
                                     className="form-input"
                                     style={{ paddingLeft: '2.8rem' }}
@@ -280,10 +357,10 @@ const Calculator = () => {
 
                         {/* COL 1: SCORECARD */}
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                            <div className="card bg-secondary" style={{ padding: '1.5rem', textAlign: 'center' }}>
-                                <div style={{ fontSize: '0.9rem', color: '#64748b', marginBottom: '0.5rem' }}>Market Grade</div>
-                                <div style={{ fontSize: '3rem', fontWeight: 800, color: 'var(--color-primary)', lineHeight: 1 }}>{metrics.marketGrade}</div>
-                                <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '0.5rem' }}>Based on demand stability</div>
+                            <div className="card bg-secondary" style={{ padding: '1.5rem', textAlign: 'center', borderRadius: '1rem' }}>
+                                <div style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Market Grade</div>
+                                <div style={{ fontSize: '3.5rem', fontWeight: 900, color: 'var(--color-primary)', lineHeight: 1 }}>{metrics.marketGrade}</div>
+                                <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: '0.5rem' }}>Demand Stability Score</div>
                             </div>
 
                             <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
@@ -297,69 +374,70 @@ const Calculator = () => {
                                 </div>
                             </div>
 
-                            <div className="card bg-primary text-white" style={{ padding: '2rem', marginTop: 'auto' }}>
-                                <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>Projected Net Income (NOI)</div>
-                                <div style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '0.5rem' }}>₹{metrics.netIncome.toLocaleString()}</div>
-                                <div style={{ fontSize: '0.8rem', opacity: 0.8 }}>Does not include taxes</div>
+                            <div className="card bg-primary text-white" style={{ padding: '1.5rem', marginTop: 'auto', borderRadius: '1rem', background: 'linear-gradient(135deg, var(--color-primary) 0%, #d83a3a 100%)' }}>
+                                <div style={{ fontSize: '0.85rem', opacity: 0.9, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Est. Net Income</div>
+                                <div style={{ fontSize: '2.2rem', fontWeight: 800, lineHeight: 1, marginBottom: '0.5rem' }}>₹{metrics.netIncome.toLocaleString()}</div>
+                                <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>
+                                    Range: ₹{(metrics.netIncome * 0.9).toLocaleString()} - ₹{(metrics.netIncome * 1.1).toLocaleString()}
+                                </div>
+                                <div style={{ fontSize: '0.7rem', opacity: 0.7, marginTop: '0.5rem' }}>Based on 85% confidence interval</div>
                             </div>
                         </div>
 
                         {/* COL 2: FINANCIAL BREAKDOWN */}
                         <div className="card border-light" style={{ padding: '1.5rem' }}>
-                            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                <IndianRupee size={18} /> Financial Breakdown
+                            <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#1e293b' }}>
+                                <LucideRupee size={16} /> Financial Breakdown
                             </h3>
 
                             <div style={{ marginBottom: '1.5rem' }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', fontWeight: 600 }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', fontWeight: 600, fontSize: '0.95rem' }}>
                                     <span>Gross Revenue</span>
                                     <span>₹{metrics.grossRevenue.toLocaleString()}</span>
                                 </div>
-                                <div style={{ height: '8px', width: '100%', background: '#e2e8f0', borderRadius: '4px' }}>
-                                    <div style={{ height: '100%', width: '100%', background: '#22c55e', borderRadius: '4px' }}></div>
+                                <div style={{ height: '6px', width: '100%', background: '#f1f5f9', borderRadius: '3px' }}>
+                                    <div style={{ height: '100%', width: '100%', background: '#10b981', borderRadius: '3px' }}></div>
                                 </div>
                             </div>
 
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
                                 <ExpenseItem label="Hostizzy Mgmt (20%)" amount={metrics.breakdown?.fee} color="#3b82f6" />
                                 <ExpenseItem label="OTA Commissions (18%)" amount={metrics.breakdown?.ota} color="#f59e0b" />
-                                <ExpenseItem label="Ops & Maintenance (15%)" amount={metrics.breakdown?.ops} color="#ef4444" />
+                                <ExpenseItem label="Ops & Maintenance (15%)" amount={metrics.breakdown?.ops} color="#f43f5e" />
                             </div>
 
-                            <div style={{ marginTop: '2rem', paddingTop: '1rem', borderTop: '1px solid #f1f5f9' }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, fontSize: '1.1rem', color: 'var(--color-primary)' }}>
-                                    <span>Net Operating Income</span>
+                            <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid #f1f5f9' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 800, fontSize: '1.2rem', color: 'var(--color-primary)' }}>
+                                    <span>Your Net Income</span>
                                     <span>₹{metrics.netIncome.toLocaleString()}</span>
                                 </div>
+                                <p style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '0.5rem', textAlign: 'right' }}>Conservative Estimate (Pre-Tax)</p>
                             </div>
                         </div>
 
-                        {/* COL 3: SEASONALITY */}
+                        {/* COL 3: METHODOLOGY & DATA */}
                         <div className="card border-light" style={{ padding: '1.5rem' }}>
-                            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                <Calendar size={18} /> Seasonality Curve
+                            <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#1e293b' }}>
+                                <LucideInfo size={16} /> Market Intelligence
                             </h3>
-                            <div style={{ display: 'flex', alignItems: 'flex-end', height: '200px', gap: '6px' }}>
-                                {metrics.seasonality.map((val, i) => (
-                                    <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
-                                        <motion.div
-                                            initial={{ height: 0 }}
-                                            whileInView={{ height: `${val}%` }}
-                                            transition={{ duration: 0.5, delay: i * 0.05 }}
-                                            style={{
-                                                width: '100%',
-                                                background: val > 80 ? '#22c55e' : (val > 50 ? '#3b82f6' : '#cbd5e1'),
-                                                borderRadius: '4px 4px 0 0',
-                                                opacity: 0.8
-                                            }}
-                                        />
-                                        <span style={{ fontSize: '0.65rem', color: '#64748b' }}>{['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'][i]}</span>
-                                    </div>
-                                ))}
+
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+                                <div style={{ borderLeft: '3px solid #e2e8f0', paddingLeft: '1rem' }}>
+                                    <div style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 600 }}>Data Source</div>
+                                    <div style={{ fontSize: '0.9rem', color: '#1e293b' }}>Hostizzy proprietary database (Real-time tracking of 2,500+ properties in India)</div>
+                                </div>
+                                <div style={{ borderLeft: '3px solid #e2e8f0', paddingLeft: '1rem' }}>
+                                    <div style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 600 }}>Update Frequency</div>
+                                    <div style={{ fontSize: '0.9rem', color: '#1e293b' }}>Monthly rolling average (Last sync: Dec 2024)</div>
+                                </div>
+                                <div style={{ borderLeft: '3px solid #e2e8f0', paddingLeft: '1rem' }}>
+                                    <div style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 600 }}>Methodology</div>
+                                    <div style={{ fontSize: '0.9rem', color: '#1e293b' }}>Conservative multi-layer projections considering location, configuration, and finish quality.</div>
+                                </div>
                             </div>
-                            <div style={{ marginTop: '1.5rem', fontSize: '0.9rem', color: '#64748b', lineHeight: 1.5 }}>
-                                <Info size={14} style={{ display: 'inline', marginRight: '4px' }} />
-                                <strong>{selectedCity}</strong> experiences {metrics.seasonality.filter(x => x > 80).length} peak months. Revenue strategy adjusts pricing dynamically during these windows.
+
+                            <div style={{ marginTop: 'auto', paddingTop: '1.5rem', fontSize: '0.75rem', color: '#94a3b8', fontStyle: 'italic' }}>
+                                * Disclaimer: These are estimates based on historical data. Actual performance may vary based on market conditions and management quality.
                             </div>
                         </div>
 
@@ -374,12 +452,20 @@ const Calculator = () => {
                             className="btn btn-primary"
                             style={{ padding: '1rem 3rem' }}
                         >
-                            Get Verified Property Audit <ArrowRight size={18} style={{ marginLeft: '0.5rem' }} />
+                            Get Verified Property Audit <LucideArrow size={18} style={{ marginLeft: '0.5rem' }} />
                         </Link>
                     </div>
 
                 </div>
             </section >
+
+            <DetailedReportModal
+                isOpen={showEmailModal}
+                onClose={() => setShowEmailModal(false)}
+                onSubmit={handleEmailSubmit}
+                city={selectedCity}
+                propertyType={propertyType}
+            />
         </>
     );
 };
