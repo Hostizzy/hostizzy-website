@@ -58,6 +58,3 @@ coverage/
 .turbo
 .agent/
 .claude/
-
-# Comprehensive improvement docs (keep only essential docs)
-COMPREHENSIVE_IMPROVEMENTS.md
