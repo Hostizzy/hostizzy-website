@@ -904,6 +904,16 @@ const Navbar = () => {
                         justify-content: space-between !important;
                     }
                 }
+                @media (min-width: 1025px) and (max-width: 1400px) {
+                    .desktop-menu ul {
+                        gap: 0.25rem !important;
+                        margin-left: 2rem !important;
+                    }
+                    .desktop-menu a, .desktop-menu span {
+                        padding: 0.55rem 0.75rem !important;
+                        font-size: 0.85rem !important;
+                    }
+                }
                 @media (min-width: 1025px) {
                     .mobile-menu-btn { display: none !important; }
                 }
