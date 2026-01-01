@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, ArrowUpRight, ChevronDown, Zap, TrendingUp, BadgeCheck } from 'lucide-react';
+import { Menu, X, ArrowUpRight, ChevronDown, Zap, TrendingUp, BadgeCheck, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { useSettings } from '../context/SettingsContext';
@@ -13,6 +13,7 @@ const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isProductDropdownOpen, setIsProductDropdownOpen] = useState(false);
     const [hoveredPath, setHoveredPath] = useState(null);
+    const [mobileActiveDropdown, setMobileActiveDropdown] = useState(null);
     const pathname = usePathname();
 
     useEffect(() => {
@@ -24,15 +25,19 @@ const Navbar = () => {
     }, []);
 
     useEffect(() => {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
         setIsMobileMenuOpen(false);
+        setMobileActiveDropdown(null);
     }, [pathname]);
 
-    // Tech Dropdown Links
-    const techDropdownLinks = [
-        { path: "/technology", name: "Our Tech Stack", icon: <Zap size={16} /> },
-        { path: "/calculator", name: "Revenue Calculator", icon: <TrendingUp size={16} /> }
-    ];
+    // Prevent body scroll when mobile menu is open
+    useEffect(() => {
+        if (isMobileMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => { document.body.style.overflow = 'unset'; };
+    }, [isMobileMenuOpen]);
 
     const companyDropdownLinks = [
         { path: "/about", name: "Our Story" },
@@ -56,7 +61,7 @@ const Navbar = () => {
                     left: '50%',
                     zIndex: 1000,
                     maxWidth: isScrolled ? '1440px' : '100%',
-                    backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.8)' : 'rgba(255, 255, 255, 0.98)',
+                    backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.85)' : 'rgba(255, 255, 255, 0.98)',
                     backdropFilter: 'blur(25px) saturate(200%)',
                     WebkitBackdropFilter: 'blur(25px) saturate(200%)',
                     boxShadow: isScrolled ? '0 20px 40px -15px rgba(0,0,0,0.1)' : '0 1px 0 rgba(0,0,0,0.05)',
@@ -75,7 +80,7 @@ const Navbar = () => {
                 }}>
 
                     {/* Brand Logo */}
-                    <Link href="/" style={{ display: 'flex', alignItems: 'center', transition: 'transform 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+                    <Link href="/" style={{ display: 'flex', alignItems: 'center', transition: 'transform 0.2s', zIndex: 1001 }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
                         <img src={settings.logoUrl} alt={settings.siteName} style={{ height: isScrolled ? '48px' : '64px', width: 'auto', objectFit: 'contain', transition: 'height 0.3s ease' }} />
                     </Link>
 
@@ -465,9 +470,10 @@ const Navbar = () => {
                     <button
                         className="mobile-menu-btn"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-foreground)' }}
+                        style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-foreground)', zIndex: 1001 }}
+                        aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
                     >
-                        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                        {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
                     </button>
                 </div>
             </motion.nav>
@@ -475,76 +481,199 @@ const Navbar = () => {
             {/* Mobile Menu Overlay */}
             <AnimatePresence>
                 {isMobileMenuOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        style={{
-                            position: 'fixed',
-                            top: isScrolled ? '5.5rem' : '4.5rem',
-                            left: '5%',
-                            width: '90%',
-                            backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                            borderRadius: '2rem',
-                            padding: '2.5rem 2rem',
-                            marginTop: '10px',
-                            boxShadow: 'var(--shadow-premium)',
-                            zIndex: 999,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: '0.85rem',
-                            border: '1px solid var(--color-border)',
-                            backdropFilter: 'blur(20px)',
-                            WebkitBackdropFilter: 'blur(20px)',
-                        }}
-                    >
-                        {[
-                            { path: "/", name: "Home" },
-                            { path: "/properties", name: "Stays" },
-                            { path: "/nextstop", name: "NextStop" },
-                            { path: "/services", name: "Plans & Pricing" },
-                            { path: "/technology", name: "Platform" },
-                            { path: "/calculator", name: "Earnings Calculator" },
-                            { path: "/about", name: "Our Story" },
-                            { path: "/invest", name: "Invest" },
-                            { path: "/career", name: "Career" },
-                            { path: "/blogs", name: "Blog" }
-                        ].map((link) => (
-                            <Link
-                                key={link.path}
-                                href={link.path}
-                                onClick={() => setIsMobileMenuOpen(false)}
-                                style={{
-                                    fontSize: '1.1rem',
-                                    fontWeight: 600,
-                                    color: 'var(--color-foreground)',
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                    padding: '0.5rem 0',
-                                    borderBottom: '1px solid #f1f5f9',
-                                    textDecoration: 'none'
-                                }}
-                            >
-                                {link.name}
-                            </Link>
-                        ))}
-                        <Link
-                            href="/contact"
+                    <>
+                        {/* Backdrop */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="btn btn-primary"
                             style={{
-                                marginTop: '1rem',
-                                borderRadius: '1rem',
-                                justifyContent: 'center',
-                                textDecoration: 'none'
+                                position: 'fixed',
+                                top: 0,
+                                left: 0,
+                                right: 0,
+                                bottom: 0,
+                                backgroundColor: 'rgba(0,0,0,0.4)',
+                                backdropFilter: 'blur(4px)',
+                                zIndex: 998
+                            }}
+                        />
+
+                        {/* Menu Panel */}
+                        <motion.div
+                            initial={{ opacity: 0, x: '100%' }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: '100%' }}
+                            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                            style={{
+                                position: 'fixed',
+                                top: 0,
+                                right: 0,
+                                bottom: 0,
+                                width: '85%',
+                                maxWidth: '400px',
+                                backgroundColor: 'white',
+                                zIndex: 999,
+                                display: 'flex',
+                                flexDirection: 'column',
+                                overflowY: 'auto',
+                                boxShadow: '-10px 0 50px rgba(0,0,0,0.15)'
                             }}
                         >
-                            Partner With Us
-                        </Link>
-                    </motion.div>
+                            {/* Header */}
+                            <div style={{ padding: '2rem 1.5rem 1rem', borderBottom: '1px solid var(--color-border)' }}>
+                                <img src={settings.logoUrl} alt={settings.siteName} style={{ height: '48px', width: 'auto' }} />
+                            </div>
+
+                            {/* Menu Items */}
+                            <nav style={{ flex: 1, padding: '1rem 0' }}>
+                                <Link href="/" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textDecoration: 'none', borderBottom: '1px solid var(--color-border)' }}>
+                                    Home
+                                    <ChevronRight size={18} color="var(--color-muted)" />
+                                </Link>
+
+                                {/* Platform Dropdown */}
+                                <div style={{ borderBottom: '1px solid var(--color-border)' }}>
+                                    <button
+                                        onClick={() => setMobileActiveDropdown(mobileActiveDropdown === 'platform' ? null : 'platform')}
+                                        style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', background: 'none', border: 'none', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textAlign: 'left', cursor: 'pointer' }}
+                                    >
+                                        Platform
+                                        <motion.div animate={{ rotate: mobileActiveDropdown === 'platform' ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                                            <ChevronDown size={18} color="var(--color-muted)" />
+                                        </motion.div>
+                                    </button>
+                                    <AnimatePresence>
+                                        {mobileActiveDropdown === 'platform' && (
+                                            <motion.div
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: 'auto', opacity: 1 }}
+                                                exit={{ height: 0, opacity: 0 }}
+                                                transition={{ duration: 0.2 }}
+                                                style={{ overflow: 'hidden', backgroundColor: 'var(--color-secondary)' }}
+                                            >
+                                                <Link href="/technology" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.75rem 1.5rem 0.75rem 2.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>Platform Overview</Link>
+                                                <Link href="/products/hostos" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.75rem 1.5rem 0.75rem 2.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>HostOS</Link>
+                                                <Link href="/products/resiq" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.75rem 1.5rem 0.75rem 2.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>ResIQ</Link>
+                                                <Link href="/products/juxtravel" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.75rem 1.5rem 0.75rem 2.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>JuxTravel</Link>
+                                                <Link href="/products/travelcrm" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.75rem 1.5rem 0.75rem 2.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>TravelCRM</Link>
+                                                <Link href="/calculator" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.75rem 1.5rem 0.75rem 2.5rem', color: 'var(--color-primary)', fontSize: '0.95rem', fontWeight: 600, textDecoration: 'none' }}>Revenue Calculator</Link>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
+
+                                {/* Host Academy Dropdown */}
+                                <div style={{ borderBottom: '1px solid var(--color-border)' }}>
+                                    <button
+                                        onClick={() => setMobileActiveDropdown(mobileActiveDropdown === 'academy' ? null : 'academy')}
+                                        style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', background: 'none', border: 'none', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textAlign: 'left', cursor: 'pointer' }}
+                                    >
+                                        Host Academy
+                                        <motion.div animate={{ rotate: mobileActiveDropdown === 'academy' ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                                            <ChevronDown size={18} color="var(--color-muted)" />
+                                        </motion.div>
+                                    </button>
+                                    <AnimatePresence>
+                                        {mobileActiveDropdown === 'academy' && (
+                                            <motion.div
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: 'auto', opacity: 1 }}
+                                                exit={{ height: 0, opacity: 0 }}
+                                                transition={{ duration: 0.2 }}
+                                                style={{ overflow: 'hidden', backgroundColor: 'var(--color-secondary)' }}
+                                            >
+                                                <Link href="/training" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.75rem 1.5rem 0.75rem 2.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>Training Programs</Link>
+                                                <Link href="/certification" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.75rem 1.5rem 0.75rem 2.5rem', color: 'var(--color-primary)', fontSize: '0.95rem', fontWeight: 600, textDecoration: 'none' }}>Host Certified™</Link>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
+
+                                <Link href="/services" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textDecoration: 'none', borderBottom: '1px solid var(--color-border)' }}>
+                                    Service Plans
+                                    <ChevronRight size={18} color="var(--color-muted)" />
+                                </Link>
+
+                                <Link href="/properties" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textDecoration: 'none', borderBottom: '1px solid var(--color-border)' }}>
+                                    Properties
+                                    <ChevronRight size={18} color="var(--color-muted)" />
+                                </Link>
+
+                                {/* Experiences Dropdown */}
+                                <div style={{ borderBottom: '1px solid var(--color-border)' }}>
+                                    <button
+                                        onClick={() => setMobileActiveDropdown(mobileActiveDropdown === 'experiences' ? null : 'experiences')}
+                                        style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', background: 'none', border: 'none', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textAlign: 'left', cursor: 'pointer' }}
+                                    >
+                                        Experiences
+                                        <motion.div animate={{ rotate: mobileActiveDropdown === 'experiences' ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                                            <ChevronDown size={18} color="var(--color-muted)" />
+                                        </motion.div>
+                                    </button>
+                                    <AnimatePresence>
+                                        {mobileActiveDropdown === 'experiences' && (
+                                            <motion.div
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: 'auto', opacity: 1 }}
+                                                exit={{ height: 0, opacity: 0 }}
+                                                transition={{ duration: 0.2 }}
+                                                style={{ overflow: 'hidden', backgroundColor: 'var(--color-secondary)' }}
+                                            >
+                                                <Link href="/experiences" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.75rem 1.5rem 0.75rem 2.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>All Experiences</Link>
+                                                <Link href="/nextstop" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.75rem 1.5rem 0.75rem 2.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>NextStop (Travel)</Link>
+                                                <Link href="/weddings" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.75rem 1.5rem 0.75rem 2.5rem', color: 'var(--color-primary)', fontSize: '0.95rem', fontWeight: 600, textDecoration: 'none' }}>Wedding Venues ❤️</Link>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
+
+                                {/* Company Dropdown */}
+                                <div style={{ borderBottom: '1px solid var(--color-border)' }}>
+                                    <button
+                                        onClick={() => setMobileActiveDropdown(mobileActiveDropdown === 'company' ? null : 'company')}
+                                        style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', background: 'none', border: 'none', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textAlign: 'left', cursor: 'pointer' }}
+                                    >
+                                        Company
+                                        <motion.div animate={{ rotate: mobileActiveDropdown === 'company' ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                                            <ChevronDown size={18} color="var(--color-muted)" />
+                                        </motion.div>
+                                    </button>
+                                    <AnimatePresence>
+                                        {mobileActiveDropdown === 'company' && (
+                                            <motion.div
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: 'auto', opacity: 1 }}
+                                                exit={{ height: 0, opacity: 0 }}
+                                                transition={{ duration: 0.2 }}
+                                                style={{ overflow: 'hidden', backgroundColor: 'var(--color-secondary)' }}
+                                            >
+                                                {companyDropdownLinks.map((link) => (
+                                                    <Link key={link.path} href={link.path} onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.75rem 1.5rem 0.75rem 2.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>
+                                                        {link.name}
+                                                    </Link>
+                                                ))}
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
+                            </nav>
+
+                            {/* Bottom Actions */}
+                            <div style={{ padding: '1.5rem', borderTop: '1px solid var(--color-border)', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                <a href="https://hostizzy.dtravel.com/" target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ width: '100%', textDecoration: 'none', justifyContent: 'center' }}>
+                                    Book Property <ArrowUpRight size={16} />
+                                </a>
+                                <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="btn btn-primary" style={{ width: '100%', textDecoration: 'none', justifyContent: 'center' }}>
+                                    Partner With Us
+                                </Link>
+                            </div>
+                        </motion.div>
+                    </>
                 )}
             </AnimatePresence>
+
             <style>{`
                 @media (max-width: 1024px) {
                     .desktop-menu { display: none !important; }
