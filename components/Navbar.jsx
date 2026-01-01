@@ -63,7 +63,7 @@ const Navbar = () => {
                 initial={{ y: -100, x: '-50%' }}
                 animate={{
                     y: isScrolled ? 12 : 0,
-                    width: isScrolled ? "96%" : "100%",
+                    width: isScrolled ? "98%" : "100%",
                 }}
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 style={{
@@ -71,7 +71,7 @@ const Navbar = () => {
                     left: '50%',
                     top: 0,
                     zIndex: 1000,
-                    maxWidth: isScrolled ? '1400px' : '100%',
+                    maxWidth: isScrolled ? '1440px' : '100%',
                     backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.9)' : 'rgba(255, 255, 255, 0.98)',
                     backdropFilter: 'blur(20px) saturate(180%)',
                     WebkitBackdropFilter: 'blur(20px) saturate(180%)',
@@ -83,7 +83,7 @@ const Navbar = () => {
                 <div className="container" style={{
                     display: 'flex',
                     alignItems: 'center',
-                    padding: isScrolled ? '0 1.5rem' : '0 2rem',
+                    padding: isScrolled ? '0 2.5rem 0 1rem' : '0 2rem',
                     height: isScrolled ? '68px' : '80px',
                     transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                     position: 'relative'
