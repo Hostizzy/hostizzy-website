@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, ArrowUpRight, ChevronDown, Zap, TrendingUp, BadgeCheck, ChevronRight } from 'lucide-react';
+import { Menu, X, ArrowUpRight, ChevronDown, Zap, TrendingUp, BadgeCheck, ChevronRight, Home, Building2, GraduationCap, Briefcase, MapPin, Heart, Users } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { useSettings } from '../context/SettingsContext';
@@ -11,8 +11,7 @@ const Navbar = () => {
     const { settings } = useSettings();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [isProductDropdownOpen, setIsProductDropdownOpen] = useState(false);
-    const [hoveredPath, setHoveredPath] = useState(null);
+    const [activeDropdown, setActiveDropdown] = useState(null);
     const [mobileActiveDropdown, setMobileActiveDropdown] = useState(null);
     const pathname = usePathname();
 
@@ -27,6 +26,7 @@ const Navbar = () => {
     useEffect(() => {
         setIsMobileMenuOpen(false);
         setMobileActiveDropdown(null);
+        setActiveDropdown(null);
     }, [pathname]);
 
     // Prevent body scroll when mobile menu is open
@@ -39,55 +39,82 @@ const Navbar = () => {
         return () => { document.body.style.overflow = 'unset'; };
     }, [isMobileMenuOpen]);
 
-    const companyDropdownLinks = [
-        { path: "/about", name: "Our Story" },
-        { path: "/invest", name: "Invest" },
-        { path: "/career", name: "Career" },
-        { path: "/blogs", name: "Blog" },
-        { path: "/testimonials", name: "Reviews" }
+    const platformLinks = [
+        { path: "/technology", name: "Platform Overview", desc: "Explore the Hostizzy Ecosystem", icon: <Zap size={16} /> },
+        { path: "/products/hostos", name: "HostOS", desc: "Property Management System", icon: <Building2 size={16} /> },
+        { path: "/products/resiq", name: "ResIQ", desc: "Revenue & Market Analytics", icon: <TrendingUp size={16} /> },
+        { path: "/products/juxtravel", name: "JuxTravel", desc: "Multi-Channel Marketplace", icon: <MapPin size={16} /> },
+        { path: "/products/travelcrm", name: "TravelCRM", desc: "Guest Loyalty & Lead Management", icon: <Users size={16} /> },
     ];
+
+    const companyLinks = [
+        { path: "/about", name: "Our Story", icon: <Users size={16} /> },
+        { path: "/invest", name: "Invest", icon: <TrendingUp size={16} /> },
+        { path: "/career", name: "Career", icon: <Briefcase size={16} /> },
+        { path: "/blogs", name: "Blog", icon: <Users size={16} /> },
+        { path: "/testimonials", name: "Reviews", icon: <Users size={16} /> }
+    ];
+
+    const isActivePath = (path) => pathname === path;
 
     return (
         <React.Fragment>
             <motion.nav
                 initial={{ y: -100, x: '-50%' }}
                 animate={{
-                    y: isScrolled ? 15 : 0,
-                    width: isScrolled ? "94%" : "100%",
+                    y: isScrolled ? 12 : 0,
+                    width: isScrolled ? "96%" : "100%",
                 }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 style={{
                     position: 'fixed',
                     left: '50%',
+                    top: 0,
                     zIndex: 1000,
-                    maxWidth: isScrolled ? '1440px' : '100%',
-                    backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.85)' : 'rgba(255, 255, 255, 0.98)',
-                    backdropFilter: 'blur(25px) saturate(200%)',
-                    WebkitBackdropFilter: 'blur(25px) saturate(200%)',
-                    boxShadow: isScrolled ? '0 20px 40px -15px rgba(0,0,0,0.1)' : '0 1px 0 rgba(0,0,0,0.05)',
-                    border: isScrolled ? '1px solid rgba(255,255,255,0.4)' : 'none',
-                    borderRadius: isScrolled ? '24px' : '0',
-                    padding: isScrolled ? '0.25rem 0' : '0.5rem 0'
+                    maxWidth: isScrolled ? '1400px' : '100%',
+                    backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.9)' : 'rgba(255, 255, 255, 0.98)',
+                    backdropFilter: 'blur(20px) saturate(180%)',
+                    WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+                    boxShadow: isScrolled ? '0 8px 32px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.05)' : '0 1px 0 rgba(0,0,0,0.06)',
+                    border: isScrolled ? '1px solid rgba(0,0,0,0.08)' : 'none',
+                    borderRadius: isScrolled ? '20px' : '0',
                 }}
             >
                 <div className="container" style={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    padding: '0 1.5rem',
-                    height: isScrolled ? '64px' : '84px',
-                    transition: 'height 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
+                    padding: isScrolled ? '0 1.5rem' : '0 2rem',
+                    height: isScrolled ? '68px' : '80px',
+                    transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
                 }}>
 
                     {/* Brand Logo */}
-                    <Link href="/" style={{ display: 'flex', alignItems: 'center', transition: 'transform 0.2s', zIndex: 1001 }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
-                        <img src={settings.logoUrl} alt={settings.siteName} style={{ height: isScrolled ? '48px' : '64px', width: 'auto', objectFit: 'contain', transition: 'height 0.3s ease' }} />
+                    <Link href="/" style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        transition: 'transform 0.3s ease',
+                        zIndex: 1001
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                    onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+                        <img
+                            src={settings.logoUrl}
+                            alt={settings.siteName}
+                            style={{
+                                height: isScrolled ? '42px' : '52px',
+                                width: 'auto',
+                                objectFit: 'contain',
+                                transition: 'height 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                                filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.05))'
+                            }}
+                        />
                     </Link>
 
                     {/* Desktop Menu - Centered */}
                     <ul className="desktop-menu" style={{
                         display: 'flex',
-                        gap: '0.25rem',
+                        gap: '0.5rem',
                         alignItems: 'center',
                         margin: 0,
                         padding: 0,
@@ -95,269 +122,398 @@ const Navbar = () => {
                         position: 'absolute',
                         left: '50%',
                         transform: 'translateX(-50%)',
-                        whiteSpace: 'nowrap',
-                        height: '100%'
+                        whiteSpace: 'nowrap'
                     }}>
                         {/* Home */}
                         <li>
-                            <Link href="/" className="nav-link"
-                                onMouseEnter={() => setHoveredPath('/')}
-                                onMouseLeave={() => setHoveredPath(null)}
+                            <Link
+                                href="/"
+                                onMouseEnter={() => setActiveDropdown('home')}
+                                onMouseLeave={() => setActiveDropdown(null)}
                                 style={{
                                     position: 'relative',
-                                    padding: '0.6rem 0.75rem',
-                                    color: 'var(--color-foreground)',
-                                    fontWeight: 500,
-                                    fontSize: '0.9rem',
-                                    transition: 'color 0.2s',
+                                    padding: '0.65rem 1rem',
+                                    color: isActivePath('/') ? 'var(--color-primary)' : 'var(--color-foreground)',
+                                    fontWeight: isActivePath('/') ? 600 : 500,
+                                    fontSize: '0.925rem',
+                                    transition: 'all 0.2s ease',
                                     textDecoration: 'none',
-                                    display: 'block'
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '6px',
+                                    borderRadius: '12px'
                                 }}
                             >
-                                {hoveredPath === '/' && (
+                                {activeDropdown === 'home' && (
                                     <motion.div
-                                        layoutId="nav-pill"
-                                        style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.04)', borderRadius: '2rem', zIndex: -1 }}
-                                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                        layoutId="nav-hover"
+                                        style={{
+                                            position: 'absolute',
+                                            inset: 0,
+                                            backgroundColor: 'rgba(254, 88, 88, 0.08)',
+                                            borderRadius: '12px',
+                                            zIndex: -1
+                                        }}
+                                        transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
                                     />
                                 )}
+                                <Home size={16} style={{ opacity: 0.7 }} />
                                 Home
                             </Link>
                         </li>
 
                         {/* Platform Dropdown */}
                         <li
-                            onMouseEnter={() => { setHoveredPath('platform'); setIsProductDropdownOpen(true); }}
-                            onMouseLeave={() => { setHoveredPath(null); setIsProductDropdownOpen(false); }}
+                            onMouseEnter={() => setActiveDropdown('platform')}
+                            onMouseLeave={() => setActiveDropdown(null)}
                             style={{ position: 'relative' }}
                         >
                             <span
                                 style={{
                                     cursor: 'pointer',
-                                    padding: '0.6rem 0.75rem',
+                                    padding: '0.65rem 1rem',
                                     color: 'var(--color-foreground)',
                                     fontWeight: 500,
-                                    fontSize: '0.9rem',
+                                    fontSize: '0.925rem',
                                     display: 'flex',
                                     alignItems: 'center',
-                                    gap: '4px'
+                                    gap: '6px',
+                                    borderRadius: '12px',
+                                    transition: 'all 0.2s ease'
                                 }}
                             >
-                                Platform <ChevronDown size={14} />
-                            </span>
-                            {hoveredPath === 'platform' && (
+                                <Zap size={16} style={{ opacity: 0.7 }} />
+                                Platform
                                 <motion.div
-                                    layoutId="nav-pill"
-                                    style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.04)', borderRadius: '2rem', zIndex: -1 }}
+                                    animate={{ rotate: activeDropdown === 'platform' ? 180 : 0 }}
+                                    transition={{ duration: 0.2 }}
+                                >
+                                    <ChevronDown size={14} style={{ opacity: 0.6 }} />
+                                </motion.div>
+                            </span>
+                            {activeDropdown === 'platform' && (
+                                <motion.div
+                                    layoutId="nav-hover"
+                                    style={{
+                                        position: 'absolute',
+                                        inset: 0,
+                                        backgroundColor: 'rgba(254, 88, 88, 0.08)',
+                                        borderRadius: '12px',
+                                        zIndex: -1
+                                    }}
                                 />
                             )}
                             <AnimatePresence>
-                                {isProductDropdownOpen && (
+                                {activeDropdown === 'platform' && (
                                     <motion.div
-                                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                        initial={{ opacity: 0, y: 8, scale: 0.96 }}
                                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                                        transition={{ duration: 0.2 }}
-                                        className="dropdown-menu shadow-premium" style={{
+                                        exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                                        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                                        style={{
                                             position: 'absolute',
-                                            top: '100%',
+                                            top: 'calc(100% + 8px)',
                                             left: '50%',
-                                            x: '-50%',
-                                            marginTop: '0.5rem',
+                                            transform: 'translateX(-50%)',
                                             background: 'white',
-                                            borderRadius: '1.25rem',
-                                            padding: '0.75rem',
+                                            borderRadius: '16px',
+                                            padding: '0.5rem',
+                                            minWidth: '320px',
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            gap: '2px',
+                                            zIndex: 100,
+                                            boxShadow: '0 12px 48px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.06)',
+                                            border: '1px solid rgba(0,0,0,0.06)'
+                                        }}
+                                    >
+                                        {platformLinks.map((link, idx) => (
+                                            <Link
+                                                key={link.path}
+                                                href={link.path}
+                                                style={{
+                                                    padding: '0.85rem 1rem',
+                                                    borderRadius: '10px',
+                                                    textDecoration: 'none',
+                                                    transition: 'all 0.15s ease',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    gap: '12px',
+                                                    borderBottom: idx < platformLinks.length - 1 ? 'none' : 'none'
+                                                }}
+                                                onMouseEnter={(e) => {
+                                                    e.currentTarget.style.backgroundColor = 'rgba(254, 88, 88, 0.06)';
+                                                    e.currentTarget.style.transform = 'translateX(4px)';
+                                                }}
+                                                onMouseLeave={(e) => {
+                                                    e.currentTarget.style.backgroundColor = 'transparent';
+                                                    e.currentTarget.style.transform = 'translateX(0)';
+                                                }}>
+                                                <div style={{
+                                                    width: '36px',
+                                                    height: '36px',
+                                                    borderRadius: '10px',
+                                                    background: idx === 0 ? 'linear-gradient(135deg, #FE5858 0%, #FF8A80 100%)' : 'var(--color-secondary)',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    flexShrink: 0,
+                                                    color: idx === 0 ? 'white' : 'var(--color-primary)'
+                                                }}>
+                                                    {link.icon}
+                                                </div>
+                                                <div style={{ flex: 1 }}>
+                                                    <div style={{ fontWeight: 600, color: 'var(--color-foreground)', fontSize: '0.9rem', marginBottom: '2px' }}>{link.name}</div>
+                                                    <div style={{ fontSize: '0.75rem', color: 'var(--color-muted)', lineHeight: 1.3 }}>{link.desc}</div>
+                                                </div>
+                                                <ChevronRight size={14} style={{ opacity: 0.3 }} />
+                                            </Link>
+                                        ))}
+                                        <div style={{ margin: '4px 0', height: '1px', background: 'var(--color-border)' }} />
+                                        <Link
+                                            href="/calculator"
+                                            style={{
+                                                padding: '0.85rem 1rem',
+                                                borderRadius: '10px',
+                                                textDecoration: 'none',
+                                                transition: 'all 0.15s ease',
+                                                background: 'linear-gradient(135deg, rgba(254, 88, 88, 0.08) 0%, rgba(255, 138, 128, 0.08) 100%)',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: '12px'
+                                            }}
+                                            onMouseEnter={(e) => {
+                                                e.currentTarget.style.background = 'linear-gradient(135deg, rgba(254, 88, 88, 0.12) 0%, rgba(255, 138, 128, 0.12) 100%)';
+                                                e.currentTarget.style.transform = 'translateX(4px)';
+                                            }}
+                                            onMouseLeave={(e) => {
+                                                e.currentTarget.style.background = 'linear-gradient(135deg, rgba(254, 88, 88, 0.08) 0%, rgba(255, 138, 128, 0.08) 100%)';
+                                                e.currentTarget.style.transform = 'translateX(0)';
+                                            }}>
+                                            <div style={{
+                                                width: '36px',
+                                                height: '36px',
+                                                borderRadius: '10px',
+                                                background: 'linear-gradient(135deg, #FE5858 0%, #FF8A80 100%)',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                color: 'white'
+                                            }}>
+                                                <TrendingUp size={16} />
+                                            </div>
+                                            <div style={{ flex: 1 }}>
+                                                <div style={{ fontWeight: 700, color: 'var(--color-primary)', fontSize: '0.9rem', marginBottom: '2px' }}>Revenue Calculator</div>
+                                                <div style={{ fontSize: '0.75rem', color: 'var(--color-muted)', lineHeight: 1.3 }}>Estimate Your Earnings Potential</div>
+                                            </div>
+                                            <ArrowUpRight size={14} style={{ color: 'var(--color-primary)' }} />
+                                        </Link>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </li>
+
+                        {/* Host Academy Dropdown */}
+                        <li
+                            onMouseEnter={() => setActiveDropdown('academy')}
+                            onMouseLeave={() => setActiveDropdown(null)}
+                            style={{ position: 'relative' }}
+                        >
+                            <span
+                                style={{
+                                    cursor: 'pointer',
+                                    padding: '0.65rem 1rem',
+                                    color: 'var(--color-foreground)',
+                                    fontWeight: 500,
+                                    fontSize: '0.925rem',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '6px',
+                                    borderRadius: '12px',
+                                    transition: 'all 0.2s ease'
+                                }}
+                            >
+                                <GraduationCap size={16} style={{ opacity: 0.7 }} />
+                                Host Academy
+                                <motion.div
+                                    animate={{ rotate: activeDropdown === 'academy' ? 180 : 0 }}
+                                    transition={{ duration: 0.2 }}
+                                >
+                                    <ChevronDown size={14} style={{ opacity: 0.6 }} />
+                                </motion.div>
+                            </span>
+                            {activeDropdown === 'academy' && (
+                                <motion.div
+                                    layoutId="nav-hover"
+                                    style={{
+                                        position: 'absolute',
+                                        inset: 0,
+                                        backgroundColor: 'rgba(254, 88, 88, 0.08)',
+                                        borderRadius: '12px',
+                                        zIndex: -1
+                                    }}
+                                />
+                            )}
+                            <AnimatePresence>
+                                {activeDropdown === 'academy' && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                                        exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                                        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                                        style={{
+                                            position: 'absolute',
+                                            top: 'calc(100% + 8px)',
+                                            left: '50%',
+                                            transform: 'translateX(-50%)',
+                                            backgroundColor: 'white',
+                                            borderRadius: '16px',
+                                            padding: '0.5rem',
+                                            boxShadow: '0 12px 48px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.06)',
+                                            border: '1px solid rgba(0,0,0,0.06)',
                                             minWidth: '280px',
                                             display: 'flex',
                                             flexDirection: 'column',
-                                            gap: '0.25rem',
-                                            zIndex: 100,
-                                            boxShadow: '0 20px 50px -12px rgba(0,0,0,0.15)',
-                                            border: '1px solid rgba(0,0,0,0.05)'
+                                            gap: '2px'
                                         }}
                                     >
-                                        <Link href="/technology" className="dropdown-link" style={{ padding: '0.75rem 1rem', borderRadius: '0.75rem', textDecoration: 'none', transition: 'all 0.2s', display: 'block' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--color-secondary)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
-                                            <div style={{ fontWeight: 700, color: 'var(--color-foreground)', fontSize: '0.9rem' }}>Platform Overview</div>
-                                            <div style={{ fontSize: '0.75rem', color: 'var(--color-muted)', marginTop: '2px' }}>Explore the Hostizzy Ecosystem</div>
+                                        <Link href="/training" style={{ padding: '0.85rem 1rem', borderRadius: '10px', textDecoration: 'none', transition: 'all 0.15s ease', display: 'flex', alignItems: 'center', gap: '12px' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgba(254, 88, 88, 0.06)'; e.currentTarget.style.transform = 'translateX(4px)'; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.transform = 'translateX(0)'; }}>
+                                            <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'var(--color-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-primary)' }}>
+                                                <GraduationCap size={16} />
+                                            </div>
+                                            <div style={{ flex: 1 }}>
+                                                <div style={{ fontWeight: 600, color: 'var(--color-foreground)', fontSize: '0.9rem', marginBottom: '2px' }}>Training Programs</div>
+                                                <div style={{ fontSize: '0.75rem', color: 'var(--color-muted)', lineHeight: 1.3 }}>Learn Professional Hosting</div>
+                                            </div>
                                         </Link>
-                                        <div style={{ height: '1px', background: '#f1f5f9', margin: '4px 0' }} />
-                                        <Link href="/products/hostos" className="dropdown-link" style={{ padding: '0.75rem 1rem', borderRadius: '0.75rem', textDecoration: 'none', transition: 'all 0.2s', display: 'block' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--color-secondary)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
-                                            <div style={{ fontWeight: 700, color: 'var(--color-foreground)', fontSize: '0.9rem' }}>HostOS</div>
-                                            <div style={{ fontSize: '0.75rem', color: 'var(--color-muted)', marginTop: '2px' }}>Property Management System</div>
-                                        </Link>
-                                        <Link href="/products/resiq" className="dropdown-link" style={{ padding: '0.75rem 1rem', borderRadius: '0.75rem', textDecoration: 'none', transition: 'all 0.2s', display: 'block' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--color-secondary)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
-                                            <div style={{ fontWeight: 700, color: 'var(--color-foreground)', fontSize: '0.9rem' }}>ResIQ</div>
-                                            <div style={{ fontSize: '0.75rem', color: 'var(--color-muted)', marginTop: '2px' }}>Revenue & Market Analytics</div>
-                                        </Link>
-                                        <Link href="/products/juxtravel" className="dropdown-link" style={{ padding: '0.75rem 1rem', borderRadius: '0.75rem', textDecoration: 'none', transition: 'all 0.2s', display: 'block' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--color-secondary)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
-                                            <div style={{ fontWeight: 700, color: 'var(--color-foreground)', fontSize: '0.9rem' }}>JuxTravel</div>
-                                            <div style={{ fontSize: '0.75rem', color: 'var(--color-muted)', marginTop: '2px' }}>Multi-Channel Marketplace</div>
-                                        </Link>
-                                        <Link href="/products/travelcrm" className="dropdown-link" style={{ padding: '0.75rem 1rem', borderRadius: '0.75rem', textDecoration: 'none', transition: 'all 0.2s', display: 'block' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--color-secondary)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
-                                            <div style={{ fontWeight: 700, color: 'var(--color-foreground)', fontSize: '0.9rem' }}>TravelCRM</div>
-                                            <div style={{ fontSize: '0.75rem', color: 'var(--color-muted)', marginTop: '2px' }}>Guest Loyalty & Lead Management</div>
-                                        </Link>
-                                        <div style={{ height: '1px', background: '#f1f5f9', margin: '4px 0' }} />
-                                        <Link href="/calculator" className="dropdown-link" style={{ padding: '0.75rem 1rem', borderRadius: '0.75rem', textDecoration: 'none', transition: 'all 0.2s', display: 'block' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--color-secondary)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
-                                            <div style={{ fontWeight: 700, color: 'var(--color-primary)', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '6px' }}><TrendingUp size={14} /> Revenue Calculator</div>
-                                            <div style={{ fontSize: '0.75rem', color: 'var(--color-muted)', marginTop: '2px' }}>Estimate Your Earnings Potential</div>
+                                        <Link href="/certification" style={{ padding: '0.85rem 1rem', borderRadius: '10px', textDecoration: 'none', transition: 'all 0.15s ease', display: 'flex', alignItems: 'center', gap: '12px', background: 'linear-gradient(135deg, rgba(254, 88, 88, 0.08) 0%, rgba(255, 138, 128, 0.08) 100%)' }} onMouseEnter={(e) => { e.currentTarget.style.background = 'linear-gradient(135deg, rgba(254, 88, 88, 0.12) 0%, rgba(255, 138, 128, 0.12) 100%)'; e.currentTarget.style.transform = 'translateX(4px)'; }} onMouseLeave={(e) => { e.currentTarget.style.background = 'linear-gradient(135deg, rgba(254, 88, 88, 0.08) 0%, rgba(255, 138, 128, 0.08) 100%)'; e.currentTarget.style.transform = 'translateX(0)'; }}>
+                                            <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'linear-gradient(135deg, #FE5858 0%, #FF8A80 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
+                                                <BadgeCheck size={16} />
+                                            </div>
+                                            <div style={{ flex: 1 }}>
+                                                <div style={{ fontWeight: 700, color: 'var(--color-primary)', fontSize: '0.9rem', marginBottom: '2px' }}>Host Certified™</div>
+                                                <div style={{ fontSize: '0.75rem', color: 'var(--color-muted)', lineHeight: 1.3 }}>Get Certified as a Pro Host</div>
+                                            </div>
                                         </Link>
                                     </motion.div>
                                 )}
                             </AnimatePresence>
                         </li>
 
-                        {/* Host Academy Dropdown (Training + Certification) */}
-                        <li
-                            onMouseEnter={() => setHoveredPath('academy')}
-                            onMouseLeave={() => setHoveredPath(null)}
-                            style={{ position: 'relative' }}
-                        >
-                            <span
-                                style={{
-                                    cursor: 'pointer',
-                                    padding: '0.6rem 0.75rem',
-                                    color: 'var(--color-foreground)',
-                                    fontWeight: 500,
-                                    fontSize: '0.9rem',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '4px'
-                                }}
-                            >
-                                Host Academy <ChevronDown size={14} />
-                            </span>
-                            {hoveredPath === 'academy' && (
-                                <motion.div
-                                    layoutId="nav-pill"
-                                    style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.04)', borderRadius: '2rem', zIndex: -1 }}
-                                />
-                            )}
-                            <AnimatePresence>
-                                {hoveredPath === 'academy' && (
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                                        transition={{ duration: 0.2 }}
-                                        style={{
-                                            position: 'absolute', top: '100%', left: '50%', x: '-50%', marginTop: '0.5rem',
-                                            backgroundColor: 'white', borderRadius: '1.25rem', padding: '0.75rem',
-                                            boxShadow: '0 20px 50px -12px rgba(0,0,0,0.15)', border: '1px solid rgba(0,0,0,0.05)',
-                                            minWidth: '240px', display: 'flex', flexDirection: 'column', gap: '0.25rem'
-                                        }}
-                                    >
-                                        <Link href="/training" style={{ padding: '0.75rem 1rem', borderRadius: '0.75rem', textDecoration: 'none', transition: 'all 0.2s', display: 'block' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--color-secondary)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
-                                            <div style={{ fontWeight: 700, color: 'var(--color-foreground)', fontSize: '0.9rem' }}>Training Programs</div>
-                                            <div style={{ fontSize: '0.75rem', color: 'var(--color-muted)', marginTop: '2px' }}>Learn Professional Hosting</div>
-                                        </Link>
-                                        <Link href="/certification" style={{ padding: '0.75rem 1rem', borderRadius: '0.75rem', textDecoration: 'none', transition: 'all 0.2s', display: 'block' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--color-secondary)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
-                                            <div style={{ fontWeight: 700, color: 'var(--color-primary)', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '6px' }}><BadgeCheck size={14} /> Host Certified™</div>
-                                            <div style={{ fontSize: '0.75rem', color: 'var(--color-muted)', marginTop: '2px' }}>Get Certified as a Pro Host</div>
-                                        </Link>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-                        </li>
-
-                        {/* Service Plans Link */}
+                        {/* Service Plans */}
                         <li>
                             <Link
                                 href="/services"
-                                onMouseEnter={() => setHoveredPath('/services')}
-                                onMouseLeave={() => setHoveredPath(null)}
+                                onMouseEnter={() => setActiveDropdown('services')}
+                                onMouseLeave={() => setActiveDropdown(null)}
                                 style={{
                                     position: 'relative',
-                                    padding: '0.6rem 0.75rem',
-                                    color: 'var(--color-foreground)',
-                                    fontWeight: 500,
-                                    fontSize: '0.9rem',
-                                    transition: 'color 0.2s',
+                                    padding: '0.65rem 1rem',
+                                    color: isActivePath('/services') ? 'var(--color-primary)' : 'var(--color-foreground)',
+                                    fontWeight: isActivePath('/services') ? 600 : 500,
+                                    fontSize: '0.925rem',
+                                    transition: 'all 0.2s ease',
                                     textDecoration: 'none',
-                                    display: 'block'
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '6px',
+                                    borderRadius: '12px'
                                 }}
                             >
-                                {hoveredPath === '/services' && (
+                                {activeDropdown === 'services' && (
                                     <motion.div
-                                        layoutId="nav-pill"
-                                        style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.04)', borderRadius: '2rem', zIndex: -1 }}
-                                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                        layoutId="nav-hover"
+                                        style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(254, 88, 88, 0.08)', borderRadius: '12px', zIndex: -1 }}
+                                        transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
                                     />
                                 )}
-                                Service Plans
+                                <Briefcase size={16} style={{ opacity: 0.7 }} />
+                                Services
                             </Link>
                         </li>
 
                         {/* Properties */}
                         <li>
-                            <Link href="/properties" className="nav-link"
-                                onMouseEnter={() => setHoveredPath('/properties')}
-                                onMouseLeave={() => setHoveredPath(null)}
+                            <Link
+                                href="/properties"
+                                onMouseEnter={() => setActiveDropdown('properties')}
+                                onMouseLeave={() => setActiveDropdown(null)}
                                 style={{
                                     position: 'relative',
-                                    padding: '0.6rem 0.75rem',
-                                    color: 'var(--color-foreground)',
-                                    fontWeight: 500,
-                                    fontSize: '0.9rem',
-                                    transition: 'color 0.2s',
+                                    padding: '0.65rem 1rem',
+                                    color: isActivePath('/properties') ? 'var(--color-primary)' : 'var(--color-foreground)',
+                                    fontWeight: isActivePath('/properties') ? 600 : 500,
+                                    fontSize: '0.925rem',
+                                    transition: 'all 0.2s ease',
                                     textDecoration: 'none',
-                                    display: 'block'
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '6px',
+                                    borderRadius: '12px'
                                 }}
                             >
-                                {hoveredPath === '/properties' && (
+                                {activeDropdown === 'properties' && (
                                     <motion.div
-                                        layoutId="nav-pill"
-                                        style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.04)', borderRadius: '2rem', zIndex: -1 }}
-                                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                        layoutId="nav-hover"
+                                        style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(254, 88, 88, 0.08)', borderRadius: '12px', zIndex: -1 }}
+                                        transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
                                     />
                                 )}
+                                <Building2 size={16} style={{ opacity: 0.7 }} />
                                 Properties
                             </Link>
                         </li>
 
                         {/* Experiences Dropdown */}
                         <li
-                            onMouseEnter={() => setHoveredPath('experiences')}
-                            onMouseLeave={() => setHoveredPath(null)}
+                            onMouseEnter={() => setActiveDropdown('experiences')}
+                            onMouseLeave={() => setActiveDropdown(null)}
                             style={{ position: 'relative' }}
                         >
                             <span
                                 style={{
                                     cursor: 'pointer',
-                                    padding: '0.6rem 0.75rem',
+                                    padding: '0.65rem 1rem',
                                     color: 'var(--color-foreground)',
                                     fontWeight: 500,
-                                    fontSize: '0.9rem',
+                                    fontSize: '0.925rem',
                                     display: 'flex',
                                     alignItems: 'center',
-                                    gap: '4px'
+                                    gap: '6px',
+                                    borderRadius: '12px',
+                                    transition: 'all 0.2s ease'
                                 }}
                             >
-                                Experiences <ChevronDown size={14} />
+                                <MapPin size={16} style={{ opacity: 0.7 }} />
+                                Experiences
+                                <motion.div animate={{ rotate: activeDropdown === 'experiences' ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                                    <ChevronDown size={14} style={{ opacity: 0.6 }} />
+                                </motion.div>
                             </span>
-                            {hoveredPath === 'experiences' && (
-                                <motion.div
-                                    layoutId="nav-pill"
-                                    style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.04)', borderRadius: '2rem', zIndex: -1 }}
-                                />
+                            {activeDropdown === 'experiences' && (
+                                <motion.div layoutId="nav-hover" style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(254, 88, 88, 0.08)', borderRadius: '12px', zIndex: -1 }} />
                             )}
                             <AnimatePresence>
-                                {hoveredPath === 'experiences' && (
+                                {activeDropdown === 'experiences' && (
                                     <motion.div
-                                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                        initial={{ opacity: 0, y: 8, scale: 0.96 }}
                                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                                        transition={{ duration: 0.2 }}
+                                        exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                                        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
                                         style={{
-                                            position: 'absolute', top: '100%', left: '50%', x: '-50%', marginTop: '0.5rem',
-                                            backgroundColor: 'white', borderRadius: '1rem', padding: '0.5rem',
-                                            boxShadow: '0 10px 40px -10px rgba(0,0,0,0.1)', border: '1px solid rgba(0,0,0,0.05)',
-                                            minWidth: '200px', display: 'flex', flexDirection: 'column', gap: '0.25rem'
+                                            position: 'absolute', top: 'calc(100% + 8px)', left: '50%', transform: 'translateX(-50%)',
+                                            backgroundColor: 'white', borderRadius: '16px', padding: '0.5rem',
+                                            boxShadow: '0 12px 48px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.06)', border: '1px solid rgba(0,0,0,0.06)',
+                                            minWidth: '240px', display: 'flex', flexDirection: 'column', gap: '2px'
                                         }}
                                     >
-                                        <Link href="/experiences" style={{ padding: '0.5rem 1rem', borderRadius: '0.75rem', color: 'var(--color-foreground)', fontSize: '0.9rem', fontWeight: 500, textDecoration: 'none' }} onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--color-secondary)'} onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>All Experiences</Link>
-                                        <Link href="/nextstop" style={{ padding: '0.5rem 1rem', borderRadius: '0.75rem', color: 'var(--color-foreground)', fontSize: '0.9rem', fontWeight: 500, textDecoration: 'none' }} onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--color-secondary)'} onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>NextStop (Travel)</Link>
-                                        <Link href="/weddings" style={{ padding: '0.5rem 1rem', borderRadius: '0.75rem', color: 'var(--color-primary)', fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none', borderTop: '1px solid var(--color-border)', marginTop: '0.25rem', paddingTop: '0.75rem' }} onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--color-secondary)'} onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>Wedding Venues ❤️</Link>
+                                        <Link href="/experiences" style={{ padding: '0.75rem 1rem', borderRadius: '10px', color: 'var(--color-foreground)', fontSize: '0.9rem', fontWeight: 500, textDecoration: 'none', transition: 'all 0.15s ease' }} onMouseEnter={(e) => { e.target.style.backgroundColor = 'var(--color-secondary)'; e.target.style.transform = 'translateX(4px)'; }} onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.transform = 'translateX(0)'; }}>All Experiences</Link>
+                                        <Link href="/nextstop" style={{ padding: '0.75rem 1rem', borderRadius: '10px', color: 'var(--color-foreground)', fontSize: '0.9rem', fontWeight: 500, textDecoration: 'none', transition: 'all 0.15s ease' }} onMouseEnter={(e) => { e.target.style.backgroundColor = 'var(--color-secondary)'; e.target.style.transform = 'translateX(4px)'; }} onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.transform = 'translateX(0)'; }}>NextStop (Travel)</Link>
+                                        <div style={{ margin: '4px 0', height: '1px', background: 'var(--color-border)' }} />
+                                        <Link href="/weddings" style={{ padding: '0.75rem 1rem', borderRadius: '10px', color: 'var(--color-primary)', fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.15s ease' }} onMouseEnter={(e) => { e.target.style.backgroundColor = 'rgba(254, 88, 88, 0.06)'; e.target.style.transform = 'translateX(4px)'; }} onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.transform = 'translateX(0)'; }}>
+                                            <Heart size={14} style={{ fill: 'currentColor' }} />
+                                            Wedding Venues
+                                        </Link>
                                     </motion.div>
                                 )}
                             </AnimatePresence>
@@ -365,74 +521,67 @@ const Navbar = () => {
 
                         {/* Company Dropdown */}
                         <li
-                            onMouseEnter={() => setHoveredPath('company')}
-                            onMouseLeave={() => setHoveredPath(null)}
+                            onMouseEnter={() => setActiveDropdown('company')}
+                            onMouseLeave={() => setActiveDropdown(null)}
                             style={{ position: 'relative' }}
                         >
                             <span
                                 style={{
                                     cursor: 'pointer',
-                                    padding: '0.6rem 0.75rem',
+                                    padding: '0.65rem 1rem',
                                     color: 'var(--color-foreground)',
                                     fontWeight: 500,
-                                    fontSize: '0.9rem',
+                                    fontSize: '0.925rem',
                                     display: 'flex',
                                     alignItems: 'center',
-                                    gap: '4px'
+                                    gap: '6px',
+                                    borderRadius: '12px',
+                                    transition: 'all 0.2s ease'
                                 }}
                             >
-                                Company <ChevronDown size={14} />
+                                <Users size={16} style={{ opacity: 0.7 }} />
+                                Company
+                                <motion.div animate={{ rotate: activeDropdown === 'company' ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                                    <ChevronDown size={14} style={{ opacity: 0.6 }} />
+                                </motion.div>
                             </span>
 
-                            {hoveredPath === 'company' && (
-                                <motion.div
-                                    layoutId="nav-pill"
-                                    style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.04)', borderRadius: '2rem', zIndex: -1 }}
-                                />
+                            {activeDropdown === 'company' && (
+                                <motion.div layoutId="nav-hover" style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(254, 88, 88, 0.08)', borderRadius: '12px', zIndex: -1 }} />
                             )}
 
                             <AnimatePresence>
-                                {hoveredPath === 'company' && (
+                                {activeDropdown === 'company' && (
                                     <motion.div
-                                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                        initial={{ opacity: 0, y: 8, scale: 0.96 }}
                                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                                        transition={{ duration: 0.2 }}
+                                        exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                                        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
                                         style={{
-                                            position: 'absolute',
-                                            top: '100%',
-                                            left: '50%',
-                                            x: '-50%',
-                                            marginTop: '0.5rem',
-                                            backgroundColor: 'white',
-                                            borderRadius: '1rem',
-                                            padding: '0.5rem',
-                                            boxShadow: '0 10px 40px -10px rgba(0,0,0,0.1)',
-                                            border: '1px solid rgba(0,0,0,0.05)',
-                                            minWidth: '160px',
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            gap: '0.25rem'
+                                            position: 'absolute', top: 'calc(100% + 8px)', left: '50%', transform: 'translateX(-50%)',
+                                            backgroundColor: 'white', borderRadius: '16px', padding: '0.5rem',
+                                            boxShadow: '0 12px 48px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.06)', border: '1px solid rgba(0,0,0,0.06)',
+                                            minWidth: '180px', display: 'flex', flexDirection: 'column', gap: '2px'
                                         }}
                                     >
-                                        {companyDropdownLinks.map((subLink) => (
+                                        {companyLinks.map((link) => (
                                             <Link
-                                                key={subLink.path}
-                                                href={subLink.path}
+                                                key={link.path}
+                                                href={link.path}
                                                 style={{
-                                                    padding: '0.5rem 1rem',
-                                                    borderRadius: '0.75rem',
+                                                    padding: '0.75rem 1rem',
+                                                    borderRadius: '10px',
                                                     color: 'var(--color-foreground)',
                                                     fontSize: '0.9rem',
                                                     fontWeight: 500,
                                                     textDecoration: 'none',
-                                                    transition: 'background 0.2s',
+                                                    transition: 'all 0.15s ease',
                                                     display: 'block'
                                                 }}
-                                                onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--color-secondary)'}
-                                                onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+                                                onMouseEnter={(e) => { e.target.style.backgroundColor = 'var(--color-secondary)'; e.target.style.transform = 'translateX(4px)'; }}
+                                                onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.transform = 'translateX(0)'; }}
                                             >
-                                                {subLink.name}
+                                                {link.name}
                                             </Link>
                                         ))}
                                     </motion.div>
@@ -442,25 +591,45 @@ const Navbar = () => {
                     </ul>
 
                     {/* Right Side Actions */}
-                    <div className="desktop-menu" style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                    <div className="desktop-menu" style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
                         <a href="https://hostizzy.dtravel.com/" target="_blank" rel="noopener noreferrer"
                             style={{
                                 fontWeight: 600,
-                                fontSize: '0.9rem',
+                                fontSize: '0.925rem',
                                 color: 'var(--color-primary)',
                                 display: 'flex',
                                 alignItems: 'center',
                                 gap: '4px',
-                                textDecoration: 'none'
+                                textDecoration: 'none',
+                                padding: '0.65rem 1rem',
+                                borderRadius: '12px',
+                                transition: 'all 0.2s ease'
+                            }}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.backgroundColor = 'rgba(254, 88, 88, 0.08)';
+                            }}
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.backgroundColor = 'transparent';
                             }}>
                             Book <ArrowUpRight size={14} />
                         </a>
                         <Link href="/contact" className="btn btn-primary" style={{
-                            borderRadius: '2rem',
-                            padding: '0.6rem 1.4rem',
-                            fontSize: '0.9rem',
-                            boxShadow: '0 4px 12px rgba(254, 88, 88, 0.3)',
-                            textDecoration: 'none'
+                            borderRadius: '12px',
+                            padding: '0.7rem 1.5rem',
+                            fontSize: '0.925rem',
+                            fontWeight: 600,
+                            boxShadow: '0 4px 12px rgba(254, 88, 88, 0.25)',
+                            textDecoration: 'none',
+                            background: 'linear-gradient(135deg, #FE5858 0%, #FF6B6B 100%)',
+                            transition: 'all 0.2s ease'
+                        }}
+                        onMouseEnter={(e) => {
+                            e.currentTarget.style.transform = 'translateY(-2px)';
+                            e.currentTarget.style.boxShadow = '0 6px 20px rgba(254, 88, 88, 0.35)';
+                        }}
+                        onMouseLeave={(e) => {
+                            e.currentTarget.style.transform = 'translateY(0)';
+                            e.currentTarget.style.boxShadow = '0 4px 12px rgba(254, 88, 88, 0.25)';
                         }}>
                             Partner With Us
                         </Link>
@@ -470,7 +639,18 @@ const Navbar = () => {
                     <button
                         className="mobile-menu-btn"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-foreground)', zIndex: 1001 }}
+                        style={{
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                            color: 'var(--color-foreground)',
+                            zIndex: 1001,
+                            padding: '8px',
+                            borderRadius: '8px',
+                            transition: 'background 0.2s ease'
+                        }}
+                        onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(0,0,0,0.05)'}
+                        onMouseLeave={(e) => e.currentTarget.style.background = 'none'}
                         aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
                     >
                         {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
@@ -494,8 +674,8 @@ const Navbar = () => {
                                 left: 0,
                                 right: 0,
                                 bottom: 0,
-                                backgroundColor: 'rgba(0,0,0,0.4)',
-                                backdropFilter: 'blur(4px)',
+                                backgroundColor: 'rgba(0,0,0,0.5)',
+                                backdropFilter: 'blur(8px)',
                                 zIndex: 998
                             }}
                         />
@@ -505,31 +685,50 @@ const Navbar = () => {
                             initial={{ opacity: 0, x: '100%' }}
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: '100%' }}
-                            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                            transition={{ type: 'spring', damping: 30, stiffness: 300 }}
                             style={{
                                 position: 'fixed',
                                 top: 0,
                                 right: 0,
                                 bottom: 0,
                                 width: '85%',
-                                maxWidth: '400px',
+                                maxWidth: '420px',
                                 backgroundColor: 'white',
                                 zIndex: 999,
                                 display: 'flex',
                                 flexDirection: 'column',
                                 overflowY: 'auto',
-                                boxShadow: '-10px 0 50px rgba(0,0,0,0.15)'
+                                boxShadow: '-10px 0 50px rgba(0,0,0,0.2)'
                             }}
                         >
                             {/* Header */}
-                            <div style={{ padding: '2rem 1.5rem 1rem', borderBottom: '1px solid var(--color-border)' }}>
-                                <img src={settings.logoUrl} alt={settings.siteName} style={{ height: '48px', width: 'auto' }} />
+                            <div style={{ padding: '2rem 1.5rem 1.5rem', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <img src={settings.logoUrl} alt={settings.siteName} style={{ height: '42px', width: 'auto' }} />
+                                <button
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    style={{
+                                        background: 'var(--color-secondary)',
+                                        border: 'none',
+                                        borderRadius: '10px',
+                                        width: '40px',
+                                        height: '40px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        cursor: 'pointer'
+                                    }}
+                                >
+                                    <X size={20} />
+                                </button>
                             </div>
 
                             {/* Menu Items */}
-                            <nav style={{ flex: 1, padding: '1rem 0' }}>
+                            <nav style={{ flex: 1, padding: '0.5rem 0' }}>
                                 <Link href="/" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textDecoration: 'none', borderBottom: '1px solid var(--color-border)' }}>
-                                    Home
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                        <Home size={20} style={{ opacity: 0.6 }} />
+                                        Home
+                                    </div>
                                     <ChevronRight size={18} color="var(--color-muted)" />
                                 </Link>
 
@@ -539,7 +738,10 @@ const Navbar = () => {
                                         onClick={() => setMobileActiveDropdown(mobileActiveDropdown === 'platform' ? null : 'platform')}
                                         style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', background: 'none', border: 'none', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textAlign: 'left', cursor: 'pointer' }}
                                     >
-                                        Platform
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                            <Zap size={20} style={{ opacity: 0.6 }} />
+                                            Platform
+                                        </div>
                                         <motion.div animate={{ rotate: mobileActiveDropdown === 'platform' ? 180 : 0 }} transition={{ duration: 0.2 }}>
                                             <ChevronDown size={18} color="var(--color-muted)" />
                                         </motion.div>
@@ -553,12 +755,14 @@ const Navbar = () => {
                                                 transition={{ duration: 0.2 }}
                                                 style={{ overflow: 'hidden', backgroundColor: 'var(--color-secondary)' }}
                                             >
-                                                <Link href="/technology" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.75rem 1.5rem 0.75rem 2.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>Platform Overview</Link>
-                                                <Link href="/products/hostos" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.75rem 1.5rem 0.75rem 2.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>HostOS</Link>
-                                                <Link href="/products/resiq" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.75rem 1.5rem 0.75rem 2.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>ResIQ</Link>
-                                                <Link href="/products/juxtravel" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.75rem 1.5rem 0.75rem 2.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>JuxTravel</Link>
-                                                <Link href="/products/travelcrm" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.75rem 1.5rem 0.75rem 2.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>TravelCRM</Link>
-                                                <Link href="/calculator" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.75rem 1.5rem 0.75rem 2.5rem', color: 'var(--color-primary)', fontSize: '0.95rem', fontWeight: 600, textDecoration: 'none' }}>Revenue Calculator</Link>
+                                                {platformLinks.map(link => (
+                                                    <Link key={link.path} href={link.path} onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.85rem 1.5rem 0.85rem 3.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>
+                                                        {link.name}
+                                                    </Link>
+                                                ))}
+                                                <Link href="/calculator" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.85rem 1.5rem 0.85rem 3.5rem', color: 'var(--color-primary)', fontSize: '0.95rem', fontWeight: 600, textDecoration: 'none' }}>
+                                                    Revenue Calculator
+                                                </Link>
                                             </motion.div>
                                         )}
                                     </AnimatePresence>
@@ -570,7 +774,10 @@ const Navbar = () => {
                                         onClick={() => setMobileActiveDropdown(mobileActiveDropdown === 'academy' ? null : 'academy')}
                                         style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', background: 'none', border: 'none', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textAlign: 'left', cursor: 'pointer' }}
                                     >
-                                        Host Academy
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                            <GraduationCap size={20} style={{ opacity: 0.6 }} />
+                                            Host Academy
+                                        </div>
                                         <motion.div animate={{ rotate: mobileActiveDropdown === 'academy' ? 180 : 0 }} transition={{ duration: 0.2 }}>
                                             <ChevronDown size={18} color="var(--color-muted)" />
                                         </motion.div>
@@ -584,20 +791,26 @@ const Navbar = () => {
                                                 transition={{ duration: 0.2 }}
                                                 style={{ overflow: 'hidden', backgroundColor: 'var(--color-secondary)' }}
                                             >
-                                                <Link href="/training" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.75rem 1.5rem 0.75rem 2.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>Training Programs</Link>
-                                                <Link href="/certification" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.75rem 1.5rem 0.75rem 2.5rem', color: 'var(--color-primary)', fontSize: '0.95rem', fontWeight: 600, textDecoration: 'none' }}>Host Certified™</Link>
+                                                <Link href="/training" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.85rem 1.5rem 0.85rem 3.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>Training Programs</Link>
+                                                <Link href="/certification" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.85rem 1.5rem 0.85rem 3.5rem', color: 'var(--color-primary)', fontSize: '0.95rem', fontWeight: 600, textDecoration: 'none' }}>Host Certified™</Link>
                                             </motion.div>
                                         )}
                                     </AnimatePresence>
                                 </div>
 
                                 <Link href="/services" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textDecoration: 'none', borderBottom: '1px solid var(--color-border)' }}>
-                                    Service Plans
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                        <Briefcase size={20} style={{ opacity: 0.6 }} />
+                                        Services
+                                    </div>
                                     <ChevronRight size={18} color="var(--color-muted)" />
                                 </Link>
 
                                 <Link href="/properties" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textDecoration: 'none', borderBottom: '1px solid var(--color-border)' }}>
-                                    Properties
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                        <Building2 size={20} style={{ opacity: 0.6 }} />
+                                        Properties
+                                    </div>
                                     <ChevronRight size={18} color="var(--color-muted)" />
                                 </Link>
 
@@ -607,7 +820,10 @@ const Navbar = () => {
                                         onClick={() => setMobileActiveDropdown(mobileActiveDropdown === 'experiences' ? null : 'experiences')}
                                         style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', background: 'none', border: 'none', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textAlign: 'left', cursor: 'pointer' }}
                                     >
-                                        Experiences
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                            <MapPin size={20} style={{ opacity: 0.6 }} />
+                                            Experiences
+                                        </div>
                                         <motion.div animate={{ rotate: mobileActiveDropdown === 'experiences' ? 180 : 0 }} transition={{ duration: 0.2 }}>
                                             <ChevronDown size={18} color="var(--color-muted)" />
                                         </motion.div>
@@ -621,9 +837,9 @@ const Navbar = () => {
                                                 transition={{ duration: 0.2 }}
                                                 style={{ overflow: 'hidden', backgroundColor: 'var(--color-secondary)' }}
                                             >
-                                                <Link href="/experiences" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.75rem 1.5rem 0.75rem 2.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>All Experiences</Link>
-                                                <Link href="/nextstop" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.75rem 1.5rem 0.75rem 2.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>NextStop (Travel)</Link>
-                                                <Link href="/weddings" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.75rem 1.5rem 0.75rem 2.5rem', color: 'var(--color-primary)', fontSize: '0.95rem', fontWeight: 600, textDecoration: 'none' }}>Wedding Venues ❤️</Link>
+                                                <Link href="/experiences" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.85rem 1.5rem 0.85rem 3.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>All Experiences</Link>
+                                                <Link href="/nextstop" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.85rem 1.5rem 0.85rem 3.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>NextStop (Travel)</Link>
+                                                <Link href="/weddings" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.85rem 1.5rem 0.85rem 3.5rem', color: 'var(--color-primary)', fontSize: '0.95rem', fontWeight: 600, textDecoration: 'none' }}>Wedding Venues ❤️</Link>
                                             </motion.div>
                                         )}
                                     </AnimatePresence>
@@ -635,7 +851,10 @@ const Navbar = () => {
                                         onClick={() => setMobileActiveDropdown(mobileActiveDropdown === 'company' ? null : 'company')}
                                         style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', background: 'none', border: 'none', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textAlign: 'left', cursor: 'pointer' }}
                                     >
-                                        Company
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                            <Users size={20} style={{ opacity: 0.6 }} />
+                                            Company
+                                        </div>
                                         <motion.div animate={{ rotate: mobileActiveDropdown === 'company' ? 180 : 0 }} transition={{ duration: 0.2 }}>
                                             <ChevronDown size={18} color="var(--color-muted)" />
                                         </motion.div>
@@ -649,8 +868,8 @@ const Navbar = () => {
                                                 transition={{ duration: 0.2 }}
                                                 style={{ overflow: 'hidden', backgroundColor: 'var(--color-secondary)' }}
                                             >
-                                                {companyDropdownLinks.map((link) => (
-                                                    <Link key={link.path} href={link.path} onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.75rem 1.5rem 0.75rem 2.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>
+                                                {companyLinks.map((link) => (
+                                                    <Link key={link.path} href={link.path} onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.85rem 1.5rem 0.85rem 3.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>
                                                         {link.name}
                                                     </Link>
                                                 ))}
@@ -661,11 +880,11 @@ const Navbar = () => {
                             </nav>
 
                             {/* Bottom Actions */}
-                            <div style={{ padding: '1.5rem', borderTop: '1px solid var(--color-border)', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                <a href="https://hostizzy.dtravel.com/" target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ width: '100%', textDecoration: 'none', justifyContent: 'center' }}>
+                            <div style={{ padding: '1.5rem', borderTop: '1px solid var(--color-border)', display: 'flex', flexDirection: 'column', gap: '0.75rem', background: 'var(--color-secondary)' }}>
+                                <a href="https://hostizzy.dtravel.com/" target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ width: '100%', textDecoration: 'none', justifyContent: 'center', padding: '0.875rem', fontSize: '0.95rem', fontWeight: 600 }}>
                                     Book Property <ArrowUpRight size={16} />
                                 </a>
-                                <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="btn btn-primary" style={{ width: '100%', textDecoration: 'none', justifyContent: 'center' }}>
+                                <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="btn btn-primary" style={{ width: '100%', textDecoration: 'none', justifyContent: 'center', padding: '0.875rem', fontSize: '0.95rem', fontWeight: 600, background: 'linear-gradient(135deg, #FE5858 0%, #FF6B6B 100%)' }}>
                                     Partner With Us
                                 </Link>
                             </div>
