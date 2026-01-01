@@ -114,7 +114,7 @@ const Navbar = () => {
                     {/* Desktop Menu - Centered */}
                     <ul className="desktop-menu" style={{
                         display: 'flex',
-                        gap: '0.5rem',
+                        gap: '0.25rem',
                         alignItems: 'center',
                         margin: 0,
                         padding: 0,
@@ -132,16 +132,16 @@ const Navbar = () => {
                                 onMouseLeave={() => setActiveDropdown(null)}
                                 style={{
                                     position: 'relative',
-                                    padding: '0.65rem 1rem',
+                                    padding: '0.6rem 0.85rem',
                                     color: isActivePath('/') ? 'var(--color-primary)' : 'var(--color-foreground)',
                                     fontWeight: isActivePath('/') ? 600 : 500,
-                                    fontSize: '0.925rem',
+                                    fontSize: '0.9rem',
                                     transition: 'all 0.2s ease',
                                     textDecoration: 'none',
                                     display: 'flex',
                                     alignItems: 'center',
-                                    gap: '6px',
-                                    borderRadius: '12px'
+                                    gap: '5px',
+                                    borderRadius: '10px'
                                 }}
                             >
                                 {activeDropdown === 'home' && (
@@ -151,13 +151,13 @@ const Navbar = () => {
                                             position: 'absolute',
                                             inset: 0,
                                             backgroundColor: 'rgba(254, 88, 88, 0.08)',
-                                            borderRadius: '12px',
+                                            borderRadius: '10px',
                                             zIndex: -1
                                         }}
                                         transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
                                     />
                                 )}
-                                <Home size={16} style={{ opacity: 0.7 }} />
+                                <Home size={15} style={{ opacity: 0.7 }} />
                                 Home
                             </Link>
                         </li>
@@ -171,18 +171,18 @@ const Navbar = () => {
                             <span
                                 style={{
                                     cursor: 'pointer',
-                                    padding: '0.65rem 1rem',
+                                    padding: '0.6rem 0.85rem',
                                     color: 'var(--color-foreground)',
                                     fontWeight: 500,
-                                    fontSize: '0.925rem',
+                                    fontSize: '0.9rem',
                                     display: 'flex',
                                     alignItems: 'center',
-                                    gap: '6px',
-                                    borderRadius: '12px',
+                                    gap: '5px',
+                                    borderRadius: '10px',
                                     transition: 'all 0.2s ease'
                                 }}
                             >
-                                <Zap size={16} style={{ opacity: 0.7 }} />
+                                <Zap size={15} style={{ opacity: 0.7 }} />
                                 Platform
                                 <motion.div
                                     animate={{ rotate: activeDropdown === 'platform' ? 180 : 0 }}
@@ -198,7 +198,7 @@ const Navbar = () => {
                                         position: 'absolute',
                                         inset: 0,
                                         backgroundColor: 'rgba(254, 88, 88, 0.08)',
-                                        borderRadius: '12px',
+                                        borderRadius: '10px',
                                         zIndex: -1
                                     }}
                                 />
@@ -322,18 +322,18 @@ const Navbar = () => {
                             <span
                                 style={{
                                     cursor: 'pointer',
-                                    padding: '0.65rem 1rem',
+                                    padding: '0.6rem 0.85rem',
                                     color: 'var(--color-foreground)',
                                     fontWeight: 500,
-                                    fontSize: '0.925rem',
+                                    fontSize: '0.9rem',
                                     display: 'flex',
                                     alignItems: 'center',
-                                    gap: '6px',
-                                    borderRadius: '12px',
+                                    gap: '5px',
+                                    borderRadius: '10px',
                                     transition: 'all 0.2s ease'
                                 }}
                             >
-                                <GraduationCap size={16} style={{ opacity: 0.7 }} />
+                                <GraduationCap size={15} style={{ opacity: 0.7 }} />
                                 Host Academy
                                 <motion.div
                                     animate={{ rotate: activeDropdown === 'academy' ? 180 : 0 }}
@@ -349,7 +349,7 @@ const Navbar = () => {
                                         position: 'absolute',
                                         inset: 0,
                                         backgroundColor: 'rgba(254, 88, 88, 0.08)',
-                                        borderRadius: '12px',
+                                        borderRadius: '10px',
                                         zIndex: -1
                                     }}
                                 />
@@ -408,15 +408,15 @@ const Navbar = () => {
                                 onMouseLeave={() => setActiveDropdown(null)}
                                 style={{
                                     position: 'relative',
-                                    padding: '0.65rem 1rem',
+                                    padding: '0.6rem 0.85rem',
                                     color: isActivePath('/services') ? 'var(--color-primary)' : 'var(--color-foreground)',
                                     fontWeight: isActivePath('/services') ? 600 : 500,
-                                    fontSize: '0.925rem',
+                                    fontSize: '0.9rem',
                                     transition: 'all 0.2s ease',
                                     textDecoration: 'none',
                                     display: 'flex',
                                     alignItems: 'center',
-                                    gap: '6px',
+                                    gap: '5px',
                                     borderRadius: '12px'
                                 }}
                             >
@@ -427,7 +427,7 @@ const Navbar = () => {
                                         transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
                                     />
                                 )}
-                                <Briefcase size={16} style={{ opacity: 0.7 }} />
+                                <Briefcase size={15} style={{ opacity: 0.7 }} />
                                 Services
                             </Link>
                         </li>
@@ -440,15 +440,15 @@ const Navbar = () => {
                                 onMouseLeave={() => setActiveDropdown(null)}
                                 style={{
                                     position: 'relative',
-                                    padding: '0.65rem 1rem',
+                                    padding: '0.6rem 0.85rem',
                                     color: isActivePath('/properties') ? 'var(--color-primary)' : 'var(--color-foreground)',
                                     fontWeight: isActivePath('/properties') ? 600 : 500,
-                                    fontSize: '0.925rem',
+                                    fontSize: '0.9rem',
                                     transition: 'all 0.2s ease',
                                     textDecoration: 'none',
                                     display: 'flex',
                                     alignItems: 'center',
-                                    gap: '6px',
+                                    gap: '5px',
                                     borderRadius: '12px'
                                 }}
                             >
@@ -459,7 +459,7 @@ const Navbar = () => {
                                         transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
                                     />
                                 )}
-                                <Building2 size={16} style={{ opacity: 0.7 }} />
+                                <Building2 size={15} style={{ opacity: 0.7 }} />
                                 Properties
                             </Link>
                         </li>
@@ -473,18 +473,18 @@ const Navbar = () => {
                             <span
                                 style={{
                                     cursor: 'pointer',
-                                    padding: '0.65rem 1rem',
+                                    padding: '0.6rem 0.85rem',
                                     color: 'var(--color-foreground)',
                                     fontWeight: 500,
-                                    fontSize: '0.925rem',
+                                    fontSize: '0.9rem',
                                     display: 'flex',
                                     alignItems: 'center',
-                                    gap: '6px',
-                                    borderRadius: '12px',
+                                    gap: '5px',
+                                    borderRadius: '10px',
                                     transition: 'all 0.2s ease'
                                 }}
                             >
-                                <MapPin size={16} style={{ opacity: 0.7 }} />
+                                <MapPin size={15} style={{ opacity: 0.7 }} />
                                 Experiences
                                 <motion.div animate={{ rotate: activeDropdown === 'experiences' ? 180 : 0 }} transition={{ duration: 0.2 }}>
                                     <ChevronDown size={14} style={{ opacity: 0.6 }} />
@@ -528,18 +528,18 @@ const Navbar = () => {
                             <span
                                 style={{
                                     cursor: 'pointer',
-                                    padding: '0.65rem 1rem',
+                                    padding: '0.6rem 0.85rem',
                                     color: 'var(--color-foreground)',
                                     fontWeight: 500,
-                                    fontSize: '0.925rem',
+                                    fontSize: '0.9rem',
                                     display: 'flex',
                                     alignItems: 'center',
-                                    gap: '6px',
-                                    borderRadius: '12px',
+                                    gap: '5px',
+                                    borderRadius: '10px',
                                     transition: 'all 0.2s ease'
                                 }}
                             >
-                                <Users size={16} style={{ opacity: 0.7 }} />
+                                <Users size={15} style={{ opacity: 0.7 }} />
                                 Company
                                 <motion.div animate={{ rotate: activeDropdown === 'company' ? 180 : 0 }} transition={{ duration: 0.2 }}>
                                     <ChevronDown size={14} style={{ opacity: 0.6 }} />
@@ -591,19 +591,20 @@ const Navbar = () => {
                     </ul>
 
                     {/* Right Side Actions */}
-                    <div className="desktop-menu" style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                    <div className="desktop-menu" style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', marginLeft: '0.5rem' }}>
                         <a href="https://hostizzy.dtravel.com/" target="_blank" rel="noopener noreferrer"
                             style={{
                                 fontWeight: 600,
-                                fontSize: '0.925rem',
+                                fontSize: '0.9rem',
                                 color: 'var(--color-primary)',
                                 display: 'flex',
                                 alignItems: 'center',
                                 gap: '4px',
                                 textDecoration: 'none',
-                                padding: '0.65rem 1rem',
-                                borderRadius: '12px',
-                                transition: 'all 0.2s ease'
+                                padding: '0.6rem 0.85rem',
+                                borderRadius: '10px',
+                                transition: 'all 0.2s ease',
+                                whiteSpace: 'nowrap'
                             }}
                             onMouseEnter={(e) => {
                                 e.currentTarget.style.backgroundColor = 'rgba(254, 88, 88, 0.08)';
@@ -614,14 +615,15 @@ const Navbar = () => {
                             Book <ArrowUpRight size={14} />
                         </a>
                         <Link href="/contact" className="btn btn-primary" style={{
-                            borderRadius: '12px',
-                            padding: '0.7rem 1.5rem',
-                            fontSize: '0.925rem',
+                            borderRadius: '10px',
+                            padding: '0.65rem 1.25rem',
+                            fontSize: '0.9rem',
                             fontWeight: 600,
                             boxShadow: '0 4px 12px rgba(254, 88, 88, 0.25)',
                             textDecoration: 'none',
                             background: 'linear-gradient(135deg, #FE5858 0%, #FF6B6B 100%)',
-                            transition: 'all 0.2s ease'
+                            transition: 'all 0.2s ease',
+                            whiteSpace: 'nowrap'
                         }}
                         onMouseEnter={(e) => {
                             e.currentTarget.style.transform = 'translateY(-2px)';
