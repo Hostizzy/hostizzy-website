@@ -83,10 +83,10 @@ const Navbar = () => {
                 <div className="container" style={{
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'space-between',
                     padding: isScrolled ? '0 1.5rem' : '0 2rem',
                     height: isScrolled ? '68px' : '80px',
-                    transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
+                    transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                    position: 'relative'
                 }}>
 
                     {/* Brand Logo */}
@@ -94,7 +94,8 @@ const Navbar = () => {
                         display: 'flex',
                         alignItems: 'center',
                         transition: 'transform 0.3s ease',
-                        zIndex: 1001
+                        zIndex: 1001,
+                        flexShrink: 0
                     }}
                     onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                     onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
@@ -106,12 +107,13 @@ const Navbar = () => {
                                 width: 'auto',
                                 objectFit: 'contain',
                                 transition: 'height 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-                                filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.05))'
+                                filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.05))',
+                                borderRadius: '8px'
                             }}
                         />
                     </Link>
 
-                    {/* Desktop Menu - Centered */}
+                    {/* Desktop Menu - Left-aligned */}
                     <ul className="desktop-menu" style={{
                         display: 'flex',
                         gap: '0.5rem',
@@ -119,10 +121,9 @@ const Navbar = () => {
                         margin: 0,
                         padding: 0,
                         listStyle: 'none',
-                        position: 'absolute',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        whiteSpace: 'nowrap'
+                        marginLeft: '3rem',
+                        whiteSpace: 'nowrap',
+                        flex: 1
                     }}>
                         {/* Home */}
                         <li>
@@ -141,7 +142,7 @@ const Navbar = () => {
                                     display: 'flex',
                                     alignItems: 'center',
                                     gap: '6px',
-                                    borderRadius: '12px'
+                                    borderRadius: '10px'
                                 }}
                             >
                                 {activeDropdown === 'home' && (
@@ -151,7 +152,7 @@ const Navbar = () => {
                                             position: 'absolute',
                                             inset: 0,
                                             backgroundColor: 'rgba(254, 88, 88, 0.08)',
-                                            borderRadius: '12px',
+                                            borderRadius: '10px',
                                             zIndex: -1
                                         }}
                                         transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
@@ -178,7 +179,7 @@ const Navbar = () => {
                                     display: 'flex',
                                     alignItems: 'center',
                                     gap: '6px',
-                                    borderRadius: '12px',
+                                    borderRadius: '10px',
                                     transition: 'all 0.2s ease'
                                 }}
                             >
@@ -198,7 +199,7 @@ const Navbar = () => {
                                         position: 'absolute',
                                         inset: 0,
                                         backgroundColor: 'rgba(254, 88, 88, 0.08)',
-                                        borderRadius: '12px',
+                                        borderRadius: '10px',
                                         zIndex: -1
                                     }}
                                 />
@@ -329,7 +330,7 @@ const Navbar = () => {
                                     display: 'flex',
                                     alignItems: 'center',
                                     gap: '6px',
-                                    borderRadius: '12px',
+                                    borderRadius: '10px',
                                     transition: 'all 0.2s ease'
                                 }}
                             >
@@ -349,7 +350,7 @@ const Navbar = () => {
                                         position: 'absolute',
                                         inset: 0,
                                         backgroundColor: 'rgba(254, 88, 88, 0.08)',
-                                        borderRadius: '12px',
+                                        borderRadius: '10px',
                                         zIndex: -1
                                     }}
                                 />
@@ -480,7 +481,7 @@ const Navbar = () => {
                                     display: 'flex',
                                     alignItems: 'center',
                                     gap: '6px',
-                                    borderRadius: '12px',
+                                    borderRadius: '10px',
                                     transition: 'all 0.2s ease'
                                 }}
                             >
@@ -535,7 +536,7 @@ const Navbar = () => {
                                     display: 'flex',
                                     alignItems: 'center',
                                     gap: '6px',
-                                    borderRadius: '12px',
+                                    borderRadius: '10px',
                                     transition: 'all 0.2s ease'
                                 }}
                             >
@@ -591,7 +592,7 @@ const Navbar = () => {
                     </ul>
 
                     {/* Right Side Actions */}
-                    <div className="desktop-menu" style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                    <div className="desktop-menu" style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flexShrink: 0 }}>
                         <a href="https://hostizzy.dtravel.com/" target="_blank" rel="noopener noreferrer"
                             style={{
                                 fontWeight: 600,
@@ -602,8 +603,9 @@ const Navbar = () => {
                                 gap: '4px',
                                 textDecoration: 'none',
                                 padding: '0.65rem 1rem',
-                                borderRadius: '12px',
-                                transition: 'all 0.2s ease'
+                                borderRadius: '10px',
+                                transition: 'all 0.2s ease',
+                                whiteSpace: 'nowrap'
                             }}
                             onMouseEnter={(e) => {
                                 e.currentTarget.style.backgroundColor = 'rgba(254, 88, 88, 0.08)';
@@ -614,14 +616,15 @@ const Navbar = () => {
                             Book <ArrowUpRight size={14} />
                         </a>
                         <Link href="/contact" className="btn btn-primary" style={{
-                            borderRadius: '12px',
-                            padding: '0.7rem 1.5rem',
+                            borderRadius: '10px',
+                            padding: '0.65rem 1.25rem',
                             fontSize: '0.925rem',
                             fontWeight: 600,
                             boxShadow: '0 4px 12px rgba(254, 88, 88, 0.25)',
                             textDecoration: 'none',
                             background: 'linear-gradient(135deg, #FE5858 0%, #FF6B6B 100%)',
-                            transition: 'all 0.2s ease'
+                            transition: 'all 0.2s ease',
+                            whiteSpace: 'nowrap'
                         }}
                         onMouseEnter={(e) => {
                             e.currentTarget.style.transform = 'translateY(-2px)';
@@ -897,6 +900,9 @@ const Navbar = () => {
                 @media (max-width: 1024px) {
                     .desktop-menu { display: none !important; }
                     .mobile-menu-btn { display: block !important; }
+                    .container {
+                        justify-content: space-between !important;
+                    }
                 }
                 @media (min-width: 1025px) {
                     .mobile-menu-btn { display: none !important; }
