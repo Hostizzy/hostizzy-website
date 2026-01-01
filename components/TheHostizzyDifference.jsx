@@ -40,7 +40,7 @@ const TheHostizzyDifference = () => {
                         <p style={{ fontSize: '1.125rem', opacity: 0.8, marginBottom: '2rem' }}>
                             The Hostizzy Difference: Combining the quality of a luxury hotel with the comfort of a private home.
                         </p>
-                        <Link href="/properties" className="btn btn-primary">Find Your Happy Place</Link>
+                        <Link href="/properties" className="btn btn-gradient">Find Your Happy Place</Link>
                     </ScrollReveal>
 
                     <div className="grid desktop-2-col" style={{ gap: '1.5rem' }}>

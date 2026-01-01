@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import SEO from '../../components/SEO';
 import ScrollReveal from '../../components/ScrollReveal';
 import PropertyFilters from '../../components/PropertyFilters';
+import { PropertyCardSkeleton } from '../../components/Skeleton';
 import { Star, Heart, Search, MapPin } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -163,7 +164,11 @@ const Properties = () => {
                     )}
 
                     {loading ? (
-                        <div className="text-center" style={{ padding: '4rem', color: 'var(--color-muted)' }}>Loading stays...</div>
+                        <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '2.5rem 1.5rem' }}>
+                            {[...Array(6)].map((_, i) => (
+                                <PropertyCardSkeleton key={i} />
+                            ))}
+                        </div>
                     ) : (
                         <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '2.5rem 1.5rem' }}>
                             {filteredProperties.length > 0 ? (

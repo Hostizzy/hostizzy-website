@@ -249,7 +249,7 @@ export default function Calculator() {
                                 </p>
                                 <button
                                     onClick={() => setShowEmailModal(true)}
-                                    className="btn btn-primary"
+                                    className="btn btn-gradient"
                                     style={{ width: '100%', padding: '1rem' }}
                                 >
                                     Get Full Report (Free)

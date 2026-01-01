@@ -344,7 +344,7 @@ const Training = () => {
                             </div>
 
                             <div style={{ textAlign: 'center' }}>
-                                <button className="btn btn-primary" style={{
+                                <button className="btn btn-gradient" style={{
                                     fontSize: '1.2rem',
                                     padding: '1.25rem 3rem',
                                     background: 'linear-gradient(135deg, #10b981, #059669)'
@@ -439,7 +439,7 @@ const Training = () => {
                                     </div>
                                 </div>
 
-                                <button className="btn btn-primary" style={{
+                                <button className="btn btn-gradient" style={{
                                     width: '100%',
                                     fontSize: '1.1rem',
                                     background: 'linear-gradient(135deg, #f59e0b, #d97706)'
@@ -526,7 +526,7 @@ const Training = () => {
                                     </div>
                                 </div>
 
-                                <button className="btn btn-primary" style={{
+                                <button className="btn btn-gradient" style={{
                                     width: '100%',
                                     fontSize: '1.1rem',
                                     background: 'linear-gradient(135deg, #FE5858, #ff4040)'

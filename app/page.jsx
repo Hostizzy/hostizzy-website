@@ -125,7 +125,7 @@ const Home = () => {
                             <p style={{ fontSize: '1.2rem', opacity: 0.8, marginBottom: '2rem', lineHeight: 1.7 }}>
                                 Join an elite network of hosts committed to quality. Earn your badge, build guest trust, and unlock premium benefits.
                             </p>
-                            <Link href="/certification" className="btn btn-primary">
+                            <Link href="/certification" className="btn btn-gradient">
                                 Get Certified <ArrowRight size={18} style={{ marginLeft: '0.5rem' }} />
                             </Link>
                         </div>

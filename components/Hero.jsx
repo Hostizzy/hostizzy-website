@@ -115,7 +115,7 @@ const Hero = () => {
                             transition={{ delay: 0.6, duration: 0.8 }}
                             style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}
                         >
-                            <a href="#contact" className="btn btn-primary" style={{ padding: '1rem 2rem', fontSize: '1.1rem' }}>
+                            <a href="#contact" className="btn btn-gradient" style={{ padding: '1rem 2rem', fontSize: '1.1rem' }}>
                                 Partner With Us <ArrowRight size={20} style={{ marginLeft: '0.5rem' }} />
                             </a>
                             <Link href="/experiences" className="btn" style={{
@@ -167,7 +167,7 @@ const Hero = () => {
                             <p style={{ color: '#64748b', marginBottom: '2.5rem', lineHeight: 1.7, fontSize: '1.1rem' }}>
                                 Ever wondered how much your vacation rental could earn? Our AI-driven market analysis tool estimates your income based on location, size, and seasonal demand.
                             </p>
-                            <Link href="/calculator" className="btn btn-primary" style={{
+                            <Link href="/calculator" className="btn btn-gradient" style={{
                                 width: '100%',
                                 padding: '1.25rem',
                                 fontSize: '1.1rem',

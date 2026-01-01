@@ -175,7 +175,7 @@ export default function PropertyDetails({ params }) {
                             </div>
                         </div>
 
-                        <button onClick={() => setBookingOpen(true)} className="btn btn-primary" style={{ width: '100%', marginBottom: '1rem', padding: '1rem', fontSize: '1rem' }}>Reserve</button>
+                        <button onClick={() => setBookingOpen(true)} className="btn btn-gradient" style={{ width: '100%', marginBottom: '1rem', padding: '1rem', fontSize: '1rem' }}>Reserve</button>
                         <p style={{ textAlign: 'center', fontSize: '0.9rem', color: '#64748b' }}>You won't be charged yet</p>
                     </div>
                 </div>

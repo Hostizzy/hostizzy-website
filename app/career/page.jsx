@@ -181,7 +181,7 @@ const Career = () => {
                                         </div>
                                         <p style={{ color: '#475569', lineHeight: 1.6 }}>{job.desc}</p>
                                     </div>
-                                    <Link href="/contact" className="btn btn-primary" style={{ padding: '0.75rem 1.5rem', whiteSpace: 'nowrap' }}>
+                                    <Link href="/contact" className="btn btn-gradient" style={{ padding: '0.75rem 1.5rem', whiteSpace: 'nowrap' }}>
                                         Apply Now <ArrowRight size={16} style={{ marginLeft: '0.5rem' }} />
                                     </Link>
                                 </div>
@@ -255,7 +255,7 @@ const Career = () => {
                         <p style={{ color: '#64748b', fontSize: '1.1rem', marginBottom: '2rem', lineHeight: 1.7 }}>
                             Don\'t see your exact role? We\'re always looking for exceptional talent. Send us your portfolio or resume—let\'s chat.
                         </p>
-                        <Link href="/contact" className="btn btn-primary" style={{ padding: '1rem 2.5rem', fontSize: '1.1rem' }}>
+                        <Link href="/contact" className="btn btn-gradient" style={{ padding: '1rem 2.5rem', fontSize: '1.1rem' }}>
                             Get in Touch <ArrowRight size={18} style={{ marginLeft: '0.5rem' }} />
                         </Link>
                     </div>

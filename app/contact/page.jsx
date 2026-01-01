@@ -460,7 +460,7 @@ export default function Contact() {
                                                     onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
                                                     placeholder="How can we assist you?"></textarea>
                                             </div>
-                                            <button className="btn btn-primary" type="submit" disabled={status === 'sending'} style={{
+                                            <button className="btn btn-gradient" type="submit" disabled={status === 'sending'} style={{
                                                 padding: '1.25rem',
                                                 display: 'flex',
                                                 justifyContent: 'center',

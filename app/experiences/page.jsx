@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import ScrollReveal from '../../components/ScrollReveal';
+import { ExperienceCardSkeleton } from '../../components/Skeleton';
 import { Star, Clock, Zap, MapPin, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -39,7 +40,11 @@ export default function Experiences() {
             <section className="section" style={{ background: '#f5f5f5', minHeight: '60vh' }}>
                 <div className="container">
                     {loading ? (
-                        <div className="text-center" style={{ padding: '4rem' }}>Loading experiences...</div>
+                        <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '2rem' }}>
+                            {[...Array(6)].map((_, i) => (
+                                <ExperienceCardSkeleton key={i} />
+                            ))}
+                        </div>
                     ) : (
                         <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '2rem' }}>
                             {experiences.map((exp, i) => (

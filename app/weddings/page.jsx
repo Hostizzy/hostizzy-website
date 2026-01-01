@@ -496,7 +496,7 @@ const Weddings = () => {
                                         ></textarea>
                                     </div>
 
-                                    <button type="submit" className="btn btn-primary" style={{ width: '100%', fontSize: '1.1rem', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+                                    <button type="submit" className="btn btn-gradient" style={{ width: '100%', fontSize: '1.1rem', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
                                         <Send size={18} />
                                         Send Wedding Inquiry
                                     </button>
@@ -524,7 +524,7 @@ const Weddings = () => {
                             Our team has helped couples create magical wedding experiences. Let us make your special day unforgettable.
                         </p>
                         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-                            <a href="tel:+919876543210" className="btn btn-primary" style={{ fontSize: '1.1rem', padding: '1rem 2.5rem' }}>
+                            <a href="tel:+919876543210" className="btn btn-gradient" style={{ fontSize: '1.1rem', padding: '1rem 2.5rem' }}>
                                 Call Us Now
                             </a>
                             <a href="https://wa.me/919876543210?text=Hi,%20I'm%20interested%20in%20booking%20a%20wedding%20venue" target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ fontSize: '1.1rem', padding: '1rem 2.5rem' }}>

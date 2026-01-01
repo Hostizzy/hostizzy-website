@@ -20,7 +20,7 @@ export default function Invest() {
                             Hostizzy is raising a <strong>₹1–1.5 Cr pre-seed round</strong> to scale our operations and proprietary technology stack. Join us in capturing India's high-growth hospitality market.
                         </p>
                         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                            <a href="https://hostizzy.site/" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ padding: '1rem 2.5rem', fontSize: '1.1rem' }}>
+                            <a href="https://hostizzy.site/" target="_blank" rel="noopener noreferrer" className="btn btn-gradient" style={{ padding: '1rem 2.5rem', fontSize: '1.1rem' }}>
                                 View Investor Deck <ArrowUpRight size={20} />
                             </a>
                             <Link href="/contact?type=investor" className="btn btn-outline" style={{ padding: '1rem 2.5rem', fontSize: '1.1rem', color: 'white', borderColor: 'rgba(255,255,255,0.3)' }}>
