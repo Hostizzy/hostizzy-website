@@ -15,6 +15,9 @@ import InstagramFeed from '../components/InstagramFeed';
 import ChannelCarousel from '../components/ChannelCarousel';
 import AuditWizard from '../components/AuditWizard';
 import TrustMetrics from '../components/TrustMetrics';
+import StickyCTABar from '../components/StickyCTABar';
+import ExitIntentPopup from '../components/ExitIntentPopup';
+import QuickROIWidget from '../components/QuickROIWidget';
 
 
 const Home = () => {
@@ -338,6 +341,11 @@ const Home = () => {
             <ChannelCarousel />
 
             <HomeBanners />
+
+            {/* Conversion Optimization Components */}
+            <StickyCTABar type="calculator" scrollThreshold={800} />
+            <ExitIntentPopup type="calculator" delay={10000} />
+            <QuickROIWidget position="bottom-right" />
         </>
     );
 };
