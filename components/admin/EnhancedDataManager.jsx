@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { Search, Plus, Edit, Trash2, X, Image as ImageIcon, Upload, ChevronDown, ChevronUp } from 'lucide-react';
+import ImageUpload from './ImageUpload';
 
 /**
  * EnhancedDataManager - A comprehensive data management component
@@ -345,30 +346,13 @@ const EnhancedDataManager = ({
             case 'image':
                 return (
                     <div key={key}>
-                        {fieldLabel}
-                        <input
-                            type="url"
+                        <ImageUpload
                             value={value || ''}
-                            onChange={(e) => updateField(key, e.target.value)}
-                            placeholder="https://example.com/image.jpg"
-                            style={baseInputStyle}
+                            onChange={(url) => updateField(key, url)}
+                            label={`${label} ${required ? '*' : ''}`}
+                            folder={`hostizzy/${endpoint.split('/').pop()}`}
+                            multiple={false}
                         />
-                        {value && (
-                            <div style={{ marginTop: '0.75rem' }}>
-                                <img
-                                    src={value}
-                                    alt="Preview"
-                                    style={{
-                                        maxWidth: '200px',
-                                        maxHeight: '200px',
-                                        borderRadius: '0.5rem',
-                                        border: '1px solid #e2e8f0',
-                                        objectFit: 'cover'
-                                    }}
-                                    onError={(e) => e.target.style.display = 'none'}
-                                />
-                            </div>
-                        )}
                         {errorMessage}
                     </div>
                 );
@@ -376,75 +360,14 @@ const EnhancedDataManager = ({
             case 'gallery':
                 return (
                     <div key={key}>
-                        {fieldLabel}
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                            {(value || []).map((url, idx) => (
-                                <div key={idx} style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                                    <input
-                                        type="url"
-                                        value={url}
-                                        onChange={(e) => updateArrayField(key, idx, e.target.value)}
-                                        placeholder={`Image URL ${idx + 1}`}
-                                        style={{ ...baseInputStyle, marginBottom: 0 }}
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={() => removeArrayItem(key, idx)}
-                                        style={{
-                                            padding: '0.75rem',
-                                            background: '#fee2e2',
-                                            border: 'none',
-                                            borderRadius: '0.5rem',
-                                            color: '#ef4444',
-                                            cursor: 'pointer',
-                                            flexShrink: 0
-                                        }}
-                                    >
-                                        <X size={18} />
-                                    </button>
-                                </div>
-                            ))}
-                            <button
-                                type="button"
-                                onClick={() => addArrayItem(key, '')}
-                                style={{
-                                    padding: '0.75rem',
-                                    background: '#f1f5f9',
-                                    border: '1px dashed #94a3b8',
-                                    borderRadius: '0.5rem',
-                                    color: '#64748b',
-                                    cursor: 'pointer',
-                                    fontSize: '0.9rem',
-                                    fontWeight: 600
-                                }}
-                            >
-                                + Add Image URL
-                            </button>
-                        </div>
-                        {value && value.length > 0 && (
-                            <div style={{
-                                display: 'grid',
-                                gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
-                                gap: '0.75rem',
-                                marginTop: '1rem'
-                            }}>
-                                {value.map((url, idx) => url && (
-                                    <img
-                                        key={idx}
-                                        src={url}
-                                        alt={`Gallery ${idx + 1}`}
-                                        style={{
-                                            width: '100%',
-                                            height: '150px',
-                                            borderRadius: '0.5rem',
-                                            border: '1px solid #e2e8f0',
-                                            objectFit: 'cover'
-                                        }}
-                                        onError={(e) => e.target.style.display = 'none'}
-                                    />
-                                ))}
-                            </div>
-                        )}
+                        <ImageUpload
+                            value={value || []}
+                            onChange={(urls) => updateField(key, urls)}
+                            label={`${label} ${required ? '*' : ''}`}
+                            folder={`hostizzy/${endpoint.split('/').pop()}`}
+                            multiple={true}
+                            maxFiles={10}
+                        />
                         {errorMessage}
                     </div>
                 );
