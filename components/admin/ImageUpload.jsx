@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Upload, X, Image as ImageIcon, Loader } from 'lucide-react';
 
 /**
@@ -19,6 +19,15 @@ const ImageUpload = ({
   const [preview, setPreview] = useState(value);
   const [previews, setPreviews] = useState(Array.isArray(value) ? value : []);
   const fileInputRef = useRef(null);
+
+  // Sync internal state with prop changes
+  useEffect(() => {
+    if (multiple) {
+      setPreviews(Array.isArray(value) ? value : []);
+    } else {
+      setPreview(value || '');
+    }
+  }, [value, multiple]);
 
   const handleFileSelect = async (e) => {
     const files = Array.from(e.target.files);
