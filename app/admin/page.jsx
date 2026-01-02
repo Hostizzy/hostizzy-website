@@ -227,7 +227,7 @@ export default function Admin() {
 
     const handleLogout = () => {
         localStorage.removeItem('adminToken');
-        router.push('/login');
+        router.push('/');
     };
 
     const handleAddSEO = () => {
