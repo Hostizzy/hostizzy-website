@@ -1,20 +1,24 @@
 import { NextResponse } from 'next/server';
 import { withAuth } from '@/lib/auth';
-import { DATA_FILES, readJson, writeJson } from '@/lib/db';
+import { findById, updateById, deleteById } from '@/lib/mongodb';
 import { errorResponse, successResponse, getRequestBody } from '@/lib/utils';
+
+const COLLECTION = 'properties';
 
 // GET /api/properties/:id - Get single property (public)
 export async function GET(request, { params }) {
   try {
     const { id } = params;
-    const properties = readJson(DATA_FILES.PROPERTIES);
-    const property = properties.find(p => p.id == id);
+    const property = await findById(COLLECTION, id);
 
     if (!property) {
       return errorResponse('Property not found', 404);
     }
 
-    return successResponse(property);
+    // Remove MongoDB _id from response
+    const { _id, ...sanitized } = property;
+
+    return successResponse(sanitized);
   } catch (error) {
     console.error('Error fetching property:', error);
     return errorResponse('Failed to load property', 500);
@@ -31,17 +35,23 @@ const handlePUT = async (request, { params }) => {
       return errorResponse('Request body is required', 400);
     }
 
-    let properties = readJson(DATA_FILES.PROPERTIES);
-    const index = properties.findIndex(p => p.id == id);
+    // Add updatedAt timestamp
+    const updates = {
+      ...body,
+      updatedAt: new Date().toISOString()
+    };
 
-    if (index === -1) {
+    const result = await updateById(COLLECTION, id, updates);
+
+    if (result.matchedCount === 0) {
       return errorResponse('Property not found', 404);
     }
 
-    properties[index] = { ...properties[index], ...body };
-    writeJson(DATA_FILES.PROPERTIES, properties);
+    // Fetch updated property
+    const updated = await findById(COLLECTION, id);
+    const { _id, ...sanitized } = updated;
 
-    return successResponse(properties[index]);
+    return successResponse(sanitized);
   } catch (error) {
     console.error('Error updating property:', error);
     return errorResponse('Failed to update property', 500);
@@ -52,14 +62,12 @@ const handlePUT = async (request, { params }) => {
 const handleDELETE = async (request, { params }) => {
   try {
     const { id } = params;
-    let properties = readJson(DATA_FILES.PROPERTIES);
-    const newProperties = properties.filter(p => p.id != id);
+    const result = await deleteById(COLLECTION, id);
 
-    if (properties.length === newProperties.length) {
+    if (result.deletedCount === 0) {
       return errorResponse('Property not found', 404);
     }
 
-    writeJson(DATA_FILES.PROPERTIES, newProperties);
     return successResponse({ success: true });
   } catch (error) {
     console.error('Error deleting property:', error);

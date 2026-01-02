@@ -1,31 +1,31 @@
 import { NextResponse } from 'next/server';
 import { withAuth } from '@/lib/auth';
-import { DATA_FILES, readJson, writeJson } from '@/lib/db';
-import { errorResponse, successResponse, getRequestBody, getQueryParams, filterByQuery, generateId } from '@/lib/utils';
+import { findAll, insertOne, getNextId } from '@/lib/mongodb';
+import { errorResponse, successResponse, getRequestBody, getQueryParams } from '@/lib/utils';
+
+const COLLECTION = 'properties';
 
 // GET /api/properties - Get all properties (public)
 export async function GET(request) {
   try {
-    const properties = readJson(DATA_FILES.PROPERTIES);
     const query = getQueryParams(request);
+    let filter = {};
 
-    let filtered = properties;
-
-    // Filter by category
+    // Build MongoDB filter
     if (query.category && query.category !== 'All') {
-      filtered = filtered.filter(p =>
-        p.type?.toLowerCase() === query.category.toLowerCase()
-      );
+      filter.type = { $regex: new RegExp(query.category, 'i') };
     }
 
-    // Filter by location
     if (query.location && query.location !== 'All') {
-      filtered = filtered.filter(p =>
-        p.location?.includes(query.location)
-      );
+      filter.location = { $regex: new RegExp(query.location, 'i') };
     }
 
-    return successResponse(filtered);
+    const properties = await findAll(COLLECTION, filter);
+
+    // Remove MongoDB _id from response
+    const sanitized = properties.map(({ _id, ...rest }) => rest);
+
+    return successResponse(sanitized);
   } catch (error) {
     console.error('Error fetching properties:', error);
     return errorResponse('Failed to load properties', 500);
@@ -41,19 +41,23 @@ const handlePOST = async (request) => {
       return errorResponse('Request body is required', 400);
     }
 
-    const properties = readJson(DATA_FILES.PROPERTIES);
+    const nextId = await getNextId(COLLECTION);
 
     const newProperty = {
-      id: generateId(),
+      id: nextId,
       ...body,
       rating: body.rating || 5.0,
-      reviews: body.reviews || 0
+      reviews: body.reviews || 0,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
     };
 
-    properties.push(newProperty);
-    writeJson(DATA_FILES.PROPERTIES, properties);
+    const result = await insertOne(COLLECTION, newProperty);
 
-    return successResponse(newProperty, 201);
+    // Remove MongoDB _id from response
+    const { _id, ...sanitizedResult } = result;
+
+    return successResponse(sanitizedResult, 201);
   } catch (error) {
     console.error('Error creating property:', error);
     return errorResponse('Failed to create property', 500);

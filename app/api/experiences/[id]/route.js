@@ -1,20 +1,24 @@
 import { NextResponse } from 'next/server';
 import { withAuth } from '@/lib/auth';
-import { DATA_FILES, readJson, writeJson } from '@/lib/db';
+import { findById, updateById, deleteById } from '@/lib/mongodb';
 import { errorResponse, successResponse, getRequestBody } from '@/lib/utils';
+
+const COLLECTION = 'experiences';
 
 // GET /api/experiences/:id - Get single experience (public)
 export async function GET(request, { params }) {
   try {
     const { id } = params;
-    const experiences = readJson(DATA_FILES.EXPERIENCES);
-    const exp = experiences.find(e => e.id == id);
+    const exp = await findById(COLLECTION, id);
 
     if (!exp) {
       return errorResponse('Experience not found', 404);
     }
 
-    return successResponse(exp);
+    // Remove MongoDB _id from response
+    const { _id, ...sanitized } = exp;
+
+    return successResponse(sanitized);
   } catch (error) {
     console.error('Error fetching experience:', error);
     return errorResponse('Failed to load experience', 500);
@@ -31,17 +35,23 @@ const handlePUT = async (request, { params }) => {
       return errorResponse('Request body is required', 400);
     }
 
-    let experiences = readJson(DATA_FILES.EXPERIENCES);
-    const index = experiences.findIndex(e => e.id == id);
+    // Add updatedAt timestamp
+    const updates = {
+      ...body,
+      updatedAt: new Date().toISOString()
+    };
 
-    if (index === -1) {
+    const result = await updateById(COLLECTION, id, updates);
+
+    if (result.matchedCount === 0) {
       return errorResponse('Experience not found', 404);
     }
 
-    experiences[index] = { ...experiences[index], ...body };
-    writeJson(DATA_FILES.EXPERIENCES, experiences);
+    // Fetch updated experience
+    const updated = await findById(COLLECTION, id);
+    const { _id, ...sanitized } = updated;
 
-    return successResponse(experiences[index]);
+    return successResponse(sanitized);
   } catch (error) {
     console.error('Error updating experience:', error);
     return errorResponse('Failed to update experience', 500);
@@ -52,14 +62,12 @@ const handlePUT = async (request, { params }) => {
 const handleDELETE = async (request, { params }) => {
   try {
     const { id } = params;
-    let experiences = readJson(DATA_FILES.EXPERIENCES);
-    const newExps = experiences.filter(e => e.id != id);
+    const result = await deleteById(COLLECTION, id);
 
-    if (experiences.length === newExps.length) {
+    if (result.deletedCount === 0) {
       return errorResponse('Experience not found', 404);
     }
 
-    writeJson(DATA_FILES.EXPERIENCES, newExps);
     return successResponse({ success: true });
   } catch (error) {
     console.error('Error deleting experience:', error);

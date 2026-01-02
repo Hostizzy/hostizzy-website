@@ -1,13 +1,19 @@
 import { NextResponse } from 'next/server';
 import { withAuth } from '@/lib/auth';
-import { DATA_FILES, readJson, writeJson } from '@/lib/db';
-import { errorResponse, successResponse, getRequestBody, generateId } from '@/lib/utils';
+import { findAll, insertOne, getNextId } from '@/lib/mongodb';
+import { errorResponse, successResponse, getRequestBody } from '@/lib/utils';
+
+const COLLECTION = 'experiences';
 
 // GET /api/experiences - Get all experiences (public)
 export async function GET(request) {
   try {
-    const experiences = readJson(DATA_FILES.EXPERIENCES);
-    return successResponse(experiences);
+    const experiences = await findAll(COLLECTION);
+
+    // Remove MongoDB _id from response
+    const sanitized = experiences.map(({ _id, ...rest }) => rest);
+
+    return successResponse(sanitized);
   } catch (error) {
     console.error('Error fetching experiences:', error);
     return errorResponse('Failed to load experiences', 500);
@@ -23,17 +29,21 @@ const handlePOST = async (request) => {
       return errorResponse('Request body is required', 400);
     }
 
-    const experiences = readJson(DATA_FILES.EXPERIENCES);
+    const nextId = await getNextId(COLLECTION);
 
     const newExp = {
-      id: generateId(),
-      ...body
+      id: nextId,
+      ...body,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
     };
 
-    experiences.push(newExp);
-    writeJson(DATA_FILES.EXPERIENCES, experiences);
+    const result = await insertOne(COLLECTION, newExp);
 
-    return successResponse(newExp, 201);
+    // Remove MongoDB _id from response
+    const { _id, ...sanitized } = result;
+
+    return successResponse(sanitized, 201);
   } catch (error) {
     console.error('Error creating experience:', error);
     return errorResponse('Failed to create experience', 500);
