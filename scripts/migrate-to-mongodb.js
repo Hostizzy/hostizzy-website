@@ -42,15 +42,14 @@ async function migrateData() {
 
     const db = client.db(DB_NAME);
 
-    // Read db.json
-    const dbPath = path.join(__dirname, '..', 'db.json');
-    if (!fs.existsSync(dbPath)) {
-      console.error(`❌ db.json not found at ${dbPath}`);
+    // Read data from server/data directory
+    const dataDir = path.join(__dirname, '..', 'server', 'data');
+    if (!fs.existsSync(dataDir)) {
+      console.error(`❌ Data directory not found at ${dataDir}`);
       process.exit(1);
     }
 
-    const dbData = JSON.parse(fs.readFileSync(dbPath, 'utf-8'));
-    console.log('📖 Read db.json successfully\n');
+    console.log('📖 Reading data files from server/data/\n');
 
     // Collections to migrate
     const collections = [
@@ -68,8 +67,18 @@ async function migrateData() {
     let totalMigrated = 0;
 
     for (const collectionName of collections) {
-      if (dbData[collectionName] && Array.isArray(dbData[collectionName])) {
-        const data = dbData[collectionName];
+      // Read individual JSON files
+      const filePath = path.join(dataDir, `${collectionName}.json`);
+
+      if (!fs.existsSync(filePath)) {
+        console.log(`⏭️  Skipping ${collectionName} (file not found)`);
+        continue;
+      }
+
+      const fileData = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+      const data = Array.isArray(fileData) ? fileData : [];
+
+      if (data && Array.isArray(data)) {
 
         if (data.length === 0) {
           console.log(`⏭️  Skipping ${collectionName} (empty)`);
