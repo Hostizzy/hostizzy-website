@@ -164,9 +164,9 @@ const Training = () => {
                                 <br />to build a successful hosting business in India
                             </p>
 
-                            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginBottom: '3rem', flexWrap: 'wrap' }}>
+                            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginBottom: '2rem', flexWrap: 'wrap' }}>
                                 <button className="btn btn-secondary" style={{ fontSize: '1.1rem', padding: '1rem 2rem' }}>
-                                    Start Free Course
+                                    Join Waitlist - Early Bird Offer
                                 </button>
                                 <button className="btn btn-outline" style={{
                                     fontSize: '1.1rem',
@@ -175,36 +175,25 @@ const Training = () => {
                                     color: 'white',
                                     border: '2px solid rgba(255,255,255,0.3)'
                                 }}>
-                                    View Advanced Programs
+                                    View Course Details
                                 </button>
                             </div>
 
-                            {/* Stats */}
+                            {/* Launch Badge */}
                             <div style={{
-                                display: 'grid',
-                                gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-                                gap: '2rem',
-                                marginTop: '3rem',
-                                padding: '2rem',
-                                background: 'rgba(255,255,255,0.05)',
+                                display: 'inline-block',
+                                marginTop: '2rem',
+                                padding: '1rem 2rem',
+                                background: 'rgba(255,255,255,0.1)',
                                 borderRadius: '1rem',
-                                backdropFilter: 'blur(10px)'
+                                backdropFilter: 'blur(10px)',
+                                border: '1px solid rgba(255,255,255,0.2)'
                             }}>
-                                <div>
-                                    <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#FE5858' }}>500+</div>
-                                    <div style={{ fontSize: '0.9rem', opacity: 0.8 }}>Hosts Trained</div>
+                                <div style={{ fontSize: '1.1rem', fontWeight: 700, color: 'white', marginBottom: '0.25rem' }}>
+                                    🚀 Launching Soon
                                 </div>
-                                <div>
-                                    <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#FE5858' }}>4.9★</div>
-                                    <div style={{ fontSize: '0.9rem', opacity: 0.8 }}>Average Rating</div>
-                                </div>
-                                <div>
-                                    <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#FE5858' }}>85%</div>
-                                    <div style={{ fontSize: '0.9rem', opacity: 0.8 }}>Completion Rate</div>
-                                </div>
-                                <div>
-                                    <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#FE5858' }}>₹50K+</div>
-                                    <div style={{ fontSize: '0.9rem', opacity: 0.8 }}>Avg. Monthly Earnings</div>
+                                <div style={{ fontSize: '0.9rem', opacity: 0.8 }}>
+                                    Join the waitlist for exclusive early bird pricing
                                 </div>
                             </div>
                         </div>
@@ -631,11 +620,11 @@ const Training = () => {
                         <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
                             <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Ready to Start Your Hosting Journey?</h2>
                             <p style={{ fontSize: '1.2rem', opacity: 0.9, marginBottom: '2rem' }}>
-                                Join 500+ successful hosts who started with our free course
+                                Be among the first to access India's most comprehensive host training program
                             </p>
                             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                                 <button className="btn btn-secondary" style={{ fontSize: '1.1rem', padding: '1rem 2rem' }}>
-                                    Start Free Course Now
+                                    Join Waitlist Now
                                 </button>
                                 <Link href="/contact" style={{ textDecoration: 'none' }}>
                                     <button className="btn btn-outline" style={{

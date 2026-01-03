@@ -178,7 +178,7 @@ const Weddings = () => {
                                 </a>
                             </div>
 
-                            {/* Trust Stats */}
+                            {/* Real Performance Stats */}
                             <div style={{
                                 display: 'grid',
                                 gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
@@ -191,20 +191,37 @@ const Weddings = () => {
                                 border: '1px solid rgba(255,255,255,0.2)'
                             }}>
                                 <div>
-                                    <div style={{ fontSize: '2.5rem', fontWeight: 900, color: 'white' }}>25+</div>
-                                    <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>Wedding Venues</div>
-                                </div>
-                                <div>
-                                    <div style={{ fontSize: '2.5rem', fontWeight: 900, color: 'white' }}>150+</div>
+                                    <div style={{ fontSize: '2.5rem', fontWeight: 900, color: 'white' }}>40+</div>
                                     <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>Weddings Hosted</div>
                                 </div>
                                 <div>
-                                    <div style={{ fontSize: '2.5rem', fontWeight: 900, color: 'white' }}>4.9★</div>
-                                    <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>Guest Rating</div>
+                                    <div style={{ fontSize: '2.5rem', fontWeight: 900, color: 'white' }}>15,000+</div>
+                                    <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>Guests Served</div>
                                 </div>
                                 <div>
-                                    <div style={{ fontSize: '2.5rem', fontWeight: 900, color: 'white' }}>50-200</div>
-                                    <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>Guest Capacity</div>
+                                    <div style={{ fontSize: '2.5rem', fontWeight: 900, color: 'white' }}>₹1.5 CR</div>
+                                    <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>Total GMV</div>
+                                </div>
+                                <div>
+                                    <div style={{ fontSize: '2.5rem', fontWeight: 900, color: 'white' }}>2</div>
+                                    <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>Exclusive Venues</div>
+                                </div>
+                            </div>
+
+                            {/* Expansion Badge */}
+                            <div style={{
+                                marginTop: '2rem',
+                                padding: '1.25rem 2rem',
+                                background: 'linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05))',
+                                borderRadius: '1rem',
+                                border: '1px solid rgba(255,255,255,0.25)',
+                                textAlign: 'center'
+                            }}>
+                                <div style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.25rem' }}>
+                                    🚀 Now Expanding to Delhi NCR
+                                </div>
+                                <div style={{ fontSize: '0.95rem', opacity: 0.9 }}>
+                                    Exclusive & non-exclusive venues coming soon
                                 </div>
                             </div>
                         </div>
