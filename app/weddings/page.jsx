@@ -985,11 +985,12 @@ const Weddings = () => {
                                             : calculator.decoration === 'standard' ? 800000
                                             : calculator.decoration === 'premium' ? 1200000 : 1500000;
 
-                                        // Room charges: Max 20 guests accommodation, extra charges for 20+
+                                        // Room charges: Max 60 guests accommodation, extra charges for 20+
                                         let roomCharges = 0;
                                         if (calculator.needRooms && calculator.guests > 20) {
-                                            const extraGuests = calculator.guests - 20;
-                                            roomCharges = extraGuests * 2000; // ₹2000/extra guest beyond 20
+                                            const accommodationGuests = Math.min(calculator.guests, 60); // Cap at 60
+                                            const extraGuests = accommodationGuests - 20;
+                                            roomCharges = extraGuests * 2000; // ₹2000/extra guest beyond 20 (up to 60 max)
                                         }
 
                                         const total = venueRental + foodCost + decorationCost + roomCharges;
@@ -1012,7 +1013,10 @@ const Weddings = () => {
                                                 </div>
                                                 {calculator.needRooms && calculator.guests > 20 && (
                                                     <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '0.5rem', borderBottom: '1px solid rgba(254, 88, 88, 0.1)' }}>
-                                                        <span style={{ color: '#64748b' }}>Extra Room Charges ({calculator.guests - 20} guests)</span>
+                                                        <span style={{ color: '#64748b' }}>
+                                                            Extra Room Charges ({Math.min(calculator.guests, 60) - 20} guests)
+                                                            {calculator.guests > 60 && <span style={{ fontSize: '0.75rem', display: 'block', color: '#ef4444' }}>Max 60 guests accommodation</span>}
+                                                        </span>
                                                         <span style={{ fontWeight: 600, color: '#0f172a' }}>₹{(roomCharges / 100000).toFixed(1)}L</span>
                                                     </div>
                                                 )}
@@ -1041,8 +1045,8 @@ const Weddings = () => {
                                 }}>
                                     <strong style={{ color: '#0f172a', display: 'block', marginBottom: '0.5rem' }}>Pricing Details:</strong>
                                     • Venue: Flat ₹75,000 for &lt;70 guests, ₹1,000/head for 70+ guests<br />
-                                    • Accommodation: Up to 20 guests included<br />
-                                    • Extra room charges for 20+ guests (₹2,000/guest)<br />
+                                    • Accommodation: Up to 20 guests included (max 60 total)<br />
+                                    • Extra room charges for 21-60 guests (₹2,000/guest)<br />
                                     • Food: ₹1,500/head per meal<br />
                                     • Decoration: ₹4L-₹15L based on preference
                                 </div>
