@@ -16,8 +16,18 @@ const Weddings = () => {
         phone: '',
         weddingDate: '',
         guestCount: '',
+        daysRequired: '',
+        budget: '',
         message: '',
         propertyInterest: ''
+    });
+
+    // Calculator state
+    const [calculator, setCalculator] = useState({
+        guests: 50,
+        needRooms: false,
+        meals: 2,
+        decoration: 'basic'
     });
 
     useEffect(() => {
@@ -85,8 +95,8 @@ const Weddings = () => {
         },
         {
             icon: <Users size={32} />,
-            title: 'Accommodates 50-200 Guests',
-            description: 'Spacious properties with multiple rooms perfect for hosting your entire wedding party and family'
+            title: 'Lawn Capacity Up to 800 Guests',
+            description: 'Spacious outdoor lawns perfect for grand celebrations, accommodating intimate gatherings to large wedding ceremonies'
         },
         {
             icon: <Camera size={32} />,
@@ -123,7 +133,11 @@ const Weddings = () => {
             {/* Hero Section */}
             <section className="section bg-primary text-white" style={{
                 padding: 'calc(var(--header-height) + 4rem) 0 5rem',
-                background: 'linear-gradient(135deg, #FE5858 0%, #EE4B4B 100%)',
+                background: 'linear-gradient(135deg, rgba(254, 88, 88, 0.95) 0%, rgba(238, 75, 75, 0.90) 100%)',
+                backgroundImage: 'url(https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=2000)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundBlendMode: 'multiply',
                 position: 'relative',
                 overflow: 'hidden'
             }}>
@@ -133,7 +147,7 @@ const Weddings = () => {
                     left: 0,
                     right: 0,
                     bottom: 0,
-                    background: 'radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 50%)',
+                    background: 'radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%)',
                     pointerEvents: 'none'
                 }}></div>
 
@@ -203,7 +217,7 @@ const Weddings = () => {
                                     <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>Total GMV</div>
                                 </div>
                                 <div>
-                                    <div style={{ fontSize: '2.5rem', fontWeight: 900, color: 'white' }}>2</div>
+                                    <div style={{ fontSize: '2.5rem', fontWeight: 900, color: 'white' }}>4-5</div>
                                     <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>Exclusive Venues</div>
                                 </div>
                             </div>
@@ -420,33 +434,112 @@ const Weddings = () => {
             </section>
 
             {/* Inquiry Form */}
-            <section id="inquiry" className="section bg-secondary">
-                <div className="container">
+            <section id="inquiry" className="section" style={{
+                background: 'linear-gradient(135deg, #FEF1F1 0%, #FCE4E4 100%)',
+                position: 'relative',
+                overflow: 'hidden'
+            }}>
+                {/* Decorative elements */}
+                <div style={{
+                    position: 'absolute',
+                    top: '-50px',
+                    right: '-50px',
+                    width: '300px',
+                    height: '300px',
+                    background: 'radial-gradient(circle, rgba(254, 88, 88, 0.1) 0%, transparent 70%)',
+                    borderRadius: '50%',
+                    pointerEvents: 'none'
+                }}></div>
+                <div style={{
+                    position: 'absolute',
+                    bottom: '-100px',
+                    left: '-100px',
+                    width: '400px',
+                    height: '400px',
+                    background: 'radial-gradient(circle, rgba(254, 88, 88, 0.08) 0%, transparent 70%)',
+                    borderRadius: '50%',
+                    pointerEvents: 'none'
+                }}></div>
+
+                <div className="container" style={{ position: 'relative', zIndex: 1 }}>
                     <ScrollReveal>
-                        <div style={{ maxWidth: '700px', margin: '0 auto' }}>
+                        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+                            {/* Header */}
                             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-                                <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Plan Your Dream Wedding</h2>
-                                <p style={{ fontSize: '1.1rem', color: 'var(--color-muted)' }}>
-                                    Tell us about your vision and our wedding specialist will contact you within 24 hours
+                                <div style={{
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: '0.5rem',
+                                    padding: '0.5rem 1.5rem',
+                                    background: 'rgba(254, 88, 88, 0.1)',
+                                    borderRadius: '2rem',
+                                    marginBottom: '1.5rem',
+                                    border: '1px solid rgba(254, 88, 88, 0.2)'
+                                }}>
+                                    <Heart size={16} color="#FE5858" />
+                                    <span style={{ fontSize: '0.9rem', fontWeight: 600, color: '#FE5858' }}>Let's Make It Magical</span>
+                                </div>
+                                <h2 style={{ fontSize: '2.75rem', marginBottom: '1rem', fontWeight: 900, color: '#0f172a' }}>
+                                    Plan Your Dream Wedding
+                                </h2>
+                                <p style={{ fontSize: '1.15rem', color: '#64748b', maxWidth: '600px', margin: '0 auto' }}>
+                                    Share your vision with us and our wedding specialist will contact you within 24 hours with personalized venue options
                                 </p>
                             </div>
 
-                            <form onSubmit={handleSubmit} className="card" style={{ padding: '2.5rem' }}>
-                                <div style={{ display: 'grid', gap: '1.5rem' }}>
+                            {/* Form & Calculator Grid */}
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 500px), 1fr))', gap: '2rem', alignItems: 'start' }} className="form-calculator-grid">
+                                {/* Form Card */}
+                                <form onSubmit={handleSubmit} style={{
+                                    background: 'white',
+                                    borderRadius: '1.5rem',
+                                    padding: '3rem',
+                                    boxShadow: '0 20px 60px rgba(0,0,0,0.08)',
+                                    border: '1px solid rgba(254, 88, 88, 0.1)'
+                                }}>
+                                <div style={{ display: 'grid', gap: '2.5rem' }}>
+                                    {/* Row 1: Name & Email */}
                                     <div className="grid desktop-2-col" style={{ gap: '1.5rem' }}>
-                                        <div className="form-group">
-                                            <label>Your Name *</label>
+                                        <div>
+                                            <label style={{
+                                                display: 'block',
+                                                marginBottom: '0.75rem',
+                                                fontWeight: 600,
+                                                fontSize: '0.95rem',
+                                                color: '#0f172a'
+                                            }}>
+                                                Your Name <span style={{ color: '#FE5858' }}>*</span>
+                                            </label>
                                             <input
                                                 type="text"
                                                 name="name"
                                                 value={formData.name}
                                                 onChange={handleChange}
                                                 required
-                                                placeholder="Enter your name"
+                                                placeholder="Enter your full name"
+                                                style={{
+                                                    width: '100%',
+                                                    padding: '1rem 1.25rem',
+                                                    fontSize: '1rem',
+                                                    border: '2px solid #e2e8f0',
+                                                    borderRadius: '0.75rem',
+                                                    transition: 'all 0.3s ease',
+                                                    outline: 'none'
+                                                }}
+                                                onFocus={(e) => e.target.style.borderColor = '#FE5858'}
+                                                onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
                                             />
                                         </div>
-                                        <div className="form-group">
-                                            <label>Email Address *</label>
+                                        <div>
+                                            <label style={{
+                                                display: 'block',
+                                                marginBottom: '0.75rem',
+                                                fontWeight: 600,
+                                                fontSize: '0.95rem',
+                                                color: '#0f172a'
+                                            }}>
+                                                Email Address <span style={{ color: '#FE5858' }}>*</span>
+                                            </label>
                                             <input
                                                 type="email"
                                                 name="email"
@@ -454,13 +547,33 @@ const Weddings = () => {
                                                 onChange={handleChange}
                                                 required
                                                 placeholder="your@email.com"
+                                                style={{
+                                                    width: '100%',
+                                                    padding: '1rem 1.25rem',
+                                                    fontSize: '1rem',
+                                                    border: '2px solid #e2e8f0',
+                                                    borderRadius: '0.75rem',
+                                                    transition: 'all 0.3s ease',
+                                                    outline: 'none'
+                                                }}
+                                                onFocus={(e) => e.target.style.borderColor = '#FE5858'}
+                                                onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
                                             />
                                         </div>
                                     </div>
 
+                                    {/* Row 2: Phone & Wedding Date */}
                                     <div className="grid desktop-2-col" style={{ gap: '1.5rem' }}>
-                                        <div className="form-group">
-                                            <label>Phone Number *</label>
+                                        <div>
+                                            <label style={{
+                                                display: 'block',
+                                                marginBottom: '0.75rem',
+                                                fontWeight: 600,
+                                                fontSize: '0.95rem',
+                                                color: '#0f172a'
+                                            }}>
+                                                Phone Number <span style={{ color: '#FE5858' }}>*</span>
+                                            </label>
                                             <input
                                                 type="tel"
                                                 name="phone"
@@ -468,62 +581,486 @@ const Weddings = () => {
                                                 onChange={handleChange}
                                                 required
                                                 placeholder="+91 98765 43210"
+                                                style={{
+                                                    width: '100%',
+                                                    padding: '1rem 1.25rem',
+                                                    fontSize: '1rem',
+                                                    border: '2px solid #e2e8f0',
+                                                    borderRadius: '0.75rem',
+                                                    transition: 'all 0.3s ease',
+                                                    outline: 'none'
+                                                }}
+                                                onFocus={(e) => e.target.style.borderColor = '#FE5858'}
+                                                onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
                                             />
                                         </div>
-                                        <div className="form-group">
-                                            <label>Wedding Date</label>
+                                        <div>
+                                            <label style={{
+                                                display: 'block',
+                                                marginBottom: '0.75rem',
+                                                fontWeight: 600,
+                                                fontSize: '0.95rem',
+                                                color: '#0f172a'
+                                            }}>
+                                                Wedding Date
+                                            </label>
                                             <input
                                                 type="date"
                                                 name="weddingDate"
                                                 value={formData.weddingDate}
                                                 onChange={handleChange}
+                                                style={{
+                                                    width: '100%',
+                                                    padding: '1rem 1.25rem',
+                                                    fontSize: '1rem',
+                                                    border: '2px solid #e2e8f0',
+                                                    borderRadius: '0.75rem',
+                                                    transition: 'all 0.3s ease',
+                                                    outline: 'none'
+                                                }}
+                                                onFocus={(e) => e.target.style.borderColor = '#FE5858'}
+                                                onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
                                             />
                                         </div>
                                     </div>
 
-                                    <div className="form-group">
-                                        <label>Expected Guest Count</label>
-                                        <select name="guestCount" value={formData.guestCount} onChange={handleChange}>
-                                            <option value="">Select guest count</option>
-                                            <option value="50-100">50-100 guests</option>
-                                            <option value="100-150">100-150 guests</option>
-                                            <option value="150-200">150-200 guests</option>
-                                            <option value="200+">200+ guests</option>
-                                        </select>
+                                    {/* Row 3: Guest Count & Days Required */}
+                                    <div className="grid desktop-2-col" style={{ gap: '1.5rem' }}>
+                                        <div>
+                                            <label style={{
+                                                display: 'block',
+                                                marginBottom: '0.75rem',
+                                                fontWeight: 600,
+                                                fontSize: '0.95rem',
+                                                color: '#0f172a'
+                                            }}>
+                                                Expected Guest Count <span style={{ color: '#FE5858' }}>*</span>
+                                            </label>
+                                            <select
+                                                name="guestCount"
+                                                value={formData.guestCount}
+                                                onChange={handleChange}
+                                                required
+                                                style={{
+                                                    width: '100%',
+                                                    padding: '1rem 1.25rem',
+                                                    fontSize: '1rem',
+                                                    border: '2px solid #e2e8f0',
+                                                    borderRadius: '0.75rem',
+                                                    transition: 'all 0.3s ease',
+                                                    outline: 'none',
+                                                    backgroundColor: 'white',
+                                                    cursor: 'pointer'
+                                                }}
+                                                onFocus={(e) => e.target.style.borderColor = '#FE5858'}
+                                                onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
+                                            >
+                                                <option value="">Select guest count</option>
+                                                <option value="50-100">50-100 guests</option>
+                                                <option value="100-150">100-150 guests</option>
+                                                <option value="150-200">150-200 guests</option>
+                                                <option value="200-300">200-300 guests</option>
+                                                <option value="300+">300+ guests</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label style={{
+                                                display: 'block',
+                                                marginBottom: '0.75rem',
+                                                fontWeight: 600,
+                                                fontSize: '0.95rem',
+                                                color: '#0f172a'
+                                            }}>
+                                                Days Required <span style={{ color: '#FE5858' }}>*</span>
+                                            </label>
+                                            <select
+                                                name="daysRequired"
+                                                value={formData.daysRequired}
+                                                onChange={handleChange}
+                                                required
+                                                style={{
+                                                    width: '100%',
+                                                    padding: '1rem 1.25rem',
+                                                    fontSize: '1rem',
+                                                    border: '2px solid #e2e8f0',
+                                                    borderRadius: '0.75rem',
+                                                    transition: 'all 0.3s ease',
+                                                    outline: 'none',
+                                                    backgroundColor: 'white',
+                                                    cursor: 'pointer'
+                                                }}
+                                                onFocus={(e) => e.target.style.borderColor = '#FE5858'}
+                                                onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
+                                            >
+                                                <option value="">Select duration</option>
+                                                <option value="1">1 Day</option>
+                                                <option value="2">2 Days</option>
+                                                <option value="3">3 Days</option>
+                                                <option value="4">4 Days</option>
+                                                <option value="5+">5+ Days</option>
+                                            </select>
+                                        </div>
                                     </div>
 
-                                    <div className="form-group">
-                                        <label>Preferred Property (Optional)</label>
-                                        <select name="propertyInterest" value={formData.propertyInterest} onChange={handleChange}>
-                                            <option value="">Any available venue</option>
-                                            {properties.map(p => (
-                                                <option key={p.id} value={p.title}>{p.title} - {p.location}</option>
-                                            ))}
-                                        </select>
+                                    {/* Row 4: Budget & Preferred Venue */}
+                                    <div className="grid desktop-2-col" style={{ gap: '1.5rem' }}>
+                                        <div>
+                                            <label style={{
+                                                display: 'block',
+                                                marginBottom: '0.75rem',
+                                                fontWeight: 600,
+                                                fontSize: '0.95rem',
+                                                color: '#0f172a'
+                                            }}>
+                                                Your Budget <span style={{ color: '#FE5858' }}>*</span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="budget"
+                                                value={formData.budget}
+                                                onChange={handleChange}
+                                                required
+                                                placeholder="e.g., ₹10-12 Lakhs or ₹15 Lakhs"
+                                                style={{
+                                                    width: '100%',
+                                                    padding: '1rem 1.25rem',
+                                                    fontSize: '1rem',
+                                                    border: '2px solid #e2e8f0',
+                                                    borderRadius: '0.75rem',
+                                                    transition: 'all 0.3s ease',
+                                                    outline: 'none'
+                                                }}
+                                                onFocus={(e) => e.target.style.borderColor = '#FE5858'}
+                                                onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label style={{
+                                                display: 'block',
+                                                marginBottom: '0.75rem',
+                                                fontWeight: 600,
+                                                fontSize: '0.95rem',
+                                                color: '#0f172a'
+                                            }}>
+                                                Preferred Venue
+                                            </label>
+                                            <select
+                                                name="propertyInterest"
+                                                value={formData.propertyInterest}
+                                                onChange={handleChange}
+                                                style={{
+                                                    width: '100%',
+                                                    padding: '1rem 1.25rem',
+                                                    fontSize: '1rem',
+                                                    border: '2px solid #e2e8f0',
+                                                    borderRadius: '0.75rem',
+                                                    transition: 'all 0.3s ease',
+                                                    outline: 'none',
+                                                    backgroundColor: 'white',
+                                                    cursor: 'pointer'
+                                                }}
+                                                onFocus={(e) => e.target.style.borderColor = '#FE5858'}
+                                                onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
+                                            >
+                                                <option value="">Any available venue</option>
+                                                {properties.map(p => (
+                                                    <option key={p.id} value={p.title}>{p.title} - {p.location}</option>
+                                                ))}
+                                            </select>
+                                        </div>
                                     </div>
 
-                                    <div className="form-group">
-                                        <label>Tell us about your wedding vision</label>
+                                    {/* Row 5: Message */}
+                                    <div>
+                                        <label style={{
+                                            display: 'block',
+                                            marginBottom: '0.75rem',
+                                            fontWeight: 600,
+                                            fontSize: '0.95rem',
+                                            color: '#0f172a'
+                                        }}>
+                                            Tell Us About Your Wedding Vision
+                                        </label>
                                         <textarea
                                             name="message"
                                             value={formData.message}
                                             onChange={handleChange}
-                                            rows="4"
-                                            placeholder="Share details about your dream wedding, preferred dates, budget, specific requirements..."
+                                            rows="6"
+                                            placeholder="Share your dream wedding details: themes, cultural preferences, special requirements, or any specific requests you have in mind..."
+                                            style={{
+                                                width: '100%',
+                                                padding: '1rem 1.25rem',
+                                                fontSize: '1rem',
+                                                border: '2px solid #e2e8f0',
+                                                borderRadius: '0.75rem',
+                                                transition: 'all 0.3s ease',
+                                                outline: 'none',
+                                                lineHeight: '1.6',
+                                                resize: 'vertical',
+                                                fontFamily: 'inherit'
+                                            }}
+                                            onFocus={(e) => e.target.style.borderColor = '#FE5858'}
+                                            onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
                                         ></textarea>
                                     </div>
 
-                                    <button type="submit" className="btn btn-gradient" style={{ width: '100%', fontSize: '1.1rem', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
-                                        <Send size={18} />
+                                    {/* Submit Button */}
+                                    <button
+                                        type="submit"
+                                        className="btn btn-gradient"
+                                        style={{
+                                            width: '100%',
+                                            fontSize: '1.1rem',
+                                            fontWeight: 600,
+                                            padding: '1.25rem',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            gap: '0.75rem',
+                                            borderRadius: '0.75rem',
+                                            boxShadow: '0 10px 30px rgba(254, 88, 88, 0.3)',
+                                            transition: 'all 0.3s ease'
+                                        }}
+                                        onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+                                        onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+                                    >
+                                        <Send size={20} />
                                         Send Wedding Inquiry
                                     </button>
 
-                                    <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)', textAlign: 'center', marginTop: '0.5rem' }}>
-                                        Our wedding specialist will contact you within 24 hours with venue options and pricing
-                                    </p>
+                                    {/* Footer Note */}
+                                    <div style={{
+                                        padding: '1.25rem',
+                                        background: 'linear-gradient(135deg, #FEF1F1 0%, #FCE4E4 100%)',
+                                        borderRadius: '0.75rem',
+                                        textAlign: 'center',
+                                        border: '1px solid rgba(254, 88, 88, 0.1)'
+                                    }}>
+                                        <p style={{
+                                            fontSize: '0.95rem',
+                                            color: '#64748b',
+                                            margin: 0,
+                                            lineHeight: 1.6
+                                        }}>
+                                            <strong style={{ color: '#FE5858' }}>✓</strong> Our wedding specialist will contact you within 24 hours with personalized venue options and pricing
+                                        </p>
+                                    </div>
                                 </div>
                             </form>
+
+                            {/* Budget Calculator Widget */}
+                            <div style={{
+                                background: 'white',
+                                borderRadius: '1.5rem',
+                                padding: '2rem',
+                                boxShadow: '0 20px 60px rgba(0,0,0,0.08)',
+                                border: '1px solid rgba(254, 88, 88, 0.1)',
+                                position: 'sticky',
+                                top: '100px'
+                            }}>
+                                <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem', color: '#0f172a' }}>
+                                    Budget Calculator
+                                </h3>
+                                <p style={{ fontSize: '0.9rem', color: '#64748b', marginBottom: '2rem' }}>
+                                    Get an approximate cost estimate
+                                </p>
+
+                                {/* Calculator Inputs */}
+                                <div style={{ display: 'grid', gap: '1.5rem', marginBottom: '2rem' }}>
+                                    {/* Guest Count */}
+                                    <div>
+                                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, fontSize: '0.9rem', color: '#0f172a' }}>
+                                            Number of Guests
+                                        </label>
+                                        <input
+                                            type="number"
+                                            value={calculator.guests}
+                                            onChange={(e) => setCalculator({...calculator, guests: parseInt(e.target.value) || 0})}
+                                            min="1"
+                                            style={{
+                                                width: '100%',
+                                                padding: '0.75rem 1rem',
+                                                fontSize: '0.95rem',
+                                                border: '2px solid #e2e8f0',
+                                                borderRadius: '0.5rem',
+                                                outline: 'none'
+                                            }}
+                                        />
+                                    </div>
+
+                                    {/* Rooms Needed */}
+                                    <div>
+                                        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                                            <input
+                                                type="checkbox"
+                                                checked={calculator.needRooms}
+                                                onChange={(e) => setCalculator({...calculator, needRooms: e.target.checked})}
+                                                style={{ width: '18px', height: '18px', cursor: 'pointer' }}
+                                            />
+                                            <span style={{ fontWeight: 600, fontSize: '0.9rem', color: '#0f172a' }}>
+                                                Need accommodation (rooms)?
+                                            </span>
+                                        </label>
+                                        {calculator.needRooms && (
+                                            <p style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '0.5rem', marginLeft: '1.5rem' }}>
+                                                {calculator.guests <= 20
+                                                    ? 'Up to 20 guests accommodation included'
+                                                    : `Additional room charges apply for ${calculator.guests - 20} guests beyond 20`}
+                                            </p>
+                                        )}
+                                    </div>
+
+                                    {/* Meals */}
+                                    <div>
+                                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, fontSize: '0.9rem', color: '#0f172a' }}>
+                                            Number of Meals/Person
+                                        </label>
+                                        <select
+                                            value={calculator.meals}
+                                            onChange={(e) => setCalculator({...calculator, meals: parseInt(e.target.value)})}
+                                            style={{
+                                                width: '100%',
+                                                padding: '0.75rem 1rem',
+                                                fontSize: '0.95rem',
+                                                border: '2px solid #e2e8f0',
+                                                borderRadius: '0.5rem',
+                                                outline: 'none',
+                                                backgroundColor: 'white',
+                                                cursor: 'pointer'
+                                            }}
+                                        >
+                                            <option value="1">1 Meal</option>
+                                            <option value="2">2 Meals</option>
+                                            <option value="3">3 Meals</option>
+                                            <option value="4">4 Meals</option>
+                                        </select>
+                                    </div>
+
+                                    {/* Decoration */}
+                                    <div>
+                                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, fontSize: '0.9rem', color: '#0f172a' }}>
+                                            Decoration Level
+                                        </label>
+                                        <select
+                                            value={calculator.decoration}
+                                            onChange={(e) => setCalculator({...calculator, decoration: e.target.value})}
+                                            style={{
+                                                width: '100%',
+                                                padding: '0.75rem 1rem',
+                                                fontSize: '0.95rem',
+                                                border: '2px solid #e2e8f0',
+                                                borderRadius: '0.5rem',
+                                                outline: 'none',
+                                                backgroundColor: 'white',
+                                                cursor: 'pointer'
+                                            }}
+                                        >
+                                            <option value="basic">Basic (₹4L)</option>
+                                            <option value="standard">Standard (₹8L)</option>
+                                            <option value="premium">Premium (₹12L)</option>
+                                            <option value="luxury">Luxury (₹15L)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                {/* Cost Breakdown */}
+                                <div style={{
+                                    padding: '1.5rem',
+                                    background: 'linear-gradient(135deg, #FEF1F1 0%, #FCE4E4 100%)',
+                                    borderRadius: '0.75rem',
+                                    border: '1px solid rgba(254, 88, 88, 0.1)'
+                                }}>
+                                    <h4 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1rem', color: '#0f172a' }}>
+                                        Estimated Cost
+                                    </h4>
+
+                                    {(() => {
+                                        // Venue rental: Flat 75k for <70 guests, ₹1000/guest for 70+
+                                        const venueRental = calculator.guests < 70 ? 75000 : calculator.guests * 1000;
+
+                                        const foodCost = calculator.guests * 1500 * calculator.meals;
+                                        const decorationCost = calculator.decoration === 'basic' ? 400000
+                                            : calculator.decoration === 'standard' ? 800000
+                                            : calculator.decoration === 'premium' ? 1200000 : 1500000;
+
+                                        // Room charges: Max 20 guests accommodation, extra charges for 20+
+                                        let roomCharges = 0;
+                                        if (calculator.needRooms && calculator.guests > 20) {
+                                            const extraGuests = calculator.guests - 20;
+                                            roomCharges = extraGuests * 2000; // ₹2000/extra guest beyond 20
+                                        }
+
+                                        const total = venueRental + foodCost + decorationCost + roomCharges;
+
+                                        return (
+                                            <div style={{ display: 'grid', gap: '0.75rem', fontSize: '0.9rem' }}>
+                                                <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '0.5rem', borderBottom: '1px solid rgba(254, 88, 88, 0.1)' }}>
+                                                    <span style={{ color: '#64748b' }}>
+                                                        {calculator.guests < 70 ? 'Venue Rental (Flat)' : `Venue Rental (${calculator.guests} × ₹1,000)`}
+                                                    </span>
+                                                    <span style={{ fontWeight: 600, color: '#0f172a' }}>₹{(venueRental / 100000).toFixed(2)}L</span>
+                                                </div>
+                                                <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '0.5rem', borderBottom: '1px solid rgba(254, 88, 88, 0.1)' }}>
+                                                    <span style={{ color: '#64748b' }}>Food ({calculator.guests} × {calculator.meals} × ₹1,500)</span>
+                                                    <span style={{ fontWeight: 600, color: '#0f172a' }}>₹{(foodCost / 100000).toFixed(1)}L</span>
+                                                </div>
+                                                <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '0.5rem', borderBottom: '1px solid rgba(254, 88, 88, 0.1)' }}>
+                                                    <span style={{ color: '#64748b' }}>Decoration ({calculator.decoration})</span>
+                                                    <span style={{ fontWeight: 600, color: '#0f172a' }}>₹{(decorationCost / 100000).toFixed(0)}L</span>
+                                                </div>
+                                                {calculator.needRooms && calculator.guests > 20 && (
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '0.5rem', borderBottom: '1px solid rgba(254, 88, 88, 0.1)' }}>
+                                                        <span style={{ color: '#64748b' }}>Extra Room Charges ({calculator.guests - 20} guests)</span>
+                                                        <span style={{ fontWeight: 600, color: '#0f172a' }}>₹{(roomCharges / 100000).toFixed(1)}L</span>
+                                                    </div>
+                                                )}
+                                                <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '0.5rem', marginTop: '0.5rem' }}>
+                                                    <span style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0f172a' }}>Total Estimate</span>
+                                                    <span style={{ fontSize: '1.25rem', fontWeight: 900, color: '#FE5858' }}>₹{(total / 100000).toFixed(1)}L</span>
+                                                </div>
+                                            </div>
+                                        );
+                                    })()}
+
+                                    <p style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '1rem', fontStyle: 'italic' }}>
+                                        * This is an approximate estimate. Actual costs may vary based on specific requirements, seasonality, and customization.
+                                    </p>
+                                </div>
+
+                                {/* Notes */}
+                                <div style={{
+                                    marginTop: '1.5rem',
+                                    padding: '1rem',
+                                    background: '#f8fafc',
+                                    borderRadius: '0.5rem',
+                                    fontSize: '0.8rem',
+                                    color: '#64748b',
+                                    lineHeight: 1.6
+                                }}>
+                                    <strong style={{ color: '#0f172a', display: 'block', marginBottom: '0.5rem' }}>Pricing Details:</strong>
+                                    • Venue: Flat ₹75,000 for &lt;70 guests, ₹1,000/head for 70+ guests<br />
+                                    • Accommodation: Up to 20 guests included<br />
+                                    • Extra room charges for 20+ guests (₹2,000/guest)<br />
+                                    • Food: ₹1,500/head per meal<br />
+                                    • Decoration: ₹4L-₹15L based on preference
+                                </div>
+                            </div>
+                            </div>
+                            {/* End of Form & Calculator Grid */}
                         </div>
+
+                        <style dangerouslySetInnerHTML={{__html: `
+                            @media (min-width: 1024px) {
+                                .form-calculator-grid {
+                                    grid-template-columns: 1fr 380px !important;
+                                }
+                            }
+                            @media (max-width: 1023px) {
+                                .form-calculator-grid {
+                                    grid-template-columns: 1fr !important;
+                                }
+                            }
+                        `}} />
                     </ScrollReveal>
                 </div>
             </section>
