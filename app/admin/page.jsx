@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import SEO from '../../components/SEO';
 import EnhancedDataManager from '../../components/admin/EnhancedDataManager';
+import ListingWizard from '../../components/admin/ListingWizard';
 
 // Field Schemas
 const PROPERTY_SCHEMA = [
@@ -142,6 +143,8 @@ export default function Admin() {
     });
     const [inquiriesTab, setInquiriesTab] = useState('contacts');
     const [searchQuery, setSearchQuery] = useState('');
+    const [showWizard, setShowWizard] = useState(false);
+    const [wizardMode, setWizardMode] = useState('property');
 
     useEffect(() => {
         // Check authentication
@@ -715,12 +718,59 @@ export default function Admin() {
 
                         {/* Properties */}
                         {activeTab === 'properties' && (
-                            <EnhancedDataManager
-                                endpoint="/api/properties"
-                                title="Property"
-                                schema={PROPERTY_SCHEMA}
-                                displayFields={['title', 'location', 'type', 'price', 'guests', 'bedrooms']}
-                            />
+                            <>
+                                <div style={{
+                                    marginBottom: '1.5rem',
+                                    padding: '1.25rem',
+                                    background: 'linear-gradient(135deg, #FEF1F1 0%, #FCE4E4 100%)',
+                                    borderRadius: '0.75rem',
+                                    border: '1px solid rgba(254, 88, 88, 0.2)',
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center'
+                                }}>
+                                    <div>
+                                        <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.25rem', color: '#0f172a' }}>
+                                            ✨ Try the New Listing Wizard
+                                        </h3>
+                                        <p style={{ fontSize: '0.9rem', color: '#64748b' }}>
+                                            Beautiful step-by-step experience inspired by Airbnb
+                                        </p>
+                                    </div>
+                                    <button
+                                        onClick={() => {
+                                            setWizardMode('property');
+                                            setShowWizard(true);
+                                        }}
+                                        style={{
+                                            padding: '0.85rem 1.75rem',
+                                            background: 'linear-gradient(135deg, #FE5858 0%, #ff7b7b 100%)',
+                                            color: 'white',
+                                            border: 'none',
+                                            borderRadius: '0.5rem',
+                                            cursor: 'pointer',
+                                            fontWeight: 700,
+                                            fontSize: '0.95rem',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: '0.5rem',
+                                            boxShadow: '0 4px 12px rgba(254, 88, 88, 0.3)',
+                                            transition: 'all 0.2s'
+                                        }}
+                                        onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+                                        onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+                                    >
+                                        <Plus size={20} />
+                                        Add with Wizard
+                                    </button>
+                                </div>
+                                <EnhancedDataManager
+                                    endpoint="/api/properties"
+                                    title="Property"
+                                    schema={PROPERTY_SCHEMA}
+                                    displayFields={['title', 'location', 'type', 'price', 'guests', 'bedrooms']}
+                                />
+                            </>
                         )}
 
                         {/* Experiences */}
@@ -1355,6 +1405,43 @@ export default function Admin() {
                     </div>
                 </main>
             </div>
+
+            {/* Listing Wizard Modal */}
+            {showWizard && (
+                <ListingWizard
+                    mode={wizardMode}
+                    onClose={() => setShowWizard(false)}
+                    onSubmit={async (data) => {
+                        try {
+                            const token = localStorage.getItem('adminToken');
+                            const endpoint = wizardMode === 'property' ? '/api/properties' : '/api/experiences';
+
+                            const res = await fetch(endpoint, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': `Bearer ${token}`
+                                },
+                                body: JSON.stringify(data)
+                            });
+
+                            if (res.ok) {
+                                setShowWizard(false);
+                                alert(`${wizardMode === 'property' ? 'Property' : 'Experience'} ${data.draft ? 'saved as draft' : 'published'} successfully!`);
+                                // Refresh the data
+                                if (activeTab === 'properties' || activeTab === 'experiences') {
+                                    window.location.reload();
+                                }
+                            } else {
+                                throw new Error('Failed to save');
+                            }
+                        } catch (error) {
+                            console.error('Save error:', error);
+                            alert(`Failed to save ${wizardMode}. Please try again.`);
+                        }
+                    }}
+                />
+            )}
         </>
     );
 }
