@@ -763,6 +763,8 @@ const Weddings = () => {
                                                 onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
                                             >
                                                 <option value="">Any available venue</option>
+                                                <option value="Sunahari Bagh Gurgaon">Sunahari Bagh - Gurgaon</option>
+                                                <option value="Evergreen Woods Sohna">Evergreen Woods - Sohna</option>
                                                 {properties.map(p => (
                                                     <option key={p.id} value={p.title}>{p.title} - {p.location}</option>
                                                 ))}
@@ -903,9 +905,9 @@ const Weddings = () => {
                                         </label>
                                         {calculator.needRooms && (
                                             <p style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '0.5rem', marginLeft: '1.5rem' }}>
-                                                {calculator.guests <= 20
-                                                    ? 'Up to 20 guests accommodation included'
-                                                    : `Additional room charges apply for ${calculator.guests - 20} guests beyond 20`}
+                                                {calculator.guests <= 60
+                                                    ? `Accommodation available for up to ${Math.min(calculator.guests, 60)} guests (max 50-60)`
+                                                    : 'Maximum 50-60 guests accommodation available. External arrangements needed for additional guests.'}
                                             </p>
                                         )}
                                     </div>
