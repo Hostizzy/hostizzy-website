@@ -32,6 +32,19 @@ export async function GET(request) {
   }
 }
 
+// Helper: Generate URL-friendly slug
+function generateSlug(title, type) {
+  const slug = title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
+    .replace(/\s+/g, '-')          // Replace spaces with hyphens
+    .replace(/-+/g, '-')           // Replace multiple hyphens with single
+    .trim();
+
+  const typeSlug = type ? type.toLowerCase().replace(/\s+/g, '-') : 'property';
+  return `${typeSlug}/${slug}`;
+}
+
 // POST /api/properties - Create new property (requires auth)
 const handlePOST = async (request) => {
   try {
@@ -43,8 +56,12 @@ const handlePOST = async (request) => {
 
     const nextId = await getNextId(COLLECTION);
 
+    // Generate slug from title and type
+    const slug = body.slug || generateSlug(body.title, body.type);
+
     const newProperty = {
       id: nextId,
+      slug,
       ...body,
       rating: body.rating || 5.0,
       reviews: body.reviews || 0,

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import {
     BarChart3, Home, MapPin, FileText, MessageCircle, Settings, LogOut, Globe,
     Plus, Edit, Trash2, Save, Calendar, Mail, Users, TrendingUp, Star, DollarSign,
-    Activity, ChevronRight, Package, Download, Search, Filter, X
+    Activity, ChevronRight, Package, Download, Search, Filter, X, Upload
 } from 'lucide-react';
 import SEO from '../../components/SEO';
 import EnhancedDataManager from '../../components/admin/EnhancedDataManager';
@@ -16,6 +16,7 @@ const PROPERTY_SCHEMA = [
     // Basic Information
     { key: 'id', label: 'ID', type: 'number', required: false, group: 'Basic Information' },
     { key: 'title', label: 'Property Title', type: 'text', required: true, placeholder: 'Luxury Villa in Manali', group: 'Basic Information' },
+    { key: 'slug', label: 'URL Slug (auto-generated)', type: 'text', required: false, placeholder: 'villa/luxury-villa-in-manali', group: 'Basic Information' },
     { key: 'location', label: 'Location', type: 'text', required: true, placeholder: 'Mashobra, Shimla', group: 'Basic Information' },
     { key: 'type', label: 'Property Type', type: 'select', required: true, options: [
         { value: 'Villa', label: 'Villa' },
@@ -37,9 +38,10 @@ const PROPERTY_SCHEMA = [
     { key: 'reviews', label: 'Number of Reviews', type: 'number', required: false, placeholder: '124', group: 'Ratings & Status' },
     { key: 'superhost', label: 'Superhost Property', type: 'boolean', required: false, group: 'Ratings & Status' },
 
-    // Images
-    { key: 'image', label: 'Main Image URL', type: 'image', required: true, placeholder: 'https://example.com/image.jpg', group: 'Images' },
-    { key: 'gallery', label: 'Image Gallery', type: 'gallery', required: false, group: 'Images' },
+    // Images & Media
+    { key: 'image', label: 'Main Image URL', type: 'image', required: true, placeholder: 'https://example.com/image.jpg', group: 'Images & Media' },
+    { key: 'gallery', label: 'Image Gallery (Multiple)', type: 'gallery', required: false, group: 'Images & Media' },
+    { key: 'videos', label: 'Property Videos (URLs)', type: 'array', required: false, placeholder: 'https://youtube.com/watch?v=...', group: 'Images & Media' },
 
     // Amenities & Rules
     { key: 'amenities_grouped', label: 'Amenities (Grouped)', type: 'object', required: false, group: 'Amenities & Rules' },
@@ -362,6 +364,7 @@ export default function Admin() {
     const navItems = [
         { id: 'dashboard', label: 'Dashboard', icon: <BarChart3 size={20} />, color: '#FE5858' },
         { id: 'properties', label: 'Properties', icon: <Home size={20} />, color: '#3b82f6' },
+        { id: 'import', label: 'Import Listings', icon: <Upload size={20} />, color: '#8b5cf6' },
         { id: 'experiences', label: 'Experiences', icon: <MapPin size={20} />, color: '#10b981' },
         { id: 'blogs', label: 'Blogs', icon: <FileText size={20} />, color: '#f59e0b' },
         { id: 'testimonials', label: 'Testimonials', icon: <MessageCircle size={20} />, color: '#8b5cf6' },
@@ -771,6 +774,161 @@ export default function Admin() {
                                     displayFields={['title', 'location', 'type', 'price', 'guests', 'bedrooms']}
                                 />
                             </>
+                        )}
+
+                        {/* Import Listings */}
+                        {activeTab === 'import' && (
+                            <div className="card" style={{ padding: '2rem', background: 'white' }}>
+                                <h3 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '2rem', color: '#0f172a' }}>
+                                    Import Listings from Third-Party Sources
+                                </h3>
+
+                                <div style={{ marginBottom: '2rem', padding: '1.5rem', background: '#f0f9ff', borderRadius: '0.75rem', border: '1px solid #bfdbfe' }}>
+                                    <h4 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1rem', color: '#1e40af' }}>
+                                        Supported Sources
+                                    </h4>
+                                    <ul style={{ listStyle: 'none', padding: 0, display: 'grid', gap: '0.75rem' }}>
+                                        <li>📋 <strong>JSON</strong> - Direct JSON array of properties</li>
+                                        <li>🌐 <strong>URL</strong> - Fetch from API endpoint</li>
+                                        <li>🏠 <strong>Airbnb</strong> - Airbnb-style format</li>
+                                        <li>🏨 <strong>Booking.com</strong> - Booking.com format</li>
+                                    </ul>
+                                </div>
+
+                                <form onSubmit={async (e) => {
+                                    e.preventDefault();
+                                    const formData = new FormData(e.target);
+                                    const source = formData.get('source');
+                                    const urlInput = formData.get('url');
+                                    const jsonInput = formData.get('json');
+                                    const apiKey = formData.get('apiKey');
+
+                                    try {
+                                        setLoading(true);
+
+                                        const body = {
+                                            source,
+                                            ...(source === 'url' && { url: urlInput, apiKey }),
+                                            ...(source !== 'url' && { data: JSON.parse(jsonInput) })
+                                        };
+
+                                        const token = localStorage.getItem('adminToken');
+                                        const res = await fetch('/api/import-listings', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                                'Authorization': `Bearer ${token}`
+                                            },
+                                            body: JSON.stringify(body)
+                                        });
+
+                                        const result = await res.json();
+
+                                        if (res.ok) {
+                                            alert(`✅ ${result.message}\n\nImported: ${result.results.imported}\nSkipped: ${result.results.skipped}\nFailed: ${result.results.failed}`);
+                                            e.target.reset();
+                                        } else {
+                                            alert(`❌ Error: ${result.error}`);
+                                        }
+                                    } catch (error) {
+                                        alert(`❌ Error: ${error.message}`);
+                                    } finally {
+                                        setLoading(false);
+                                    }
+                                }} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                                    <div>
+                                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 700, fontSize: '0.95rem', color: '#0f172a' }}>
+                                            Source Type *
+                                        </label>
+                                        <select name="source" required style={{
+                                            width: '100%',
+                                            padding: '0.85rem 1.25rem',
+                                            border: '1px solid #e2e8f0',
+                                            borderRadius: '0.75rem',
+                                            fontSize: '0.95rem'
+                                        }}>
+                                            <option value="">Select source type</option>
+                                            <option value="json">Direct JSON</option>
+                                            <option value="url">Fetch from URL</option>
+                                            <option value="airbnb">Airbnb Format</option>
+                                            <option value="booking">Booking.com Format</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 700, fontSize: '0.95rem', color: '#0f172a' }}>
+                                            API URL (for URL source)
+                                        </label>
+                                        <input name="url" type="url" placeholder="https://api.example.com/properties" style={{
+                                            width: '100%',
+                                            padding: '0.85rem 1.25rem',
+                                            border: '1px solid #e2e8f0',
+                                            borderRadius: '0.75rem',
+                                            fontSize: '0.95rem'
+                                        }} />
+                                    </div>
+
+                                    <div>
+                                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 700, fontSize: '0.95rem', color: '#0f172a' }}>
+                                            API Key (optional)
+                                        </label>
+                                        <input name="apiKey" type="text" placeholder="Bearer token for authenticated APIs" style={{
+                                            width: '100%',
+                                            padding: '0.85rem 1.25rem',
+                                            border: '1px solid #e2e8f0',
+                                            borderRadius: '0.75rem',
+                                            fontSize: '0.95rem'
+                                        }} />
+                                    </div>
+
+                                    <div>
+                                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 700, fontSize: '0.95rem', color: '#0f172a' }}>
+                                            JSON Data (for JSON/Airbnb/Booking sources)
+                                        </label>
+                                        <textarea name="json" rows={10} placeholder='[{"title": "Luxury Villa", "location": "Goa", "type": "Villa", "price": 5000, ...}]' style={{
+                                            width: '100%',
+                                            padding: '0.85rem 1.25rem',
+                                            border: '1px solid #e2e8f0',
+                                            borderRadius: '0.75rem',
+                                            fontSize: '0.9rem',
+                                            fontFamily: 'monospace',
+                                            resize: 'vertical'
+                                        }}></textarea>
+                                    </div>
+
+                                    <div style={{ display: 'flex', gap: '1rem' }}>
+                                        <button type="submit" className="btn btn-primary" disabled={loading} style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: '0.5rem'
+                                        }}>
+                                            <Upload size={18} />
+                                            {loading ? 'Importing...' : 'Import Listings'}
+                                        </button>
+                                    </div>
+                                </form>
+
+                                <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#fef3c7', borderRadius: '0.75rem', border: '1px solid #fde047' }}>
+                                    <h4 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.5rem', color: '#92400e' }}>
+                                        💡 Example JSON Format
+                                    </h4>
+                                    <pre style={{ background: '#fff', padding: '1rem', borderRadius: '0.5rem', fontSize: '0.85rem', overflow: 'auto' }}>{`[
+  {
+    "title": "Luxury Beach Villa",
+    "location": "Goa, India",
+    "type": "Villa",
+    "price": 8500,
+    "guests": 6,
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "description": "Beautiful villa...",
+    "image": "https://...",
+    "gallery": ["https://..."],
+    "amenities": ["WiFi", "Pool", "AC"]
+  }
+]`}</pre>
+                                </div>
+                            </div>
                         )}
 
                         {/* Experiences */}
