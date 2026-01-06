@@ -42,7 +42,7 @@ function generateSlug(title, type) {
     .trim();
 
   const typeSlug = type ? type.toLowerCase().replace(/\s+/g, '-') : 'property';
-  return `${typeSlug}/${slug}`;
+  return `${typeSlug}-${slug}`;
 }
 
 // POST /api/properties - Create new property (requires auth)

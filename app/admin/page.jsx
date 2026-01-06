@@ -16,7 +16,7 @@ const PROPERTY_SCHEMA = [
     // Basic Information
     { key: 'id', label: 'ID', type: 'number', required: false, group: 'Basic Information' },
     { key: 'title', label: 'Property Title', type: 'text', required: true, placeholder: 'Luxury Villa in Manali', group: 'Basic Information' },
-    { key: 'slug', label: 'URL Slug (auto-generated)', type: 'text', required: false, placeholder: 'villa/luxury-villa-in-manali', group: 'Basic Information' },
+    { key: 'slug', label: 'URL Slug (auto-generated)', type: 'text', required: false, placeholder: 'villa-luxury-villa-in-manali', group: 'Basic Information' },
     { key: 'location', label: 'Location', type: 'text', required: true, placeholder: 'Mashobra, Shimla', group: 'Basic Information' },
     { key: 'type', label: 'Property Type', type: 'select', required: true, options: [
         { value: 'Villa', label: 'Villa' },
