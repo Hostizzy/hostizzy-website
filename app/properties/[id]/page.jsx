@@ -36,10 +36,10 @@ export default function PropertyDetails({ params }) {
             <SEO title={`${property.title} - Hostizzy`} description={property.description} />
 
             {/* Gallery Grid */}
-            <div className="container" style={{ paddingTop: '2rem' }}>
+            <div className="container" style={{ paddingTop: '120px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '1.5rem' }}>
                     <div>
-                        <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{property.title}</h1>
+                        <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem', color: '#0f172a' }}>{property.title}</h1>
                         <div style={{ display: 'flex', gap: '1rem', color: '#64748b', fontSize: '0.95rem' }}>
                             <span style={{ display: 'flex', alignItems: 'center', gap: '4px', textDecoration: 'underline', fontWeight: 600, color: 'var(--color-foreground)' }}><Star size={16} fill="var(--color-foreground)" /> {property.rating} · {property.reviews} reviews</span>
                             <span>{property.location}</span>
@@ -95,7 +95,7 @@ export default function PropertyDetails({ params }) {
 
                     <div style={{ borderBottom: '1px solid #e2e8f0', paddingBottom: '2rem', marginBottom: '2rem' }}>
                         <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>About this place</h2>
-                        <p style={{ lineHeight: 1.7, color: '#334155' }}>
+                        <p style={{ lineHeight: 1.7, color: '#334155', whiteSpace: 'pre-wrap' }}>
                             {property.description}
                         </p>
                     </div>

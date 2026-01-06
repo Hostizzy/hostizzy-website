@@ -33,20 +33,24 @@ const ImageUpload = ({
     const files = Array.from(e.target.files);
     if (files.length === 0) return;
 
+    console.log(`[ImageUpload] Selected ${files.length} file(s), multiple mode: ${multiple}`);
     setUploading(true);
 
     try {
       if (multiple) {
         // Handle multiple files
+        console.log(`[ImageUpload] Uploading ${files.length} files to gallery...`);
         const uploadPromises = files.map(file => uploadToCloudinary(file, folder));
         const results = await Promise.all(uploadPromises);
         const urls = results.map(r => r.url);
 
         const newPreviews = [...previews, ...urls].slice(0, maxFiles);
+        console.log(`[ImageUpload] Gallery updated with ${newPreviews.length} images`);
         setPreviews(newPreviews);
         onChange(newPreviews);
       } else {
         // Handle single file
+        console.log('[ImageUpload] Uploading single image...');
         const result = await uploadToCloudinary(files[0], folder);
         setPreview(result.url);
         onChange(result.url);
@@ -128,11 +132,11 @@ const ImageUpload = ({
           multiple={multiple}
           onChange={handleFileSelect}
           style={{ display: 'none' }}
-          id="image-upload"
+          id={`image-upload-${label.replace(/\s+/g, '-').toLowerCase()}`}
         />
 
         <label
-          htmlFor="image-upload"
+          htmlFor={`image-upload-${label.replace(/\s+/g, '-').toLowerCase()}`}
           style={{
             display: 'inline-flex',
             alignItems: 'center',
