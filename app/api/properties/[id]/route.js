@@ -6,9 +6,9 @@ import { errorResponse, successResponse, getRequestBody } from '@/lib/utils';
 const COLLECTION = 'properties';
 
 // GET /api/properties/:id - Get single property (public)
-export async function GET(request, { params }) {
+export async function GET(request, context) {
   try {
-    const { id } = params;
+    const { id } = await context.params;
     const property = await findById(COLLECTION, id);
 
     if (!property) {
@@ -26,9 +26,9 @@ export async function GET(request, { params }) {
 }
 
 // PUT /api/properties/:id - Update property (requires auth)
-const handlePUT = async (request, { params }) => {
+const handlePUT = async (request, context) => {
   try {
-    const { id } = params;
+    const { id } = await context.params;
     const body = await getRequestBody(request);
 
     if (!body) {
@@ -59,9 +59,9 @@ const handlePUT = async (request, { params }) => {
 };
 
 // DELETE /api/properties/:id - Delete property (requires auth)
-const handleDELETE = async (request, { params }) => {
+const handleDELETE = async (request, context) => {
   try {
-    const { id } = params;
+    const { id } = await context.params;
     const result = await deleteById(COLLECTION, id);
 
     if (result.deletedCount === 0) {
