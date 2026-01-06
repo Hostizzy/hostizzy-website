@@ -174,7 +174,7 @@ const Properties = () => {
                             {filteredProperties.length > 0 ? (
                                 filteredProperties.map((property, index) => (
                                     <ScrollReveal key={property.id} delay={index * 0.05}>
-                                        <Link href={`/properties/${property.id}`} style={{ display: 'block', color: 'inherit', textDecoration: 'none' }}>
+                                        <Link href={`/properties/${property.slug || property.id}`} style={{ display: 'block', color: 'inherit', textDecoration: 'none' }}>
                                             {/* Image Carousel Mockup */}
                                             <div style={{ position: 'relative', aspectRatio: '1/0.95', borderRadius: '1rem', overflow: 'hidden', marginBottom: '1rem', background: '#f1f5f9' }}>
                                                 <motion.img

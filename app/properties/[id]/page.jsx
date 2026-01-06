@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, use } from 'react';
 import SEO from '../../../components/SEO';
 import ScrollReveal from '../../../components/ScrollReveal';
 import { Star, MapPin, Share, Heart, Check, Calendar, Shield, Coffee, Wifi, Car, Utensils } from 'lucide-react';
 import BookingModal from '../../../components/BookingModal';
 
 export default function PropertyDetails({ params }) {
-    const { id } = params; // Next.js dynamic route params
+    const { id } = use(params); // Next.js 15+ requires unwrapping params Promise
     const [property, setProperty] = useState(null);
     const [loading, setLoading] = useState(true);
     const [isBookingOpen, setBookingOpen] = useState(false);

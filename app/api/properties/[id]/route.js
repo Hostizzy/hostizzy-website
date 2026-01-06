@@ -1,15 +1,16 @@
 import { NextResponse } from 'next/server';
 import { withAuth } from '@/lib/auth';
-import { findById, updateById, deleteById } from '@/lib/mongodb';
+import { findById, findByIdOrSlug, updateById, deleteById } from '@/lib/mongodb';
 import { errorResponse, successResponse, getRequestBody } from '@/lib/utils';
 
 const COLLECTION = 'properties';
 
 // GET /api/properties/:id - Get single property (public)
+// Supports both numeric ID and slug-based URLs
 export async function GET(request, context) {
   try {
     const { id } = await context.params;
-    const property = await findById(COLLECTION, id);
+    const property = await findByIdOrSlug(COLLECTION, id);
 
     if (!property) {
       return errorResponse('Property not found', 404);
