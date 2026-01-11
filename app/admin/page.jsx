@@ -120,7 +120,8 @@ const SETTINGS_SCHEMA = [
     { key: 'whatsappNumber', label: 'WhatsApp Number', type: 'text', required: false, group: 'Contact Information' },
     { key: 'footerTagline', label: 'Footer Tagline', type: 'textarea', required: false, rows: 2, group: 'Branding' },
     { key: 'instagramUrl', label: 'Instagram URL', type: 'url', required: false, group: 'Social Media' },
-    { key: 'linkedinUrl', label: 'LinkedIn URL', type: 'url', required: false, group: 'Social Media' }
+    { key: 'linkedinUrl', label: 'LinkedIn URL', type: 'url', required: false, group: 'Social Media' },
+    { key: 'propertyPageUSPs', label: 'Property Page USPs (one per line)', type: 'array', required: false, placeholder: 'Free cancellation up to 48 hours', group: 'Property Booking' }
 ];
 
 export default function Admin() {

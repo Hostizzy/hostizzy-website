@@ -176,20 +176,41 @@ const BookingModal = ({ isOpen, onClose, title, price, type }) => {
                             <div style={{ maxWidth: '600px', margin: '0 auto' }}>
                                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
                                     <div>
-                                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, fontSize: '0.9rem' }}>Full Name</label>
-                                        <input value={personalInfo.name} onChange={e => setPersonalInfo({ ...personalInfo, name: e.target.value })} className="form-input" placeholder="John Doe" required />
+                                        <label style={{ display: 'block', marginBottom: '0.75rem', fontWeight: 600, fontSize: '1rem', color: '#1e293b' }}>Full Name</label>
+                                        <input
+                                            value={personalInfo.name}
+                                            onChange={e => setPersonalInfo({ ...personalInfo, name: e.target.value })}
+                                            className="form-input"
+                                            placeholder="John Doe"
+                                            required
+                                            style={{ padding: '1rem', fontSize: '1rem', borderRadius: '0.75rem', border: '1px solid #e2e8f0', width: '100%' }}
+                                        />
                                     </div>
                                     <div>
-                                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, fontSize: '0.9rem' }}>Phone Number</label>
-                                        <input value={personalInfo.phone} onChange={e => setPersonalInfo({ ...personalInfo, phone: e.target.value })} className="form-input" placeholder="+91 98765 43210" required />
+                                        <label style={{ display: 'block', marginBottom: '0.75rem', fontWeight: 600, fontSize: '1rem', color: '#1e293b' }}>Phone Number</label>
+                                        <input
+                                            value={personalInfo.phone}
+                                            onChange={e => setPersonalInfo({ ...personalInfo, phone: e.target.value })}
+                                            className="form-input"
+                                            placeholder="+91 98765 43210"
+                                            required
+                                            style={{ padding: '1rem', fontSize: '1rem', borderRadius: '0.75rem', border: '1px solid #e2e8f0', width: '100%' }}
+                                        />
                                     </div>
                                 </div>
                                 <div style={{ marginBottom: '1.5rem' }}>
-                                    <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, fontSize: '0.9rem' }}>Email Address</label>
-                                    <input value={personalInfo.email} onChange={e => setPersonalInfo({ ...personalInfo, email: e.target.value })} className="form-input" placeholder="john@example.com" required />
+                                    <label style={{ display: 'block', marginBottom: '0.75rem', fontWeight: 600, fontSize: '1rem', color: '#1e293b' }}>Email Address</label>
+                                    <input
+                                        value={personalInfo.email}
+                                        onChange={e => setPersonalInfo({ ...personalInfo, email: e.target.value })}
+                                        className="form-input"
+                                        placeholder="john@example.com"
+                                        required
+                                        style={{ padding: '1rem', fontSize: '1rem', borderRadius: '0.75rem', border: '1px solid #e2e8f0', width: '100%' }}
+                                    />
                                 </div>
                                 <div style={{ marginBottom: '1.5rem' }}>
-                                    <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, fontSize: '0.9rem' }}>Purpose of Visit</label>
+                                    <label style={{ display: 'block', marginBottom: '0.75rem', fontWeight: 600, fontSize: '1rem', color: '#1e293b' }}>Purpose of Visit</label>
                                     <div style={{ display: 'flex', gap: '1rem' }}>
                                         {['vacation', 'work', 'event'].map(p => (
                                             <button
@@ -197,10 +218,11 @@ const BookingModal = ({ isOpen, onClose, title, price, type }) => {
                                                 type="button"
                                                 onClick={() => setPersonalInfo({ ...personalInfo, purpose: p })}
                                                 style={{
-                                                    flex: 1, padding: '0.75rem', borderRadius: '0.75rem', border: '1px solid #e2e8f0',
+                                                    flex: 1, padding: '1rem', borderRadius: '0.75rem', border: '2px solid #e2e8f0',
                                                     background: personalInfo.purpose === p ? 'var(--color-primary)' : 'white',
                                                     color: personalInfo.purpose === p ? 'white' : '#64748b',
-                                                    fontWeight: 600, textTransform: 'capitalize', cursor: 'pointer', transition: 'all 0.2s'
+                                                    fontWeight: 600, textTransform: 'capitalize', cursor: 'pointer', transition: 'all 0.2s',
+                                                    fontSize: '1rem'
                                                 }}
                                             >
                                                 {p}
@@ -209,10 +231,17 @@ const BookingModal = ({ isOpen, onClose, title, price, type }) => {
                                     </div>
                                 </div>
                                 <div style={{ marginBottom: '2rem' }}>
-                                    <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, fontSize: '0.9rem' }}>Message for Host</label>
-                                    <textarea value={personalInfo.message} onChange={e => setPersonalInfo({ ...personalInfo, message: e.target.value })} rows={4} className="form-input" placeholder="Tell us about your trip..."></textarea>
+                                    <label style={{ display: 'block', marginBottom: '0.75rem', fontWeight: 600, fontSize: '1rem', color: '#1e293b' }}>Message for Host</label>
+                                    <textarea
+                                        value={personalInfo.message}
+                                        onChange={e => setPersonalInfo({ ...personalInfo, message: e.target.value })}
+                                        rows={5}
+                                        className="form-input"
+                                        placeholder="Tell us about your trip..."
+                                        style={{ padding: '1rem', fontSize: '1rem', borderRadius: '0.75rem', border: '1px solid #e2e8f0', width: '100%', resize: 'vertical' }}
+                                    ></textarea>
                                 </div>
-                                <button onClick={() => setStep(3)} className="btn btn-primary" style={{ width: '100%', py: '1rem' }}>Review Summary</button>
+                                <button onClick={() => setStep(3)} className="btn btn-primary" style={{ width: '100%', padding: '1.25rem', fontSize: '1.1rem', fontWeight: 600, borderRadius: '0.75rem' }}>Review Summary</button>
                             </div>
                         )}
 

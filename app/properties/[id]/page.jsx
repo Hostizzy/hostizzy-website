@@ -3,7 +3,7 @@
 import React, { useState, useEffect, use } from 'react';
 import SEO from '../../../components/SEO';
 import ScrollReveal from '../../../components/ScrollReveal';
-import { Star, MapPin, Share, Heart, Check, Calendar, Shield, Coffee, Wifi, Car, Utensils } from 'lucide-react';
+import { Star, MapPin, Share, Heart, Check, Calendar, Shield, Coffee, Wifi, Car, Utensils, MessageCircle, Phone, CheckCircle2 } from 'lucide-react';
 import BookingModal from '../../../components/BookingModal';
 
 export default function PropertyDetails({ params }) {
@@ -11,15 +11,23 @@ export default function PropertyDetails({ params }) {
     const [property, setProperty] = useState(null);
     const [loading, setLoading] = useState(true);
     const [isBookingOpen, setBookingOpen] = useState(false);
+    const [settings, setSettings] = useState(null);
 
     useEffect(() => {
-        fetch(`/api/properties/${id}`)
-            .then(res => res.json())
-            .then(data => {
-                setProperty(data);
+        // Fetch property and settings
+        Promise.all([
+            fetch(`/api/properties/${id}`).then(res => res.json()),
+            fetch('/api/settings').then(res => res.json())
+        ])
+            .then(([propertyData, settingsData]) => {
+                setProperty(propertyData);
+                setSettings(settingsData);
                 setLoading(false);
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+                console.error(err);
+                setLoading(false);
+            });
     }, [id]);
 
     if (loading) return <div className="section text-center">Loading...</div>;
@@ -153,30 +161,96 @@ export default function PropertyDetails({ params }) {
                 {/* Sticky Booking Card */}
                 <div style={{ flex: 1, position: 'sticky', top: '100px' }}>
                     <div className="card shadow-premium" style={{ padding: '1.5rem', border: '1px solid rgba(0,0,0,0.08)' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-                            <div><span style={{ fontSize: '1.5rem', fontWeight: 700 }}>₹{property.price.toLocaleString()}</span> <span style={{ color: '#64748b' }}>night</span></div>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.9rem' }}><Star size={14} fill="var(--color-foreground)" /> <span>{property.rating}</span></div>
-                        </div>
-
-                        <div style={{ border: '1px solid #cbd5e1', borderRadius: '0.5rem', overflow: 'hidden', marginBottom: '1rem' }}>
-                            <div style={{ display: 'flex', borderBottom: '1px solid #cbd5e1' }}>
-                                <div style={{ flex: 1, padding: '0.75rem', borderRight: '1px solid #cbd5e1' }}>
-                                    <div style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase' }}>Check-in</div>
-                                    <div style={{ fontSize: '0.9rem', color: '#64748b' }}>Add date</div>
-                                </div>
-                                <div style={{ flex: 1, padding: '0.75rem' }}>
-                                    <div style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase' }}>Check-out</div>
-                                    <div style={{ fontSize: '0.9rem', color: '#64748b' }}>Add date</div>
-                                </div>
+                        {/* Price Header */}
+                        <div style={{ marginBottom: '1.5rem', textAlign: 'center' }}>
+                            <div style={{ fontSize: '0.9rem', color: '#64748b', marginBottom: '0.25rem' }}>Starting from</div>
+                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'baseline', gap: '0.5rem' }}>
+                                <span style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--color-primary)' }}>₹{property.price.toLocaleString()}</span>
+                                <span style={{ fontSize: '1rem', color: '#64748b' }}>/night</span>
                             </div>
-                            <div style={{ padding: '0.75rem' }}>
-                                <div style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase' }}>Guests</div>
-                                <div style={{ fontSize: '0.9rem', color: '#64748b' }}>1 guest</div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.9rem', justifyContent: 'center', marginTop: '0.5rem' }}>
+                                <Star size={14} fill="#FFC107" stroke="#FFC107" />
+                                <span style={{ fontWeight: 600 }}>{property.rating}</span>
+                                <span style={{ color: '#64748b' }}>({property.reviews} reviews)</span>
                             </div>
                         </div>
 
-                        <button onClick={() => setBookingOpen(true)} className="btn btn-gradient" style={{ width: '100%', marginBottom: '1rem', padding: '1rem', fontSize: '1rem' }}>Reserve</button>
-                        <p style={{ textAlign: 'center', fontSize: '0.9rem', color: '#64748b' }}>You won't be charged yet</p>
+                        {/* USPs */}
+                        {settings?.propertyPageUSPs && settings.propertyPageUSPs.length > 0 && (
+                            <div style={{ marginBottom: '1.5rem', padding: '1rem', background: '#f8fafc', borderRadius: '0.75rem', border: '1px solid #e2e8f0' }}>
+                                {settings.propertyPageUSPs.map((usp, index) => (
+                                    <div key={index} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', marginBottom: index < settings.propertyPageUSPs.length - 1 ? '0.75rem' : '0' }}>
+                                        <CheckCircle2 size={18} style={{ color: '#10b981', marginTop: '2px', flexShrink: 0 }} />
+                                        <span style={{ fontSize: '0.9rem', color: '#334155', lineHeight: 1.5 }}>{usp}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+
+                        {/* Contact Buttons */}
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1rem' }}>
+                            <a
+                                href={`https://wa.me/${settings?.whatsappNumber || '919560494001'}?text=Hi, I'm interested in ${encodeURIComponent(property.title)}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn"
+                                style={{
+                                    width: '100%',
+                                    padding: '1rem',
+                                    fontSize: '1rem',
+                                    fontWeight: 600,
+                                    background: '#25D366',
+                                    color: 'white',
+                                    border: 'none',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    gap: '0.5rem',
+                                    textDecoration: 'none',
+                                    borderRadius: '0.75rem',
+                                    transition: 'all 0.2s'
+                                }}
+                            >
+                                <MessageCircle size={20} />
+                                WhatsApp Us
+                            </a>
+                            <a
+                                href={`tel:${settings?.whatsappNumber || '919560494001'}`}
+                                className="btn btn-outline"
+                                style={{
+                                    width: '100%',
+                                    padding: '1rem',
+                                    fontSize: '1rem',
+                                    fontWeight: 600,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    gap: '0.5rem',
+                                    textDecoration: 'none',
+                                    borderRadius: '0.75rem'
+                                }}
+                            >
+                                <Phone size={20} />
+                                Call Now
+                            </a>
+                        </div>
+
+                        {/* Reserve Button */}
+                        <button
+                            onClick={() => setBookingOpen(true)}
+                            className="btn btn-gradient"
+                            style={{
+                                width: '100%',
+                                marginBottom: '0.75rem',
+                                padding: '1rem',
+                                fontSize: '1rem',
+                                fontWeight: 600,
+                                borderRadius: '0.75rem'
+                            }}
+                        >
+                            Book Now
+                        </button>
+                        <p style={{ textAlign: 'center', fontSize: '0.85rem', color: '#64748b' }}>No payment required now</p>
                     </div>
                 </div>
             </div>
