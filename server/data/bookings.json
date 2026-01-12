@@ -1,3 +1,26 @@
 {
-    "bookings": []
+  "bookings": [
+    {
+      "id": "1768205196980",
+      "status": "Inquiry",
+      "paymentId": "N/A",
+      "date": "2026-01-12T08:06:36.980Z",
+      "name": "Ethan Barman",
+      "email": "ethan.barman@gmail.com",
+      "phone": "7982984901",
+      "purpose": "vacation",
+      "message": "Please connect",
+      "guests": {
+        "adults": 7,
+        "children": 2,
+        "infants": 0,
+        "pets": 0
+      },
+      "checkIn": "2026-01-13T18:30:00.000Z",
+      "checkOut": "2026-01-14T18:30:00.000Z",
+      "itemTitle": "The Orchard Farm - A Private Farmstay near Delhi with Pool",
+      "itemType": "Property",
+      "totalPrice": 35000
+    }
+  ]
 }

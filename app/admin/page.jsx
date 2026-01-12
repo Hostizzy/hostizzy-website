@@ -1230,7 +1230,11 @@ export default function Admin() {
                                                                     {booking.checkOut || 'N/A'}
                                                                 </td>
                                                                 <td style={{ padding: '1rem', color: '#64748b', fontSize: '0.9rem' }}>
-                                                                    {booking.guests || 'N/A'}
+                                                                    {booking.guests
+                                                                        ? (typeof booking.guests === 'object'
+                                                                            ? `${booking.guests.adults + booking.guests.children} guest${(booking.guests.adults + booking.guests.children) > 1 ? 's' : ''}${booking.guests.pets > 0 ? `, ${booking.guests.pets} pet${booking.guests.pets > 1 ? 's' : ''}` : ''}`
+                                                                            : booking.guests)
+                                                                        : 'N/A'}
                                                                 </td>
                                                             </tr>
                                                         ))}
