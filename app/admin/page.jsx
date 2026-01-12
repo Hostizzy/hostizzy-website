@@ -49,7 +49,8 @@ const PROPERTY_SCHEMA = [
 
     // Additional Details
     { key: 'cancellation_policy', label: 'Cancellation Policy', type: 'textarea', required: false, rows: 3, group: 'Additional Details' },
-    { key: 'map_coordinates', label: 'Map Coordinates', type: 'coordinates', required: false, group: 'Additional Details' }
+    { key: 'map_coordinates', label: 'Map Coordinates', type: 'coordinates', required: false, group: 'Additional Details' },
+    { key: 'usps', label: 'Unique Selling Points (USPs)', type: 'array', required: false, placeholder: 'Free cancellation up to 48 hours', group: 'Additional Details' }
 ];
 
 const EXPERIENCE_SCHEMA = [

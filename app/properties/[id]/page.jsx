@@ -73,6 +73,40 @@ export default function PropertyDetails({ params }) {
                         <img key={i} src={img} style={{ height: '100%', width: '100%', objectFit: 'cover' }} alt={`Gallery ${i}`} />
                     ))}
                 </div>
+
+                {/* Video Section */}
+                {property.videos && property.videos.length > 0 && (
+                    <div style={{ marginTop: '2rem' }}>
+                        <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1rem' }}>Property Videos</h3>
+                        <div style={{ display: 'grid', gridTemplateColumns: property.videos.length === 1 ? '1fr' : 'repeat(auto-fit, minmax(400px, 1fr))', gap: '1rem' }}>
+                            {property.videos.map((videoUrl, index) => {
+                                // Extract video ID from YouTube/Vimeo URLs
+                                let embedUrl = videoUrl;
+                                if (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be')) {
+                                    const videoId = videoUrl.includes('youtu.be')
+                                        ? videoUrl.split('youtu.be/')[1]?.split('?')[0]
+                                        : new URLSearchParams(new URL(videoUrl).search).get('v');
+                                    embedUrl = `https://www.youtube.com/embed/${videoId}`;
+                                } else if (videoUrl.includes('vimeo.com')) {
+                                    const videoId = videoUrl.split('vimeo.com/')[1]?.split('?')[0];
+                                    embedUrl = `https://player.vimeo.com/video/${videoId}`;
+                                }
+
+                                return (
+                                    <div key={index} style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '1rem' }}>
+                                        <iframe
+                                            src={embedUrl}
+                                            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none', borderRadius: '1rem' }}
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                            title={`Property Video ${index + 1}`}
+                                        />
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                )}
             </div>
 
             <div className="container section" style={{ display: 'flex', gap: '4rem', alignItems: 'flex-start', position: 'relative' }}>
@@ -176,10 +210,10 @@ export default function PropertyDetails({ params }) {
                         </div>
 
                         {/* USPs */}
-                        {settings?.propertyPageUSPs && settings.propertyPageUSPs.length > 0 && (
+                        {property?.usps && property.usps.length > 0 && (
                             <div style={{ marginBottom: '1.5rem', padding: '1rem', background: '#f8fafc', borderRadius: '0.75rem', border: '1px solid #e2e8f0' }}>
-                                {settings.propertyPageUSPs.map((usp, index) => (
-                                    <div key={index} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', marginBottom: index < settings.propertyPageUSPs.length - 1 ? '0.75rem' : '0' }}>
+                                {property.usps.map((usp, index) => (
+                                    <div key={index} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', marginBottom: index < property.usps.length - 1 ? '0.75rem' : '0' }}>
                                         <CheckCircle2 size={18} style={{ color: '#10b981', marginTop: '2px', flexShrink: 0 }} />
                                         <span style={{ fontSize: '0.9rem', color: '#334155', lineHeight: 1.5 }}>{usp}</span>
                                     </div>

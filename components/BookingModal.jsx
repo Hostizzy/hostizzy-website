@@ -78,7 +78,7 @@ const BookingModal = ({ isOpen, onClose, title, price, type }) => {
                     guests,
                     checkIn: range.from,
                     checkOut: range.to,
-                    itemTitle: title,
+                    propertyTitle: title,
                     itemType: type,
                     totalPrice,
                     status: 'Inquiry'
