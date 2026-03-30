@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, ArrowUpRight, ChevronDown, Zap, TrendingUp, BadgeCheck, ChevronRight, Building2, GraduationCap, Briefcase, MapPin, Users, Home } from 'lucide-react';
+import { Menu, X, ArrowUpRight, ChevronDown, Zap, TrendingUp, BadgeCheck, ChevronRight, Building2, GraduationCap, Briefcase, MapPin, Users, Home, Rocket } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { useSettings } from '../context/SettingsContext';
@@ -451,7 +451,7 @@ const Navbar = () => {
                                         transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
                                     />
                                 )}
-                                <Briefcase size={16} style={{ opacity: 0.7 }} />
+                                <Rocket size={16} style={{ opacity: 0.7 }} />
                                 Career
                             </Link>
                         </li>
@@ -747,7 +747,7 @@ const Navbar = () => {
 
                                 <Link href="/career" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textDecoration: 'none', borderBottom: '1px solid var(--color-border)' }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                                        <Briefcase size={20} style={{ opacity: 0.6 }} />
+                                        <Rocket size={20} style={{ opacity: 0.6 }} />
                                         Career
                                     </div>
                                     <ChevronRight size={18} color="var(--color-muted)" />

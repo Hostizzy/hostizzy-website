@@ -60,6 +60,9 @@ const SEO = ({
             <meta name='description' content={finalDescription} />
             {finalKeywords && <meta name="keywords" content={finalKeywords} />}
 
+            {/* AI Content Declaration */}
+            <meta name="ai-content-declaration" content="human-created" />
+
             {/* Comprehensive Crawler Tags for All Major LLMs */}
             <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
             <meta name="googlebot" content="index, follow, max-image-preview:large" />

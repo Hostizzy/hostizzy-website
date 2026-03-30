@@ -57,8 +57,19 @@ body {
 }
 
 h1 {
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
   font-weight: 800;
   letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+}
+
+h3 {
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  font-weight: 700;
 }
 
 h1,
@@ -70,7 +81,6 @@ h6 {
   font-family: var(--font-display);
   line-height: 1.2;
   color: #0F172A;
-  /* Fallback for light mode */
   text-wrap: balance;
 }
 

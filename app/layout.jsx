@@ -76,16 +76,117 @@ export default function RootLayout({ children }) {
               "logo": "https://www.hostizzy.com/images/logo.jpg",
               "image": "https://www.hostizzy.com/images/og-image.jpg",
               "sameAs": [
-                "https://www.instagram.com/hostizzy",
+                "https://www.instagram.com/hostizzy_official",
                 "https://www.facebook.com/hostizzy",
                 "https://www.linkedin.com/company/hostizzy",
                 "https://twitter.com/hostizzy"
               ],
               "address": {
                 "@type": "PostalAddress",
+                "streetAddress": "E 13/29, 1st Floor, Harsha Bhawan, Connaught Place",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110001",
                 "addressCountry": "IN"
               },
               "priceRange": "₹₹₹",
+              "areaServed": [
+                {
+                  "@type": "State",
+                  "name": "Goa"
+                },
+                {
+                  "@type": "City",
+                  "name": "Manali",
+                  "containedInPlace": { "@type": "State", "name": "Himachal Pradesh" }
+                },
+                {
+                  "@type": "City",
+                  "name": "Shimla",
+                  "containedInPlace": { "@type": "State", "name": "Himachal Pradesh" }
+                },
+                {
+                  "@type": "City",
+                  "name": "Kasauli",
+                  "containedInPlace": { "@type": "State", "name": "Himachal Pradesh" }
+                },
+                {
+                  "@type": "City",
+                  "name": "Mukteshwar",
+                  "containedInPlace": { "@type": "State", "name": "Uttarakhand" }
+                },
+                {
+                  "@type": "City",
+                  "name": "Nainital",
+                  "containedInPlace": { "@type": "State", "name": "Uttarakhand" }
+                },
+                {
+                  "@type": "City",
+                  "name": "Jaipur",
+                  "containedInPlace": { "@type": "State", "name": "Rajasthan" }
+                },
+                {
+                  "@type": "City",
+                  "name": "Udaipur",
+                  "containedInPlace": { "@type": "State", "name": "Rajasthan" }
+                },
+                {
+                  "@type": "Place",
+                  "name": "Delhi NCR"
+                },
+                {
+                  "@type": "City",
+                  "name": "Sohna",
+                  "containedInPlace": { "@type": "State", "name": "Haryana" }
+                }
+              ],
+              "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "Hostizzy Service Plans",
+                "itemListElement": [
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "StayPrime",
+                      "description": "Full-service management for premium properties"
+                    }
+                  },
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "TotalCare360",
+                      "description": "Comprehensive management with marketing"
+                    }
+                  },
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "BrandEngage Pro",
+                      "description": "Marketing and digital presence services"
+                    }
+                  },
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "DIY with Support",
+                      "description": "Tools and guidance for self-managing hosts"
+                    }
+                  }
+                ]
+              },
+              "knowsAbout": [
+                "vacation rental management",
+                "Airbnb management",
+                "property management India",
+                "hospitality technology",
+                "revenue optimization",
+                "dynamic pricing",
+                "guest experience management"
+              ],
               "aggregateRating": {
                 "@type": "AggregateRating",
                 "ratingValue": "4.9",
@@ -96,7 +197,8 @@ export default function RootLayout({ children }) {
               "contactPoint": {
                 "@type": "ContactPoint",
                 "contactType": "Customer Service",
-                "email": "hello@hostizzy.com",
+                "email": "stay@hostizzy.com",
+                "telephone": "+91-95604-94001",
                 "availableLanguage": ["en", "hi"]
               }
             }

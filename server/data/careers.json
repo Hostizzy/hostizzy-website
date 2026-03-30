@@ -1,0 +1,52 @@
+[
+  {
+    "id": "1",
+    "role": "Content Creator / Social Media Manager",
+    "department": "Marketing",
+    "location": "Hybrid (Gurgaon/Remote)",
+    "experience": "2+ years",
+    "description": "Plan content calendars, capture reels, write compelling copy, and run social campaigns for Hostizzy & NextStop brands.",
+    "postedDate": "2026-03-15",
+    "isActive": true
+  },
+  {
+    "id": "2",
+    "role": "SEO Strategist (Organic Growth Lead)",
+    "department": "Growth",
+    "location": "Hybrid (Gurgaon/Remote)",
+    "experience": "2+ years",
+    "description": "Develop full-funnel SEO strategy, execute technical audits, build backlinks, and grow organic traffic across our platforms.",
+    "postedDate": "2026-03-10",
+    "isActive": true
+  },
+  {
+    "id": "3",
+    "role": "WordPress Developer",
+    "department": "Engineering",
+    "location": "Hybrid (Gurgaon/Remote)",
+    "experience": "2+ years",
+    "description": "Build and maintain our property marketplace, integrate payment gateways, optimize site speed, and implement custom themes/plugins.",
+    "postedDate": "2026-03-20",
+    "isActive": true
+  },
+  {
+    "id": "4",
+    "role": "Performance Marketer (Google Ads)",
+    "department": "Marketing",
+    "location": "Hybrid (Gurgaon/Remote)",
+    "experience": "2+ years",
+    "description": "Plan and launch Google Ads campaigns, optimize ROAS, A/B test creatives, and drive direct bookings for our properties.",
+    "postedDate": "2026-03-18",
+    "isActive": true
+  },
+  {
+    "id": "5",
+    "role": "Full Stack Developer",
+    "department": "Engineering",
+    "location": "Remote / Gurgaon",
+    "experience": "2-5 years",
+    "description": "Architect our website, APIs, booking flows, and internal dashboards. Work with React, Node, Next.js, and modern cloud infrastructure.",
+    "postedDate": "2026-03-05",
+    "isActive": true
+  }
+]

@@ -1,0 +1,18 @@
+# AI Agent Information for Hostizzy
+User-agent: *
+Allow: /
+
+# Extended information files
+LLMs-txt: https://www.hostizzy.com/llms.txt
+LLMs-full-txt: https://www.hostizzy.com/llms-full.txt
+
+# Sitemap
+Sitemap: https://www.hostizzy.com/sitemap.xml
+
+# Contact for AI/API integrations
+Contact: stay@hostizzy.com
+
+# Content declaration
+Content-type: human-created
+Language: en
+Region: IN

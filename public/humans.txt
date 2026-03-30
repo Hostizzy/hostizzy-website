@@ -1,0 +1,21 @@
+/* TEAM */
+Company: Hostizzy (Hostsphere India Pvt Ltd)
+Founder: Ethan Barman
+Location: New Delhi, India
+Contact: stay@hostizzy.com
+Twitter: @hostizzy
+LinkedIn: linkedin.com/company/hostizzy
+
+/* TECHNOLOGY */
+Framework: Next.js 16
+Language: JavaScript/React
+Hosting: Vercel
+Analytics: Google Analytics 4
+Design: Custom (Inter + Outfit fonts)
+Icons: Lucide React
+
+/* SITE */
+Last update: 2026-03-30
+Standards: HTML5, CSS3, ES2024
+Components: React 19, Framer Motion
+SEO: next-sitemap, Structured Data (JSON-LD)

@@ -1,0 +1,152 @@
+# Hostizzy
+
+> India's premier vacation rental management company. We empower property owners with technology-driven management and deliver exceptional guest experiences.
+
+## About
+Hostizzy (brand of Hostsphere India Pvt Ltd) is a vertically integrated hospitality technology company managing 50+ premium vacation rentals across India. We combine professional property management with proprietary technology (HostOS, ResIQ) to maximize owner revenue and guest satisfaction.
+
+## What We Do
+- **Full-Service Property Management**: End-to-end vacation rental management including marketing, guest communication, housekeeping, maintenance, and revenue optimization
+- **Technology Platform**: HostOS (property management system) and ResIQ (revenue analytics dashboard) for data-driven hospitality
+- **Multi-Channel Distribution**: Properties listed on Airbnb, Booking.com, Agoda, MakeMyTrip, and direct booking channels
+- **Revenue Optimization**: Dynamic pricing, occupancy forecasting, and channel performance analytics
+- **Guest Experience**: Curated luxury stays with concierge services, personalized itineraries, and quality assurance
+
+## Products
+- **HostOS** (https://hostos.hostizzy.com): Property management system with unified calendar, automated guest messaging, maintenance tracking, and built-in CRM
+- **ResIQ** (https://resiq.hostizzy.com): Revenue intelligence dashboard with real-time earnings, occupancy forecasting, and channel performance analytics
+- **JuxTravel** (Coming Soon): AI-powered travel marketplace connecting luxury hosts with discerning guests
+- **Booking Site** (https://book.hostizzy.com): Direct booking platform for Hostizzy-managed properties
+
+## Key Markets
+Goa (North & South), Manali, Shimla, Kasauli (Himachal Pradesh), Mukteshwar, Nainital (Uttarakhand), Jaipur, Udaipur (Rajasthan), Delhi NCR, Sohna (Haryana)
+
+## Service Plans
+- StayPrime: Full-service management for premium properties
+- TotalCare360: Comprehensive management with marketing
+- BrandEngage Pro: Marketing and digital presence services
+- DIY with Support: Tools and guidance for self-managing hosts
+
+## Stats
+- 50+ Properties Managed
+- ₹15 Crore+ Revenue Generated
+- 40,000+ Happy Guests
+- 4.9★ Average Rating
+
+## Contact
+- Website: https://www.hostizzy.com
+- Booking: https://book.hostizzy.com
+- Email: stay@hostizzy.com
+- Phone: +91-95604-94001
+- Address: E 13/29, 1st Floor, Harsha Bhawan, Connaught Place, New Delhi 110001
+
+## Social
+- Instagram: https://www.instagram.com/hostizzy_official
+- LinkedIn: https://www.linkedin.com/company/hostizzy
+- Facebook: https://www.facebook.com/hostizzy
+
+---
+
+## Detailed Product Information
+
+### HostOS - Property Management System
+HostOS is Hostizzy's proprietary property management system designed specifically for the Indian vacation rental market. It serves as the operational backbone for managing multiple properties across different locations, providing a unified interface for all day-to-day management tasks.
+
+The platform features a unified calendar that synchronizes availability across all booking channels (Airbnb, Booking.com, Agoda, MakeMyTrip, and direct bookings) in real time, preventing double bookings and ensuring maximum occupancy. Automated guest messaging handles pre-arrival instructions, check-in details, mid-stay check-ins, and post-checkout review requests without manual intervention.
+
+HostOS includes a comprehensive maintenance tracking module that allows property managers to log issues, assign tasks to local maintenance teams, track resolution timelines, and maintain service histories for each property. The built-in CRM tracks guest preferences, repeat visits, and communication history to enable personalized service delivery.
+
+The system also provides housekeeping management with automated task generation based on check-in/check-out schedules, quality checklists, and inventory tracking for linens, amenities, and supplies across all managed properties.
+
+### ResIQ - Revenue Intelligence Dashboard
+ResIQ is Hostizzy's owner-facing revenue intelligence dashboard that provides property owners with complete transparency into their property's financial performance. Owners can access real-time earnings data, view booking details, and track revenue trends over customizable time periods.
+
+The dashboard includes occupancy forecasting powered by historical booking data, seasonal trends, and local event calendars. This helps owners understand expected income and plan personal property usage around high-demand periods. Channel performance analytics show which booking platforms generate the most revenue, highest average daily rates, and best guest ratings.
+
+ResIQ provides detailed financial reporting including monthly P&L statements, expense breakdowns (maintenance, housekeeping, utilities, management fees), and year-over-year performance comparisons. Owners can download reports for tax filing and financial planning purposes.
+
+The platform also features a competitive benchmarking module that compares property performance against similar listings in the same market, helping owners understand how their property stacks up in terms of pricing, occupancy, and guest satisfaction.
+
+## Host Academy
+Hostizzy's Host Academy is an educational initiative designed to elevate the standard of vacation rental hosting across India. The program offers structured training for property owners who want to improve their hosting skills, whether they self-manage or use professional management services.
+
+### Training Programs
+- **Hosting Fundamentals**: A beginner course covering property listing optimization, photography tips, pricing strategies, and guest communication best practices
+- **Revenue Mastery**: Advanced training on dynamic pricing, seasonal revenue strategies, multi-channel distribution optimization, and competitive analysis
+- **Guest Experience Excellence**: Training focused on creating memorable stays through thoughtful amenities, local experience curation, and service recovery techniques
+- **Property Compliance**: Guidance on local regulations, tax compliance (GST for vacation rentals), safety standards, and insurance requirements
+
+### Certification
+Graduates of the Host Academy receive the "Hostizzy Certified Host" designation, which is displayed on their property listings across all platforms. Certified hosts gain access to priority support, exclusive tools, and networking events with other top-performing hosts in the Hostizzy network.
+
+## Frequently Asked Questions
+
+### How do I list my property with Hostizzy?
+Simply visit our 'Management' page or contact us directly. We'll schedule a property audit to see if your home fits our portfolio.
+
+### What is your commission rate?
+Our full-service management fee ranges between 15-20% depending on the property location and services required.
+
+### Do you handle guest vetting?
+Yes, we use strict verification processes across all booking platforms to ensure high-quality guests.
+
+### What happens if a guest damages my property?
+We collect security deposits and assist with insurance claims through platforms like Airbnb AirCover.
+
+### Can I use my own property?
+Absolutely! You can block dates for personal use anytime through our Owner Portal (ResIQ).
+
+## Careers at Hostizzy
+Hostizzy is a growing hospitality technology company always looking for talented individuals who are passionate about travel, technology, and exceptional service. We offer a dynamic work environment that blends startup agility with hospitality warmth.
+
+### Open Positions
+- **City Managers**: On-ground operations leads for new and existing markets (Goa, Himachal Pradesh, Uttarakhand, Rajasthan)
+- **Full-Stack Developers**: Building and maintaining HostOS, ResIQ, and JuxTravel platforms (Next.js, Node.js, Firebase)
+- **Digital Marketing Specialists**: Managing multi-channel digital campaigns, SEO, content strategy, and social media
+- **Guest Experience Associates**: Handling guest communications, concierge services, and quality assurance
+- **Business Development Executives**: Onboarding new property owners and expanding the Hostizzy portfolio
+
+### Why Work at Hostizzy
+- Work at the intersection of hospitality and technology
+- Remote-friendly roles with travel opportunities to beautiful destinations
+- Competitive compensation with performance bonuses
+- Opportunity to shape the future of vacation rental management in India
+
+To apply, send your resume to careers@hostizzy.com or visit the Careers page on our website.
+
+## Investment Opportunity
+Hostizzy is positioned at the forefront of India's rapidly growing vacation rental market, estimated to reach $5 billion by 2028. With a proven technology platform, established operations across key tourist destinations, and a scalable management model, Hostizzy offers a compelling investment opportunity.
+
+### Growth Highlights
+- Revenue growth driven by expanding property portfolio and technology licensing
+- Asset-light business model with high operating leverage
+- Proprietary technology stack (HostOS, ResIQ, JuxTravel) creating competitive moats
+- First-mover advantage in organized vacation rental management in tier-2 Indian tourist destinations
+
+For investment inquiries, contact invest@hostizzy.com.
+
+## Detailed Service Plan Features
+
+### StayPrime
+Full-service management for premium properties. Includes professional photography, listing creation and optimization across all OTAs, dynamic pricing management, 24/7 guest communication, coordinated housekeeping and laundry, routine maintenance and emergency repairs, monthly financial reporting via ResIQ, and dedicated property manager assignment.
+
+### TotalCare360
+Comprehensive management with enhanced marketing. Includes everything in StayPrime plus social media promotion, influencer collaboration campaigns, featured placement on Hostizzy's booking site, quarterly property refresh recommendations, and priority access to Host Academy training.
+
+### BrandEngage Pro
+Marketing and digital presence services for owners who handle operations themselves. Includes professional listing creation, SEO-optimized property descriptions, social media content creation, paid advertising management (Google Ads, Meta Ads), and monthly performance reporting.
+
+### DIY with Support
+Tools and guidance for self-managing hosts who want professional-grade capabilities. Includes access to HostOS for calendar and booking management, ResIQ dashboard for revenue tracking, Host Academy training modules, community forum access, and email/chat support during business hours.
+
+## Technology Stack
+Hostizzy's technology infrastructure is built on modern, scalable frameworks designed for reliability and performance:
+
+- **Frontend**: Next.js (React), Framer Motion for animations, Tailwind-inspired custom CSS
+- **Backend**: Node.js, Firebase (Firestore, Authentication, Cloud Functions, Storage)
+- **Hosting**: Vercel (website), Firebase Hosting (HostOS, ResIQ)
+- **Analytics**: Google Analytics 4, custom event tracking
+- **Communication**: WhatsApp Business API, automated email systems
+- **Payments**: Razorpay integration for direct bookings
+- **SEO**: next-sitemap, JSON-LD structured data, server-side rendering
+- **Channel Management**: API integrations with Airbnb, Booking.com, Agoda, MakeMyTrip

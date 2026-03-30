@@ -1,26 +1,46 @@
-# Hostizzy: Premier Vacation Rental Management in India
+# Hostizzy
 
-## Overview
-Hostizzy is a leading property management company for vacation rentals, Airbnb, and villas in India. 
-We specialize in maximizing revenue for luxury homes in Goa, Uttarakhand, Rajasthan, and Himachal Pradesh.
+> India's premier vacation rental management company. We empower property owners with technology-driven management and deliver exceptional guest experiences.
 
-## Services for Property Owners
-- **Full-Service Management**: Marketing, guest communication, maintenance, and revenue management.
-- **Revenue Optimization**: Dynamic pricing strategies to maximize occupancy and yield.
-- **Multichannel Distribution**: Listing on Airbnb, Booking.com, Agoda, and more (OTA Expert).
-- **Transparency**: Real-time dashboard for owners to track earnings and bookings.
+## About
+Hostizzy (brand of Hostsphere India Pvt Ltd) is a vertically integrated hospitality technology company managing 50+ premium vacation rentals across India. We combine professional property management with proprietary technology (HostOS, ResIQ) to maximize owner revenue and guest satisfaction.
 
-## Guest Experience
-- **Luxury Stays**: Curated collection of villas, farmstays, and apartments.
-- **Concierge Services**: Personalized itineraries, meal planning, and local experiences.
-- **Quality Assurance**: Every property is vetted for comfort, style, and amenities.
+## What We Do
+- **Full-Service Property Management**: End-to-end vacation rental management including marketing, guest communication, housekeeping, maintenance, and revenue optimization
+- **Technology Platform**: HostOS (property management system) and ResIQ (revenue analytics dashboard) for data-driven hospitality
+- **Multi-Channel Distribution**: Properties listed on Airbnb, Booking.com, Agoda, MakeMyTrip, and direct booking channels
+- **Revenue Optimization**: Dynamic pricing, occupancy forecasting, and channel performance analytics
+- **Guest Experience**: Curated luxury stays with concierge services, personalized itineraries, and quality assurance
+
+## Products
+- **HostOS** (https://hostos.hostizzy.com): Property management system with unified calendar, automated guest messaging, maintenance tracking, and built-in CRM
+- **ResIQ** (https://resiq.hostizzy.com): Revenue intelligence dashboard with real-time earnings, occupancy forecasting, and channel performance analytics
+- **JuxTravel** (Coming Soon): AI-powered travel marketplace connecting luxury hosts with discerning guests
+- **Booking Site** (https://book.hostizzy.com): Direct booking platform for Hostizzy-managed properties
 
 ## Key Markets
-- Goa (North & South)
-- Mukteshwar & Nainital (Uttarakhand)
-- Jaipur & Udaipur (Rajasthan)
-- Kasauli & Shimla (Himachal Pradesh)
+Goa (North & South), Manali, Shimla, Kasauli (Himachal Pradesh), Mukteshwar, Nainital (Uttarakhand), Jaipur, Udaipur (Rajasthan), Delhi NCR, Sohna (Haryana)
+
+## Service Plans
+- StayPrime: Full-service management for premium properties
+- TotalCare360: Comprehensive management with marketing
+- BrandEngage Pro: Marketing and digital presence services
+- DIY with Support: Tools and guidance for self-managing hosts
+
+## Stats
+- 50+ Properties Managed
+- ₹15 Crore+ Revenue Generated
+- 40,000+ Happy Guests
+- 4.9★ Average Rating
 
 ## Contact
-- Website: https://hostizzy.com
-- Email: contact@hostizzy.com
+- Website: https://www.hostizzy.com
+- Booking: https://book.hostizzy.com
+- Email: stay@hostizzy.com
+- Phone: +91-95604-94001
+- Address: E 13/29, 1st Floor, Harsha Bhawan, Connaught Place, New Delhi 110001
+
+## Social
+- Instagram: https://www.instagram.com/hostizzy_official
+- LinkedIn: https://www.linkedin.com/company/hostizzy
+- Facebook: https://www.facebook.com/hostizzy
