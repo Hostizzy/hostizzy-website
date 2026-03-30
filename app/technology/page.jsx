@@ -94,11 +94,8 @@ export default function Technology() {
                                 {/* Top Right (ResIQ) -> Center */}
                                 <path d="M750,150 C750,250 600,350 500,400" stroke="url(#grad-intel)" className="animate-pulse-slow" style={{ animationDelay: '0.5s' }} />
 
-                                {/* Bottom Left (TravelCRM) -> Center */}
-                                <path d="M250,650 C250,550 400,450 500,400" stroke="url(#grad-guest)" className="animate-pulse-slow" style={{ animationDelay: '1s' }} />
-
-                                {/* Bottom Right (TripMind AI) -> Center */}
-                                <path d="M750,650 C750,550 600,450 500,400" stroke="url(#grad-ai)" className="animate-pulse-slow" style={{ animationDelay: '1.5s' }} />
+                                {/* Bottom Center (TripMind AI) -> Center */}
+                                <path d="M500,700 C500,600 500,500 500,400" stroke="url(#grad-ai)" className="animate-pulse-slow" style={{ animationDelay: '1s' }} />
                             </g>
                         </svg>
 
@@ -129,7 +126,7 @@ export default function Technology() {
                                         </div>
                                         <h4 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '0.5rem' }}>HostOS</h4>
                                         <p style={{ fontSize: '0.9rem', color: '#64748b', lineHeight: 1.5 }}>
-                                            The operating system for suppliers. Manages inventory, pricing, and operations.
+                                            The operating system for suppliers. Manages inventory, pricing, operations, and guest CRM.
                                         </p>
                                     </div>
                                 </ScrollReveal>
@@ -185,28 +182,8 @@ export default function Technology() {
 
                             {/* -- BOTTOM ROW -- */}
 
-                            {/* TravelCRM (Bottom Left) */}
-                            <div style={{ gridColumn: '2 / span 4', gridRow: '3', display: 'flex', justifyContent: 'center' }}>
-                                <ScrollReveal delay={0.3}>
-                                    <div className="card glass-hover" style={{
-                                        width: '100%', maxWidth: '280px', padding: '2rem', borderRadius: '1.5rem',
-                                        background: 'white', border: '1px solid #fdf2f8',
-                                        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)',
-                                        textAlign: 'center', transition: 'all 0.3s ease'
-                                    }}>
-                                        <div style={{ margin: '0 auto 1.5rem', background: '#fdf2f8', width: '64px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '1rem' }}>
-                                            <Users size={32} color="#db2777" />
-                                        </div>
-                                        <h4 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '0.5rem' }}>TravelCRM</h4>
-                                        <p style={{ fontSize: '0.9rem', color: '#64748b', lineHeight: 1.5 }}>
-                                            Unified guest profiles and communication hub for seamless experiences.
-                                        </p>
-                                    </div>
-                                </ScrollReveal>
-                            </div>
-
-                            {/* TripMind AI (Bottom Right) */}
-                            <div style={{ gridColumn: '8 / span 4', gridRow: '3', display: 'flex', justifyContent: 'center' }}>
+                            {/* TripMind AI (Bottom Center) */}
+                            <div style={{ gridColumn: '5 / span 4', gridRow: '3', display: 'flex', justifyContent: 'center' }}>
                                 <ScrollReveal delay={0.4}>
                                     <div className="card glass-hover" style={{
                                         width: '100%', maxWidth: '280px', padding: '2rem', borderRadius: '1.5rem',
@@ -271,7 +248,7 @@ export default function Technology() {
                             <div className="badge mb-sm" style={{ backgroundColor: 'rgba(254, 88, 88, 0.1)', color: 'var(--color-primary)' }}>HostOS v2.0</div>
                             <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', lineHeight: 1.2 }}>The Central Nervous System of Hospitality</h2>
                             <p style={{ fontSize: '1.125rem', color: 'var(--color-muted)', marginBottom: '2.5rem', lineHeight: 1.8 }}>
-                                HostOS integrates every aspect of vacation rental management into one seamless interface. From dynamic pricing to guest communications, everything is automated.
+                                HostOS integrates every aspect of vacation rental management—operations, guest CRM, and lead management—into one seamless interface. From dynamic pricing to guest communications, everything is automated.
                             </p>
 
                             <ul style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '3rem' }}>
@@ -289,9 +266,9 @@ export default function Technology() {
                                     </li>
                                 ))}
                             </ul>
-                            <Link href="/products/hostos" className="btn btn-primary">
-                                Explore HostOS <ArrowRight size={18} style={{ marginLeft: '0.5rem' }} />
-                            </Link>
+                            <a href="https://hostos.hostizzy.com/" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+                                Explore HostOS <ArrowRight size={18} />
+                            </a>
                         </div>
                     </ScrollReveal>
 
@@ -378,9 +355,9 @@ export default function Technology() {
                                         </div>
                                     ))}
                                 </div>
-                                <Link href="/products/resiq" className="btn btn-primary">
-                                    Deep Dive into ResIQ <ArrowRight size={18} style={{ marginLeft: '0.5rem' }} />
-                                </Link>
+                                <a href="https://resiq.hostizzy.com/" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    Deep Dive into ResIQ <ArrowRight size={18} />
+                                </a>
                             </div>
                         </ScrollReveal>
                     </div>
@@ -453,33 +430,19 @@ export default function Technology() {
                 </div>
             </section>
 
-            {/* JuxTravel & TravelCRM Cards */}
+            {/* JuxTravel Card */}
             <section className="section container">
-                <div className="grid desktop-2-col" style={{ gap: '3rem' }}>
+                <div style={{ maxWidth: '700px', margin: '0 auto' }}>
                     <ScrollReveal y={30}>
-                        <div className="card shadow-premium" style={{ padding: '4rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '2.5rem' }}>
+                        <div className="card shadow-premium" style={{ padding: '4rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '2.5rem', textAlign: 'center' }}>
                             <div className="badge mb-sm" style={{ background: '#8b5cf6', color: 'white' }}>COMING SOON</div>
                             <Globe size={48} color="#8b5cf6" style={{ marginBottom: '2rem' }} />
                             <h2 style={{ fontSize: '2.25rem', marginBottom: '1.5rem' }}>JuxTravel Marketplace</h2>
-                            <p style={{ fontSize: '1.1rem', color: 'var(--color-muted)', marginBottom: '2.5rem', lineHeight: 1.7 }}>
+                            <p style={{ fontSize: '1.1rem', color: 'var(--color-muted)', marginBottom: '2.5rem', lineHeight: 1.7, maxWidth: '500px', margin: '0 auto 2.5rem' }}>
                                 Direct bookings, AI-powered travel recommendations, and a community-driven travel marketplace for India's best villas.
                             </p>
                             <Link href="/products/juxtravel" className="btn" style={{ background: 'white', border: '1px solid #e2e8f0', padding: '1rem 2rem' }}>
-                                Experience JuxTravel
-                            </Link>
-                        </div>
-                    </ScrollReveal>
-
-                    <ScrollReveal y={30} delay={0.2}>
-                        <div className="card shadow-premium" style={{ padding: '4rem', background: '#0f172a', color: 'white', borderRadius: '2.5rem' }}>
-                            <div className="badge mb-sm" style={{ background: '#10b981', color: 'white' }}>LEAD MANAGEMENT</div>
-                            <Users size={48} color="#10b981" style={{ marginBottom: '2rem' }} />
-                            <h2 style={{ fontSize: '2.25rem', marginBottom: '1.5rem' }}>TravelCRM</h2>
-                            <p style={{ fontSize: '1.1rem', opacity: 0.8, marginBottom: '2.5rem', lineHeight: 1.7 }}>
-                                The "Missing Middle" solution for vacation rentals. Track leaks, convert WhatsApp inquiries, and build guest loyalty.
-                            </p>
-                            <Link href="/products/travelcrm" className="btn btn-primary" style={{ background: '#10b981', border: 'none', padding: '1rem 2rem' }}>
-                                Deep Dive into CRM
+                                Learn More
                             </Link>
                         </div>
                     </ScrollReveal>

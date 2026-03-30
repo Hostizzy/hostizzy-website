@@ -106,7 +106,7 @@ const Hero = () => {
                                 textAlign: 'left'
                             }}
                         >
-                            Hostizzy is building the world's first fully vertically integrated hospitality ecosystem. From HostOS for owners to JuxTravel for guests—we are redefining how the world stays.
+                            Hostizzy is building the world's first fully vertically integrated hospitality ecosystem. From HostOS for operations to ResIQ for intelligence—we are redefining how the world stays.
                         </motion.p>
 
                         <motion.div

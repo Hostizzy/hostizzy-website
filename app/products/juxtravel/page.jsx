@@ -7,13 +7,13 @@ export default function JuxTravel() {
     return (
         <ProductPage
             title="JuxTravel Marketplace"
-            badge="Demand Module"
+            badge="Coming Soon"
             description="The next generation travel marketplace connecting luxury hosts with discerning guests through AI-powered recommendations."
             accentColor="#8b5cf6"
             stats={[
-                { label: 'Direct Bookings', value: '30%+' },
-                { label: 'AI Accuray', value: '94%' },
-                { label: 'Market Reach', value: 'Global' }
+                { label: 'Launch', value: 'Coming Soon' },
+                { label: 'AI Accuracy', value: '94%' },
+                { label: 'Market Reach', value: 'India' }
             ]}
             features={[
                 { title: 'AI Recommendations', desc: 'Personalized travel planning that matches guests to their perfect villa based on intent.' },
@@ -27,6 +27,7 @@ export default function JuxTravel() {
                     bullets: ["Hyper-local experience bundles", "Verified owner listings", "Seamless payment gateway"]
                 }
             ]}
+            comingSoon={true}
         />
     );
 }

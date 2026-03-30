@@ -156,7 +156,7 @@ export default function Services() {
         { q: "Can I upgrade or downgrade my plan later?", a: "Yes! We offer flexibility. You can switch plans with 30 days notice to suit your changing needs." },
         { q: "What if I only need marketing services?", a: "Our Add-ons like 'Digital Presence' or 'BrandEngage Pro' are perfect for hosts who need marketing boost without full management." },
         { q: "Do you provide housekeeping and maintenance?", a: "Yes, our 'TotalCare360' and 'StayPrime' plans include full coordination of housekeeping, laundry, and maintenance." },
-        { q: "How does JuxTravel relate to Hostizzy?", a: "JuxTravel is our open marketplace for unique stays. All Hostizzy-managed properties get featured listing priority on JuxTravel." },
+        { q: "How does JuxTravel relate to Hostizzy?", a: "JuxTravel is our upcoming open marketplace for unique stays. Once launched, all Hostizzy-managed properties will get featured listing priority." },
         { q: "What locations do you serve?", a: "We currently serve key leisure markets across India including Goa, Manali, Shimla, and major urban metros." },
         { q: "Is there a minimum contract period?", a: "Standard contracts are 1 year, ensuring we have time to optimize and grow your property's performance effectively." }
     ];

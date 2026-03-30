@@ -44,7 +44,6 @@ const Navbar = () => {
         { path: "/products/hostos", name: "HostOS", desc: "Property Management System", icon: <Building2 size={16} /> },
         { path: "/products/resiq", name: "ResIQ", desc: "Revenue & Market Analytics", icon: <TrendingUp size={16} /> },
         { path: "/products/juxtravel", name: "JuxTravel", desc: "Multi-Channel Marketplace", icon: <MapPin size={16} /> },
-        { path: "/products/travelcrm", name: "TravelCRM", desc: "Guest Loyalty & Lead Management", icon: <Users size={16} /> },
     ];
 
     const companyLinks = [

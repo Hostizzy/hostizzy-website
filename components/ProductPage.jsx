@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check, ArrowRight } from 'lucide-react';
+import { Check, ArrowRight, ExternalLink } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 
 const ProductPage = ({
@@ -13,7 +13,9 @@ const ProductPage = ({
     image,
     stats,
     accentColor = 'var(--color-primary)',
-    detailedInfo = []
+    detailedInfo = [],
+    externalUrl,
+    comingSoon = false
 }) => {
     return (
         <>
@@ -33,9 +35,16 @@ const ProductPage = ({
                         <div className="badge mb-sm" style={{ background: 'white', color: accentColor, fontWeight: 700 }}>{badge}</div>
                         <h1 style={{ fontSize: '3.5rem', fontWeight: 800, marginBottom: '1.5rem', color: '#0f172a', lineHeight: 1.1 }}>{title}</h1>
                         <p style={{ fontSize: '1.25rem', color: '#64748b', marginBottom: '2.5rem', lineHeight: 1.6 }}>{description}</p>
-                        <div style={{ display: 'flex', gap: '1.25rem' }}>
-                            <button className="btn btn-primary" style={{ background: accentColor, padding: '1rem 2rem' }}>Request Demo</button>
-                            <button className="btn" style={{ padding: '1rem 2rem', background: 'white' }}>Documentation</button>
+                        <div style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap' }}>
+                            {comingSoon ? (
+                                <div className="btn" style={{ background: accentColor, color: 'white', padding: '1rem 2rem', opacity: 0.9, cursor: 'default' }}>Coming Soon</div>
+                            ) : externalUrl ? (
+                                <a href={externalUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ background: accentColor, padding: '1rem 2rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    Go to {title} <ExternalLink size={18} />
+                                </a>
+                            ) : (
+                                <button className="btn btn-primary" style={{ background: accentColor, padding: '1rem 2rem' }}>Request Demo</button>
+                            )}
                         </div>
                     </motion.div>
 
@@ -147,11 +156,24 @@ const ProductPage = ({
             {/* CTA */}
             <section style={{ padding: '6rem 0', background: '#0f172a', color: 'white' }}>
                 <div className="container text-center">
-                    <h2 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '1.5rem' }}>Ready to Scale Your Property Business?</h2>
+                    <h2 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '1.5rem' }}>
+                        {comingSoon ? 'Stay Tuned' : 'Ready to Scale Your Property Business?'}
+                    </h2>
                     <p style={{ fontSize: '1.2rem', opacity: 0.8, maxWidth: '600px', margin: '0 auto 3rem' }}>
-                        Experience how {title} can transform your operations. Schedule a personalized walkthrough today.
+                        {comingSoon
+                            ? `${title} is currently in development. We're building something special for the future of travel.`
+                            : `Experience how ${title} can transform your operations.`
+                        }
                     </p>
-                    <button className="btn btn-primary" style={{ background: accentColor, padding: '1.25rem 3rem', fontSize: '1.1rem' }}>Book a Demo <ArrowRight size={20} style={{ marginLeft: '0.5rem' }} /></button>
+                    {comingSoon ? (
+                        <div className="btn" style={{ background: accentColor, color: 'white', padding: '1.25rem 3rem', fontSize: '1.1rem', opacity: 0.9, cursor: 'default' }}>Launching Soon</div>
+                    ) : externalUrl ? (
+                        <a href={externalUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ background: accentColor, padding: '1.25rem 3rem', fontSize: '1.1rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+                            Go to {title} <ExternalLink size={20} />
+                        </a>
+                    ) : (
+                        <button className="btn btn-primary" style={{ background: accentColor, padding: '1.25rem 3rem', fontSize: '1.1rem' }}>Book a Demo <ArrowRight size={20} style={{ marginLeft: '0.5rem' }} /></button>
+                    )}
                 </div>
             </section>
         </>

@@ -28,6 +28,7 @@ export default function ResIQ() {
                     bullets: ["Real-time daily payouts tracking", "Automated commission calculations", "Historical performance comparison"]
                 }
             ]}
+            externalUrl="https://resiq.hostizzy.com/"
         />
     );
 }
