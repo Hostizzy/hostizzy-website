@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, ArrowUpRight, ChevronDown, Zap, TrendingUp, BadgeCheck, ChevronRight, Home, Building2, GraduationCap, Briefcase, MapPin, Heart, Users } from 'lucide-react';
+import { Menu, X, ArrowUpRight, ChevronDown, Zap, TrendingUp, BadgeCheck, ChevronRight, Building2, GraduationCap, Briefcase, MapPin, Users } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { useSettings } from '../context/SettingsContext';
@@ -46,12 +46,11 @@ const Navbar = () => {
         { path: "/products/juxtravel", name: "JuxTravel", desc: "Multi-Channel Marketplace", icon: <MapPin size={16} /> },
     ];
 
-    const companyLinks = [
+    const aboutLinks = [
         { path: "/about", name: "Our Story", icon: <Users size={16} /> },
-        { path: "/invest", name: "Invest", icon: <TrendingUp size={16} /> },
-        { path: "/career", name: "Career", icon: <Briefcase size={16} /> },
         { path: "/blogs", name: "Blog", icon: <Users size={16} /> },
-        { path: "/testimonials", name: "Reviews", icon: <Users size={16} /> }
+        { path: "/career", name: "Career", icon: <Briefcase size={16} /> },
+        { path: "/invest", name: "Invest", icon: <TrendingUp size={16} /> },
     ];
 
     const isActivePath = (path) => pathname === path;
@@ -124,41 +123,35 @@ const Navbar = () => {
                         whiteSpace: 'nowrap',
                         flex: 1
                     }}>
-                        {/* Home */}
+                        {/* Services */}
                         <li>
                             <Link
-                                href="/"
-                                onMouseEnter={() => setActiveDropdown('home')}
+                                href="/services"
+                                onMouseEnter={() => setActiveDropdown('services')}
                                 onMouseLeave={() => setActiveDropdown(null)}
                                 style={{
                                     position: 'relative',
                                     padding: '0.65rem 1rem',
-                                    color: isActivePath('/') ? 'var(--color-primary)' : 'var(--color-foreground)',
-                                    fontWeight: isActivePath('/') ? 600 : 500,
+                                    color: isActivePath('/services') ? 'var(--color-primary)' : 'var(--color-foreground)',
+                                    fontWeight: isActivePath('/services') ? 600 : 500,
                                     fontSize: '0.925rem',
                                     transition: 'all 0.2s ease',
                                     textDecoration: 'none',
                                     display: 'flex',
                                     alignItems: 'center',
                                     gap: '6px',
-                                    borderRadius: '10px'
+                                    borderRadius: '12px'
                                 }}
                             >
-                                {activeDropdown === 'home' && (
+                                {activeDropdown === 'services' && (
                                     <motion.div
                                         layoutId="nav-hover"
-                                        style={{
-                                            position: 'absolute',
-                                            inset: 0,
-                                            backgroundColor: 'rgba(254, 88, 88, 0.08)',
-                                            borderRadius: '10px',
-                                            zIndex: -1
-                                        }}
+                                        style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(254, 88, 88, 0.08)', borderRadius: '12px', zIndex: -1 }}
                                         transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
                                     />
                                 )}
-                                <Home size={16} style={{ opacity: 0.7 }} />
-                                Home
+                                <Briefcase size={16} style={{ opacity: 0.7 }} />
+                                Services
                             </Link>
                         </li>
 
@@ -313,7 +306,7 @@ const Navbar = () => {
                             </AnimatePresence>
                         </li>
 
-                        {/* Host Academy Dropdown */}
+                        {/* Academy Dropdown */}
                         <li
                             onMouseEnter={() => setActiveDropdown('academy')}
                             onMouseLeave={() => setActiveDropdown(null)}
@@ -334,7 +327,7 @@ const Navbar = () => {
                                 }}
                             >
                                 <GraduationCap size={16} style={{ opacity: 0.7 }} />
-                                Host Academy
+                                Academy
                                 <motion.div
                                     animate={{ rotate: activeDropdown === 'academy' ? 180 : 0 }}
                                     transition={{ duration: 0.2 }}
@@ -400,75 +393,9 @@ const Navbar = () => {
                             </AnimatePresence>
                         </li>
 
-                        {/* Service Plans */}
-                        <li>
-                            <Link
-                                href="/services"
-                                onMouseEnter={() => setActiveDropdown('services')}
-                                onMouseLeave={() => setActiveDropdown(null)}
-                                style={{
-                                    position: 'relative',
-                                    padding: '0.65rem 1rem',
-                                    color: isActivePath('/services') ? 'var(--color-primary)' : 'var(--color-foreground)',
-                                    fontWeight: isActivePath('/services') ? 600 : 500,
-                                    fontSize: '0.925rem',
-                                    transition: 'all 0.2s ease',
-                                    textDecoration: 'none',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '6px',
-                                    borderRadius: '12px'
-                                }}
-                            >
-                                {activeDropdown === 'services' && (
-                                    <motion.div
-                                        layoutId="nav-hover"
-                                        style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(254, 88, 88, 0.08)', borderRadius: '12px', zIndex: -1 }}
-                                        transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
-                                    />
-                                )}
-                                <Briefcase size={16} style={{ opacity: 0.7 }} />
-                                Services
-                            </Link>
-                        </li>
-
-                        {/* Book Now */}
-                        <li>
-                            <a
-                                href="https://book.hostizzy.com/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                onMouseEnter={() => setActiveDropdown('book')}
-                                onMouseLeave={() => setActiveDropdown(null)}
-                                style={{
-                                    position: 'relative',
-                                    padding: '0.65rem 1rem',
-                                    color: 'var(--color-foreground)',
-                                    fontWeight: 500,
-                                    fontSize: '0.925rem',
-                                    transition: 'all 0.2s ease',
-                                    textDecoration: 'none',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '6px',
-                                    borderRadius: '12px'
-                                }}
-                            >
-                                {activeDropdown === 'book' && (
-                                    <motion.div
-                                        layoutId="nav-hover"
-                                        style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(254, 88, 88, 0.08)', borderRadius: '12px', zIndex: -1 }}
-                                        transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
-                                    />
-                                )}
-                                <Building2 size={16} style={{ opacity: 0.7 }} />
-                                Book Now
-                            </a>
-                        </li>
-
-                        {/* Company Dropdown */}
+                        {/* About Us Dropdown */}
                         <li
-                            onMouseEnter={() => setActiveDropdown('company')}
+                            onMouseEnter={() => setActiveDropdown('about')}
                             onMouseLeave={() => setActiveDropdown(null)}
                             style={{ position: 'relative' }}
                         >
@@ -487,18 +414,18 @@ const Navbar = () => {
                                 }}
                             >
                                 <Users size={16} style={{ opacity: 0.7 }} />
-                                Company
-                                <motion.div animate={{ rotate: activeDropdown === 'company' ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                                About Us
+                                <motion.div animate={{ rotate: activeDropdown === 'about' ? 180 : 0 }} transition={{ duration: 0.2 }}>
                                     <ChevronDown size={14} style={{ opacity: 0.6 }} />
                                 </motion.div>
                             </span>
 
-                            {activeDropdown === 'company' && (
+                            {activeDropdown === 'about' && (
                                 <motion.div layoutId="nav-hover" style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(254, 88, 88, 0.08)', borderRadius: '12px', zIndex: -1 }} />
                             )}
 
                             <AnimatePresence>
-                                {activeDropdown === 'company' && (
+                                {activeDropdown === 'about' && (
                                     <motion.div
                                         initial={{ opacity: 0, y: 8, scale: 0.96 }}
                                         animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -511,7 +438,7 @@ const Navbar = () => {
                                             minWidth: '180px', display: 'flex', flexDirection: 'column', gap: '2px'
                                         }}
                                     >
-                                        {companyLinks.map((link) => (
+                                        {aboutLinks.map((link) => (
                                             <Link
                                                 key={link.path}
                                                 href={link.path}
@@ -540,26 +467,26 @@ const Navbar = () => {
                     {/* Right Side Actions */}
                     <div className="desktop-menu" style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flexShrink: 0 }}>
                         <a href="https://book.hostizzy.com/" target="_blank" rel="noopener noreferrer"
+                            className="btn btn-outline"
                             style={{
                                 fontWeight: 600,
                                 fontSize: '0.925rem',
-                                color: 'var(--color-primary)',
                                 display: 'flex',
                                 alignItems: 'center',
                                 gap: '4px',
                                 textDecoration: 'none',
-                                padding: '0.65rem 1rem',
+                                padding: '0.65rem 1.25rem',
                                 borderRadius: '10px',
                                 transition: 'all 0.2s ease',
                                 whiteSpace: 'nowrap'
                             }}
                             onMouseEnter={(e) => {
-                                e.currentTarget.style.backgroundColor = 'rgba(254, 88, 88, 0.08)';
+                                e.currentTarget.style.transform = 'translateY(-2px)';
                             }}
                             onMouseLeave={(e) => {
-                                e.currentTarget.style.backgroundColor = 'transparent';
+                                e.currentTarget.style.transform = 'translateY(0)';
                             }}>
-                            Book <ArrowUpRight size={14} />
+                            Book a Stay <ArrowUpRight size={14} />
                         </a>
                         <Link href="/contact" className="btn btn-primary" style={{
                             borderRadius: '10px',
@@ -673,10 +600,10 @@ const Navbar = () => {
 
                             {/* Menu Items */}
                             <nav style={{ flex: 1, padding: '0.5rem 0' }}>
-                                <Link href="/" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textDecoration: 'none', borderBottom: '1px solid var(--color-border)' }}>
+                                <Link href="/services" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textDecoration: 'none', borderBottom: '1px solid var(--color-border)' }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                                        <Home size={20} style={{ opacity: 0.6 }} />
-                                        Home
+                                        <Briefcase size={20} style={{ opacity: 0.6 }} />
+                                        Services
                                     </div>
                                     <ChevronRight size={18} color="var(--color-muted)" />
                                 </Link>
@@ -717,7 +644,7 @@ const Navbar = () => {
                                     </AnimatePresence>
                                 </div>
 
-                                {/* Host Academy Dropdown */}
+                                {/* Academy Dropdown */}
                                 <div style={{ borderBottom: '1px solid var(--color-border)' }}>
                                     <button
                                         onClick={() => setMobileActiveDropdown(mobileActiveDropdown === 'academy' ? null : 'academy')}
@@ -725,7 +652,7 @@ const Navbar = () => {
                                     >
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                                             <GraduationCap size={20} style={{ opacity: 0.6 }} />
-                                            Host Academy
+                                            Academy
                                         </div>
                                         <motion.div animate={{ rotate: mobileActiveDropdown === 'academy' ? 180 : 0 }} transition={{ duration: 0.2 }}>
                                             <ChevronDown size={18} color="var(--color-muted)" />
@@ -747,39 +674,22 @@ const Navbar = () => {
                                     </AnimatePresence>
                                 </div>
 
-                                <Link href="/services" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textDecoration: 'none', borderBottom: '1px solid var(--color-border)' }}>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                                        <Briefcase size={20} style={{ opacity: 0.6 }} />
-                                        Services
-                                    </div>
-                                    <ChevronRight size={18} color="var(--color-muted)" />
-                                </Link>
-
-                                <a href="https://book.hostizzy.com/" target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textDecoration: 'none', borderBottom: '1px solid var(--color-border)' }}>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                                        <Building2 size={20} style={{ opacity: 0.6 }} />
-                                        Book Now
-                                    </div>
-                                    <ArrowUpRight size={18} color="var(--color-muted)" />
-                                </a>
-
-
-                                {/* Company Dropdown */}
+                                {/* About Us Dropdown */}
                                 <div style={{ borderBottom: '1px solid var(--color-border)' }}>
                                     <button
-                                        onClick={() => setMobileActiveDropdown(mobileActiveDropdown === 'company' ? null : 'company')}
+                                        onClick={() => setMobileActiveDropdown(mobileActiveDropdown === 'about' ? null : 'about')}
                                         style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', background: 'none', border: 'none', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textAlign: 'left', cursor: 'pointer' }}
                                     >
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                                             <Users size={20} style={{ opacity: 0.6 }} />
-                                            Company
+                                            About Us
                                         </div>
-                                        <motion.div animate={{ rotate: mobileActiveDropdown === 'company' ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                                        <motion.div animate={{ rotate: mobileActiveDropdown === 'about' ? 180 : 0 }} transition={{ duration: 0.2 }}>
                                             <ChevronDown size={18} color="var(--color-muted)" />
                                         </motion.div>
                                     </button>
                                     <AnimatePresence>
-                                        {mobileActiveDropdown === 'company' && (
+                                        {mobileActiveDropdown === 'about' && (
                                             <motion.div
                                                 initial={{ height: 0, opacity: 0 }}
                                                 animate={{ height: 'auto', opacity: 1 }}
@@ -787,7 +697,7 @@ const Navbar = () => {
                                                 transition={{ duration: 0.2 }}
                                                 style={{ overflow: 'hidden', backgroundColor: 'var(--color-secondary)' }}
                                             >
-                                                {companyLinks.map((link) => (
+                                                {aboutLinks.map((link) => (
                                                     <Link key={link.path} href={link.path} onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.85rem 1.5rem 0.85rem 3.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>
                                                         {link.name}
                                                     </Link>
@@ -801,7 +711,7 @@ const Navbar = () => {
                             {/* Bottom Actions */}
                             <div style={{ padding: '1.5rem', borderTop: '1px solid var(--color-border)', display: 'flex', flexDirection: 'column', gap: '0.75rem', background: 'var(--color-secondary)' }}>
                                 <a href="https://book.hostizzy.com/" target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ width: '100%', textDecoration: 'none', justifyContent: 'center', padding: '0.875rem', fontSize: '0.95rem', fontWeight: 600 }}>
-                                    Book Property <ArrowUpRight size={16} />
+                                    Book a Stay <ArrowUpRight size={16} />
                                 </a>
                                 <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="btn btn-primary" style={{ width: '100%', textDecoration: 'none', justifyContent: 'center', padding: '0.875rem', fontSize: '0.95rem', fontWeight: 600, background: 'linear-gradient(135deg, #FE5858 0%, #FF6B6B 100%)' }}>
                                     Partner With Us

@@ -17,6 +17,20 @@ export default function FAQ() {
 
     return (
         <>
+            <script type="application/ld+json" dangerouslySetInnerHTML={{
+                __html: JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "FAQPage",
+                    "mainEntity": faqs.map(item => ({
+                        "@type": "Question",
+                        "name": item.q,
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": item.a
+                        }
+                    }))
+                })
+            }} />
             <section className="section bg-secondary text-center" style={{ padding: '6rem 0 4rem' }}>
                 <div className="container">
                     <ScrollReveal>

@@ -33,8 +33,8 @@ const Footer = () => {
                             <h4 style={{ fontSize: '1.1rem', marginBottom: '1.25rem', color: '#f8fafc' }}>Quick Links</h4>
                             <ul style={{ listStyle: 'none', opacity: 0.8, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                                 <li><Link href="/">Home</Link></li>
-                                <li><Link href="/about">About Us</Link></li>
-                                <li><Link href="/services">Plans & Pricing</Link></li>
+                                <li><Link href="/services">Services</Link></li>
+                                <li><Link href="/calculator">Calculator</Link></li>
                                 <li><a href="https://book.hostizzy.com/" target="_blank" rel="noreferrer">Book Now</a></li>
                                 <li><Link href="/contact">Contact Us</Link></li>
                             </ul>
@@ -59,13 +59,15 @@ const Footer = () => {
                             </ul>
                         </div>
 
-                        {/* Legal */}
+                        {/* Resources & Legal */}
                         <div>
-                            <h4 style={{ fontSize: '1.1rem', marginBottom: '1.25rem', color: '#f8fafc' }}>Legal</h4>
+                            <h4 style={{ fontSize: '1.1rem', marginBottom: '1.25rem', color: '#f8fafc' }}>Resources</h4>
                             <ul style={{ listStyle: 'none', opacity: 0.8, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                                <li><Link href="/training">Training</Link></li>
+                                <li><Link href="/certification">Certification</Link></li>
+                                <li><Link href="/faq">FAQ</Link></li>
                                 <li><Link href="/privacy">Privacy Policy</Link></li>
                                 <li><Link href="/terms">Terms & Conditions</Link></li>
-                                <li><Link href="/faq">FAQs</Link></li>
                             </ul>
                         </div>
                     </div>

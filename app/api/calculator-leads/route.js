@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { withAuth } from '@/lib/auth';
 import { DATA_FILES, readJson, writeJson } from '@/lib/db';
 import { errorResponse, successResponse, getRequestBody, generateId } from '@/lib/utils';
+import { sendCalculatorLeadNotification } from '@/lib/email';
 
 // GET /api/calculator-leads - Get all calculator leads (requires auth)
 const handleGET = async (request) => {
@@ -31,6 +32,9 @@ export async function POST(request) {
     };
     leads.unshift(newLead);
     writeJson(DATA_FILES.CALCULATOR_LEADS, leads);
+
+    // Fire-and-forget email notification
+    sendCalculatorLeadNotification(newLead).catch(() => {});
 
     return successResponse({
       success: true,

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { DATA_FILES, readJson, writeJson } from '@/lib/db';
 import { errorResponse, successResponse, getRequestBody, generateId } from '@/lib/utils';
+import { sendContactNotification } from '@/lib/email';
 
 // POST /api/contact - Submit contact form (public - no auth required)
 export async function POST(request) {
@@ -27,6 +28,9 @@ export async function POST(request) {
     console.log('--- NEW CONTACT ---');
     console.log(newContact);
     console.log('-------------------');
+
+    // Fire-and-forget email notification
+    sendContactNotification(newContact).catch(() => {});
 
     return successResponse({
       success: true,

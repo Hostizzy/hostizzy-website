@@ -1,6 +1,13 @@
+# *
 User-agent: *
 Allow: /
-Disallow: /admin
+
+# *
+User-agent: *
 Disallow: /api
 
-Sitemap: https://hostizzy.com/sitemap.xml
+# Host
+Host: https://www.hostizzy.com
+
+# Sitemaps
+Sitemap: https://www.hostizzy.com/sitemap.xml
