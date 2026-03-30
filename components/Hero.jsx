@@ -118,16 +118,17 @@ const Hero = () => {
                             <a href="#contact" className="btn btn-gradient" style={{ padding: '1rem 2rem', fontSize: '1.1rem' }}>
                                 Partner With Us <ArrowRight size={20} style={{ marginLeft: '0.5rem' }} />
                             </a>
-                            <Link href="/experiences" className="btn" style={{
+                            <a href="https://book.hostizzy.com/" target="_blank" rel="noopener noreferrer" className="btn" style={{
                                 padding: '1rem 2rem',
                                 fontSize: '1.1rem',
                                 background: 'rgba(255,255,255,0.1)',
                                 backdropFilter: 'blur(5px)',
                                 border: '1px solid rgba(255,255,255,0.5)',
-                                color: 'white'
+                                color: 'white',
+                                textDecoration: 'none'
                             }}>
                                 Explore Stays
-                            </Link>
+                            </a>
                         </motion.div>
                     </motion.div>
 

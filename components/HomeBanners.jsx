@@ -20,10 +20,10 @@ const HomeBanners = () => {
                     }}>
                         <h3 style={{ marginBottom: '1rem', fontSize: '1.75rem', color: '#0369a1' }}>Looking to Book or Explore Unique Stays?</h3>
                         <p style={{ marginBottom: '2rem', color: '#334155', lineHeight: 1.6 }}>
-                            Visit our sister site <strong>JuxTravel</strong> to discover and book verified properties across India—including stays managed by Hostizzy and unique homes listed by independent hosts.
+                            Discover and book verified Hostizzy-managed properties across India—stays, experiences, and group trips all in one place.
                         </p>
-                        <a href="https://hostizzy.dtravel.com/" target="_blank" rel="noopener noreferrer" className="btn" style={{ background: '#0284c7', color: 'white' }}>
-                            Visit JuxTravel <ExternalLink size={18} style={{ marginLeft: '0.5rem' }} />
+                        <a href="https://book.hostizzy.com/" target="_blank" rel="noopener noreferrer" className="btn" style={{ background: '#0284c7', color: 'white' }}>
+                            Book Now <ExternalLink size={18} style={{ marginLeft: '0.5rem' }} />
                         </a>
                     </div>
                 </ScrollReveal>

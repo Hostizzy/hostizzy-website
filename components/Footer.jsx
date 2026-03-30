@@ -35,7 +35,7 @@ const Footer = () => {
                                 <li><Link href="/">Home</Link></li>
                                 <li><Link href="/about">About Us</Link></li>
                                 <li><Link href="/services">Plans & Pricing</Link></li>
-                                <li><a href="https://hostizzy.dtravel.com/" target="_blank" rel="noreferrer">JuxTravel</a></li>
+                                <li><a href="https://book.hostizzy.com/" target="_blank" rel="noreferrer">Book Now</a></li>
                                 <li><Link href="/contact">Contact Us</Link></li>
                             </ul>
                         </div>

@@ -402,17 +402,16 @@ export default function Services() {
                 </div>
             </section>
 
-            {/* JuxTravel Promo */}
+            {/* Booking Promo */}
             <section className="section container">
                 <ScrollReveal>
                     <div className="card shadow-premium" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #334155 100%)', color: 'white', padding: '4rem 2rem', textAlign: 'center', borderRadius: '2rem' }}>
                         <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Looking to Travel Instead of Host?</h2>
                         <p style={{ maxWidth: '700px', margin: '0 auto 2rem', fontSize: '1.1rem', opacity: 0.9, lineHeight: 1.7 }}>
-                            Discover unique stays across India on <strong>JuxTravel</strong>—our open marketplace featuring villas, retreats, urban lofts and luxe homes.
-                            Browse Hostizzy-managed properties alongside independents.
+                            Discover and book Hostizzy-managed stays, experiences, and group trips across India—villas, retreats, urban lofts and luxe homes.
                         </p>
                         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-                            <button className="btn" style={{ background: 'white', color: '#0f172a' }}>Explore JuxTravel</button>
+                            <a href="https://book.hostizzy.com/" target="_blank" rel="noopener noreferrer" className="btn" style={{ background: 'white', color: '#0f172a', textDecoration: 'none' }}>Book Now</a>
                             <Link href="/contact" className="btn btn-outline" style={{ borderColor: 'white', color: 'white' }}>List Your Property</Link>
                         </div>
                     </div>
