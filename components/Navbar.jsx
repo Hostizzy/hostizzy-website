@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, ArrowUpRight, ChevronDown, Zap, TrendingUp, BadgeCheck, ChevronRight, Building2, GraduationCap, Briefcase, MapPin, Users } from 'lucide-react';
+import { Menu, X, ArrowUpRight, ChevronDown, Zap, TrendingUp, BadgeCheck, ChevronRight, Building2, GraduationCap, Briefcase, MapPin, Users, Home } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { useSettings } from '../context/SettingsContext';
@@ -49,7 +49,6 @@ const Navbar = () => {
     const aboutLinks = [
         { path: "/about", name: "Our Story", icon: <Users size={16} /> },
         { path: "/blogs", name: "Blog", icon: <Users size={16} /> },
-        { path: "/career", name: "Career", icon: <Briefcase size={16} /> },
         { path: "/invest", name: "Invest", icon: <TrendingUp size={16} /> },
     ];
 
@@ -123,6 +122,38 @@ const Navbar = () => {
                         whiteSpace: 'nowrap',
                         flex: 1
                     }}>
+                        {/* Home */}
+                        <li>
+                            <Link
+                                href="/"
+                                onMouseEnter={() => setActiveDropdown('home')}
+                                onMouseLeave={() => setActiveDropdown(null)}
+                                style={{
+                                    position: 'relative',
+                                    padding: '0.65rem 1rem',
+                                    color: isActivePath('/') ? 'var(--color-primary)' : 'var(--color-foreground)',
+                                    fontWeight: isActivePath('/') ? 600 : 500,
+                                    fontSize: '0.925rem',
+                                    transition: 'all 0.2s ease',
+                                    textDecoration: 'none',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '6px',
+                                    borderRadius: '12px'
+                                }}
+                            >
+                                {activeDropdown === 'home' && (
+                                    <motion.div
+                                        layoutId="nav-hover"
+                                        style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(254, 88, 88, 0.08)', borderRadius: '12px', zIndex: -1 }}
+                                        transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
+                                    />
+                                )}
+                                <Home size={16} style={{ opacity: 0.7 }} />
+                                Home
+                            </Link>
+                        </li>
+
                         {/* Services */}
                         <li>
                             <Link
@@ -393,6 +424,38 @@ const Navbar = () => {
                             </AnimatePresence>
                         </li>
 
+                        {/* Career */}
+                        <li>
+                            <Link
+                                href="/career"
+                                onMouseEnter={() => setActiveDropdown('career')}
+                                onMouseLeave={() => setActiveDropdown(null)}
+                                style={{
+                                    position: 'relative',
+                                    padding: '0.65rem 1rem',
+                                    color: isActivePath('/career') ? 'var(--color-primary)' : 'var(--color-foreground)',
+                                    fontWeight: isActivePath('/career') ? 600 : 500,
+                                    fontSize: '0.925rem',
+                                    transition: 'all 0.2s ease',
+                                    textDecoration: 'none',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '6px',
+                                    borderRadius: '12px'
+                                }}
+                            >
+                                {activeDropdown === 'career' && (
+                                    <motion.div
+                                        layoutId="nav-hover"
+                                        style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(254, 88, 88, 0.08)', borderRadius: '12px', zIndex: -1 }}
+                                        transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
+                                    />
+                                )}
+                                <Briefcase size={16} style={{ opacity: 0.7 }} />
+                                Career
+                            </Link>
+                        </li>
+
                         {/* About Us Dropdown */}
                         <li
                             onMouseEnter={() => setActiveDropdown('about')}
@@ -600,6 +663,14 @@ const Navbar = () => {
 
                             {/* Menu Items */}
                             <nav style={{ flex: 1, padding: '0.5rem 0' }}>
+                                <Link href="/" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textDecoration: 'none', borderBottom: '1px solid var(--color-border)' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                        <Home size={20} style={{ opacity: 0.6 }} />
+                                        Home
+                                    </div>
+                                    <ChevronRight size={18} color="var(--color-muted)" />
+                                </Link>
+
                                 <Link href="/services" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textDecoration: 'none', borderBottom: '1px solid var(--color-border)' }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                                         <Briefcase size={20} style={{ opacity: 0.6 }} />
@@ -673,6 +744,14 @@ const Navbar = () => {
                                         )}
                                     </AnimatePresence>
                                 </div>
+
+                                <Link href="/career" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textDecoration: 'none', borderBottom: '1px solid var(--color-border)' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                        <Briefcase size={20} style={{ opacity: 0.6 }} />
+                                        Career
+                                    </div>
+                                    <ChevronRight size={18} color="var(--color-muted)" />
+                                </Link>
 
                                 {/* About Us Dropdown */}
                                 <div style={{ borderBottom: '1px solid var(--color-border)' }}>
