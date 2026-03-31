@@ -119,9 +119,9 @@ const Home = () => {
             <HowItWorks />
 
             <VideoSection
-                url="https://www.youtube.com/watch?v=uiOcrwHz1aY"
-                title="Experience Hostizzy"
-                subtitle="Step inside The Kesari Bagh — one of our finest managed properties."
+                url="https://www.youtube.com/watch?v=vXaW0NSbsig"
+                title="Co-Host Your Home with Hostizzy"
+                subtitle="Turn your vacation home into a revenue-generating asset — without the hassle."
                 bgColor="#f8fafc"
             />
 
