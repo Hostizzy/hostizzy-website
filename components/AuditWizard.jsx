@@ -7,7 +7,7 @@ const steps = [
     {
         id: 'start',
         title: 'Free Property Audit',
-        subtitle: 'Our AI analyzes your property to predict its true earning potential.',
+        subtitle: 'Get an AI-powered estimate of your property\'s earning potential.',
         icon: <Calculator size={48} className="text-primary" />
     },
     {
@@ -49,7 +49,7 @@ const steps = [
     {
         id: 'result',
         title: 'Audit Complete!',
-        subtitle: 'Our algorithm has processed your data.',
+        subtitle: 'Here\'s what our AI estimates for your property.',
         icon: <CheckCircle2 size={64} className="text-green-500" />
     }
 ];
@@ -67,13 +67,41 @@ const AuditWizard = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    const handleNext = () => {
+    const [aiResult, setAiResult] = useState(null);
+
+    const handleNext = async () => {
         if (currentStep === steps.length - 2) {
             setIsProcessing(true);
-            setTimeout(() => {
-                setIsProcessing(false);
-                setCurrentStep(prev => prev + 1);
-            }, 2000);
+            try {
+                // Map property type for API
+                const typeMap = { 'Villa / Independent Home': 'villa', 'Apartment / Condo': 'apartment', 'Boutique Hotel': 'villa', 'Farmhouse': 'farmhouse' };
+                const res = await fetch('/api/ai-estimate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        city: formData.location,
+                        propertyType: typeMap[formData.type] || 'villa',
+                        bedrooms: parseInt(formData.bedrooms) || 3,
+                        finishLevel: 'premium'
+                    })
+                });
+                const data = await res.json();
+                if (data.grossRevenue) {
+                    setAiResult(data);
+                }
+            } catch (err) {
+                console.error('AI estimate error:', err);
+            }
+            // Also capture lead
+            try {
+                await fetch('/api/calculator-leads', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: formData.email, city: formData.location, propertyType: formData.type, bedrooms: formData.bedrooms, source: 'audit-wizard' })
+                });
+            } catch (err) { /* ignore */ }
+            setIsProcessing(false);
+            setCurrentStep(prev => prev + 1);
         } else {
             setCurrentStep(prev => prev + 1);
         }
@@ -139,10 +167,26 @@ const AuditWizard = () => {
 
                     {currentStep === steps.length - 1 ? (
                         <div style={{ padding: '2rem', backgroundColor: '#f0fdf4', borderRadius: '1.5rem', marginTop: '1rem' }}>
-                            <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#166534', marginBottom: '0.5rem' }}>Predicted Annual Revenue</div>
-                            <div style={{ fontSize: '3rem', fontWeight: 900, color: '#15803d', letterSpacing: '-1px' }}>₹ 18L - 24L</div>
-                            <p style={{ color: '#166534', marginTop: '1rem', opacity: 0.8 }}>We've sent a detailed breakdown to {formData.email}.</p>
-                            <button className="btn btn-primary" style={{ marginTop: '2rem', width: '100%' }} onClick={() => setCurrentStep(0)}>Run Another Audit</button>
+                            <div style={{ fontSize: '1.2rem', fontWeight: 700, color: '#166534', marginBottom: '0.5rem' }}>
+                                {aiResult ? '✨ AI-Powered Estimate' : 'Predicted Annual Revenue'}
+                            </div>
+                            <div style={{ fontSize: '3rem', fontWeight: 900, color: '#15803d', letterSpacing: '-1px' }}>
+                                {aiResult ? `₹ ${(aiResult.grossRevenue / 100000).toFixed(1)}L` : '₹ 18L - 24L'}
+                            </div>
+                            {aiResult && (
+                                <div style={{ fontSize: '1rem', color: '#166534', marginTop: '0.5rem', opacity: 0.9 }}>
+                                    Net Income: ₹ {(aiResult.netIncome / 100000).toFixed(1)}L/year · ADR: ₹{aiResult.adr?.toLocaleString()}
+                                </div>
+                            )}
+                            {aiResult?.marketInsight && (
+                                <p style={{ color: '#334155', marginTop: '1rem', fontSize: '0.9rem', lineHeight: 1.6, textAlign: 'left', background: 'white', padding: '1rem', borderRadius: '0.75rem' }}>
+                                    💡 {aiResult.marketInsight}
+                                </p>
+                            )}
+                            <a href="/calculator" className="btn btn-primary" style={{ marginTop: '1.5rem', width: '100%', textDecoration: 'none', display: 'block', textAlign: 'center' }}>
+                                View Detailed Analysis →
+                            </a>
+                            <button className="btn" style={{ marginTop: '0.5rem', width: '100%', background: '#f8fafc' }} onClick={() => { setCurrentStep(0); setAiResult(null); }}>Run Another Audit</button>
                         </div>
                     ) : (
                         <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>

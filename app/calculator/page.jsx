@@ -48,6 +48,11 @@ export default function Calculator() {
     const [userEmail, setUserEmail] = useState('');
     const [showEmailModal, setShowEmailModal] = useState(false);
 
+    // AI integration state
+    const [aiLoading, setAiLoading] = useState(false);
+    const [aiData, setAiData] = useState(null);
+    const [aiError, setAiError] = useState(false);
+
     // Calculate investment confidence score (0-10) - MUST be before useMemo
     const calculateConfidenceScore = (cityData, occupancy) => {
         let score = 0;
@@ -129,6 +134,35 @@ export default function Calculator() {
 
     }, [selectedCity, propertyType, bedrooms, finishes]);
 
+    const fetchAIEstimate = async () => {
+        setAiLoading(true);
+        setAiError(false);
+        try {
+            const res = await fetch('/api/ai-estimate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    city: selectedCity,
+                    propertyType: propertyType,
+                    bedrooms: bedrooms,
+                    finishLevel: finishes
+                })
+            });
+            const data = await res.json();
+            if (data.fallback || data.error) {
+                setAiError(true);
+                setAiData(null);
+            } else {
+                setAiData(data);
+            }
+        } catch (err) {
+            setAiError(true);
+            setAiData(null);
+        } finally {
+            setAiLoading(false);
+        }
+    };
+
     const handleEmailSubmit = async (email) => {
         setUserEmail(email);
 
@@ -161,6 +195,7 @@ export default function Calculator() {
 
     return (
         <>
+            <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
             {/* Page Header - Standardized */}
             <section className="section-sm bg-secondary">
                 <div className="container text-center">
@@ -168,7 +203,11 @@ export default function Calculator() {
                         <div className="badge badge-primary" style={{ marginBottom: '1rem' }}>
                             <LucideTrend size={14} style={{ marginRight: '0.5rem' }} /> Market Intelligence Tool
                         </div>
-                        <h1 className="page-header">Vacation Rental Earnings Calculator</h1>
+                        <h1 className="page-header">Vacation Rental Earnings Calculator
+                            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'linear-gradient(135deg, #8b5cf6, #6366f1)', color: 'white', padding: '0.3rem 0.8rem', borderRadius: '999px', fontSize: '0.75rem', fontWeight: 600, marginLeft: '0.75rem', verticalAlign: 'middle' }}>
+                                AI-Powered
+                            </span>
+                        </h1>
                         <p className="section-subtitle">
                             Data-driven insights for 20+ top Indian leisure markets. Calculate your potential income from professional Airbnb property management.
                         </p>
@@ -265,9 +304,9 @@ export default function Calculator() {
                             <h2 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '1.5rem', color: '#1e293b', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                                 <LucideTrend size={16} /> Market Seasonality
                             </h2>
-                            {seasonalityData && seasonalityData.length > 0 ? (
+                            {(aiData?.seasonalTrend || seasonalityData)?.length > 0 ? (
                                 <ResponsiveContainer width="100%" height={240}>
-                                    <LineChart data={seasonalityData} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
+                                    <LineChart data={aiData?.seasonalTrend ? aiData.seasonalTrend.map((val, idx) => ({ month: idx + 1, revenue: val })) : seasonalityData} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
                                         <XAxis dataKey="month" tickFormatter={m => `${['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'][m - 1]}`} stroke="#94a3b8" fontSize={11} tickLine={false} axisLine={false} />
                                         <YAxis stroke="#94a3b8" fontSize={11} tickLine={false} axisLine={false} />
                                         <Line type="monotone" dataKey="revenue" stroke="var(--color-primary)" strokeWidth={3} dot={{ r: 4, strokeWidth: 2, fill: '#fff' }} activeDot={{ r: 6 }} />
@@ -336,8 +375,38 @@ export default function Calculator() {
                         </div>
                     </div>
 
+                    {/* AI ESTIMATE BUTTON */}
+                    <div style={{ textAlign: 'center', padding: '1.5rem 0', borderBottom: '1px solid #f1f5f9' }}>
+                        <button
+                            onClick={fetchAIEstimate}
+                            disabled={aiLoading}
+                            className="btn btn-gradient"
+                            style={{ padding: '0.85rem 2.5rem', fontSize: '1rem', opacity: aiLoading ? 0.7 : 1, cursor: aiLoading ? 'wait' : 'pointer' }}
+                        >
+                            {aiLoading ? 'Analyzing with AI...' : 'Get AI-Powered Estimate'}
+                        </button>
+                        {aiError && (
+                            <p style={{ color: '#ef4444', fontSize: '0.85rem', marginTop: '0.5rem' }}>
+                                AI estimation unavailable. Showing formula-based results.
+                            </p>
+                        )}
+                    </div>
+
                     {/* DASHBOARD GRID */}
-                    <div className="grid desktop-3-col" style={{ marginTop: '2rem', gap: '2rem' }}>
+                    <div className="grid desktop-3-col" style={{ marginTop: '2rem', gap: '2rem', position: 'relative' }}>
+
+                        {/* AI LOADING OVERLAY */}
+                        {aiLoading && (
+                            <div style={{
+                                position: 'absolute', inset: 0, background: 'rgba(255,255,255,0.9)',
+                                display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                                borderRadius: '1.5rem', zIndex: 10
+                            }}>
+                                <div style={{ width: '48px', height: '48px', border: '4px solid #e2e8f0', borderTopColor: 'var(--color-primary)', borderRadius: '50%', animation: 'spin 1s linear infinite' }} />
+                                <p style={{ marginTop: '1rem', fontWeight: 600, color: '#334155' }}>Analyzing with AI...</p>
+                                <p style={{ fontSize: '0.85rem', color: '#64748b' }}>Generating personalized market insights</p>
+                            </div>
+                        )}
 
                         {/* COL 1: SCORECARD */}
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -350,21 +419,21 @@ export default function Calculator() {
                             <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                                 <div className="card border-light" style={{ padding: '1rem', textAlign: 'center' }}>
                                     <div style={{ fontSize: '0.8rem', color: '#64748b' }}>Occupancy</div>
-                                    <div style={{ fontSize: '1.25rem', fontWeight: 700 }}>{metrics.occupancy}%</div>
+                                    <div style={{ fontSize: '1.25rem', fontWeight: 700 }}>{aiData ? aiData.occupancy : metrics.occupancy}%</div>
                                 </div>
                                 <div className="card border-light" style={{ padding: '1rem', textAlign: 'center' }}>
                                     <div style={{ fontSize: '0.8rem', color: '#64748b' }}>RevPAR</div>
-                                    <div style={{ fontSize: '1.25rem', fontWeight: 700 }}>₹{metrics.revpar}</div>
+                                    <div style={{ fontSize: '1.25rem', fontWeight: 700 }}>₹{aiData ? Math.round(aiData.grossRevenue / 365) : metrics.revpar}</div>
                                 </div>
                             </div>
 
                             <div className="card bg-primary text-white" style={{ padding: '1.5rem', marginTop: 'auto', borderRadius: '1rem', background: 'linear-gradient(135deg, var(--color-primary) 0%, #d83a3a 100%)' }}>
-                                <div style={{ fontSize: '0.85rem', opacity: 0.9, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Est. Net Income</div>
-                                <div style={{ fontSize: '2.2rem', fontWeight: 800, lineHeight: 1, marginBottom: '0.5rem' }}>₹{metrics.netIncome.toLocaleString()}</div>
+                                <div style={{ fontSize: '0.85rem', opacity: 0.9, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Est. Net Income {aiData && <span style={{ fontSize: '0.7rem', background: 'rgba(255,255,255,0.2)', padding: '0.15rem 0.5rem', borderRadius: '999px', marginLeft: '0.5rem' }}>AI</span>}</div>
+                                <div style={{ fontSize: '2.2rem', fontWeight: 800, lineHeight: 1, marginBottom: '0.5rem' }}>₹{(aiData ? aiData.netIncome : metrics.netIncome).toLocaleString()}</div>
                                 <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>
-                                    Range: ₹{(metrics.netIncome * 0.9).toLocaleString()} - ₹{(metrics.netIncome * 1.1).toLocaleString()}
+                                    Range: ₹{((aiData ? aiData.netIncome : metrics.netIncome) * 0.9).toLocaleString()} - ₹{((aiData ? aiData.netIncome : metrics.netIncome) * 1.1).toLocaleString()}
                                 </div>
-                                <div style={{ fontSize: '0.7rem', opacity: 0.7, marginTop: '0.5rem' }}>Based on 85% confidence interval</div>
+                                <div style={{ fontSize: '0.7rem', opacity: 0.7, marginTop: '0.5rem' }}>{aiData ? `AI Confidence: ${aiData.confidence}/10` : 'Based on 85% confidence interval'}</div>
                             </div>
                         </div>
 
@@ -377,7 +446,7 @@ export default function Calculator() {
                             <div style={{ marginBottom: '1.5rem' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', fontWeight: 600, fontSize: '0.95rem' }}>
                                     <span>Gross Revenue</span>
-                                    <span>₹{metrics.grossRevenue.toLocaleString()}</span>
+                                    <span>₹{(aiData ? aiData.grossRevenue : metrics.grossRevenue).toLocaleString()}</span>
                                 </div>
                                 <div style={{ height: '6px', width: '100%', background: '#f1f5f9', borderRadius: '3px' }}>
                                     <div style={{ height: '100%', width: '100%', background: '#10b981', borderRadius: '3px' }}></div>
@@ -385,17 +454,17 @@ export default function Calculator() {
                             </div>
 
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
-                                <ExpenseItem label="Hostizzy Mgmt (20%)" amount={metrics.breakdown?.fee} color="#3b82f6" />
-                                <ExpenseItem label="OTA Commissions (18%)" amount={metrics.breakdown?.ota} color="#f59e0b" />
-                                <ExpenseItem label="Ops & Maintenance (15%)" amount={metrics.breakdown?.ops} color="#f43f5e" />
+                                <ExpenseItem label="Hostizzy Mgmt (20%)" amount={aiData ? Math.round(aiData.grossRevenue * 0.20) : metrics.breakdown?.fee} color="#3b82f6" />
+                                <ExpenseItem label="OTA Commissions (18%)" amount={aiData ? Math.round(aiData.grossRevenue * 0.18) : metrics.breakdown?.ota} color="#f59e0b" />
+                                <ExpenseItem label="Ops & Maintenance (15%)" amount={aiData ? Math.round(aiData.grossRevenue * 0.15) : metrics.breakdown?.ops} color="#f43f5e" />
                             </div>
 
                             <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid #f1f5f9' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 800, fontSize: '1.2rem', color: 'var(--color-primary)' }}>
                                     <span>Your Net Income</span>
-                                    <span>₹{metrics.netIncome.toLocaleString()}</span>
+                                    <span>₹{(aiData ? aiData.netIncome : metrics.netIncome).toLocaleString()}</span>
                                 </div>
-                                <p style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '0.5rem', textAlign: 'right' }}>Conservative Estimate (Pre-Tax)</p>
+                                <p style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '0.5rem', textAlign: 'right' }}>{aiData ? 'AI-Generated Estimate (Pre-Tax)' : 'Conservative Estimate (Pre-Tax)'}</p>
                             </div>
                         </div>
 
@@ -427,12 +496,35 @@ export default function Calculator() {
 
                     </div>
 
+                    {/* AI INSIGHTS & RECOMMENDATIONS */}
+                    {aiData && (
+                        <>
+                            <div className="card" style={{ padding: '1.5rem', marginTop: '1.5rem', background: 'linear-gradient(135deg, #f0f9ff, #eff6ff)', border: '1px solid #bfdbfe' }}>
+                                <h4 style={{ marginBottom: '0.5rem', color: '#1e40af', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    Market Insight
+                                </h4>
+                                <p style={{ color: '#334155', lineHeight: 1.6 }}>{aiData.marketInsight}</p>
+                            </div>
+                            <div className="card" style={{ padding: '1.5rem', marginTop: '1rem' }}>
+                                <h4 style={{ marginBottom: '0.75rem' }}>Recommendations</h4>
+                                <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                    {aiData.recommendations?.map((rec, i) => (
+                                        <li key={i} style={{ display: 'flex', alignItems: 'start', gap: '0.5rem', color: '#334155' }}>
+                                            <span style={{ color: '#22c55e', marginTop: '2px' }}>&#10003;</span>
+                                            {rec}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </>
+                    )}
+
                     {/* CTA */}
                     <div style={{ marginTop: '2rem', textAlign: 'center', padding: '2rem', background: '#f8fafc', borderRadius: '1rem' }}>
                         <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem' }}>Want this exact performance?</h3>
                         <p style={{ marginBottom: '1.5rem', color: '#64748b' }}>Get a verified audit from our revenue management team.</p>
                         <Link
-                            href={`/contact?type=owner&loc=${selectedCity}&rev=${metrics.grossRevenue}`}
+                            href={`/contact?type=owner&loc=${selectedCity}&rev=${aiData ? aiData.grossRevenue : metrics.grossRevenue}`}
                             className="btn btn-primary"
                             style={{ padding: '1rem 3rem' }}
                         >
