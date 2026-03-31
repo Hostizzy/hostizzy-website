@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import ScrollReveal from '../../components/ScrollReveal';
+import VideoSection from '../../components/VideoSection';
 import {
     Check, ArrowRight, Zap, Star, Shield, TrendingUp, Smartphone, Globe,
     Home, Building, Palmtree, Crown, HelpCircle
@@ -348,6 +349,13 @@ export default function Services() {
                     </div>
                 </div>
             </section>
+
+            <VideoSection
+                url="https://www.youtube.com/watch?v=vXaW0NSbsig"
+                title="Co-Host Your Home with Hostizzy"
+                subtitle="Turn your vacation home into a revenue-generating asset — without the hassle."
+                bgColor="#f8fafc"
+            />
 
             {/* Add-ons */}
             <section className="section container">
