@@ -4,280 +4,212 @@ import Link from 'next/link';
 import { ArrowRight, Star, Building2, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const propertyImages = [
-  {
-    src: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80',
-    alt: 'Luxury villa with pool',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=400&q=80',
-    alt: 'Hotel pool area',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=400&q=80',
-    alt: 'Tropical resort',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=400&q=80',
-    alt: 'Modern hotel room',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=400&q=80',
-    alt: 'Luxury pool at sunset',
-  },
-];
-
-const trustBadges = [
-  { icon: Star, label: '4.9 Rating' },
-  { icon: Building2, label: '50+ Properties' },
-  { icon: Users, label: '40,000+ Guests' },
-];
-
-const tileStyle = {
-  borderRadius: '1rem',
-  overflow: 'hidden',
-  boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-  transition: 'transform 0.35s ease',
-};
-
-const imgStyle = {
-  width: '100%',
-  height: '100%',
-  objectFit: 'cover',
-  display: 'block',
-};
-
 const Hero = () => {
-  return (
-    <section
-      className="hero-split"
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        background: '#fafafa',
-        paddingTop: 'var(--header-height)',
-        overflow: 'hidden',
-      }}
-    >
-      <div className="container hero-split__grid">
-        {/* Left Column -- Text */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          style={{ maxWidth: '640px' }}
-        >
-          {/* Badge */}
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.5 }}
-            className="badge"
-            style={{
-              display: 'inline-block',
-              padding: '0.45rem 1.1rem',
-              borderRadius: '999px',
-              background: 'rgba(254,88,88,0.1)',
-              color: 'var(--color-primary)',
-              fontSize: '0.85rem',
-              fontWeight: 600,
-              marginBottom: '1.5rem',
-              letterSpacing: '0.01em',
-            }}
-          >
-            Vacation rental made easy
-          </motion.span>
-
-          {/* Heading */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.7 }}
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(2.4rem, 4.5vw, 3.8rem)',
-              fontWeight: 700,
-              lineHeight: 1.15,
-              color: 'var(--color-foreground)',
-              marginBottom: '1.5rem',
-              letterSpacing: '-0.02em',
-            }}
-          >
-            India&apos;s Premier
-            <br />
-            Vacation Rental
-            <br />
-            Management
-          </motion.h1>
-
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35, duration: 0.7 }}
-            style={{
-              fontSize: '1.15rem',
-              lineHeight: 1.7,
-              color: 'var(--color-muted)',
-              marginBottom: '1.75rem',
-              maxWidth: '540px',
-            }}
-          >
-            We empower property owners with technology-driven management and
-            deliver exceptional guest experiences across India&apos;s most
-            desirable destinations.
-          </motion.p>
-
-          {/* Trust Badges */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '1.25rem',
-              marginBottom: '2rem',
-              alignItems: 'center',
-            }}
-          >
-            {trustBadges.map(({ icon: Icon, label }) => (
-              <span
-                key={label}
+    return (
+        <section style={{
+            position: 'relative',
+            minHeight: '100vh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            overflow: 'hidden',
+            background: '#0f172a'
+        }}>
+            {/* Background Image */}
+            <img
+                src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=2400"
+                alt="Luxury vacation rental"
                 style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.4rem',
-                  fontSize: '0.9rem',
-                  color: 'var(--color-muted)',
-                  fontWeight: 500,
+                    position: 'absolute',
+                    inset: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    opacity: 0.55
                 }}
-              >
-                <Icon size={16} strokeWidth={2.2} />
-                {label}
-              </span>
-            ))}
-          </motion.div>
+            />
 
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.7 }}
-            style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}
-          >
-            <Link href="/contact" className="btn btn-gradient">
-              Partner With Us{' '}
-              <ArrowRight size={18} style={{ marginLeft: '0.35rem' }} />
-            </Link>
-            <a
-              href="https://book.hostizzy.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-outline"
-            >
-              Explore Stays
-            </a>
-          </motion.div>
-        </motion.div>
+            {/* Gradient Overlay */}
+            <div style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'linear-gradient(180deg, rgba(15,23,42,0.4) 0%, rgba(15,23,42,0.7) 60%, rgba(15,23,42,0.85) 100%)'
+            }} />
 
-        {/* Right Column -- Property Mosaic */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.9, delay: 0.3, ease: 'easeOut' }}
-          className="hero-mosaic"
-        >
-          {/* Image 1 -- large, spans 2 cols + 2 rows */}
-          <div className="hero-mosaic__tile hero-mosaic__tile--large" style={tileStyle}>
-            <img src={propertyImages[0].src} alt={propertyImages[0].alt} style={imgStyle} />
-          </div>
+            {/* Content */}
+            <div className="container" style={{
+                position: 'relative',
+                zIndex: 1,
+                textAlign: 'center',
+                color: 'white',
+                padding: 'calc(var(--header-height) + 2rem) 1.5rem 4rem'
+            }}>
+                {/* Badge */}
+                <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    style={{ marginBottom: '1.5rem' }}
+                >
+                    <span style={{
+                        display: 'inline-block',
+                        padding: '0.5rem 1.25rem',
+                        borderRadius: '999px',
+                        background: 'rgba(254,88,88,0.2)',
+                        color: '#ff9a9a',
+                        fontSize: '0.9rem',
+                        fontWeight: 600,
+                        letterSpacing: '0.02em',
+                        border: '1px solid rgba(254,88,88,0.3)'
+                    }}>
+                        Vacation Rental Made Easy
+                    </span>
+                </motion.div>
 
-          {/* Image 2 */}
-          <div className="hero-mosaic__tile" style={tileStyle}>
-            <img src={propertyImages[1].src} alt={propertyImages[1].alt} style={imgStyle} />
-          </div>
+                {/* Heading */}
+                <motion.h1
+                    initial={{ opacity: 0, y: 25 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.15, duration: 0.7 }}
+                    style={{
+                        fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
+                        fontWeight: 700,
+                        lineHeight: 1.1,
+                        letterSpacing: '-0.02em',
+                        color: 'white',
+                        marginBottom: '1.5rem',
+                        maxWidth: '900px',
+                        margin: '0 auto 1.5rem',
+                        textShadow: '0 2px 30px rgba(0,0,0,0.3)'
+                    }}
+                >
+                    Empowering Owners.{' '}
+                    <span style={{ color: '#FFD700' }}>Enriching Guests.</span>
+                    <br />
+                    Engineering the Future.
+                </motion.h1>
 
-          {/* Image 3 */}
-          <div className="hero-mosaic__tile" style={tileStyle}>
-            <img src={propertyImages[2].src} alt={propertyImages[2].alt} style={imgStyle} />
-          </div>
+                {/* Subtitle */}
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3, duration: 0.7 }}
+                    style={{
+                        fontSize: 'clamp(1rem, 1.8vw, 1.25rem)',
+                        lineHeight: 1.7,
+                        color: 'rgba(255,255,255,0.85)',
+                        maxWidth: '680px',
+                        margin: '0 auto 2rem',
+                        textShadow: '0 1px 10px rgba(0,0,0,0.3)'
+                    }}
+                >
+                    India&apos;s premier vacation rental management company. We combine technology-driven operations with exceptional hospitality to maximize your property&apos;s potential.
+                </motion.p>
 
-          {/* Image 4 */}
-          <div className="hero-mosaic__tile" style={tileStyle}>
-            <img src={propertyImages[3].src} alt={propertyImages[3].alt} style={imgStyle} />
-          </div>
+                {/* Trust Badges */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.45, duration: 0.6 }}
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        flexWrap: 'wrap',
+                        gap: '1.5rem',
+                        marginBottom: '2.5rem'
+                    }}
+                >
+                    {[
+                        { icon: Star, label: '4.9 Rating', color: '#FFD700' },
+                        { icon: Building2, label: '50+ Properties', color: '#60a5fa' },
+                        { icon: Users, label: '40,000+ Guests', color: '#34d399' }
+                    ].map(({ icon: Icon, label, color }) => (
+                        <span key={label} style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.5rem',
+                            fontSize: '0.95rem',
+                            color: 'rgba(255,255,255,0.9)',
+                            fontWeight: 500,
+                            padding: '0.4rem 1rem',
+                            background: 'rgba(255,255,255,0.08)',
+                            borderRadius: '999px',
+                            border: '1px solid rgba(255,255,255,0.1)'
+                        }}>
+                            <Icon size={16} color={color} strokeWidth={2.2} />
+                            {label}
+                        </span>
+                    ))}
+                </motion.div>
 
-          {/* Image 5 */}
-          <div className="hero-mosaic__tile" style={tileStyle}>
-            <img src={propertyImages[4].src} alt={propertyImages[4].alt} style={imgStyle} />
-          </div>
-        </motion.div>
-      </div>
+                {/* CTA Buttons */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6, duration: 0.7 }}
+                    style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}
+                >
+                    <Link href="/contact" className="btn btn-gradient" style={{
+                        padding: '1rem 2.5rem',
+                        fontSize: '1.1rem'
+                    }}>
+                        Partner With Us <ArrowRight size={20} style={{ marginLeft: '0.5rem' }} />
+                    </Link>
+                    <a
+                        href="https://book.hostizzy.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn"
+                        style={{
+                            padding: '1rem 2.5rem',
+                            fontSize: '1.1rem',
+                            background: 'rgba(255,255,255,0.1)',
+                            backdropFilter: 'blur(8px)',
+                            border: '1px solid rgba(255,255,255,0.3)',
+                            color: 'white',
+                            textDecoration: 'none'
+                        }}
+                    >
+                        Explore Stays
+                    </a>
+                </motion.div>
 
-      <style jsx>{`
-        .hero-split__grid {
-          display: grid;
-          grid-template-columns: 55% 45%;
-          align-items: center;
-          gap: 3rem;
-          padding: 4rem 1.5rem;
-        }
-
-        .hero-mosaic {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          grid-template-rows: 190px 190px;
-          gap: 0.75rem;
-        }
-
-        .hero-mosaic__tile--large {
-          grid-column: 1 / 3;
-          grid-row: 1 / 3;
-        }
-
-        .hero-mosaic__tile:hover {
-          transform: scale(1.02);
-        }
-
-        /* Images 4 & 5 sit in a third row on desktop */
-        .hero-mosaic__tile:nth-child(4) {
-          grid-column: 1 / 2;
-        }
-        .hero-mosaic__tile:nth-child(5) {
-          grid-column: 2 / 4;
-        }
-
-        @media (max-width: 768px) {
-          .hero-split__grid {
-            grid-template-columns: 1fr !important;
-            padding: 2.5rem 1.25rem !important;
-            gap: 2.5rem !important;
-          }
-
-          .hero-mosaic {
-            grid-template-columns: 1fr 1fr !important;
-            grid-template-rows: 170px 170px !important;
-          }
-
-          /* Hide the large image on mobile */
-          .hero-mosaic__tile--large {
-            display: none !important;
-          }
-
-          /* Reset grid placement for remaining tiles */
-          .hero-mosaic__tile:nth-child(2),
-          .hero-mosaic__tile:nth-child(3),
-          .hero-mosaic__tile:nth-child(4),
-          .hero-mosaic__tile:nth-child(5) {
-            grid-column: auto !important;
-            grid-row: auto !important;
-          }
-        }
-      `}</style>
-    </section>
-  );
+                {/* Scroll Indicator */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.2, duration: 0.8 }}
+                    style={{
+                        position: 'absolute',
+                        bottom: '2rem',
+                        left: '50%',
+                        transform: 'translateX(-50%)'
+                    }}
+                >
+                    <motion.div
+                        animate={{ y: [0, 8, 0] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                        style={{
+                            width: '28px',
+                            height: '44px',
+                            borderRadius: '14px',
+                            border: '2px solid rgba(255,255,255,0.3)',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            paddingTop: '8px'
+                        }}
+                    >
+                        <div style={{
+                            width: '4px',
+                            height: '10px',
+                            borderRadius: '2px',
+                            background: 'rgba(255,255,255,0.5)'
+                        }} />
+                    </motion.div>
+                </motion.div>
+            </div>
+        </section>
+    );
 };
 
 export default Hero;
