@@ -3,16 +3,16 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const channels = [
-    { name: 'Airbnb', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/2560px-Airbnb_Logo_B%C3%A9lo.svg.png', height: '36px' },
-    { name: 'Booking.com', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Booking.com_logo.svg/2560px-Booking.com_logo.svg.png', height: '30px' },
-    { name: 'MakeMyTrip', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/MakeMyTrip_Logo.svg/2560px-MakeMyTrip_Logo.svg.png', height: '30px' },
-    { name: 'Agoda', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Agoda_logo.svg/2560px-Agoda_logo.svg.png', height: '28px' },
-    { name: 'Expedia', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Expedia_2023.svg/2560px-Expedia_2023.svg.png', height: '30px' },
-    { name: 'VRBO', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Vrbo_logo.svg/2560px-Vrbo_logo.svg.png', height: '28px' },
-    { name: 'TripAdvisor', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Tripadvisor_Logo.svg/2560px-Tripadvisor_Logo.svg.png', height: '30px' },
-    { name: 'Google Vacation Rentals', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1200px-Google_2015_logo.svg.png', height: '28px' },
-    { name: 'Goibibo', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Goibibo_Logo.svg/2560px-Goibibo_Logo.svg.png', height: '28px' },
-    { name: 'Marriott Homes & Villas', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Marriott_Bonvoy_Logo.svg/2560px-Marriott_Bonvoy_Logo.svg.png', height: '24px' },
+    { name: 'Airbnb', logo: '/images/otas/airbnb.svg', height: '36px' },
+    { name: 'Booking.com', logo: '/images/otas/booking.svg', height: '28px' },
+    { name: 'MakeMyTrip', logo: '/images/otas/makemytrip.png', height: '26px' },
+    { name: 'TripAdvisor', logo: '/images/otas/tripadvisor.svg', height: '30px' },
+    { name: 'Google', logo: '/images/otas/google.svg', height: '28px' },
+    { name: 'Agoda', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Agoda_logo.svg/320px-Agoda_logo.svg.png', height: '28px' },
+    { name: 'Expedia', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Expedia_2023.svg/320px-Expedia_2023.svg.png', height: '28px' },
+    { name: 'VRBO', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Vrbo_logo.svg/320px-Vrbo_logo.svg.png', height: '26px' },
+    { name: 'Marriott Bonvoy', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Marriott_Bonvoy_Logo.svg/320px-Marriott_Bonvoy_Logo.svg.png', height: '22px' },
+    { name: 'Goibibo', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Goibibo_Logo.svg/320px-Goibibo_Logo.svg.png', height: '26px' },
 ];
 
 const ChannelCarousel = () => {
@@ -20,7 +20,7 @@ const ChannelCarousel = () => {
         <div style={{ padding: '4rem 0', background: 'white', overflow: 'hidden' }}>
             <div className="container" style={{ marginBottom: '3rem', textAlign: 'center' }}>
                 <div className="badge mb-sm" style={{ backgroundColor: 'rgba(254, 88, 88, 0.1)', color: 'var(--color-primary)' }}>Global Distribution</div>
-                <h2 style={{ fontSize: '2.5rem', fontWeight: 800 }}>Listed Everywhere. Booked Always.</h2>
+                <h2 style={{ fontWeight: 800 }}>Listed Everywhere. Booked Always.</h2>
                 <p style={{ color: 'var(--color-muted)', fontSize: '1.1rem' }}>Your property distributed across 20+ major travel channels automatically.</p>
             </div>
 
@@ -53,7 +53,7 @@ const ChannelCarousel = () => {
                             alignItems: 'center',
                             height: '80px',
                             padding: '0 1.5rem',
-                            opacity: 0.7,
+                            opacity: 0.75,
                             transition: 'all 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
                             cursor: 'default'
                         }}
@@ -62,7 +62,7 @@ const ChannelCarousel = () => {
                                 e.currentTarget.style.transform = 'scale(1.08)';
                             }}
                             onMouseLeave={(e) => {
-                                e.currentTarget.style.opacity = '0.7';
+                                e.currentTarget.style.opacity = '0.75';
                                 e.currentTarget.style.transform = 'scale(1)';
                             }}
                         >
