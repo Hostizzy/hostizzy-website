@@ -69,43 +69,20 @@ const HomeBanners = () => {
                             </ul>
                         </div>
 
-                        {/* Video Story Placeholder */}
+                        {/* Video Embed */}
                         <div style={{
                             aspectRatio: '16/9',
-                            background: '#1e293b',
                             borderRadius: '1rem',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            position: 'relative',
                             overflow: 'hidden',
                             boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)'
                         }}>
-                            <div style={{ textAlign: 'center', color: 'white', zIndex: 10 }}>
-                                <div style={{
-                                    width: '64px',
-                                    height: '64px',
-                                    background: 'white',
-                                    borderRadius: '50%',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    margin: '0 auto 1rem',
-                                    cursor: 'pointer'
-                                }}>
-                                    <div style={{
-                                        marginLeft: '4px',
-                                        width: 0,
-                                        height: 0,
-                                        borderTop: '10px solid transparent',
-                                        borderBottom: '10px solid transparent',
-                                        borderLeft: '16px solid var(--color-primary)'
-                                    }} />
-                                </div>
-                                <h4 style={{ fontSize: '1.2rem' }}>Watch Our Story</h4>
-                            </div>
-                            {/* Faux Overlay */}
-                            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'linear-gradient(45deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3))' }} />
+                            <iframe
+                                src="https://www.youtube.com/embed/0c07HfA1tQw?rel=0"
+                                title="India's Host Story — Why Hostizzy"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                                style={{ width: '100%', height: '100%', border: 'none' }}
+                            />
                         </div>
                     </div>
                 </ScrollReveal>
