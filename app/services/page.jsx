@@ -11,99 +11,120 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Services() {
-    const [activeTab, setActiveTab] = useState('full'); // 'diy', 'shared', 'full'
+    const [activeTab, setActiveTab] = useState('cohosting'); // 'newhost', 'cohosting', 'complete'
 
     const propertyCategories = [
         {
-            title: "Hostizzy® Stays",
+            title: "Hostizzy\u00ae Stays",
             desc: "Ideal for traditional vacation rentals like apartments and homes.",
             icon: <Home size={32} color="#FE5858" />
         },
         {
-            title: "Hostizzy® Retreats",
+            title: "Hostizzy\u00ae Retreats",
             desc: "Perfect for cabins, beach houses, and experiential stays.",
             icon: <Palmtree size={32} color="#FE5858" />
         },
         {
-            title: "Hostizzy® Urban Spaces",
+            title: "Hostizzy\u00ae Urban Spaces",
             desc: "City apartments and lofts for urban explorers & business travelers.",
             icon: <Building size={32} color="#FE5858" />
         },
         {
-            title: "Hostizzy® Luxe",
+            title: "Hostizzy\u00ae Luxe",
             desc: "Luxury properties delivering premium accommodations & exclusive services.",
             icon: <Crown size={32} color="#FE5858" />
         },
     ];
 
+    const overviewCards = [
+        {
+            key: 'newhost',
+            emoji: '\u{1F680}',
+            name: 'New Host',
+            description: 'Get set up on top platforms with expert guidance',
+            fromPrice: 'From \u20B914,999'
+        },
+        {
+            key: 'cohosting',
+            emoji: '\u{1F4CA}',
+            name: 'Co-Hosting',
+            description: 'We manage bookings while you own the experience',
+            fromPrice: 'From \u20B915,000/mo'
+        },
+        {
+            key: 'complete',
+            emoji: '\u{1F3E0}',
+            name: 'Complete Management',
+            description: 'Full-service property management, end to end',
+            fromPrice: 'From 30%'
+        }
+    ];
+
+    const tabTaglines = {
+        newhost: "Just getting started? We'll set you up for success on the world's biggest travel platforms.",
+        cohosting: "You own the property, we manage the bookings. Maximum revenue, minimum effort.",
+        complete: "Sit back while we handle everything \u2014 from guest check-in to checkout and beyond."
+    };
+
     const plans = {
-        diy: [
+        newhost: [
             {
                 name: "SmartStart",
-                price: "₹9,999",
-                period: "One-time setup fee",
+                price: "\u20B914,999",
+                period: "One-time",
+                description: "Perfect for new hosts entering the vacation rental market",
                 features: [
-                    "One-time listing creation & OTA setup",
-                    "90-day pricing strategy & optimization",
+                    "Onboarding on 3 major OTA channels",
+                    "Professional listing creation & optimization",
+                    "90-day pricing strategy",
                     "Guest communication templates",
-                    "House rules & cleaning checklists",
-                    "Two 45-minute coaching calls"
+                    "One-on-one consultation session"
                 ],
                 cta: "Get Started",
                 popular: false
-            },
-            {
-                name: "Listing Optimizer",
-                price: "₹3,000",
-                period: "Per month",
-                features: [
-                    "Quarterly audit of listing & pricing",
-                    "Review prompts & response templates",
-                    "Monthly performance check-in call",
-                    "Access to knowledge base resources"
-                ],
-                cta: "Learn More",
-                popular: false
             }
         ],
-        shared: [
+        cohosting: [
             {
                 name: "ChannelPro",
-                price: "15-20%",
-                period: "Of net revenue",
+                price: "\u20B915,000 \u2013 \u20B940,000",
+                period: "Per month (fixed)",
+                description: "Pricing based on your property's nightly rate. Or choose a 2-night stay equivalent or revenue share from 10\u201317%.",
                 features: [
                     "Multi-OTA channel management & sync",
                     "Dynamic pricing & revenue optimization",
                     "24/7 guest messaging & reservations",
-                    "Monthly performance actionable reports"
+                    "Monthly performance reports"
                 ],
                 cta: "Choose Plan",
                 popular: false
             },
             {
                 name: "Hybrid Core",
-                price: "20% + ₹2k",
-                period: "Of net revenue + base",
+                price: "18%",
+                period: "Of net revenue (Gross - OTA fees)",
+                description: "Everything in ChannelPro plus your own direct booking channel",
                 features: [
                     "Everything in ChannelPro",
+                    "Direct booking website for your property",
                     "Festival & surge pricing management",
                     "Dedicated account manager",
-                    "Inventory supply coordination",
                     "Priority customer support"
                 ],
                 cta: "Choose Plan",
                 popular: true
             }
         ],
-        full: [
+        complete: [
             {
                 name: "TotalCare360",
-                price: "25-30%",
-                period: "Of gross/net revenue",
+                price: "30%",
+                period: "Profit share",
+                description: "For villas, farmhouses & boutique homes",
                 features: [
-                    "End-to-end guest & reservation mgmt",
-                    "Professional cleaning & turnover mgmt",
-                    "Dynamic pricing across channels",
+                    "End-to-end guest & reservation management",
+                    "Professional cleaning & turnover management",
+                    "Dynamic pricing across all channels",
                     "Maintenance coordination & resolution",
                     "Quarterly strategy review sessions"
                 ],
@@ -112,14 +133,15 @@ export default function Services() {
             },
             {
                 name: "StayPrime",
-                price: "30%",
-                period: "Of net revenue",
+                price: "50-50",
+                period: "Revenue split",
+                description: "Designed for apartments",
                 features: [
-                    "Everything in TotalCare360",
-                    "Concierge services (F&B, Transport)",
-                    "Premium listing exposure on Luxury OTAs",
-                    "Advanced yield management for peaks",
-                    "VIP guest relations & reputation mgmt"
+                    "End-to-end guest & reservation management",
+                    "Professional cleaning & turnover management",
+                    "Dynamic pricing across all channels",
+                    "Maintenance coordination & resolution",
+                    "Quarterly strategy review sessions"
                 ],
                 cta: "Choose Plan",
                 popular: false
@@ -129,19 +151,37 @@ export default function Services() {
 
     const addons = [
         {
-            title: "Digital Presence",
-            price: "₹5,000 / mo",
-            features: ["Branded landing page", "Direct booking widget", "SEO & Analytics", "Email marketing to past guests"]
+            title: "Social Media",
+            price: "\u20B920,000 / mo",
+            features: [
+                "12 Reels per month",
+                "5 Carousel/Posts per month",
+                "Professional shoot, edit & ideation",
+                "Daily stories management",
+                "3-month minimum commitment",
+                "Monthly meetup & performance review"
+            ]
         },
         {
-            title: "Influencer & Social",
-            price: "₹7,500 / mo",
-            features: ["Monthly content calendar", "Quarterly micro-influencer collab", "Paid ads management", "Reputation monitoring"]
+            title: "Full Digital",
+            price: "\u20B930,000 + 5% ad spend",
+            features: [
+                "Everything in Social Media",
+                "Influencer marketing campaigns",
+                "Meta & Google Ads management",
+                "Performance reporting & optimization"
+            ]
         },
         {
-            title: "BrandEngage Pro",
-            price: "₹12,000 / mo",
-            features: ["Everything in Influencer & Social", "PR outreach & Press features", "Annual pro photo/video shoot", "Brand storytelling strategy"]
+            title: "Premium Digital",
+            price: "\u20B950,000 / mo",
+            features: [
+                "Everything in Full Digital",
+                "Dedicated website & landing pages",
+                "SEO strategy & execution",
+                "Google Ads management",
+                "Complete digital presence management"
+            ]
         }
     ];
 
@@ -153,12 +193,12 @@ export default function Services() {
     ];
 
     const faqs = [
-        { q: "How is revenue share calculated?", a: "Revenue share is calculated typically on the payout received from platforms after their fees, or on Gross booking value depending on the plan." },
+        { q: "How is revenue share calculated?", a: "Revenue share is calculated on net revenue (gross booking value minus OTA service fees). For Complete Management plans, it's based on profit share or revenue split depending on your property type." },
         { q: "Can I upgrade or downgrade my plan later?", a: "Yes! We offer flexibility. You can switch plans with 30 days notice to suit your changing needs." },
-        { q: "What if I only need marketing services?", a: "Our Add-ons like 'Digital Presence' or 'BrandEngage Pro' are perfect for hosts who need marketing boost without full management." },
+        { q: "What if I only need marketing services?", a: "Our Add-ons like 'Social Media' or 'Premium Digital' are perfect for hosts who need marketing boost without full management." },
         { q: "Do you provide housekeeping and maintenance?", a: "Yes, our 'TotalCare360' and 'StayPrime' plans include full coordination of housekeeping, laundry, and maintenance." },
         { q: "How does JuxTravel relate to Hostizzy?", a: "JuxTravel is our upcoming open marketplace for unique stays. Once launched, all Hostizzy-managed properties will get featured listing priority." },
-        { q: "What locations do you serve?", a: "We currently serve key leisure markets across India including Goa, Manali, Shimla, and major urban metros." },
+        { q: "What locations do you serve?", a: "We offer Complete Management in Delhi NCR, Uttarakhand, Himachal Pradesh, Rajasthan, and North East India. Co-Hosting services are available across all major Indian leisure markets including Goa, Kerala, and Karnataka." },
         { q: "Is there a minimum contract period?", a: "Standard contracts are 1 year, ensuring we have time to optimize and grow your property's performance effectively." }
     ];
 
@@ -196,7 +236,7 @@ export default function Services() {
                     <ScrollReveal>
                         <h1 className="page-header" style={{ color: 'white' }}>Property Management, <br /><span style={{ color: 'var(--color-primary)' }}>Evolved.</span></h1>
                         <p className="section-subtitle" style={{ maxWidth: '800px', margin: '0 auto', color: 'rgba(255,255,255,0.8)' }}>
-                            Hostizzy® blends high-touch hospitality with high-tech optimization to transform your property into a five-star asset. Explore our end-to-end management models.
+                            Hostizzy\u00ae blends high-touch hospitality with high-tech optimization to transform your property into a five-star asset. Explore our end-to-end management models.
                         </p>
                     </ScrollReveal>
                 </div>
@@ -244,6 +284,64 @@ export default function Services() {
                 </ScrollReveal>
             </section>
 
+            {/* Quick Overview / Partnership Level */}
+            <section className="section container">
+                <ScrollReveal>
+                    <div className="text-center" style={{ marginBottom: '3rem' }}>
+                        <h2>Choose Your Partnership Level</h2>
+                        <p style={{ color: '#64748b', maxWidth: '600px', margin: '0 auto' }}>
+                            Whether you're a first-time host or an established property owner, we have a plan that fits.
+                        </p>
+                    </div>
+                </ScrollReveal>
+
+                <div className="grid desktop-3-col" style={{ gap: '1.5rem', marginBottom: '2rem' }}>
+                    {overviewCards.map((card, i) => (
+                        <ScrollReveal key={card.key} delay={i * 0.1}>
+                            <div
+                                onClick={() => setActiveTab(card.key)}
+                                style={{
+                                    background: 'white',
+                                    borderRadius: '1.5rem',
+                                    padding: '2rem',
+                                    textAlign: 'center',
+                                    cursor: 'pointer',
+                                    border: activeTab === card.key ? '2px solid var(--color-primary)' : '2px solid #e2e8f0',
+                                    boxShadow: activeTab === card.key ? '0 10px 30px -8px rgba(254, 88, 88, 0.15)' : 'var(--shadow-sm)',
+                                    transition: 'all 0.3s cubic-bezier(0.22, 1, 0.36, 1)',
+                                    transform: activeTab === card.key ? 'translateY(-4px)' : 'none'
+                                }}
+                                onMouseEnter={(e) => {
+                                    if (activeTab !== card.key) {
+                                        e.currentTarget.style.borderColor = 'var(--color-primary-light)';
+                                        e.currentTarget.style.transform = 'translateY(-2px)';
+                                    }
+                                }}
+                                onMouseLeave={(e) => {
+                                    if (activeTab !== card.key) {
+                                        e.currentTarget.style.borderColor = '#e2e8f0';
+                                        e.currentTarget.style.transform = 'none';
+                                    }
+                                }}
+                            >
+                                <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>{card.emoji}</div>
+                                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '0.5rem', color: 'var(--color-foreground)' }}>{card.name}</h3>
+                                <p style={{ fontSize: '0.95rem', color: '#64748b', marginBottom: '1rem', lineHeight: 1.5 }}>{card.description}</p>
+                                <div style={{
+                                    fontSize: '1rem',
+                                    fontWeight: 700,
+                                    color: 'var(--color-primary)',
+                                    background: 'rgba(254, 88, 88, 0.08)',
+                                    padding: '0.4rem 1rem',
+                                    borderRadius: '2rem',
+                                    display: 'inline-block'
+                                }}>{card.fromPrice}</div>
+                            </div>
+                        </ScrollReveal>
+                    ))}
+                </div>
+            </section>
+
             {/* Pricing Tabs */}
             <section className="section bg-light" id="pricing">
                 <div className="container">
@@ -251,9 +349,9 @@ export default function Services() {
                         <h2 style={{ fontSize: '2.5rem', fontWeight: 800 }}>Choose Your Model</h2>
                         <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '2rem', flexWrap: 'wrap' }}>
                             {[
-                                { id: 'diy', label: 'Starter Setup (DIY)' },
-                                { id: 'shared', label: 'Shared Responsibility' },
-                                { id: 'full', label: 'Complete Management' }
+                                { id: 'newhost', label: 'New Host' },
+                                { id: 'cohosting', label: 'Co-Hosting' },
+                                { id: 'complete', label: 'Complete Management' }
                             ].map(tab => (
                                 <button
                                     key={tab.id}
@@ -274,6 +372,27 @@ export default function Services() {
                                 </button>
                             ))}
                         </div>
+
+                        {/* Tab Tagline */}
+                        <AnimatePresence mode="wait">
+                            <motion.p
+                                key={activeTab}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.25 }}
+                                style={{
+                                    marginTop: '1.5rem',
+                                    color: '#64748b',
+                                    fontSize: '1.05rem',
+                                    maxWidth: '650px',
+                                    margin: '1.5rem auto 0',
+                                    lineHeight: 1.6
+                                }}
+                            >
+                                {tabTaglines[activeTab]}
+                            </motion.p>
+                        </AnimatePresence>
                     </div>
 
                     <div className="container" style={{ maxWidth: '1000px' }}>
@@ -284,8 +403,12 @@ export default function Services() {
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -20 }}
                                 transition={{ duration: 0.3 }}
-                                className="grid desktop-2-col"
-                                style={{ gap: '2rem', alignItems: 'flex-start' }}
+                                className={plans[activeTab].length === 1 ? '' : 'grid desktop-2-col'}
+                                style={{
+                                    gap: '2rem',
+                                    alignItems: 'flex-start',
+                                    ...(plans[activeTab].length === 1 ? { maxWidth: '520px', margin: '0 auto' } : {})
+                                }}
                             >
                                 {plans[activeTab].map((plan, i) => (
                                     <div key={i} className="card" style={{
@@ -315,12 +438,15 @@ export default function Services() {
                                         )}
                                         <div style={{ padding: '3rem' }}>
                                             <h3 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '0.5rem', color: '#0f172a' }}>{plan.name}</h3>
-                                            <div style={{ marginBottom: '2.5rem' }}>
+                                            <div style={{ marginBottom: '1rem' }}>
                                                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.2rem' }}>
                                                     <span style={{ fontSize: '2.5rem', fontWeight: 900, color: 'var(--color-foreground)' }}>{plan.price}</span>
                                                 </div>
                                                 <div style={{ fontSize: '1rem', color: 'var(--color-muted)', fontWeight: 500 }}>{plan.period}</div>
                                             </div>
+                                            {plan.description && (
+                                                <p style={{ fontSize: '0.95rem', color: '#64748b', lineHeight: 1.5, marginBottom: '1.5rem' }}>{plan.description}</p>
+                                            )}
                                             <div style={{ height: '1px', background: '#f1f5f9', marginBottom: '2.5rem' }} />
                                             <ul style={{ marginBottom: '3rem', listStyle: 'none', padding: 0 }}>
                                                 {plan.features.map((feat, idx) => (
@@ -353,7 +479,7 @@ export default function Services() {
             <VideoSection
                 url="https://www.youtube.com/watch?v=vXaW0NSbsig"
                 title="Co-Host Your Home with Hostizzy"
-                subtitle="Turn your vacation home into a revenue-generating asset — without the hassle."
+                subtitle="Turn your vacation home into a revenue-generating asset \u2014 without the hassle."
                 bgColor="#f8fafc"
             />
 
@@ -377,7 +503,7 @@ export default function Services() {
                                     ))}
                                 </ul>
                                 <div style={{ marginTop: '1.5rem', paddingTop: '1rem', borderTop: '1px solid #e2e8f0', textAlign: 'center' }}>
-                                    <Link href="/contact" style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--color-primary)' }}>Add to Plan →</Link>
+                                    <Link href="/contact" style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--color-primary)' }}>Add to Plan &rarr;</Link>
                                 </div>
                             </div>
                         </ScrollReveal>
