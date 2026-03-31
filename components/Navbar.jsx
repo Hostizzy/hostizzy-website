@@ -182,7 +182,7 @@ const Navbar = () => {
                                     />
                                 )}
                                 <Briefcase size={16} style={{ opacity: 0.7 }} />
-                                Services
+                                Plans & Pricing
                             </Link>
                         </li>
 
@@ -207,7 +207,7 @@ const Navbar = () => {
                                 }}
                             >
                                 <Zap size={16} style={{ opacity: 0.7 }} />
-                                Platform
+                                Technology
                                 <motion.div
                                     animate={{ rotate: activeDropdown === 'platform' ? 180 : 0 }}
                                     transition={{ duration: 0.2 }}
@@ -358,7 +358,7 @@ const Navbar = () => {
                                 }}
                             >
                                 <GraduationCap size={16} style={{ opacity: 0.7 }} />
-                                Academy
+                                Host Academy
                                 <motion.div
                                     animate={{ rotate: activeDropdown === 'academy' ? 180 : 0 }}
                                     transition={{ duration: 0.2 }}
@@ -452,7 +452,7 @@ const Navbar = () => {
                                     />
                                 )}
                                 <Rocket size={16} style={{ opacity: 0.7 }} />
-                                Career
+                                Careers
                             </Link>
                         </li>
 
@@ -477,7 +477,7 @@ const Navbar = () => {
                                 }}
                             >
                                 <Users size={16} style={{ opacity: 0.7 }} />
-                                About Us
+                                Our Story
                                 <motion.div animate={{ rotate: activeDropdown === 'about' ? 180 : 0 }} transition={{ duration: 0.2 }}>
                                     <ChevronDown size={14} style={{ opacity: 0.6 }} />
                                 </motion.div>
@@ -674,7 +674,7 @@ const Navbar = () => {
                                 <Link href="/services" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textDecoration: 'none', borderBottom: '1px solid var(--color-border)' }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                                         <Briefcase size={20} style={{ opacity: 0.6 }} />
-                                        Services
+                                        Plans & Pricing
                                     </div>
                                     <ChevronRight size={18} color="var(--color-muted)" />
                                 </Link>
@@ -687,7 +687,7 @@ const Navbar = () => {
                                     >
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                                             <Zap size={20} style={{ opacity: 0.6 }} />
-                                            Platform
+                                            Technology
                                         </div>
                                         <motion.div animate={{ rotate: mobileActiveDropdown === 'platform' ? 180 : 0 }} transition={{ duration: 0.2 }}>
                                             <ChevronDown size={18} color="var(--color-muted)" />
@@ -723,7 +723,7 @@ const Navbar = () => {
                                     >
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                                             <GraduationCap size={20} style={{ opacity: 0.6 }} />
-                                            Academy
+                                            Host Academy
                                         </div>
                                         <motion.div animate={{ rotate: mobileActiveDropdown === 'academy' ? 180 : 0 }} transition={{ duration: 0.2 }}>
                                             <ChevronDown size={18} color="var(--color-muted)" />
@@ -748,7 +748,7 @@ const Navbar = () => {
                                 <Link href="/career" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textDecoration: 'none', borderBottom: '1px solid var(--color-border)' }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                                         <Rocket size={20} style={{ opacity: 0.6 }} />
-                                        Career
+                                        Careers
                                     </div>
                                     <ChevronRight size={18} color="var(--color-muted)" />
                                 </Link>
@@ -761,7 +761,7 @@ const Navbar = () => {
                                     >
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                                             <Users size={20} style={{ opacity: 0.6 }} />
-                                            About Us
+                                            Our Story
                                         </div>
                                         <motion.div animate={{ rotate: mobileActiveDropdown === 'about' ? 180 : 0 }} transition={{ duration: 0.2 }}>
                                             <ChevronDown size={18} color="var(--color-muted)" />
