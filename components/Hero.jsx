@@ -17,7 +17,7 @@ const Hero = () => {
         }}>
             {/* Background Image */}
             <img
-                src="/images/properties/waarah-pool-sunset.jpg"
+                src=""
                 alt="Waarah Ville Jawai — luxury villa with pool at sunset, managed by Hostizzy"
                 style={{
                     position: 'absolute',
