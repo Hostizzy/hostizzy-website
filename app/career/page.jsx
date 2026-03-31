@@ -103,7 +103,7 @@ const Career = () => {
 
             {/* ── Hero Section ── */}
             <section style={{
-                padding: 'calc(var(--header-height) + 3rem) 0 0',
+                padding: 'calc(var(--header-height) + 3rem) 0 4rem',
                 background: 'linear-gradient(160deg, #0f172a 0%, #1e293b 100%)',
                 color: '#fff',
                 position: 'relative',

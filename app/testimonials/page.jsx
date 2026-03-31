@@ -22,7 +22,7 @@ export default function Testimonials() {
 
     return (
         <>
-            <section className="section text-center bg-secondary">
+            <section className="section text-center bg-secondary" style={{ padding: 'calc(var(--header-height) + 3rem) 0 4rem' }}>
                 <div className="container">
                     <h1>What People Say</h1>
                     <p className="subtitle">Real stories from our community.</p>

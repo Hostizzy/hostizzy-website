@@ -38,7 +38,7 @@ export default function Certification() {
             <section style={{
                 background: '#ffffff',
                 color: 'var(--color-foreground)',
-                padding: 'calc(var(--header-height) + 4rem) 0 6rem',
+                padding: 'calc(var(--header-height) + 3rem) 0 4rem',
                 position: 'relative',
                 overflow: 'hidden'
             }}>

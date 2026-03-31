@@ -13,7 +13,7 @@ export default function Technology() {
             <section className="section" style={{
                 background: '#0f172a',
                 color: 'white',
-                padding: 'calc(var(--header-height) + 4rem) 0 6rem',
+                padding: 'calc(var(--header-height) + 3rem) 0 4rem',
                 position: 'relative',
                 overflow: 'hidden'
             }}>

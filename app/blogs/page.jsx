@@ -24,7 +24,7 @@ export default function Blogs() {
 
     return (
         <>
-            <section className="section bg-secondary" style={{ padding: '6rem 0 4rem', textAlign: 'center' }}>
+            <section className="section bg-secondary" style={{ padding: 'calc(var(--header-height) + 3rem) 0 4rem', textAlign: 'center' }}>
                 <div className="container">
                     <ScrollReveal>
                         <h1 style={{ fontSize: '3.5rem', marginBottom: '1rem' }}>Hostizzy Insights</h1>

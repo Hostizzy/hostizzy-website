@@ -165,7 +165,7 @@ export default function Services() {
         <>
             {/* Hero Section */}
             <section className="section text-center" style={{
-                padding: '10rem 0 7rem',
+                padding: 'calc(var(--header-height) + 3rem) 0 4rem',
                 position: 'relative',
                 background: '#0f172a',
                 overflow: 'hidden',

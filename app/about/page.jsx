@@ -13,7 +13,7 @@ const About = () => {
 
             {/* Hero Section */}
             <section className="section bg-primary text-white text-center" style={{
-                padding: 'calc(var(--header-height) + 2rem) 0 4rem',
+                padding: 'calc(var(--header-height) + 3rem) 0 4rem',
                 background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)'
             }}>
                 <div className="container">

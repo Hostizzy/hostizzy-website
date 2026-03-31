@@ -494,7 +494,7 @@ export default function Calculator() {
             {/* ===== 1. HERO SECTION ===== */}
             <section style={{
                 background: 'linear-gradient(160deg, #0f172a 0%, #1e293b 100%)',
-                padding: '5rem 0 4rem',
+                padding: 'calc(var(--header-height) + 3rem) 0 4rem',
                 position: 'relative',
                 overflow: 'hidden',
             }}>

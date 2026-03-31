@@ -8,7 +8,7 @@ import { TrendingUp, ShieldCheck, PieChart, ArrowUpRight, CheckCircle2, Layout, 
 export default function Invest() {
     return (
         <>
-            <section className="section bg-primary text-white" style={{ padding: 'calc(var(--header-height) + 2rem) 0 4rem', position: 'relative', overflow: 'hidden', background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)' }}>
+            <section className="section bg-primary text-white" style={{ padding: 'calc(var(--header-height) + 3rem) 0 4rem', position: 'relative', overflow: 'hidden', background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)' }}>
                 <div className="container" style={{ position: 'relative', zIndex: 1 }}>
                     <ScrollReveal>
                         <div className="badge mb-sm" style={{ backgroundColor: 'var(--color-primary)', color: 'white', border: 'none' }}>Pre-Seed Round Now Open</div>

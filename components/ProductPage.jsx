@@ -21,7 +21,7 @@ const ProductPage = ({
         <>
             {/* Hero Section */}
             <section style={{
-                padding: '10rem 0 6rem',
+                padding: 'calc(var(--header-height) + 3rem) 0 4rem',
                 background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
                 position: 'relative',
                 overflow: 'hidden'

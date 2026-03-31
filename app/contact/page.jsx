@@ -62,7 +62,7 @@ export default function Contact() {
             {/* Premium Immersive Hero */}
             <section style={{
                 position: 'relative',
-                padding: 'calc(var(--header-height) + 4rem) 0 6rem',
+                padding: 'calc(var(--header-height) + 3rem) 0 4rem',
                 background: '#0f172a',
                 color: 'white',
                 overflow: 'hidden'
