@@ -11,8 +11,8 @@ const channels = [
     { name: 'VRBO', logo: '/images/otas/vrbo.png', height: '48px' },
     { name: 'TripAdvisor', logo: '/images/otas/tripadvisor.svg', height: '36px' },
     { name: 'Google', logo: '/images/otas/google.svg', height: '34px' },
-    { name: 'Goibibo', logo: '/images/otas/goibibo.png', height: '38px' },
-    { name: 'Dtravel', logo: '/images/otas/dtravel.png', height: '38px' },
+    { name: 'Goibibo', logo: '/images/otas/goibibo.png', height: '52px' },
+    { name: 'Dtravel', logo: '/images/otas/dtravel.png', height: '52px' },
 ];
 
 const ChannelCarousel = () => {
