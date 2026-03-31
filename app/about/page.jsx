@@ -96,7 +96,7 @@ const About = () => {
         return (match && match[2].length === 11) ? match[2] : null;
     };
 
-    const videoId = getYouTubeId('https://www.youtube.com/watch?v=0c07HfA1tQw');
+    const videoId = getYouTubeId('https://www.youtube.com/watch?v=Z7-NlFyVMz4');
 
     return (
         <>
