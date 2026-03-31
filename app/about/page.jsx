@@ -309,6 +309,113 @@ const About = () => {
                 </div>
             </section>
 
+            {/* ── Powered by Technology ── */}
+            <section style={{ background: '#0f172a', color: 'white', padding: '5rem 0' }}>
+                <div className="container">
+                    <ScrollReveal>
+                        <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+                            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', fontWeight: 700, color: 'white', marginBottom: '0.75rem' }}>
+                                Powered by Technology
+                            </h2>
+                            <p style={{ color: '#94a3b8', fontSize: '1.1rem', maxWidth: '600px', margin: '0 auto' }}>
+                                Our proprietary tech stack powers every aspect of vacation rental management
+                            </p>
+                        </div>
+                    </ScrollReveal>
+
+                    <div className="grid desktop-3-col" style={{ gap: '2rem', marginBottom: '3rem' }}>
+                        {[
+                            {
+                                title: 'HostOS',
+                                subtitle: 'Property Management System',
+                                desc: 'The central nervous system of hospitality. Unified calendar, automated guest messaging, maintenance tracking, and built-in CRM — all in one platform.',
+                                badge: 'Live',
+                                badgeColor: '#22c55e',
+                                accentColor: '#3b82f6',
+                                href: 'https://hostos.hostizzy.com/',
+                                linkText: 'Explore HostOS',
+                                external: true
+                            },
+                            {
+                                title: 'ResIQ',
+                                subtitle: 'Revenue Intelligence Dashboard',
+                                desc: 'Real-time financial performance, occupancy forecasting, and channel analytics. Complete transparency for property owners.',
+                                badge: 'Live',
+                                badgeColor: '#22c55e',
+                                accentColor: '#FE5858',
+                                href: 'https://resiq.hostizzy.com/',
+                                linkText: 'Explore ResIQ',
+                                external: true
+                            },
+                            {
+                                title: 'JuxTravel',
+                                subtitle: 'Travel Marketplace',
+                                desc: 'AI-powered travel marketplace connecting luxury hosts with discerning guests. Direct bookings, lower commissions, community trust.',
+                                badge: 'Coming Soon',
+                                badgeColor: '#8b5cf6',
+                                accentColor: '#8b5cf6',
+                                href: '/products/juxtravel',
+                                linkText: 'Learn More',
+                                external: false
+                            }
+                        ].map((product, i) => (
+                            <ScrollReveal key={i} delay={i * 0.1}>
+                                <div style={{
+                                    background: 'rgba(255,255,255,0.05)',
+                                    border: '1px solid rgba(255,255,255,0.1)',
+                                    borderRadius: '1.5rem',
+                                    padding: '2.5rem 2rem',
+                                    borderTop: `3px solid ${product.accentColor}`,
+                                    height: '100%',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    transition: 'all 0.3s ease'
+                                }}
+                                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.background = 'rgba(255,255,255,0.08)'; }}
+                                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; }}
+                                >
+                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                                        <h3 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'white', margin: 0 }}>{product.title}</h3>
+                                        <span style={{
+                                            padding: '0.25rem 0.75rem', borderRadius: '999px',
+                                            background: `${product.badgeColor}20`, color: product.badgeColor,
+                                            fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em'
+                                        }}>
+                                            {product.badge}
+                                        </span>
+                                    </div>
+                                    <p style={{ fontSize: '0.85rem', color: product.accentColor, fontWeight: 600, marginBottom: '1rem' }}>{product.subtitle}</p>
+                                    <p style={{ color: '#94a3b8', lineHeight: 1.7, fontSize: '0.95rem', flex: 1 }}>{product.desc}</p>
+                                    {product.external ? (
+                                        <a href={product.href} target="_blank" rel="noopener noreferrer" style={{
+                                            display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
+                                            color: product.accentColor, fontWeight: 600, fontSize: '0.9rem',
+                                            textDecoration: 'none', marginTop: '1.5rem'
+                                        }}>
+                                            {product.linkText} <ArrowRight size={16} />
+                                        </a>
+                                    ) : (
+                                        <Link href={product.href} style={{
+                                            display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
+                                            color: product.accentColor, fontWeight: 600, fontSize: '0.9rem',
+                                            textDecoration: 'none', marginTop: '1.5rem'
+                                        }}>
+                                            {product.linkText} <ArrowRight size={16} />
+                                        </Link>
+                                    )}
+                                </div>
+                            </ScrollReveal>
+                        ))}
+                    </div>
+
+                    <div style={{ textAlign: 'center' }}>
+                        <Link href="/technology" style={{ color: '#94a3b8', fontSize: '0.95rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+                            See the full platform <ArrowRight size={16} />
+                        </Link>
+                    </div>
+                </div>
+            </section>
+
             {/* ── Growth & Milestones (Timeline) ── */}
             <section className="section" style={{ background: '#f8fafc' }}>
                 <div className="container">
