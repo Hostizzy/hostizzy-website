@@ -5,14 +5,14 @@ import { motion } from 'framer-motion';
 const channels = [
     { name: 'Airbnb', logo: '/images/otas/airbnb.svg', height: '36px' },
     { name: 'Booking.com', logo: '/images/otas/booking.svg', height: '28px' },
-    { name: 'MakeMyTrip', logo: '/images/otas/makemytrip.png', height: '26px' },
+    { name: 'MakeMyTrip', logo: '/images/otas/makemytrip.png', height: '30px' },
+    { name: 'Agoda', logo: '/images/otas/agoda.png', height: '32px' },
+    { name: 'Expedia', logo: '/images/otas/expedia.png', height: '30px' },
+    { name: 'VRBO', logo: '/images/otas/vrbo.png', height: '34px' },
     { name: 'TripAdvisor', logo: '/images/otas/tripadvisor.svg', height: '30px' },
     { name: 'Google', logo: '/images/otas/google.svg', height: '28px' },
-    { name: 'Agoda', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Agoda_logo.svg/320px-Agoda_logo.svg.png', height: '28px' },
-    { name: 'Expedia', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Expedia_2023.svg/320px-Expedia_2023.svg.png', height: '28px' },
-    { name: 'VRBO', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Vrbo_logo.svg/320px-Vrbo_logo.svg.png', height: '26px' },
-    { name: 'Marriott Bonvoy', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Marriott_Bonvoy_Logo.svg/320px-Marriott_Bonvoy_Logo.svg.png', height: '22px' },
-    { name: 'Goibibo', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Goibibo_Logo.svg/320px-Goibibo_Logo.svg.png', height: '26px' },
+    { name: 'Goibibo', logo: '/images/otas/goibibo.png', height: '28px' },
+    { name: 'Dtravel', logo: '/images/otas/dtravel.png', height: '28px' },
 ];
 
 const ChannelCarousel = () => {
