@@ -21,7 +21,7 @@ const Home = () => {
         <>
             <SEO
                 title="Premier Vacation Rental Management Company India | Airbnb Property Management"
-                description="Expert Airbnb property management India. End-to-end vacation rental management services for villas in Goa, Uttarakhand & beyond. Professional hosting services with 4.8★ rating."
+                description="Expert Airbnb property management India. End-to-end vacation rental management services for villas in Goa, Uttarakhand & beyond. Professional hosting services with 4.9★ rating."
                 keywords={[
                     'vacation rental management company',
                     'Airbnb property management India',
@@ -49,7 +49,7 @@ const Home = () => {
                     },
                     "aggregateRating": {
                         "@type": "AggregateRating",
-                        "ratingValue": "4.8",
+                        "ratingValue": "4.9",
                         "reviewCount": "150",
                         "bestRating": "5",
                         "worstRating": "1"
@@ -246,19 +246,19 @@ const Home = () => {
 
                         <div className="grid desktop-4-col" style={{ gap: '2rem' }}>
                             <div style={{ textAlign: 'center', padding: '1.5rem', background: 'rgba(255,255,255,0.05)', borderRadius: '1rem' }}>
-                                <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#86efac', marginBottom: '0.5rem' }}>45+</div>
+                                <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#86efac', marginBottom: '0.5rem' }}>50+</div>
                                 <div style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.8)' }}>Properties Managed</div>
                             </div>
                             <div style={{ textAlign: 'center', padding: '1.5rem', background: 'rgba(255,255,255,0.05)', borderRadius: '1rem' }}>
-                                <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#86efac', marginBottom: '0.5rem' }}>30k+</div>
+                                <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#86efac', marginBottom: '0.5rem' }}>40,000+</div>
                                 <div style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.8)' }}>Guests Hosted</div>
                             </div>
                             <div style={{ textAlign: 'center', padding: '1.5rem', background: 'rgba(255,255,255,0.05)', borderRadius: '1rem' }}>
-                                <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#86efac', marginBottom: '0.5rem' }}>15CR</div>
+                                <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#86efac', marginBottom: '0.5rem' }}>₹15Cr+</div>
                                 <div style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.8)' }}>GMV Generated</div>
                             </div>
                             <div style={{ textAlign: 'center', padding: '1.5rem', background: 'rgba(255,255,255,0.05)', borderRadius: '1rem' }}>
-                                <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#86efac', marginBottom: '0.5rem' }}>4.8★</div>
+                                <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#86efac', marginBottom: '0.5rem' }}>4.9★</div>
                                 <div style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.8)' }}>Average Rating</div>
                             </div>
                         </div>
