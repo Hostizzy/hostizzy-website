@@ -3,16 +3,16 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const channels = [
-    { name: 'Airbnb', logo: '/images/otas/airbnb.svg', height: '36px' },
-    { name: 'Booking.com', logo: '/images/otas/booking.svg', height: '28px' },
-    { name: 'MakeMyTrip', logo: '/images/otas/makemytrip.png', height: '30px' },
-    { name: 'Agoda', logo: '/images/otas/agoda.png', height: '32px' },
-    { name: 'Expedia', logo: '/images/otas/expedia.png', height: '30px' },
-    { name: 'VRBO', logo: '/images/otas/vrbo.png', height: '34px' },
-    { name: 'TripAdvisor', logo: '/images/otas/tripadvisor.svg', height: '30px' },
-    { name: 'Google', logo: '/images/otas/google.svg', height: '28px' },
-    { name: 'Goibibo', logo: '/images/otas/goibibo.png', height: '28px' },
-    { name: 'Dtravel', logo: '/images/otas/dtravel.png', height: '28px' },
+    { name: 'Airbnb', logo: '/images/otas/airbnb.svg', height: '40px' },
+    { name: 'Booking.com', logo: '/images/otas/booking.svg', height: '34px' },
+    { name: 'MakeMyTrip', logo: '/images/otas/makemytrip.png', height: '38px' },
+    { name: 'Agoda', logo: '/images/otas/agoda.png', height: '44px' },
+    { name: 'Expedia', logo: '/images/otas/expedia.png', height: '36px' },
+    { name: 'VRBO', logo: '/images/otas/vrbo.png', height: '48px' },
+    { name: 'TripAdvisor', logo: '/images/otas/tripadvisor.svg', height: '36px' },
+    { name: 'Google', logo: '/images/otas/google.svg', height: '34px' },
+    { name: 'Goibibo', logo: '/images/otas/goibibo.png', height: '38px' },
+    { name: 'Dtravel', logo: '/images/otas/dtravel.png', height: '38px' },
 ];
 
 const ChannelCarousel = () => {
