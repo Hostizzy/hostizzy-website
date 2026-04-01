@@ -13,7 +13,7 @@ const Footer = () => {
             <TrustBadges />
             <div style={{ paddingTop: '4rem', paddingBottom: '2rem' }}>
                 <div className="container">
-                    <div className="grid desktop-4-col" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '3rem', marginBottom: '3rem' }}>
+                    <div className="grid desktop-4-col" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '2.5rem', marginBottom: '3rem' }}>
 
                         {/* Brand & Social */}
                         <div>
@@ -56,6 +56,18 @@ const Footer = () => {
                                     <Phone size={18} />
                                     <a href={`tel:${(settings.supportPhone || '').replace(/\s+/g, '')}`}>{settings.supportPhone}</a>
                                 </li>
+                            </ul>
+                        </div>
+
+                        {/* Locations */}
+                        <div>
+                            <h4 style={{ fontSize: '1.1rem', marginBottom: '1.25rem', color: '#f8fafc' }}>Locations</h4>
+                            <ul style={{ listStyle: 'none', opacity: 0.8, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                                <li><Link href="/locations/delhi-ncr">Delhi NCR</Link></li>
+                                <li><Link href="/locations/himachal-pradesh">Himachal Pradesh</Link></li>
+                                <li><Link href="/locations/uttarakhand">Uttarakhand</Link></li>
+                                <li><Link href="/locations/rajasthan">Rajasthan</Link></li>
+                                <li><Link href="/locations">All Locations</Link></li>
                             </ul>
                         </div>
 

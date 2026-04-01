@@ -36,6 +36,11 @@ module.exports = {
       '/faq': 0.6,
       '/invest': 0.5,
       '/career': 0.5,
+      '/locations': 0.8,
+      '/locations/delhi-ncr': 0.8,
+      '/locations/himachal-pradesh': 0.8,
+      '/locations/uttarakhand': 0.8,
+      '/locations/rajasthan': 0.8,
     };
 
     return {
