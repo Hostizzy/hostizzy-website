@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useToast } from '../../components/Toast';
 import { useSettings } from '../../context/SettingsContext';
 import ScrollReveal from '../../components/ScrollReveal';
-import { Mail, Send } from 'lucide-react';
+import { Mail, Send, Phone } from 'lucide-react';
 import AuditWizard from '../../components/AuditWizard';
 
 export default function Contact() {
@@ -17,26 +17,43 @@ export default function Contact() {
 
     const departments = {
         owner: {
-            email: 'stay@hostizzy.com',
-            title: 'Owner Relations',
-            desc: 'Start your journey with India\'s premier management experts.'
+            email: 'partnerships@hostizzy.com',
+            phone: '+919560493335',
+            whatsapp: '919560493335',
+            title: 'Property Owner',
+            desc: 'List your property with India\'s premier management company.',
+            tag: 'Maximize Revenue',
+            icon: '\u{1F3E0}'
         },
         guest: {
-            email: settings.supportEmail || 'stay@hostizzy.com',
-            title: 'Guest Concierge',
-            desc: 'Inquire about stay details or upcoming reservations.'
+            email: 'stay@hostizzy.com',
+            phone: '+919560494001',
+            whatsapp: '919560494001',
+            title: 'Guest / Traveler',
+            desc: 'Book a stay or get help with your reservation.',
+            tag: 'Book Your Stay',
+            icon: '\u{2708}\u{FE0F}'
         },
         business: {
-            email: 'partnerships@hostizzy.com',
-            title: 'Strategic Growth',
-            desc: 'Collaborations, marketing, and institutional partners.'
+            email: 'founder@hostizzy.com',
+            phone: '+919560493335',
+            whatsapp: '919560493335',
+            title: 'Business / Partner',
+            desc: 'Explore partnerships, marketing, and investment opportunities.',
+            tag: 'Grow Together',
+            icon: '\u{1F91D}'
         }
     };
 
     const businessDepts = {
-        partnerships: { email: 'partnerships@hostizzy.com', title: 'Partnerships' },
-        marketing: { email: 'marketing@hostizzy.com', title: 'Marketing & PR' },
-        founders: { email: 'founders@hostizzy.com', title: 'Founders Office' }
+        founders: { email: 'founder@hostizzy.com', title: 'Founders Office' },
+        marketing: { email: 'marketing@hostizzy.com', title: 'Marketing & PR' }
+    };
+
+    const whatsappMessages = {
+        owner: 'Hi, I\'m interested in listing my property with Hostizzy.',
+        guest: 'Hi, I need help with a booking at Hostizzy.',
+        business: 'Hi, I\'m interested in a business partnership with Hostizzy.'
     };
 
     const handleChange = (e) => {
@@ -47,12 +64,32 @@ export default function Contact() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setStatus('sending');
-        setTimeout(() => {
-            setStatus('success');
-            addToast("Your inquiry has been routed to our team!", "success");
-            setFormData({ name: '', email: '', phone: '', message: '', inquiryType: '' });
-        }, 1500);
+        try {
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    ...formData,
+                    department: userType,
+                    departmentEmail: departments[userType].email,
+                    timestamp: new Date().toISOString()
+                })
+            });
+            if (res.ok) {
+                setStatus('success');
+                addToast("Your inquiry has been sent! We'll respond within 24 hours.", "success");
+                setFormData({ name: '', email: '', phone: '', message: '', inquiryType: '' });
+            } else {
+                setStatus('');
+                addToast("Something went wrong. Please try again.", "error");
+            }
+        } catch (err) {
+            setStatus('');
+            addToast("Something went wrong. Please try again.", "error");
+        }
     };
+
+    const dept = departments[userType];
 
     return (
         <div style={{ background: '#fafafa' }}>
@@ -71,21 +108,21 @@ export default function Contact() {
                 <div className="container" style={{ position: 'relative', zIndex: 1 }}>
                     <ScrollReveal>
                         <div style={{ maxWidth: '800px' }}>
-                            <div className="badge badge-primary" style={{ marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '2px', background: 'rgba(254, 88, 88, 0.1)', color: 'var(--color-primary)', border: 'none' }}>Personalized Excellence</div>
+                            <div className="badge badge-primary" style={{ marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '2px', background: 'rgba(254, 88, 88, 0.1)', color: 'var(--color-primary)', border: 'none' }}>We're Here to Help</div>
                             <h1 style={{
                                 fontSize: 'clamp(3rem, 5vw, 4.5rem)',
                                 fontWeight: 900,
                                 marginBottom: '1.5rem',
                                 lineHeight: 1.1,
                                 color: 'white'
-                            }}>Concierge Services</h1>
+                            }}>Get in Touch</h1>
                             <p style={{
                                 fontSize: '1.25rem',
                                 color: '#94a3b8',
                                 lineHeight: 1.6,
                                 maxWidth: '600px'
                             }}>
-                                Whether you're a host, a guest, or a partner—our specialists are here to assist you.
+                                Whether you're a property owner, a guest, or a potential partner — reach out and we'll connect you with the right team.
                             </p>
                         </div>
                     </ScrollReveal>
@@ -120,9 +157,9 @@ export default function Contact() {
                     {/* Concierge Desk Navigation */}
                     <div className="grid desktop-3-col" style={{ gap: '1.5rem', marginBottom: '4rem' }}>
                         {[
-                            { id: 'owner', label: 'Property Owner', icon: '🏠', tag: 'Maximize Revenue', color: 'var(--color-primary)', lightColor: '#fee2e2' },
-                            { id: 'guest', label: 'Guest / Traveler', icon: '✈️', tag: 'Book Your Stay', color: 'var(--color-primary)', lightColor: '#fee2e2' },
-                            { id: 'business', label: 'Partner / Investor', icon: '🤝', tag: 'Grow Together', color: 'var(--color-primary)', lightColor: '#fee2e2' }
+                            { id: 'owner', label: 'Property Owner', icon: '\u{1F3E0}', tag: 'Maximize Revenue', color: 'var(--color-primary)', lightColor: '#fee2e2' },
+                            { id: 'guest', label: 'Guest / Traveler', icon: '\u{2708}\u{FE0F}', tag: 'Book Your Stay', color: 'var(--color-primary)', lightColor: '#fee2e2' },
+                            { id: 'business', label: 'Business / Partner', icon: '\u{1F91D}', tag: 'Grow Together', color: 'var(--color-primary)', lightColor: '#fee2e2' }
                         ].map(role => (
                             <ScrollReveal key={role.id}>
                                 <button
@@ -171,7 +208,7 @@ export default function Contact() {
                                                 transform: userType === role.id ? 'rotate(-5deg) scale(1.1)' : 'rotate(0) scale(1)',
                                                 boxShadow: userType === role.id ? `0 8px 20px -6px ${role.color}60` : 'none'
                                             }}>
-                                                {userType === role.id ? '✓' : role.icon}
+                                                {userType === role.id ? '\u{2713}' : role.icon}
                                             </div>
                                             <div style={{
                                                 padding: '0.5rem 1rem',
@@ -245,27 +282,40 @@ export default function Contact() {
                                 fontWeight: 800,
                                 border: '1px solid #FE585830',
                                 padding: '0.6rem 1.2rem'
-                            }}>✨ Premium Advisory</div>
+                            }}>{userType === 'owner' ? '\u{1F3E0} Property Owners' : userType === 'guest' ? '\u{2708}\u{FE0F} Guests' : '\u{1F91D} Business'}</div>
                             <h3 style={{ fontSize: '2.8rem', marginBottom: '1.2rem', fontWeight: 900, color: '#0f172a', lineHeight: 1.1 }}>
-                                {userType === 'owner' ? 'Maximize Your Property Yield' : userType === 'guest' ? 'Elite Guest Experience' : 'Strategic Growth Network'}
+                                {userType === 'owner' ? 'Partner With Hostizzy' : userType === 'guest' ? 'How Can We Help?' : 'Let\u2019s Build Together'}
                             </h3>
                             <div style={{ lineHeight: 1.8, color: '#64748b', marginBottom: '2.5rem', fontSize: '1.1rem' }}>
                                 {userType === 'owner' ? (
-                                    <>
-                                        Our specialized growth team handles end-to-end asset optimization for luxury villas and high-end apartments across India. <br /><span style={{ color: 'var(--color-primary)', fontWeight: 700 }}>New:</span> Ask us about our <Link href="/certification" style={{ color: 'var(--color-primary)', textDecoration: 'underline' }}>Host Certification Program</Link>.
-                                    </>
+                                    "Our team manages 50+ premium properties across India. From villas and farmhouses to boutique homes \u2014 we handle everything so you earn more."
                                 ) : userType === 'guest' ? (
-                                    "From chauffeur services to private villa setups, our concierge desk is dedicated to your absolute comfort."
+                                    <>
+                                        Whether you're planning a stay or need help with an existing booking, our concierge team is here for you.
+                                        <div style={{ marginTop: '1rem' }}>
+                                            <a href="https://book.hostizzy.com/" target="_blank" rel="noopener noreferrer" style={{
+                                                display: 'inline-flex',
+                                                alignItems: 'center',
+                                                gap: '0.5rem',
+                                                color: 'var(--color-primary)',
+                                                fontWeight: 700,
+                                                fontSize: '1.05rem',
+                                                textDecoration: 'none'
+                                            }}>
+                                                Looking to book? Visit book.hostizzy.com &rarr;
+                                            </a>
+                                        </div>
+                                    </>
                                 ) : (
-                                    "Join forces with the technology leader in Indian alternative accommodation. Our partners are eager to explore visionary projects."
+                                    "Interested in partnerships, marketing collaborations, or investment? Our founders and team are eager to connect."
                                 )}
                             </div>
 
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                 {userType === 'business' ? (
                                     <>
-                                        {Object.values(businessDepts).map((dept, idx) => (
-                                            <div key={dept.email} className="card" style={{
+                                        {Object.values(businessDepts).map((bdept) => (
+                                            <div key={bdept.email} className="card" style={{
                                                 padding: '1.75rem',
                                                 borderRadius: '1.25rem',
                                                 display: 'flex',
@@ -288,11 +338,28 @@ export default function Contact() {
                                                 }}>
                                                 <div style={{ background: '#eff6ff', padding: '1rem', borderRadius: '0.875rem', color: '#3b82f6', flexShrink: 0 }}><Mail size={22} /></div>
                                                 <div style={{ flex: 1 }}>
-                                                    <div style={{ fontWeight: 700, fontSize: '0.75rem', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '0.25rem' }}>{dept.title}</div>
-                                                    <a href={`mailto:${dept.email}`} style={{ color: '#0f172a', fontWeight: 700, fontSize: '1rem', textDecoration: 'none' }}>{dept.email}</a>
+                                                    <div style={{ fontWeight: 700, fontSize: '0.75rem', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '0.25rem' }}>{bdept.title}</div>
+                                                    <a href={`mailto:${bdept.email}`} style={{ color: '#0f172a', fontWeight: 700, fontSize: '1rem', textDecoration: 'none' }}>{bdept.email}</a>
                                                 </div>
                                             </div>
                                         ))}
+
+                                        {/* Phone for business */}
+                                        <div className="card" style={{
+                                            padding: '1.75rem',
+                                            borderRadius: '1.25rem',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: '1.25rem',
+                                            border: '2px solid #e2e8f0',
+                                            background: 'white'
+                                        }}>
+                                            <div style={{ background: '#eff6ff', padding: '1rem', borderRadius: '0.875rem', color: '#3b82f6', flexShrink: 0 }}><Phone size={22} /></div>
+                                            <div style={{ flex: 1 }}>
+                                                <div style={{ fontWeight: 700, fontSize: '0.75rem', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '0.25rem' }}>Phone</div>
+                                                <a href={`tel:${dept.phone}`} style={{ color: '#0f172a', fontWeight: 700, fontSize: '1rem', textDecoration: 'none' }}>+91 95604 93335</a>
+                                            </div>
+                                        </div>
                                     </>
                                 ) : (
                                     <div className="card" style={{
@@ -302,23 +369,77 @@ export default function Contact() {
                                         background: 'white',
                                         boxShadow: '0 10px 25px -5px rgba(0,0,0,0.05)'
                                     }}>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
-                                            <div style={{
-                                                background: 'linear-gradient(135deg, #FE585815, #FE585808)',
-                                                padding: '1.25rem',
-                                                borderRadius: '1rem',
-                                                color: 'var(--color-primary)',
-                                                border: '2px solid #FE585820'
-                                            }}><Mail size={28} /></div>
-                                            <div style={{ flex: 1 }}>
-                                                <div style={{ fontWeight: 700, color: '#64748b', textTransform: 'uppercase', fontSize: '0.75rem', letterSpacing: '0.5px', marginBottom: '0.5rem' }}>Direct Contact</div>
-                                                <a href={`mailto:${userType === 'owner' ? departments.owner.email : departments.guest.email}`} style={{ color: '#0f172a', fontSize: '1.25rem', fontWeight: 800, textDecoration: 'none' }}>
-                                                    {userType === 'owner' ? departments.owner.email : departments.guest.email}
-                                                </a>
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+                                                <div style={{
+                                                    background: 'linear-gradient(135deg, #FE585815, #FE585808)',
+                                                    padding: '1.25rem',
+                                                    borderRadius: '1rem',
+                                                    color: 'var(--color-primary)',
+                                                    border: '2px solid #FE585820',
+                                                    flexShrink: 0
+                                                }}><Mail size={28} /></div>
+                                                <div style={{ flex: 1 }}>
+                                                    <div style={{ fontWeight: 700, color: '#64748b', textTransform: 'uppercase', fontSize: '0.75rem', letterSpacing: '0.5px', marginBottom: '0.5rem' }}>Email</div>
+                                                    <a href={`mailto:${dept.email}`} style={{ color: '#0f172a', fontSize: '1.15rem', fontWeight: 800, textDecoration: 'none' }}>
+                                                        {dept.email}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+                                                <div style={{
+                                                    background: 'linear-gradient(135deg, #FE585815, #FE585808)',
+                                                    padding: '1.25rem',
+                                                    borderRadius: '1rem',
+                                                    color: 'var(--color-primary)',
+                                                    border: '2px solid #FE585820',
+                                                    flexShrink: 0
+                                                }}><Phone size={28} /></div>
+                                                <div style={{ flex: 1 }}>
+                                                    <div style={{ fontWeight: 700, color: '#64748b', textTransform: 'uppercase', fontSize: '0.75rem', letterSpacing: '0.5px', marginBottom: '0.5rem' }}>Phone</div>
+                                                    <a href={`tel:${dept.phone}`} style={{ color: '#0f172a', fontSize: '1.15rem', fontWeight: 800, textDecoration: 'none' }}>
+                                                        {userType === 'owner' ? '+91 95604 93335' : '+91 95604 94001'}
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 )}
+
+                                {/* WhatsApp Button */}
+                                <a
+                                    href={`https://wa.me/${dept.whatsapp}?text=${encodeURIComponent(whatsappMessages[userType])}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={{
+                                        display: 'inline-flex',
+                                        alignItems: 'center',
+                                        gap: '0.5rem',
+                                        padding: '0.75rem 1.5rem',
+                                        borderRadius: '0.75rem',
+                                        background: '#25D366',
+                                        color: 'white',
+                                        fontWeight: 700,
+                                        fontSize: '0.95rem',
+                                        textDecoration: 'none',
+                                        marginTop: '0.5rem',
+                                        border: 'none',
+                                        cursor: 'pointer',
+                                        transition: 'all 0.2s',
+                                        justifyContent: 'center'
+                                    }}
+                                >
+                                    {'\u{1F4AC}'} Chat on WhatsApp
+                                </a>
+
+                                {/* Office Address Card */}
+                                <div className="card" style={{ padding: '1.5rem', borderRadius: '1rem', marginTop: '0.5rem', border: '1px solid #e2e8f0' }}>
+                                    <div style={{ fontWeight: 700, fontSize: '0.75rem', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '0.5rem' }}>Office</div>
+                                    <p style={{ color: '#334155', lineHeight: 1.6, fontSize: '0.95rem', margin: 0 }}>
+                                        E 13/29, 1st Floor, Harsha Bhawan,<br />
+                                        Connaught Place, New Delhi 110001
+                                    </p>
+                                </div>
                             </div>
                         </div>
 
