@@ -19,20 +19,17 @@ export default function Contact() {
         owner: {
             email: 'stay@hostizzy.com',
             title: 'Owner Relations',
-            desc: 'Start your journey with India\'s premier management experts.',
-            image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=800'
+            desc: 'Start your journey with India\'s premier management experts.'
         },
         guest: {
             email: settings.supportEmail || 'stay@hostizzy.com',
             title: 'Guest Concierge',
-            desc: 'Inquire about stay details or upcoming reservations.',
-            image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=800'
+            desc: 'Inquire about stay details or upcoming reservations.'
         },
         business: {
             email: 'partnerships@hostizzy.com',
             title: 'Strategic Growth',
-            desc: 'Collaborations, marketing, and institutional partners.',
-            image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800'
+            desc: 'Collaborations, marketing, and institutional partners.'
         }
     };
 

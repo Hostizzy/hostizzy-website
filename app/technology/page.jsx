@@ -367,69 +367,6 @@ export default function Technology() {
             {/* Global Distribution Carousel */}
             <ChannelCarousel />
 
-            {/* Mobile App Previews */}
-            <section className="section" style={{ backgroundColor: '#0f172a', color: 'white', padding: '6rem 0', overflow: 'hidden' }}>
-                <div className="container">
-                    <div className="grid desktop-2-col" style={{ alignItems: 'center', gap: '3rem' }}>
-                        <ScrollReveal x={-30}>
-                            <div>
-                                <div className="badge mb-sm" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', color: 'white' }}>Hostizzy Mobile</div>
-                                <h2 style={{ fontSize: '3rem', fontWeight: 800, marginBottom: '2rem', lineHeight: 1.1 }}>Management at Your Fingertips</h2>
-                                <p style={{ fontSize: '1.2rem', opacity: 0.8, lineHeight: 1.8, marginBottom: '3rem' }}>
-                                    Stay connected to your business from anywhere. Our mobile apps for iOS and Android give owners and staff real-time visibility and control.
-                                </p>
-
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                                    {[
-                                        { title: "Real-time Notifications", desc: "Never miss a booking inquiry or maintenance alert." },
-                                        { title: "Live Revenue Tracker", desc: "Watch your earnings grow in real-time with daily payouts." },
-                                        { title: "Staff Coordination", desc: "Assign tasks to housekeeping and maintenance instantly." }
-                                    ].map((f, i) => (
-                                        <div key={i} style={{ display: 'flex', gap: '1.5rem' }}>
-                                            <div style={{ color: 'var(--color-primary)', marginTop: '4px' }}><CheckCircle2 size={24} /></div>
-                                            <div>
-                                                <div style={{ fontWeight: 700, fontSize: '1.1rem', marginBottom: '4px' }}>{f.title}</div>
-                                                <div style={{ opacity: 0.7, fontSize: '0.95rem' }}>{f.desc}</div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </ScrollReveal>
-
-                        <ScrollReveal x={30} delay={0.2}>
-                            <div style={{ position: 'relative' }}>
-                                {/* Floating Glass Card */}
-                                <div style={{
-                                    position: 'absolute', top: '20%', left: '-10%', zIndex: 10,
-                                    background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)',
-                                    padding: '1.5rem', borderRadius: '1.5rem', border: '1px solid rgba(255,255,255,0.2)',
-                                    boxShadow: '0 20px 40px rgba(0,0,0,0.5)'
-                                }}>
-                                    <TrendingUp size={32} color="var(--color-primary)" style={{ marginBottom: '1rem' }} />
-                                    <div style={{ fontSize: '0.8rem', opacity: 0.6, textTransform: 'uppercase', letterSpacing: '1px' }}>Daily Bookings</div>
-                                    <div style={{ fontSize: '1.5rem', fontWeight: 800 }}>+128%</div>
-                                </div>
-
-                                <img
-                                    src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=800"
-                                    alt="Hostizzy Mobile App"
-                                    style={{
-                                        width: '100%',
-                                        maxWidth: '400px',
-                                        borderRadius: '3rem',
-                                        boxShadow: '0 50px 100px -20px rgba(0,0,0,0.5)',
-                                        border: '10px solid #1e293b',
-                                        margin: '0 auto',
-                                        display: 'block'
-                                    }}
-                                />
-                            </div>
-                        </ScrollReveal>
-                    </div>
-                </div>
-            </section>
-
             {/* JuxTravel Card */}
             <section className="section container">
                 <div style={{ maxWidth: '700px', margin: '0 auto' }}>

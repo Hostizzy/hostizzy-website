@@ -213,24 +213,10 @@ export default function Services() {
                 color: 'white'
             }}>
                 <div style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    zIndex: 0
-                }}>
-                    <img
-                        src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=2400"
-                        alt="Background"
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.4 }}
-                    />
-                    <div style={{
-                        position: 'absolute',
-                        inset: 0,
-                        background: 'linear-gradient(to bottom, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9))'
-                    }} />
-                </div>
+                    position: 'absolute', inset: 0, opacity: 0.05,
+                    backgroundImage: 'radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)',
+                    backgroundSize: '40px 40px'
+                }} />
 
                 <div className="container" style={{ position: 'relative', zIndex: 1 }}>
                     <ScrollReveal>
