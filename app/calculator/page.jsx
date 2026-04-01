@@ -102,6 +102,9 @@ const AnimatedCounter = ({ value, prefix = '\u20B9', duration = 2000 }) => {
     return <span>{prefix}{count.toLocaleString('en-IN')}</span>;
 };
 
+// Safe number formatter — prevents toLocaleString on undefined/null
+const fmt = (val) => (val != null && !isNaN(val) ? Number(val).toLocaleString('en-IN') : '0');
+
 // --- CONFIDENCE SCORE ---
 const getConfidenceScore = (cityData, occupancy) => {
     let score = 0;
@@ -404,7 +407,7 @@ export default function Calculator() {
 
     // WhatsApp link builder
     const buildWhatsAppLink = () => {
-        const gross = rawDisplayGross ? `\u20B9${rawDisplayGross.toLocaleString('en-IN')}` : '';
+        const gross = rawDisplayGross ? `\u20B9${fmt(rawDisplayGross)}` : '';
         const svcLabel = currentServiceModel === 'full' ? 'full management' : 'shared services';
         const msg = `Hi, I used the Hostizzy calculator for my ${bedrooms} BHK ${propertyType} in ${selectedCity}. Estimated revenue: ${gross}. I'd like to know more about your ${svcLabel} model.`;
         return `https://wa.me/919560494001?text=${encodeURIComponent(msg)}`;
@@ -879,7 +882,7 @@ export default function Calculator() {
                             <div style={{
                                 fontSize: '0.95rem', color: 'rgba(255,255,255,0.9)', fontWeight: 600, marginBottom: '1rem',
                             }}>
-                                Estimated {'\u20B9'}{adrLow.toLocaleString('en-IN')} &ndash; {'\u20B9'}{adrHigh.toLocaleString('en-IN')} / night
+                                Estimated {'\u20B9'}{fmt(adrLow)} &ndash; {'\u20B9'}{fmt(adrHigh)} / night
                             </div>
 
                             {/* Confidence badge */}
@@ -900,7 +903,7 @@ export default function Calculator() {
 
                             {parsedMonthlyCosts > 0 && (
                                 <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.7)', marginTop: '0.25rem' }}>
-                                    After deducting {'\u20B9'}{(viewMode === 'monthly' ? parsedMonthlyCosts : annualCostDeduction).toLocaleString('en-IN')} in {viewMode === 'monthly' ? 'monthly' : 'annual'} running costs
+                                    After deducting {'\u20B9'}{fmt(viewMode === 'monthly' ? parsedMonthlyCosts : annualCostDeduction)} in {viewMode === 'monthly' ? 'monthly' : 'annual'} running costs
                                 </div>
                             )}
                         </div>
@@ -916,7 +919,7 @@ export default function Calculator() {
                                     <div className="calc-comparison-card" style={{ opacity: 0.85 }}>
                                         <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '1rem' }}>Self-Managed</div>
                                         <div style={{ fontSize: '2rem', fontWeight: 800, color: '#475569', marginBottom: '0.5rem' }}>
-                                            {'\u20B9'}{selfNetDisplay.toLocaleString('en-IN')}
+                                            {'\u20B9'}{fmt(selfNetDisplay)}
                                             <span style={{ fontSize: '0.75rem', fontWeight: 500, color: '#94a3b8', marginLeft: '0.25rem' }}>/{viewMode === 'monthly' ? 'mo' : 'yr'}</span>
                                         </div>
                                         <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: '1.25rem' }}>Net after {results.self.occupancy}% occupancy & 18% OTA fees</div>
@@ -925,7 +928,7 @@ export default function Calculator() {
                                                 <span>Occupancy</span><span style={{ fontWeight: 600 }}>{results.self.occupancy}%</span>
                                             </div>
                                             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: '#64748b' }}>
-                                                <span>Gross Revenue</span><span style={{ fontWeight: 600 }}>{'\u20B9'}{selfGrossDisplay.toLocaleString('en-IN')}</span>
+                                                <span>Gross Revenue</span><span style={{ fontWeight: 600 }}>{'\u20B9'}{fmt(selfGrossDisplay)}</span>
                                             </div>
                                             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: '#64748b' }}>
                                                 <span>Pricing</span><span style={{ fontWeight: 600 }}>Static</span>
@@ -946,7 +949,7 @@ export default function Calculator() {
                                         </div>
                                         <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-primary)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '1rem' }}>With Hostizzy</div>
                                         <div style={{ fontSize: '2rem', fontWeight: 800, color: '#1e293b', marginBottom: '0.5rem' }}>
-                                            {'\u20B9'}{hostizzyNetDisplay.toLocaleString('en-IN')}
+                                            {'\u20B9'}{fmt(hostizzyNetDisplay)}
                                             <span style={{ fontSize: '0.75rem', fontWeight: 500, color: '#94a3b8', marginLeft: '0.25rem' }}>/{viewMode === 'monthly' ? 'mo' : 'yr'}</span>
                                         </div>
                                         <div style={{ fontSize: '0.8rem', color: '#64748b', marginBottom: '1.25rem' }}>Net after {results.occupancy}% occupancy & professional management</div>
@@ -955,7 +958,7 @@ export default function Calculator() {
                                                 <span>Occupancy</span><span style={{ fontWeight: 600 }}>{results.occupancy}%</span>
                                             </div>
                                             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: '#475569' }}>
-                                                <span>Gross Revenue</span><span style={{ fontWeight: 600 }}>{'\u20B9'}{hostizzyGrossDisplay.toLocaleString('en-IN')}</span>
+                                                <span>Gross Revenue</span><span style={{ fontWeight: 600 }}>{'\u20B9'}{fmt(hostizzyGrossDisplay)}</span>
                                             </div>
                                             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: '#475569' }}>
                                                 <span>Pricing</span><span style={{ fontWeight: 600, color: 'var(--color-primary)' }}>Dynamic AI</span>
@@ -984,7 +987,7 @@ export default function Calculator() {
                                         color: '#15803d',
                                     }}>
                                         <Zap size={16} style={{ verticalAlign: '-3px', marginRight: '0.35rem' }} />
-                                        With Hostizzy, you earn {'\u20B9'}{diffDisplay.toLocaleString('en-IN')} more per {viewMode === 'monthly' ? 'month' : 'year'} (+{results.differencePercent}%)
+                                        With Hostizzy, you earn {'\u20B9'}{fmt(diffDisplay)} more per {viewMode === 'monthly' ? 'month' : 'year'} (+{results.differencePercent}%)
                                     </div>
                                 )}
                             </ScrollReveal>
@@ -1007,9 +1010,9 @@ export default function Calculator() {
                                         </h3>
                                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                             {[
-                                                { label: 'ADR (Avg Daily Rate)', value: `\u20B9${adrLow.toLocaleString('en-IN')} \u2013 \u20B9${adrHigh.toLocaleString('en-IN')}` },
+                                                { label: 'ADR (Avg Daily Rate)', value: `\u20B9${fmt(adrLow)} \u2013 \u20B9${fmt(adrHigh)}` },
                                                 { label: 'Annual Occupancy', value: `${displayOcc}%` },
-                                                { label: 'RevPAR', value: `\u20B9${(aiData ? Math.round(aiData.grossRevenue / 365) : results.revpar).toLocaleString('en-IN')}` },
+                                                { label: 'RevPAR', value: `\u20B9${fmt(aiData ? Math.round(aiData.grossRevenue / 365) : results?.revpar)}` },
                                                 { label: 'Days Booked', value: `${results.daysBooked} / 365` },
                                                 { label: 'Market Grade', value: results.marketGrade },
                                             ].map(m => (
@@ -1048,7 +1051,7 @@ export default function Calculator() {
                                                         <span style={{ width: '10px', height: '10px', borderRadius: '3px', background: item.color, flexShrink: 0 }} />
                                                         <span style={{ flex: 1, fontSize: '0.8rem', color: '#64748b' }}>{item.label}</span>
                                                         <span style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 600 }}>{item.pct}</span>
-                                                        <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#1e293b', minWidth: '80px', textAlign: 'right' }}>{'\u20B9'}{item.amount.toLocaleString('en-IN')}</span>
+                                                        <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#1e293b', minWidth: '80px', textAlign: 'right' }}>{'\u20B9'}{fmt(item.amount)}</span>
                                                     </div>
                                                 ))}
                                             </div>
