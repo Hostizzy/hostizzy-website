@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import {
   LayoutDashboard, FileText, Briefcase, Users, LogOut,
   Plus, Trash2, Edit, Sparkles, Loader, X, Eye, EyeOff,
-  Mail, Calculator, ChevronRight
+  Mail, Calculator, ChevronRight, Building2
 } from 'lucide-react';
 
 const PRIMARY = '#FE5858';
@@ -43,7 +43,7 @@ export default function AdminPage() {
   const [showPassword, setShowPassword] = useState(false);
 
   // Dashboard state
-  const [stats, setStats] = useState({ blogs: 0, careers: 0, contacts: 0, leads: 0 });
+  const [stats, setStats] = useState({ blogs: 0, careers: 0, contacts: 0, leads: 0, propertyLeads: 0 });
   const [statsLoading, setStatsLoading] = useState(false);
 
   // Blogs state
@@ -64,8 +64,12 @@ export default function AdminPage() {
   const [careerForm, setCareerForm] = useState({ role: '', department: 'Marketing', location: '', experience: '', description: '' });
   const [careerSaving, setCareerSaving] = useState(false);
 
+  // Property Leads state
+  const [propertyLeads, setPropertyLeads] = useState([]);
+  const [propertyLeadsLoading, setPropertyLeadsLoading] = useState(false);
+
   // Leads state
-  const [leadsSubTab, setLeadsSubTab] = useState('contacts');
+  const [leadsSubTab, setLeadsSubTab] = useState('property');
   const [contacts, setContacts] = useState([]);
   const [calcLeads, setCalcLeads] = useState([]);
   const [leadsLoading, setLeadsLoading] = useState(false);
@@ -117,20 +121,22 @@ export default function AdminPage() {
     if (!token) return;
     setStatsLoading(true);
     try {
-      const [blogsRes, careersRes, contactsRes, leadsRes] = await Promise.all([
+      const [blogsRes, careersRes, contactsRes, leadsRes, propertyLeadsRes] = await Promise.all([
         fetch('/api/blogs'),
         fetch('/api/careers'),
         fetch('/api/contacts', { headers: authHeaders(token) }),
-        fetch('/api/calculator-leads', { headers: authHeaders(token) })
+        fetch('/api/calculator-leads', { headers: authHeaders(token) }),
+        fetch('/api/property-leads', { headers: authHeaders(token) })
       ]);
-      const [blogsData, careersData, contactsData, leadsData] = await Promise.all([
-        blogsRes.json(), careersRes.json(), contactsRes.json(), leadsRes.json()
+      const [blogsData, careersData, contactsData, leadsData, propertyLeadsData] = await Promise.all([
+        blogsRes.json(), careersRes.json(), contactsRes.json(), leadsRes.json(), propertyLeadsRes.json()
       ]);
       setStats({
         blogs: Array.isArray(blogsData) ? blogsData.length : 0,
         careers: Array.isArray(careersData) ? careersData.length : 0,
         contacts: Array.isArray(contactsData) ? contactsData.length : 0,
         leads: Array.isArray(leadsData) ? leadsData.length : 0,
+        propertyLeads: Array.isArray(propertyLeadsData) ? propertyLeadsData.length : 0,
       });
     } catch (err) {
       console.error('Failed to fetch stats:', err);
@@ -177,13 +183,28 @@ export default function AdminPage() {
     setLeadsLoading(false);
   }, [token]);
 
+  const fetchPropertyLeads = useCallback(async () => {
+    if (!token) return;
+    setPropertyLeadsLoading(true);
+    try {
+      const res = await fetch('/api/property-leads', { headers: authHeaders(token) });
+      const data = await res.json();
+      setPropertyLeads(Array.isArray(data) ? data : []);
+    } catch (err) {
+      console.error('Failed to fetch property leads:', err);
+    } finally {
+      setPropertyLeadsLoading(false);
+    }
+  }, [token]);
+
   useEffect(() => {
     if (!isAuthenticated) return;
     if (activeTab === 'dashboard') fetchStats();
     if (activeTab === 'blogs') fetchBlogs();
     if (activeTab === 'careers') fetchCareers();
     if (activeTab === 'leads') fetchLeads();
-  }, [isAuthenticated, activeTab, fetchStats, fetchBlogs, fetchCareers, fetchLeads]);
+    if (activeTab === 'leads' && propertyLeads.length === 0) fetchPropertyLeads();
+  }, [isAuthenticated, activeTab, fetchStats, fetchBlogs, fetchCareers, fetchLeads, fetchPropertyLeads]);
 
   // ─── Blog Actions ─────────────────────────────────
 
@@ -542,12 +563,13 @@ export default function AdminPage() {
     <>
       <div style={styles.statsGrid}>
         {[
+          { label: 'Property Leads', value: stats.propertyLeads || 0, icon: <Building2 size={24} />, color: '#ef4444', action: () => setActiveTab('leads') },
           { label: 'Total Blog Posts', value: stats.blogs, icon: <FileText size={24} />, color: '#3b82f6' },
           { label: 'Active Job Openings', value: stats.careers, icon: <Briefcase size={24} />, color: '#8b5cf6' },
           { label: 'Contact Inquiries', value: stats.contacts, icon: <Mail size={24} />, color: '#10b981' },
           { label: 'Calculator Leads', value: stats.leads, icon: <Calculator size={24} />, color: '#f59e0b' },
         ].map((s, i) => (
-          <div key={i} style={styles.statCard}>
+          <div key={i} style={{ ...styles.statCard, cursor: s.action ? 'pointer' : 'default' }} onClick={s.action || undefined}>
             <div style={styles.statIcon(s.color)}>{s.icon}</div>
             <div>
               <div style={styles.statNumber}>{statsLoading ? '-' : s.value}</div>
@@ -567,6 +589,9 @@ export default function AdminPage() {
           </button>
           <button style={styles.btnSecondary} onClick={() => { setActiveTab('careers'); setTimeout(openNewCareer, 100); }}>
             <Plus size={16} /> Add Job Opening
+          </button>
+          <button style={styles.btnPrimary} onClick={() => setActiveTab('leads')}>
+            <Building2 size={16} /> View Property Leads
           </button>
           <button style={styles.btnSecondary} onClick={() => setActiveTab('leads')}>
             <Users size={16} /> View Leads
@@ -804,9 +829,64 @@ export default function AdminPage() {
     </>
   );
 
+  const renderPropertyLeads = () => (
+    <div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+        <h2 style={{ fontSize: '1.5rem', fontWeight: 700, margin: 0 }}>Property Leads</h2>
+        <button onClick={fetchPropertyLeads} style={{ padding: '0.5rem 1rem', borderRadius: '0.5rem', border: '1px solid #e2e8f0', background: 'white', cursor: 'pointer', fontSize: '0.85rem' }}>
+          Refresh
+        </button>
+      </div>
+
+      {propertyLeadsLoading ? (
+        <div style={{ textAlign: 'center', padding: '3rem', color: '#64748b' }}><Loader size={20} className="spin" /> Loading...</div>
+      ) : propertyLeads.length === 0 ? (
+        <div style={{ textAlign: 'center', padding: '3rem', color: '#64748b' }}>No property leads yet.</div>
+      ) : (
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem' }}>
+            <thead>
+              <tr style={{ borderBottom: '2px solid #e2e8f0', textAlign: 'left' }}>
+                <th style={{ padding: '0.75rem', color: '#64748b', fontWeight: 600 }}>Name</th>
+                <th style={{ padding: '0.75rem', color: '#64748b', fontWeight: 600 }}>Phone</th>
+                <th style={{ padding: '0.75rem', color: '#64748b', fontWeight: 600 }}>Email</th>
+                <th style={{ padding: '0.75rem', color: '#64748b', fontWeight: 600 }}>City</th>
+                <th style={{ padding: '0.75rem', color: '#64748b', fontWeight: 600 }}>Property Type</th>
+                <th style={{ padding: '0.75rem', color: '#64748b', fontWeight: 600 }}>Bedrooms</th>
+                <th style={{ padding: '0.75rem', color: '#64748b', fontWeight: 600 }}>Service Interest</th>
+                <th style={{ padding: '0.75rem', color: '#64748b', fontWeight: 600 }}>Revenue</th>
+                <th style={{ padding: '0.75rem', color: '#64748b', fontWeight: 600 }}>Source</th>
+                <th style={{ padding: '0.75rem', color: '#64748b', fontWeight: 600 }}>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {propertyLeads.map((lead, i) => (
+                <tr key={lead.id || i} style={{ borderBottom: '1px solid #f1f5f9', background: i % 2 === 0 ? 'white' : '#fafafa' }}>
+                  <td style={{ padding: '0.75rem', fontWeight: 600 }}>{lead.name}</td>
+                  <td style={{ padding: '0.75rem' }}><a href={`tel:${lead.phone}`} style={{ color: '#3b82f6' }}>{lead.phone}</a></td>
+                  <td style={{ padding: '0.75rem' }}><a href={`mailto:${lead.email}`} style={{ color: '#3b82f6' }}>{lead.email}</a></td>
+                  <td style={{ padding: '0.75rem' }}>{lead.city || '\u2014'}</td>
+                  <td style={{ padding: '0.75rem' }}>{lead.propertyType || '\u2014'}</td>
+                  <td style={{ padding: '0.75rem' }}>{lead.bedrooms || '\u2014'}</td>
+                  <td style={{ padding: '0.75rem' }}>{lead.serviceInterest || '\u2014'}</td>
+                  <td style={{ padding: '0.75rem' }}>{lead.currentRevenue || '\u2014'}</td>
+                  <td style={{ padding: '0.75rem' }}><span style={{ padding: '0.2rem 0.5rem', borderRadius: '999px', background: '#f0f9ff', color: '#3b82f6', fontSize: '0.75rem', fontWeight: 600 }}>{lead.source || 'website'}</span></td>
+                  <td style={{ padding: '0.75rem', color: '#94a3b8', fontSize: '0.8rem' }}>{lead.createdAt ? new Date(lead.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '\u2014'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
+
   const renderLeads = () => (
     <>
       <div style={{ marginBottom: '20px', borderBottom: '1px solid #e2e8f0' }}>
+        <button style={styles.subTab(leadsSubTab === 'property')} onClick={() => { setLeadsSubTab('property'); if (propertyLeads.length === 0) fetchPropertyLeads(); }}>
+          <Building2 size={14} style={{ marginRight: '6px', verticalAlign: 'middle' }} /> Property Leads ({propertyLeads.length})
+        </button>
         <button style={styles.subTab(leadsSubTab === 'contacts')} onClick={() => setLeadsSubTab('contacts')}>
           <Mail size={14} style={{ marginRight: '6px', verticalAlign: 'middle' }} /> Contact Inquiries ({contacts.length})
         </button>
@@ -816,7 +896,48 @@ export default function AdminPage() {
       </div>
 
       <div style={styles.card}>
-        {leadsLoading ? (
+        {leadsSubTab === 'property' ? (
+          propertyLeadsLoading ? (
+            <div style={styles.emptyState}><Loader size={20} className="spin" /> Loading...</div>
+          ) : propertyLeads.length === 0 ? (
+            <div style={styles.emptyState}>No property leads yet.</div>
+          ) : (
+            <div style={{ overflowX: 'auto' }}>
+              <table style={styles.table}>
+                <thead>
+                  <tr>
+                    <th style={styles.th}>Name</th>
+                    <th style={styles.th}>Phone</th>
+                    <th style={styles.th}>Email</th>
+                    <th style={styles.th}>City</th>
+                    <th style={styles.th}>Type</th>
+                    <th style={styles.th}>BHK</th>
+                    <th style={styles.th}>Service</th>
+                    <th style={styles.th}>Revenue</th>
+                    <th style={styles.th}>Source</th>
+                    <th style={styles.th}>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {propertyLeads.map((lead, i) => (
+                    <tr key={lead.id || i}>
+                      <td style={{ ...styles.td(i), fontWeight: '600', whiteSpace: 'nowrap' }}>{lead.name}</td>
+                      <td style={{ ...styles.td(i), whiteSpace: 'nowrap' }}><a href={`tel:${lead.phone}`} style={{ color: '#3b82f6' }}>{lead.phone}</a></td>
+                      <td style={styles.td(i)}><a href={`mailto:${lead.email}`} style={{ color: '#3b82f6' }}>{lead.email}</a></td>
+                      <td style={styles.td(i)}>{lead.city || '—'}</td>
+                      <td style={styles.td(i)}>{lead.propertyType || '—'}</td>
+                      <td style={styles.td(i)}>{lead.bedrooms || '—'}</td>
+                      <td style={styles.td(i)}>{lead.serviceInterest || '—'}</td>
+                      <td style={styles.td(i)}>{lead.currentRevenue || '—'}</td>
+                      <td style={styles.td(i)}><span style={{ padding: '0.15rem 0.5rem', borderRadius: '999px', background: '#f0f9ff', color: '#3b82f6', fontSize: '0.7rem', fontWeight: 600 }}>{lead.source || 'web'}</span></td>
+                      <td style={{ ...styles.td(i), whiteSpace: 'nowrap' }}>{formatDate(lead.createdAt)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )
+        ) : leadsLoading ? (
           <div style={styles.emptyState}><Loader size={20} className="spin" /> Loading...</div>
         ) : leadsSubTab === 'contacts' ? (
           contacts.length === 0 ? (
