@@ -32,17 +32,17 @@ const SEO = ({
 
     const finalTitle = dynamicSEO?.title || title || 'Hostizzy';
     const finalDescription = dynamicSEO?.description || description || 'Empowering Property Owners, Enriching Guest Experiences.';
-    const finalImage = dynamicSEO?.image || image || 'https://hostizzy.com/og-default.jpg';
+    const finalImage = dynamicSEO?.image || image || 'https://www.hostizzy.com/og-default.jpg';
     const finalKeywords = dynamicSEO?.keywords || (keywords ? keywords.join(', ') : '');
-    const currentUrl = typeof window !== 'undefined' ? window.location.href : 'https://hostizzy.com';
+    const currentUrl = typeof window !== 'undefined' ? window.location.href : 'https://www.hostizzy.com';
 
     // Default Schema: Organization
     const defaultSchema = {
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "Hostizzy",
-        "url": "https://hostizzy.com",
-        "logo": "https://hostizzy.com/images/logo.jpg",
+        "url": "https://www.hostizzy.com",
+        "logo": "https://www.hostizzy.com/images/logo.jpg",
         "sameAs": [
             "https://www.instagram.com/hostizzy",
             "https://www.linkedin.com/company/hostizzy"

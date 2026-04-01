@@ -30,7 +30,7 @@ const Home = () => {
                     'vacation rental management India',
                     'Airbnb management services'
                 ]}
-                image="https://hostizzy.com/og-home.jpg"
+                image="https://www.hostizzy.com/og-home.jpg"
             />
             <script type="application/ld+json" dangerouslySetInnerHTML={{
                 __html: JSON.stringify({
@@ -38,9 +38,9 @@ const Home = () => {
                     "@type": "LocalBusiness",
                     "name": "Hostizzy",
                     "description": "Premier vacation rental management company in India specializing in Airbnb property management and professional hosting services",
-                    "url": "https://hostizzy.com",
-                    "logo": "https://hostizzy.com/images/logo.jpg",
-                    "image": "https://hostizzy.com/og-home.jpg",
+                    "url": "https://www.hostizzy.com",
+                    "logo": "https://www.hostizzy.com/images/logo.jpg",
+                    "image": "https://www.hostizzy.com/og-home.jpg",
                     "priceRange": "₹₹₹",
                     "address": {
                         "@type": "PostalAddress",
