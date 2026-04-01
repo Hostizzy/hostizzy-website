@@ -120,14 +120,18 @@ export default function Services() {
                 name: "TotalCare360",
                 price: "30%",
                 period: "Profit share",
-                description: "For villas, farmhouses & boutique homes",
+                description: "For villas, farmhouses & boutique homes — we manage everything, you bear the operational costs.",
                 features: [
-                    "End-to-end guest & reservation management",
-                    "Professional cleaning & turnover management",
-                    "Dynamic pricing across all channels",
-                    "Maintenance coordination & resolution",
+                    "Complete booking & reservation management",
+                    "Dynamic pricing across 14+ channels",
+                    "24/7 guest communication & support",
+                    "Staff & housekeeping coordination",
+                    "Maintenance & vendor management",
+                    "OTA listing optimization & marketing",
+                    "Monthly performance reports",
                     "Quarterly strategy review sessions"
                 ],
+                note: "Owner bears operational costs (staff, consumables, maintenance). Hostizzy manages all operations.",
                 cta: "Choose Plan",
                 popular: true
             },
@@ -135,14 +139,18 @@ export default function Services() {
                 name: "StayPrime",
                 price: "50-50",
                 period: "Revenue split",
-                description: "Designed for apartments",
+                description: "Complete hands-off hosting for apartments — we manage AND bear all operational costs.",
                 features: [
-                    "End-to-end guest & reservation management",
-                    "Professional cleaning & turnover management",
-                    "Dynamic pricing across all channels",
-                    "Maintenance coordination & resolution",
-                    "Quarterly strategy review sessions"
+                    "Everything in TotalCare360, plus:",
+                    "Staff hiring & management by Hostizzy",
+                    "All consumables & supplies included",
+                    "Housekeeping fully managed & paid",
+                    "Maintenance expenses covered",
+                    "Zero owner involvement required",
+                    "Monthly P&L with transparent accounting",
+                    "True passive income — just own the property"
                 ],
+                note: "Hostizzy bears ALL operational costs. Owner pays nothing beyond the property itself.",
                 cta: "Choose Plan",
                 popular: false
             }
@@ -518,6 +526,21 @@ export default function Services() {
                                                     </li>
                                                 ))}
                                             </ul>
+                                            {plan.note && (
+                                                <div style={{
+                                                    padding: '0.75rem 1rem',
+                                                    borderRadius: '0.75rem',
+                                                    background: '#f0fdf4',
+                                                    border: '1px solid #bbf7d0',
+                                                    fontSize: '0.8rem',
+                                                    color: '#15803d',
+                                                    lineHeight: 1.5,
+                                                    marginBottom: '1.5rem',
+                                                    fontWeight: 500
+                                                }}>
+                                                    {plan.note}
+                                                </div>
+                                            )}
                                             <Link href="/contact" className={`btn ${plan.popular ? 'btn-primary' : 'btn-outline'}`} style={{
                                                 width: '100%',
                                                 padding: '1.25rem',
