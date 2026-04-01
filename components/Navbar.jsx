@@ -155,7 +155,6 @@ const Navbar = () => {
                                         transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
                                     />
                                 )}
-                                <Home size={16} style={{ opacity: 0.7 }} />
                                 Home
                             </Link>
                         </li>
@@ -180,7 +179,6 @@ const Navbar = () => {
                                     transition: 'all 0.2s ease'
                                 }}
                             >
-                                <Briefcase size={16} style={{ opacity: 0.7 }} />
                                 Services
                                 <motion.div
                                     animate={{ rotate: activeDropdown === 'services' ? 180 : 0 }}
@@ -291,7 +289,6 @@ const Navbar = () => {
                                     transition: 'all 0.2s ease'
                                 }}
                             >
-                                <Zap size={16} style={{ opacity: 0.7 }} />
                                 Technology
                                 <motion.div
                                     animate={{ rotate: activeDropdown === 'platform' ? 180 : 0 }}
@@ -403,7 +400,6 @@ const Navbar = () => {
                                     transition: 'all 0.2s ease'
                                 }}
                             >
-                                <GraduationCap size={16} style={{ opacity: 0.7 }} />
                                 Host Academy
                                 <motion.div
                                     animate={{ rotate: activeDropdown === 'academy' ? 180 : 0 }}
@@ -497,7 +493,6 @@ const Navbar = () => {
                                         transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
                                     />
                                 )}
-                                <Rocket size={16} style={{ opacity: 0.7 }} />
                                 Careers
                             </Link>
                         </li>
@@ -522,7 +517,6 @@ const Navbar = () => {
                                     transition: 'all 0.2s ease'
                                 }}
                             >
-                                <Users size={16} style={{ opacity: 0.7 }} />
                                 Our Story
                                 <motion.div animate={{ rotate: activeDropdown === 'about' ? 180 : 0 }} transition={{ duration: 0.2 }}>
                                     <ChevronDown size={14} style={{ opacity: 0.6 }} />
