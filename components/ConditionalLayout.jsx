@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -7,9 +8,14 @@ import FloatingConcierge from './FloatingConcierge';
 
 export default function ConditionalLayout({ children }) {
   const pathname = usePathname();
-  const isAdminRoute = pathname?.startsWith('/admin');
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  if (isAdminRoute) {
+  useEffect(() => {
+    const hostname = window.location.hostname;
+    setIsAdmin(pathname?.startsWith('/admin') || hostname.startsWith('admin.'));
+  }, [pathname]);
+
+  if (isAdmin) {
     return children;
   }
 
