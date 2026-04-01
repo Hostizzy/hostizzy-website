@@ -648,14 +648,6 @@ export default function Services() {
                 </div>
             </section>
 
-            {/* CTA */}
-            <section className="section text-center" style={{ padding: '4rem 0' }}>
-                <div className="container">
-                    <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem' }}>Ready to Maximize Your Property's Potential?</h2>
-                    <p style={{ marginBottom: '2rem', color: '#64748b' }}>Partner with Hostizzy and join hundreds of successful property owners.</p>
-                    <Link href="/contact" className="btn btn-gradient" style={{ padding: '1rem 3rem', fontSize: '1.1rem' }}>Schedule Discovery Call</Link>
-                </div>
-            </section>
         </>
     );
 }

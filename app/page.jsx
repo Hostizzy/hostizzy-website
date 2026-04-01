@@ -11,7 +11,6 @@ import SEO from '../components/SEO';
 import ScrollReveal from '../components/ScrollReveal';
 import VideoSection from '../components/VideoSection';
 import ChannelCarousel from '../components/ChannelCarousel';
-import PropertyLeadWizard from '../components/PropertyLeadWizard';
 import TrustMetrics from '../components/TrustMetrics';
 import StickyCTABar from '../components/StickyCTABar';
 
@@ -275,16 +274,12 @@ const Home = () => {
                 </ScrollReveal>
             </section>
 
-            {/* List Your Property Section */}
-            <section className="section bg-secondary" style={{ padding: '6rem 0' }}>
+            {/* CTA Section */}
+            <section className="section text-center" style={{ padding: '4rem 0' }}>
                 <div className="container">
-                    <ScrollReveal>
-                        <div className="text-center mb-lg">
-                            <h2 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '1rem' }}>List Your Property With Us</h2>
-                            <p style={{ color: '#64748b', fontSize: '1.1rem' }}>Tell us about your property and our team will get back to you within 24 hours.</p>
-                        </div>
-                    </ScrollReveal>
-                    <PropertyLeadWizard source="homepage" />
+                    <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem' }}>Ready to Maximize Your Property's Potential?</h2>
+                    <p style={{ marginBottom: '2rem', color: '#64748b' }}>Partner with Hostizzy and join hundreds of successful property owners.</p>
+                    <Link href="/contact" className="btn btn-gradient" style={{ padding: '1rem 3rem', fontSize: '1.1rem' }}>Schedule Discovery Call</Link>
                 </div>
             </section>
 
