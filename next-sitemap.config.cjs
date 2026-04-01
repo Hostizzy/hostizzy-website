@@ -26,6 +26,7 @@ module.exports = {
       '/training': 0.8,
       '/certification': 0.8,
       '/calculator': 0.9,
+      '/marketing': 0.8,
       '/contact': 0.8,
       '/about': 0.7,
       '/products/hostos': 0.8,

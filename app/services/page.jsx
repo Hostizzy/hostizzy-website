@@ -157,42 +157,6 @@ export default function Services() {
         ]
     };
 
-    const addons = [
-        {
-            title: "Social Media",
-            price: "\u20B920,000 / mo",
-            features: [
-                "12 Reels per month",
-                "5 Carousel/Posts per month",
-                "Professional shoot, edit & ideation",
-                "Daily stories management",
-                "3-month minimum commitment",
-                "Monthly meetup & performance review"
-            ]
-        },
-        {
-            title: "Full Digital",
-            price: "\u20B930,000 + 5% ad spend",
-            features: [
-                "Everything in Social Media",
-                "Influencer marketing campaigns",
-                "Meta & Google Ads management",
-                "Performance reporting & optimization"
-            ]
-        },
-        {
-            title: "Premium Digital",
-            price: "\u20B950,000 / mo",
-            features: [
-                "Everything in Full Digital",
-                "Dedicated website & landing pages",
-                "SEO strategy & execution",
-                "Google Ads management",
-                "Complete digital presence management"
-            ]
-        }
-    ];
-
     const steps = [
         { title: "Discovery Call", desc: "We learn about your property and recommend the best plan." },
         { title: "Onboarding & Setup", desc: "We optimize listings, pricing, and provide templates." },
@@ -582,32 +546,25 @@ export default function Services() {
                 bgColor="#f8fafc"
             />
 
-            {/* Add-ons */}
+            {/* Digital Marketing Banner */}
             <section className="section container">
                 <ScrollReveal>
-                    <h2 className="text-center" style={{ fontSize: '2rem', marginBottom: '3rem' }}>Marketing Add-Ons</h2>
+                    <div className="card" style={{
+                        padding: '3rem',
+                        borderRadius: '2rem',
+                        background: 'linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%)',
+                        border: '1px solid #fbcfe8',
+                        textAlign: 'center'
+                    }}>
+                        <h2 style={{ fontSize: '2rem', fontWeight: 800, marginBottom: '0.75rem' }}>Need Marketing?</h2>
+                        <p style={{ color: '#64748b', fontSize: '1.1rem', marginBottom: '2rem', maxWidth: '500px', margin: '0 auto 2rem' }}>
+                            Professional social media, advertising, and SEO packages to maximize your property's visibility.
+                        </p>
+                        <Link href="/marketing" className="btn btn-gradient" style={{ padding: '1rem 2.5rem', fontSize: '1.05rem' }}>
+                            Explore Digital Marketing Packages →
+                        </Link>
+                    </div>
                 </ScrollReveal>
-                <div className="grid desktop-3-col" style={{ gap: '2rem' }}>
-                    {addons.map((addon, i) => (
-                        <ScrollReveal key={i} delay={i * 0.1}>
-                            <div className="card glass" style={{ padding: '2rem', height: '100%' }}>
-                                <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>{addon.title}</h3>
-                                <div style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--color-primary)', marginBottom: '1.5rem' }}>{addon.price}</div>
-                                <ul style={{ fontSize: '0.9rem', color: '#64748b' }}>
-                                    {addon.features.map((f, idx) => (
-                                        <li key={idx} style={{ marginBottom: '0.5rem', display: 'flex', gap: '0.5rem' }}>
-                                            <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#cbd5e1', marginTop: '7px' }}></div>
-                                            {f}
-                                        </li>
-                                    ))}
-                                </ul>
-                                <div style={{ marginTop: '1.5rem', paddingTop: '1rem', borderTop: '1px solid #e2e8f0', textAlign: 'center' }}>
-                                    <Link href="/contact" style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--color-primary)' }}>Add to Plan &rarr;</Link>
-                                </div>
-                            </div>
-                        </ScrollReveal>
-                    ))}
-                </div>
             </section>
 
             {/* How It Works */}

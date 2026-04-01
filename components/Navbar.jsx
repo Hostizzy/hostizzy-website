@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, ArrowUpRight, ChevronDown, Zap, TrendingUp, BadgeCheck, ChevronRight, Building2, GraduationCap, Briefcase, MapPin, Users, Home, Rocket } from 'lucide-react';
+import { Menu, X, ArrowUpRight, ChevronDown, Zap, TrendingUp, BadgeCheck, ChevronRight, Building2, GraduationCap, Briefcase, MapPin, Users, Home, Rocket, Megaphone, Calculator } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { useSettings } from '../context/SettingsContext';
@@ -50,6 +50,12 @@ const Navbar = () => {
         { path: "/about", name: "Our Story", icon: <Users size={16} /> },
         { path: "/blogs", name: "Blog", icon: <Users size={16} /> },
         { path: "/invest", name: "Invest", icon: <TrendingUp size={16} /> },
+    ];
+
+    const servicesLinks = [
+        { path: "/services", name: "Property Management", desc: "Hosting plans & pricing", icon: <Building2 size={16} /> },
+        { path: "/marketing", name: "Digital Marketing", desc: "Social media, ads & SEO", icon: <Megaphone size={16} /> },
+        { path: "/calculator", name: "Revenue Calculator", desc: "AI-powered earnings estimator", icon: <Calculator size={16} /> },
     ];
 
     const isActivePath = (path) => pathname === path;
@@ -154,36 +160,115 @@ const Navbar = () => {
                             </Link>
                         </li>
 
-                        {/* Services */}
-                        <li>
-                            <Link
-                                href="/services"
-                                onMouseEnter={() => setActiveDropdown('services')}
-                                onMouseLeave={() => setActiveDropdown(null)}
+                        {/* Services Dropdown */}
+                        <li
+                            onMouseEnter={() => setActiveDropdown('services')}
+                            onMouseLeave={() => setActiveDropdown(null)}
+                            style={{ position: 'relative' }}
+                        >
+                            <span
                                 style={{
-                                    position: 'relative',
+                                    cursor: 'pointer',
                                     padding: '0.65rem 1rem',
-                                    color: isActivePath('/services') ? 'var(--color-primary)' : 'var(--color-foreground)',
-                                    fontWeight: isActivePath('/services') ? 600 : 500,
+                                    color: 'var(--color-foreground)',
+                                    fontWeight: 500,
                                     fontSize: '0.925rem',
-                                    transition: 'all 0.2s ease',
-                                    textDecoration: 'none',
                                     display: 'flex',
                                     alignItems: 'center',
                                     gap: '6px',
-                                    borderRadius: '12px'
+                                    borderRadius: '10px',
+                                    transition: 'all 0.2s ease'
                                 }}
                             >
-                                {activeDropdown === 'services' && (
-                                    <motion.div
-                                        layoutId="nav-hover"
-                                        style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(254, 88, 88, 0.08)', borderRadius: '12px', zIndex: -1 }}
-                                        transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
-                                    />
-                                )}
                                 <Briefcase size={16} style={{ opacity: 0.7 }} />
                                 Services
-                            </Link>
+                                <motion.div
+                                    animate={{ rotate: activeDropdown === 'services' ? 180 : 0 }}
+                                    transition={{ duration: 0.2 }}
+                                >
+                                    <ChevronDown size={14} style={{ opacity: 0.6 }} />
+                                </motion.div>
+                            </span>
+                            {activeDropdown === 'services' && (
+                                <motion.div
+                                    layoutId="nav-hover"
+                                    style={{
+                                        position: 'absolute',
+                                        inset: 0,
+                                        backgroundColor: 'rgba(254, 88, 88, 0.08)',
+                                        borderRadius: '10px',
+                                        zIndex: -1
+                                    }}
+                                />
+                            )}
+                            <AnimatePresence>
+                                {activeDropdown === 'services' && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                                        exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                                        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                                        style={{
+                                            position: 'absolute',
+                                            top: 'calc(100% + 8px)',
+                                            left: '50%',
+                                            transform: 'translateX(-50%)',
+                                            background: 'white',
+                                            borderRadius: '16px',
+                                            padding: '0.5rem',
+                                            minWidth: '320px',
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            gap: '2px',
+                                            zIndex: 100,
+                                            boxShadow: '0 12px 48px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.06)',
+                                            border: '1px solid rgba(0,0,0,0.06)'
+                                        }}
+                                    >
+                                        {servicesLinks.map((link, idx) => (
+                                            <Link
+                                                key={link.path}
+                                                href={link.path}
+                                                style={{
+                                                    padding: '0.85rem 1rem',
+                                                    borderRadius: '10px',
+                                                    textDecoration: 'none',
+                                                    transition: 'all 0.15s ease',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    gap: '12px',
+                                                }}
+                                                onMouseEnter={(e) => {
+                                                    e.currentTarget.style.backgroundColor = 'rgba(254, 88, 88, 0.06)';
+                                                    e.currentTarget.style.transform = 'translateX(4px)';
+                                                }}
+                                                onMouseLeave={(e) => {
+                                                    e.currentTarget.style.backgroundColor = 'transparent';
+                                                    e.currentTarget.style.transform = 'translateX(0)';
+                                                }}>
+                                                <div style={{
+                                                    width: '36px',
+                                                    height: '36px',
+                                                    borderRadius: '10px',
+                                                    background: idx === 0 ? 'linear-gradient(135deg, #FE5858 0%, #FF8A80 100%)' : 'var(--color-secondary)',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    flexShrink: 0,
+                                                    color: idx === 0 ? 'white' : 'var(--color-primary)'
+                                                }}>
+                                                    {link.icon}
+                                                </div>
+                                                <div style={{ flex: 1 }}>
+                                                    <div style={{ fontWeight: 600, color: 'var(--color-foreground)', fontSize: '0.9rem', marginBottom: '2px' }}>{link.name}</div>
+                                                    <div style={{ fontSize: '0.75rem', color: 'var(--color-muted)', lineHeight: 1.3 }}>{link.desc}</div>
+                                                </div>
+                                                <ChevronRight size={14} style={{ opacity: 0.3 }} />
+                                            </Link>
+                                        ))}
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
                         </li>
 
                         {/* Platform Dropdown */}
@@ -293,45 +378,6 @@ const Navbar = () => {
                                                 <ChevronRight size={14} style={{ opacity: 0.3 }} />
                                             </Link>
                                         ))}
-                                        <div style={{ margin: '4px 0', height: '1px', background: 'var(--color-border)' }} />
-                                        <Link
-                                            href="/calculator"
-                                            style={{
-                                                padding: '0.85rem 1rem',
-                                                borderRadius: '10px',
-                                                textDecoration: 'none',
-                                                transition: 'all 0.15s ease',
-                                                background: 'linear-gradient(135deg, rgba(254, 88, 88, 0.08) 0%, rgba(255, 138, 128, 0.08) 100%)',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                gap: '12px'
-                                            }}
-                                            onMouseEnter={(e) => {
-                                                e.currentTarget.style.background = 'linear-gradient(135deg, rgba(254, 88, 88, 0.12) 0%, rgba(255, 138, 128, 0.12) 100%)';
-                                                e.currentTarget.style.transform = 'translateX(4px)';
-                                            }}
-                                            onMouseLeave={(e) => {
-                                                e.currentTarget.style.background = 'linear-gradient(135deg, rgba(254, 88, 88, 0.08) 0%, rgba(255, 138, 128, 0.08) 100%)';
-                                                e.currentTarget.style.transform = 'translateX(0)';
-                                            }}>
-                                            <div style={{
-                                                width: '36px',
-                                                height: '36px',
-                                                borderRadius: '10px',
-                                                background: 'linear-gradient(135deg, #FE5858 0%, #FF8A80 100%)',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                color: 'white'
-                                            }}>
-                                                <TrendingUp size={16} />
-                                            </div>
-                                            <div style={{ flex: 1 }}>
-                                                <div style={{ fontWeight: 700, color: 'var(--color-primary)', fontSize: '0.9rem', marginBottom: '2px' }}>Revenue Calculator</div>
-                                                <div style={{ fontSize: '0.75rem', color: 'var(--color-muted)', lineHeight: 1.3 }}>Estimate Your Earnings Potential</div>
-                                            </div>
-                                            <ArrowUpRight size={14} style={{ color: 'var(--color-primary)' }} />
-                                        </Link>
                                     </motion.div>
                                 )}
                             </AnimatePresence>
@@ -671,13 +717,38 @@ const Navbar = () => {
                                     <ChevronRight size={18} color="var(--color-muted)" />
                                 </Link>
 
-                                <Link href="/services" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textDecoration: 'none', borderBottom: '1px solid var(--color-border)' }}>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                                        <Briefcase size={20} style={{ opacity: 0.6 }} />
-                                        Services
-                                    </div>
-                                    <ChevronRight size={18} color="var(--color-muted)" />
-                                </Link>
+                                {/* Services Dropdown */}
+                                <div style={{ borderBottom: '1px solid var(--color-border)' }}>
+                                    <button
+                                        onClick={() => setMobileActiveDropdown(mobileActiveDropdown === 'services' ? null : 'services')}
+                                        style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', background: 'none', border: 'none', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textAlign: 'left', cursor: 'pointer' }}
+                                    >
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                            <Briefcase size={20} style={{ opacity: 0.6 }} />
+                                            Services
+                                        </div>
+                                        <motion.div animate={{ rotate: mobileActiveDropdown === 'services' ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                                            <ChevronDown size={18} color="var(--color-muted)" />
+                                        </motion.div>
+                                    </button>
+                                    <AnimatePresence>
+                                        {mobileActiveDropdown === 'services' && (
+                                            <motion.div
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: 'auto', opacity: 1 }}
+                                                exit={{ height: 0, opacity: 0 }}
+                                                transition={{ duration: 0.2 }}
+                                                style={{ overflow: 'hidden', backgroundColor: 'var(--color-secondary)' }}
+                                            >
+                                                {servicesLinks.map(link => (
+                                                    <Link key={link.path} href={link.path} onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.85rem 1.5rem 0.85rem 3.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>
+                                                        {link.name}
+                                                    </Link>
+                                                ))}
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
 
                                 {/* Platform Dropdown */}
                                 <div style={{ borderBottom: '1px solid var(--color-border)' }}>
@@ -707,9 +778,6 @@ const Navbar = () => {
                                                         {link.name}
                                                     </Link>
                                                 ))}
-                                                <Link href="/calculator" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.85rem 1.5rem 0.85rem 3.5rem', color: 'var(--color-primary)', fontSize: '0.95rem', fontWeight: 600, textDecoration: 'none' }}>
-                                                    Revenue Calculator
-                                                </Link>
                                             </motion.div>
                                         )}
                                     </AnimatePresence>
