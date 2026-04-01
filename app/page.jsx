@@ -11,7 +11,7 @@ import SEO from '../components/SEO';
 import ScrollReveal from '../components/ScrollReveal';
 import VideoSection from '../components/VideoSection';
 import ChannelCarousel from '../components/ChannelCarousel';
-import AuditWizard from '../components/AuditWizard';
+import PropertyLeadWizard from '../components/PropertyLeadWizard';
 import TrustMetrics from '../components/TrustMetrics';
 import StickyCTABar from '../components/StickyCTABar';
 
@@ -275,16 +275,16 @@ const Home = () => {
                 </ScrollReveal>
             </section>
 
-            {/* Home Page Audit Wizard Section */}
+            {/* List Your Property Section */}
             <section className="section bg-secondary" style={{ padding: '6rem 0' }}>
                 <div className="container">
                     <ScrollReveal>
                         <div className="text-center mb-lg">
-                            <h2 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '1rem' }}>See Your Earning Potential</h2>
-                            <p style={{ color: '#64748b', fontSize: '1.1rem' }}>AI-powered estimates for 40+ Indian vacation rental markets.</p>
+                            <h2 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '1rem' }}>List Your Property With Us</h2>
+                            <p style={{ color: '#64748b', fontSize: '1.1rem' }}>Tell us about your property and our team will get back to you within 24 hours.</p>
                         </div>
                     </ScrollReveal>
-                    <AuditWizard />
+                    <PropertyLeadWizard source="homepage" />
                 </div>
             </section>
 

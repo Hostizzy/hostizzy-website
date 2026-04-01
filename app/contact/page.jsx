@@ -6,7 +6,7 @@ import { useToast } from '../../components/Toast';
 import { useSettings } from '../../context/SettingsContext';
 import ScrollReveal from '../../components/ScrollReveal';
 import { Mail, Send, Phone } from 'lucide-react';
-import AuditWizard from '../../components/AuditWizard';
+import PropertyLeadWizard from '../../components/PropertyLeadWizard';
 
 export default function Contact() {
     const { settings } = useSettings();
@@ -448,7 +448,7 @@ export default function Contact() {
                             <ScrollReveal y={30} delay={0.2}>
                                 {userType === 'owner' ? (
                                     <div>
-                                        <AuditWizard />
+                                        <PropertyLeadWizard source="contact" />
                                     </div>
                                 ) : (
                                     <div className="card" style={{

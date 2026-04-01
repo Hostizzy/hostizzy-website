@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import ScrollReveal from '../../../components/ScrollReveal';
 import SEO from '../../../components/SEO';
+import PropertyLeadWizard from '../../../components/PropertyLeadWizard';
 import { getLocation } from '@/lib/locations';
 import {
     Check, ArrowRight, MapPin, Home, Star, TrendingUp, Calendar,
@@ -378,25 +379,20 @@ export default function LocationPage() {
                 </div>
             </section>
 
-            {/* Revenue Calculator CTA */}
-            <section className="section" style={{ background: '#f8fafc' }}>
-                <div className="container text-center">
+            {/* List Your Property */}
+            <section className="section" style={{ background: '#f8fafc', padding: '5rem 0' }}>
+                <div className="container">
                     <ScrollReveal>
-                        <h2 style={{ fontSize: '2rem', fontWeight: 800, marginBottom: '1rem' }}>
-                            How much can your {location.name} property earn?
-                        </h2>
-                        <p style={{ color: '#64748b', maxWidth: '600px', margin: '0 auto 2rem', fontSize: '1.05rem', lineHeight: 1.7 }}>
-                            Use our free revenue calculator to estimate your property&apos;s earning potential with professional management.
-                        </p>
-                        <Link href="/calculator" className="btn btn-gradient" style={{
-                            padding: '1rem 3rem',
-                            fontSize: '1.1rem',
-                            fontWeight: 700,
-                            borderRadius: '0.75rem'
-                        }}>
-                            Calculate Earnings
-                        </Link>
+                        <div className="text-center mb-lg">
+                            <h2 style={{ fontWeight: 800, marginBottom: '1rem' }}>
+                                List Your {location.name} Property With Us
+                            </h2>
+                            <p style={{ color: '#64748b', fontSize: '1.1rem' }}>
+                                Tell us about your property and our team will get back to you within 24 hours.
+                            </p>
+                        </div>
                     </ScrollReveal>
+                    <PropertyLeadWizard source={`location-${location.slug}`} prefilledCity={location.cities[0]} />
                 </div>
             </section>
 

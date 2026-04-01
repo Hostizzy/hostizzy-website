@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { withAuth } from '@/lib/auth';
+import { adminDb } from '@/lib/firebase-admin';
 import { DATA_FILES, readJson, writeJson } from '@/lib/db';
 import { errorResponse, successResponse, getRequestBody, generateId } from '@/lib/utils';
 import { sendCalculatorLeadNotification } from '@/lib/email';
@@ -32,6 +33,15 @@ export async function POST(request) {
     };
     leads.unshift(newLead);
     writeJson(DATA_FILES.CALCULATOR_LEADS, leads);
+
+    // Also save to Firebase if configured
+    if (adminDb) {
+      try {
+        await adminDb.collection('calculator-leads').doc(newLead.id).set(newLead);
+      } catch (fbErr) {
+        console.error('Firebase write failed:', fbErr);
+      }
+    }
 
     // Fire-and-forget email notification
     sendCalculatorLeadNotification(newLead).catch(() => {});

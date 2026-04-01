@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import ScrollReveal from '../../components/ScrollReveal';
 import VideoSection from '../../components/VideoSection';
+import PropertyLeadWizard from '../../components/PropertyLeadWizard';
 import {
     Check, ArrowRight, Zap, Star, Shield, TrendingUp, Smartphone, Globe,
     Home, Building, Palmtree, Crown, HelpCircle
@@ -596,6 +597,19 @@ export default function Services() {
                             </ScrollReveal>
                         ))}
                     </div>
+                </div>
+            </section>
+
+            {/* List Your Property Wizard */}
+            <section className="section bg-secondary" style={{ padding: '5rem 0' }}>
+                <div className="container">
+                    <ScrollReveal>
+                        <div className="text-center mb-lg">
+                            <h2 style={{ fontWeight: 800, marginBottom: '1rem' }}>Ready to Get Started?</h2>
+                            <p style={{ color: '#64748b', fontSize: '1.1rem' }}>Tell us about your property and we'll recommend the best plan for you.</p>
+                        </div>
+                    </ScrollReveal>
+                    <PropertyLeadWizard source="services" />
                 </div>
             </section>
 

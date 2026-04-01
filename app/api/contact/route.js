@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { adminDb } from '@/lib/firebase-admin';
 import { DATA_FILES, readJson, writeJson } from '@/lib/db';
 import { errorResponse, successResponse, getRequestBody, generateId } from '@/lib/utils';
 import { sendContactNotification } from '@/lib/email';
@@ -23,6 +24,15 @@ export async function POST(request) {
     // Add to top
     contacts.unshift(newContact);
     writeJson(DATA_FILES.CONTACTS, contacts);
+
+    // Also save to Firebase if configured
+    if (adminDb) {
+      try {
+        await adminDb.collection('contacts').doc(newContact.id).set(newContact);
+      } catch (fbErr) {
+        console.error('Firebase write failed:', fbErr);
+      }
+    }
 
     // Log to console for debugging
     console.log('--- NEW CONTACT ---');

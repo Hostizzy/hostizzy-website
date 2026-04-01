@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@studio-freight/lenis": "^1.0.42",
+    "firebase": "^12.11.0",
+    "firebase-admin": "^13.7.0",
     "framer-motion": "^12.23.26",
     "lucide-react": "^0.561.0",
     "next": "^16.1.1",
