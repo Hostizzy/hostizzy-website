@@ -1,11 +1,18 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import FloatingConcierge from './FloatingConcierge';
 
 export default function ConditionalLayout({ children }) {
-  // Public pages - with header/footer
+  const pathname = usePathname();
+  const isAdminRoute = pathname?.startsWith('/admin');
+
+  if (isAdminRoute) {
+    return children;
+  }
+
   return (
     <div className="app">
       <Navbar />
