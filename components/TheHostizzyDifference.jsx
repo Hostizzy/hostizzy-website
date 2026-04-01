@@ -8,23 +8,23 @@ const TheHostizzyDifference = () => {
     const features = [
         {
             icon: <Sparkles size={24} color="#ca8a04" />,
-            title: "Hotel-Grade Quality",
-            desc: "Every property is professionally maintained to luxury hotel standards — your stay always matches the photos."
+            title: "Professionally Managed Homes",
+            desc: "Every villa, farmhouse, and homestay is maintained to the highest standards — what you see is exactly what you get."
         },
         {
             icon: <Wifi size={24} color="#ca8a04" />,
-            title: "Work & Play Ready",
-            desc: "High-speed WiFi, dedicated workspaces, and curated entertainment — designed for modern travelers."
+            title: "Home Comforts, Elevated",
+            desc: "Full kitchens, private pools, spacious living areas, fast WiFi — all the comforts of home with none of the hotel constraints."
         },
         {
             icon: <Clock size={24} color="#ca8a04" />,
-            title: "Always-On Concierge",
-            desc: "24/7 guest support for anything you need — from restaurant bookings to local experiences."
+            title: "Local Experiences Built In",
+            desc: "From bonfire nights to curated local food experiences — every stay comes with memories, not just a bed."
         },
         {
             icon: <Shield size={24} color="#ca8a04" />,
-            title: "Verified & Trusted",
-            desc: "Every home is safety-inspected and verified. Book with complete confidence."
+            title: "Book With Confidence",
+            desc: "Verified properties, transparent pricing, and a dedicated host team available 24/7 throughout your stay."
         }
     ];
 
@@ -38,7 +38,7 @@ const TheHostizzyDifference = () => {
                             <span style={{ color: 'var(--color-primary)' }}>but better.</span>
                         </h2>
                         <p style={{ fontSize: '1.125rem', opacity: 0.8, marginBottom: '2rem' }}>
-                            Every Hostizzy property delivers the quality of a luxury hotel with the warmth and comfort of a private home.
+                            Stay in handpicked villas, farmhouses, and boutique homes — professionally managed for an experience that goes beyond a typical vacation rental.
                         </p>
                         <a href="https://book.hostizzy.com/" target="_blank" rel="noopener noreferrer" className="btn btn-gradient" style={{ textDecoration: 'none' }}>Find Your Happy Place</a>
                     </ScrollReveal>
