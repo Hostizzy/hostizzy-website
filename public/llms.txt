@@ -19,13 +19,22 @@ Hostizzy (brand of Hostsphere India Pvt Ltd) is a vertically integrated hospital
 - **Booking Site** (https://book.hostizzy.com): Direct booking platform for Hostizzy-managed properties
 
 ## Key Markets
-Goa (North & South), Manali, Shimla, Kasauli (Himachal Pradesh), Mukteshwar, Nainital (Uttarakhand), Jaipur, Udaipur (Rajasthan), Delhi NCR, Sohna (Haryana)
+
+### Full Management (End-to-End)
+- Delhi NCR: Delhi, Gurgaon, Noida, Sohna, Manesar (https://www.hostizzy.com/locations/delhi-ncr)
+- Himachal Pradesh: Shimla, Manali, Kasauli, Dharamshala, Bir Billing, Dalhousie (https://www.hostizzy.com/locations/himachal-pradesh)
+- Uttarakhand: Mussoorie, Rishikesh, Mukteshwar, Nainital, Dehradun, Haridwar (https://www.hostizzy.com/locations/uttarakhand)
+- Rajasthan: Jaipur, Udaipur, Jodhpur, Pushkar, Jawai, Ranthambore (https://www.hostizzy.com/locations/rajasthan)
+
+### Co-Hosting (Revenue Management + Marketing) — Pan India
+- Goa, Kerala, Maharashtra, Karnataka, Tamil Nadu, West Bengal, North East India, and more
 
 ## Service Plans
-- StayPrime: Full-service management for premium properties
-- TotalCare360: Comprehensive management with marketing
-- BrandEngage Pro: Marketing and digital presence services
-- DIY with Support: Tools and guidance for self-managing hosts
+- SmartStart: One-time onboarding for new hosts (₹14,999)
+- ChannelPro: OTA channel management (₹15,000-40,000/month or 10-17%)
+- Hybrid Core: OTA + Direct bookings (18% of net revenue)
+- TotalCare360: Complete management for villas/farmhouses (30% profit share)
+- StayPrime: Complete management for apartments (50-50 revenue split)
 
 ## Stats
 - 50+ Properties Managed
