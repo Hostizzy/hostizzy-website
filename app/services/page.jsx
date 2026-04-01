@@ -443,15 +443,21 @@ export default function Services() {
                                 }}
                             >
                                 {plans[activeTab].map((plan, i) => (
-                                    <div key={i} className="card" style={{
+                                    <Link key={i} href="/contact" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
+                                    <div className="card" style={{
                                         position: 'relative',
                                         background: 'white',
                                         borderRadius: '2rem',
                                         border: plan.popular ? '2px solid var(--color-primary)' : '1px solid #e2e8f0',
                                         transform: plan.popular ? 'scale(1.02)' : 'none',
                                         boxShadow: plan.popular ? '0 30px 60px -12px rgba(254, 88, 88, 0.15)' : 'var(--shadow-sm)',
-                                        overflow: 'hidden'
-                                    }}>
+                                        overflow: 'hidden',
+                                        cursor: 'pointer',
+                                        transition: 'all 0.3s ease'
+                                    }}
+                                    onMouseEnter={e => { e.currentTarget.style.transform = plan.popular ? 'scale(1.04)' : 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 20px 40px -8px rgba(0,0,0,0.12)'; }}
+                                    onMouseLeave={e => { e.currentTarget.style.transform = plan.popular ? 'scale(1.02)' : 'none'; e.currentTarget.style.boxShadow = plan.popular ? '0 30px 60px -12px rgba(254, 88, 88, 0.15)' : 'var(--shadow-sm)'; }}
+                                    >
                                         {plan.popular && (
                                             <div style={{
                                                 position: 'absolute',
@@ -521,17 +527,18 @@ export default function Services() {
                                                     ))}
                                                 </div>
                                             )}
-                                            <Link href="/contact" className={`btn ${plan.popular ? 'btn-primary' : 'btn-outline'}`} style={{
-                                                width: '100%',
-                                                padding: '1.25rem',
-                                                borderRadius: '1rem',
-                                                fontSize: '1.1rem',
-                                                fontWeight: 700
+                                            <div style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'flex-end',
+                                                color: plan.popular ? 'var(--color-primary)' : '#94a3b8',
+                                                marginTop: '0.5rem'
                                             }}>
-                                                {plan.cta}
-                                            </Link>
+                                                <ArrowRight size={20} />
+                                            </div>
                                         </div>
                                     </div>
+                                    </Link>
                                 ))}
                             </motion.div>
                         </AnimatePresence>
