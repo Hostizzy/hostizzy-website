@@ -132,12 +132,6 @@ export default function Services() {
                     "Quarterly strategy review sessions"
                 ],
                 note: "Your property, professionally managed. Full operational control by our expert team.",
-                notIncluded: [
-                    "Staff salaries & wages",
-                    "Consumables & supplies",
-                    "Maintenance & repair costs",
-                    "Utility bills"
-                ],
                 cta: "Choose Plan",
                 popular: true
             },
@@ -157,11 +151,6 @@ export default function Services() {
                     "Zero owner involvement — true passive income"
                 ],
                 note: "The easiest way to earn from your apartment — we take care of everything.",
-                notIncluded: [
-                    "Property rent / EMI",
-                    "Property insurance",
-                    "Society maintenance charges"
-                ],
                 cta: "Choose Plan",
                 popular: false
             }
