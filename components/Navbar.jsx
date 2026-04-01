@@ -182,7 +182,7 @@ const Navbar = () => {
                                     />
                                 )}
                                 <Briefcase size={16} style={{ opacity: 0.7 }} />
-                                Plans & Pricing
+                                Services
                             </Link>
                         </li>
 
@@ -674,7 +674,7 @@ const Navbar = () => {
                                 <Link href="/services" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', color: 'var(--color-foreground)', fontWeight: 600, fontSize: '1rem', textDecoration: 'none', borderBottom: '1px solid var(--color-border)' }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                                         <Briefcase size={20} style={{ opacity: 0.6 }} />
-                                        Plans & Pricing
+                                        Services
                                     </div>
                                     <ChevronRight size={18} color="var(--color-muted)" />
                                 </Link>

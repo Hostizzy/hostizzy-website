@@ -270,6 +270,80 @@ export default function Services() {
                 </ScrollReveal>
             </section>
 
+            {/* Trusted Across India */}
+            <section className="section" style={{ background: '#0f172a', color: 'white', padding: '5rem 0' }}>
+                <div className="container">
+                    <ScrollReveal>
+                        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+                            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', fontWeight: 700, color: 'white', marginBottom: '0.75rem' }}>
+                                Trusted Across India
+                            </h2>
+                            <p style={{ color: '#94a3b8', fontSize: '1.1rem', maxWidth: '650px', margin: '0 auto' }}>
+                                From the mountains of Himachal to the beaches of Goa — we manage vacation rentals in India's most desirable destinations.
+                            </p>
+                        </div>
+                    </ScrollReveal>
+
+                    <ScrollReveal>
+                        <div style={{ marginBottom: '1.5rem' }}>
+                            <p style={{ textAlign: 'center', color: '#94a3b8', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem' }}>Full Service Regions</p>
+                            <div className="grid desktop-4-col" style={{ gap: '1rem' }}>
+                                {[
+                                    { name: 'Delhi NCR', slug: 'delhi-ncr', cities: 'Delhi, Gurgaon, Noida, Sohna' },
+                                    { name: 'Himachal Pradesh', slug: 'himachal-pradesh', cities: 'Shimla, Manali, Kasauli, Dharamshala' },
+                                    { name: 'Uttarakhand', slug: 'uttarakhand', cities: 'Mussoorie, Rishikesh, Mukteshwar, Nainital' },
+                                    { name: 'Rajasthan', slug: 'rajasthan', cities: 'Jaipur, Udaipur, Jodhpur, Jawai' },
+                                ].map((region) => (
+                                    <Link key={region.slug} href={`/locations/${region.slug}`} style={{ textDecoration: 'none' }}>
+                                        <div style={{
+                                            background: 'rgba(255,255,255,0.05)',
+                                            border: '1px solid rgba(255,255,255,0.1)',
+                                            borderRadius: '1rem',
+                                            padding: '1.5rem',
+                                            transition: 'all 0.3s ease',
+                                            cursor: 'pointer'
+                                        }}
+                                        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
+                                        onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.transform = 'translateY(0)'; }}
+                                        >
+                                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+                                                <span style={{ fontWeight: 700, color: 'white', fontSize: '1.1rem' }}>{region.name}</span>
+                                                <span style={{ padding: '0.2rem 0.6rem', borderRadius: '999px', background: 'rgba(34,197,94,0.15)', color: '#4ade80', fontSize: '0.7rem', fontWeight: 700 }}>Full Service</span>
+                                            </div>
+                                            <p style={{ color: '#94a3b8', fontSize: '0.85rem', lineHeight: 1.5, margin: 0 }}>{region.cities}</p>
+                                        </div>
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+                    </ScrollReveal>
+
+                    <ScrollReveal delay={0.15}>
+                        <div>
+                            <p style={{ textAlign: 'center', color: '#94a3b8', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem' }}>Co-Hosting — Pan India</p>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', justifyContent: 'center' }}>
+                                {['Goa', 'Kerala', 'Maharashtra', 'Karnataka', 'Tamil Nadu', 'West Bengal', 'North East'].map((state) => (
+                                    <span key={state} style={{
+                                        padding: '0.4rem 1rem',
+                                        borderRadius: '999px',
+                                        background: 'rgba(59,130,246,0.1)',
+                                        color: '#60a5fa',
+                                        fontSize: '0.85rem',
+                                        fontWeight: 600,
+                                        border: '1px solid rgba(59,130,246,0.2)'
+                                    }}>
+                                        {state}
+                                    </span>
+                                ))}
+                            </div>
+                            <p style={{ textAlign: 'center', color: '#64748b', fontSize: '0.9rem', marginTop: '1.5rem' }}>
+                                Don't see your location? <Link href="/contact" style={{ color: 'var(--color-primary)', fontWeight: 600 }}>We can help anywhere in India.</Link>
+                            </p>
+                        </div>
+                    </ScrollReveal>
+                </div>
+            </section>
+
             {/* Quick Overview / Partnership Level */}
             <section className="section container">
                 <ScrollReveal>
@@ -519,80 +593,6 @@ export default function Services() {
                             </ScrollReveal>
                         ))}
                     </div>
-                </div>
-            </section>
-
-            {/* Trusted Across India */}
-            <section className="section" style={{ background: '#0f172a', color: 'white', padding: '5rem 0' }}>
-                <div className="container">
-                    <ScrollReveal>
-                        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-                            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', fontWeight: 700, color: 'white', marginBottom: '0.75rem' }}>
-                                Trusted Across India
-                            </h2>
-                            <p style={{ color: '#94a3b8', fontSize: '1.1rem', maxWidth: '650px', margin: '0 auto' }}>
-                                From the mountains of Himachal to the beaches of Goa — we manage vacation rentals in India's most desirable destinations.
-                            </p>
-                        </div>
-                    </ScrollReveal>
-
-                    <ScrollReveal>
-                        <div style={{ marginBottom: '1.5rem' }}>
-                            <p style={{ textAlign: 'center', color: '#94a3b8', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem' }}>Full Service Regions</p>
-                            <div className="grid desktop-4-col" style={{ gap: '1rem' }}>
-                                {[
-                                    { name: 'Delhi NCR', slug: 'delhi-ncr', cities: 'Delhi, Gurgaon, Noida, Sohna' },
-                                    { name: 'Himachal Pradesh', slug: 'himachal-pradesh', cities: 'Shimla, Manali, Kasauli, Dharamshala' },
-                                    { name: 'Uttarakhand', slug: 'uttarakhand', cities: 'Mussoorie, Rishikesh, Mukteshwar, Nainital' },
-                                    { name: 'Rajasthan', slug: 'rajasthan', cities: 'Jaipur, Udaipur, Jodhpur, Jawai' },
-                                ].map((region) => (
-                                    <Link key={region.slug} href={`/locations/${region.slug}`} style={{ textDecoration: 'none' }}>
-                                        <div style={{
-                                            background: 'rgba(255,255,255,0.05)',
-                                            border: '1px solid rgba(255,255,255,0.1)',
-                                            borderRadius: '1rem',
-                                            padding: '1.5rem',
-                                            transition: 'all 0.3s ease',
-                                            cursor: 'pointer'
-                                        }}
-                                        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
-                                        onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.transform = 'translateY(0)'; }}
-                                        >
-                                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
-                                                <span style={{ fontWeight: 700, color: 'white', fontSize: '1.1rem' }}>{region.name}</span>
-                                                <span style={{ padding: '0.2rem 0.6rem', borderRadius: '999px', background: 'rgba(34,197,94,0.15)', color: '#4ade80', fontSize: '0.7rem', fontWeight: 700 }}>Full Service</span>
-                                            </div>
-                                            <p style={{ color: '#94a3b8', fontSize: '0.85rem', lineHeight: 1.5, margin: 0 }}>{region.cities}</p>
-                                        </div>
-                                    </Link>
-                                ))}
-                            </div>
-                        </div>
-                    </ScrollReveal>
-
-                    <ScrollReveal delay={0.15}>
-                        <div>
-                            <p style={{ textAlign: 'center', color: '#94a3b8', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem' }}>Co-Hosting — Pan India</p>
-                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', justifyContent: 'center' }}>
-                                {['Goa', 'Kerala', 'Maharashtra', 'Karnataka', 'Tamil Nadu', 'West Bengal', 'North East'].map((state) => (
-                                    <span key={state} style={{
-                                        padding: '0.4rem 1rem',
-                                        borderRadius: '999px',
-                                        background: 'rgba(59,130,246,0.1)',
-                                        color: '#60a5fa',
-                                        fontSize: '0.85rem',
-                                        fontWeight: 600,
-                                        border: '1px solid rgba(59,130,246,0.2)'
-                                    }}>
-                                        {state}
-                                    </span>
-                                ))}
-                            </div>
-                            <p style={{ textAlign: 'center', color: '#64748b', fontSize: '0.9rem', marginTop: '1.5rem' }}>
-                                Don't see your location? <Link href="/contact" style={{ color: 'var(--color-primary)', fontWeight: 600 }}>We can help anywhere in India.</Link>
-                            </p>
-                        </div>
-                    </ScrollReveal>
                 </div>
             </section>
 
