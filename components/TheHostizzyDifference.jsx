@@ -8,23 +8,23 @@ const TheHostizzyDifference = () => {
     const features = [
         {
             icon: <Sparkles size={24} color="#ca8a04" />,
-            title: "Meticulous Standards",
-            desc: "Expertly operated homes. We'll never not look like the pictures."
+            title: "Hotel-Grade Quality",
+            desc: "Every property is professionally maintained to luxury hotel standards — your stay always matches the photos."
         },
         {
             icon: <Wifi size={24} color="#ca8a04" />,
-            title: "Work-Ready Amenities",
-            desc: "Ultra-fast WiFi and dedicated workspaces in every premium stay."
+            title: "Work & Play Ready",
+            desc: "High-speed WiFi, dedicated workspaces, and curated entertainment — designed for modern travelers."
         },
         {
             icon: <Clock size={24} color="#ca8a04" />,
-            title: "24/7 Guest Support",
-            desc: "Our chat-based Concierge is always available to help, day or night."
+            title: "Always-On Concierge",
+            desc: "24/7 guest support for anything you need — from restaurant bookings to local experiences."
         },
         {
             icon: <Shield size={24} color="#ca8a04" />,
-            title: "Safety Verified",
-            desc: "Industry-leading safety standards for your peace of mind."
+            title: "Verified & Trusted",
+            desc: "Every home is safety-inspected and verified. Book with complete confidence."
         }
     ];
 
@@ -38,7 +38,7 @@ const TheHostizzyDifference = () => {
                             <span style={{ color: 'var(--color-primary)' }}>but better.</span>
                         </h2>
                         <p style={{ fontSize: '1.125rem', opacity: 0.8, marginBottom: '2rem' }}>
-                            The Hostizzy Difference: Combining the quality of a luxury hotel with the comfort of a private home.
+                            Every Hostizzy property delivers the quality of a luxury hotel with the warmth and comfort of a private home.
                         </p>
                         <a href="https://book.hostizzy.com/" target="_blank" rel="noopener noreferrer" className="btn btn-gradient" style={{ textDecoration: 'none' }}>Find Your Happy Place</a>
                     </ScrollReveal>

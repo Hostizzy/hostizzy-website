@@ -95,7 +95,7 @@ const Home = () => {
                     {[
                         { title: "Exclusive Branding", desc: "Every property, a unique micro brand. We don't just list; we build an identity." },
                         { title: "Transparency & Security", desc: "Stay updated with real-time insights via our ResIQ Dashboard." },
-                        { title: "Flexible Plans", desc: "Custom solutions for every property type - from DIY to full service." },
+                        { title: "Flexible Plans", desc: "Custom solutions for every property type — from co-hosting to complete management." },
                         { title: "Optimized Listings", desc: "Maximize visibility and appeal with professional photography and SEO." },
                         { title: "Exceptional Hospitality", desc: "Seamless experiences for every guest, leading to 5-star reviews." },
                         { title: "Local Expertise", desc: "Specialized knowledge for luxury homes in key Indian markets." }
@@ -246,20 +246,20 @@ const Home = () => {
 
                         <div className="grid desktop-4-col" style={{ gap: '2rem' }}>
                             <div style={{ textAlign: 'center', padding: '1.5rem', background: 'rgba(255,255,255,0.05)', borderRadius: '1rem' }}>
-                                <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#86efac', marginBottom: '0.5rem' }}>50+</div>
-                                <div style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.8)' }}>Properties Managed</div>
+                                <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#86efac', marginBottom: '0.5rem' }}>14+</div>
+                                <div style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.8)' }}>Booking Channels</div>
                             </div>
                             <div style={{ textAlign: 'center', padding: '1.5rem', background: 'rgba(255,255,255,0.05)', borderRadius: '1rem' }}>
-                                <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#86efac', marginBottom: '0.5rem' }}>40,000+</div>
-                                <div style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.8)' }}>Guests Hosted</div>
+                                <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#86efac', marginBottom: '0.5rem' }}>24/7</div>
+                                <div style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.8)' }}>Guest Support</div>
                             </div>
                             <div style={{ textAlign: 'center', padding: '1.5rem', background: 'rgba(255,255,255,0.05)', borderRadius: '1rem' }}>
-                                <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#86efac', marginBottom: '0.5rem' }}>₹15Cr+</div>
-                                <div style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.8)' }}>GMV Generated</div>
+                                <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#86efac', marginBottom: '0.5rem' }}>100%</div>
+                                <div style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.8)' }}>Revenue Transparency</div>
                             </div>
                             <div style={{ textAlign: 'center', padding: '1.5rem', background: 'rgba(255,255,255,0.05)', borderRadius: '1rem' }}>
-                                <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#86efac', marginBottom: '0.5rem' }}>4.9★</div>
-                                <div style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.8)' }}>Average Rating</div>
+                                <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#86efac', marginBottom: '0.5rem' }}>AI</div>
+                                <div style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.8)' }}>Dynamic Pricing</div>
                             </div>
                         </div>
 
@@ -267,8 +267,8 @@ const Home = () => {
                             <Link href="/contact" className="btn">
                                 Get Started
                             </Link>
-                            <Link href="/invest" className="btn btn-outline">
-                                Invest in Growth
+                            <Link href="/calculator" className="btn btn-outline">
+                                Calculate Your Earnings
                             </Link>
                         </div>
                     </div>
@@ -281,7 +281,7 @@ const Home = () => {
                     <ScrollReveal>
                         <div className="text-center mb-lg">
                             <h2 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '1rem' }}>See Your Earning Potential</h2>
-                            <p style={{ color: '#64748b', fontSize: '1.1rem' }}>Our AI benchmarks your property against 10,000+ data points instantly.</p>
+                            <p style={{ color: '#64748b', fontSize: '1.1rem' }}>AI-powered estimates for 40+ Indian vacation rental markets.</p>
                         </div>
                     </ScrollReveal>
                     <AuditWizard />
