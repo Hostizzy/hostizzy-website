@@ -128,10 +128,16 @@ export default function Services() {
                     "Staff & housekeeping coordination",
                     "Maintenance & vendor management",
                     "OTA listing optimization & marketing",
-                    "Monthly performance reports",
+                    "Monthly P&L with transparent accounting",
                     "Quarterly strategy review sessions"
                 ],
-                note: "Owner bears operational costs (staff, consumables, maintenance). Hostizzy manages all operations.",
+                note: "Your property, professionally managed. Full operational control by our expert team.",
+                notIncluded: [
+                    "Staff salaries & wages",
+                    "Consumables & supplies",
+                    "Maintenance & repair costs",
+                    "Utility bills"
+                ],
                 cta: "Choose Plan",
                 popular: true
             },
@@ -141,16 +147,21 @@ export default function Services() {
                 period: "Revenue split",
                 description: "Complete hands-off hosting for apartments — we manage AND bear all operational costs.",
                 features: [
-                    "Everything in TotalCare360, plus:",
+                    "Complete booking & reservation management",
+                    "Dynamic pricing across 14+ channels",
+                    "24/7 guest communication & support",
                     "Staff hiring & management by Hostizzy",
-                    "All consumables & supplies included",
-                    "Housekeeping fully managed & paid",
-                    "Maintenance expenses covered",
-                    "Zero owner involvement required",
-                    "Monthly P&L with transparent accounting",
-                    "True passive income — just own the property"
+                    "All consumables & supplies covered",
+                    "Housekeeping & maintenance fully paid",
+                    "Monthly performance reports",
+                    "Zero owner involvement — true passive income"
                 ],
-                note: "Hostizzy bears ALL operational costs. Owner pays nothing beyond the property itself.",
+                note: "The easiest way to earn from your apartment — we take care of everything.",
+                notIncluded: [
+                    "Property rent / EMI",
+                    "Property insurance",
+                    "Society maintenance charges"
+                ],
                 cta: "Choose Plan",
                 popular: false
             }
@@ -532,13 +543,29 @@ export default function Services() {
                                                     borderRadius: '0.75rem',
                                                     background: '#f0fdf4',
                                                     border: '1px solid #bbf7d0',
-                                                    fontSize: '0.8rem',
+                                                    fontSize: '0.85rem',
                                                     color: '#15803d',
                                                     lineHeight: 1.5,
-                                                    marginBottom: '1.5rem',
+                                                    marginBottom: '1rem',
                                                     fontWeight: 500
                                                 }}>
                                                     {plan.note}
+                                                </div>
+                                            )}
+                                            {plan.notIncluded && (
+                                                <div style={{
+                                                    padding: '0.75rem 1rem',
+                                                    borderRadius: '0.75rem',
+                                                    background: '#fef2f2',
+                                                    border: '1px solid #fecaca',
+                                                    marginBottom: '1.5rem'
+                                                }}>
+                                                    <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#991b1b', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Not Included</div>
+                                                    {plan.notIncluded.map((item, ni) => (
+                                                        <div key={ni} style={{ fontSize: '0.8rem', color: '#dc2626', lineHeight: 1.6, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                                                            <span style={{ fontSize: '0.7rem' }}>✕</span> {item}
+                                                        </div>
+                                                    ))}
                                                 </div>
                                             )}
                                             <Link href="/contact" className={`btn ${plan.popular ? 'btn-primary' : 'btn-outline'}`} style={{
