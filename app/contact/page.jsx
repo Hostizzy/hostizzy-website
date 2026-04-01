@@ -406,40 +406,6 @@ export default function Contact() {
                                     </div>
                                 )}
 
-                                {/* WhatsApp Button */}
-                                <a
-                                    href={`https://wa.me/${dept.whatsapp}?text=${encodeURIComponent(whatsappMessages[userType])}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    style={{
-                                        display: 'inline-flex',
-                                        alignItems: 'center',
-                                        gap: '0.5rem',
-                                        padding: '0.75rem 1.5rem',
-                                        borderRadius: '0.75rem',
-                                        background: '#25D366',
-                                        color: 'white',
-                                        fontWeight: 700,
-                                        fontSize: '0.95rem',
-                                        textDecoration: 'none',
-                                        marginTop: '0.5rem',
-                                        border: 'none',
-                                        cursor: 'pointer',
-                                        transition: 'all 0.2s',
-                                        justifyContent: 'center'
-                                    }}
-                                >
-                                    {'\u{1F4AC}'} Chat on WhatsApp
-                                </a>
-
-                                {/* Office Address Card */}
-                                <div className="card" style={{ padding: '1.5rem', borderRadius: '1rem', marginTop: '0.5rem', border: '1px solid #e2e8f0' }}>
-                                    <div style={{ fontWeight: 700, fontSize: '0.75rem', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '0.5rem' }}>Office</div>
-                                    <p style={{ color: '#334155', lineHeight: 1.6, fontSize: '0.95rem', margin: 0 }}>
-                                        E 13/29, 1st Floor, Harsha Bhawan,<br />
-                                        Connaught Place, New Delhi 110001
-                                    </p>
-                                </div>
                             </div>
                         </div>
 
