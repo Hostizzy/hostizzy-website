@@ -16,22 +16,22 @@ export default function Services() {
 
     const propertyCategories = [
         {
-            title: "Hostizzy\u00ae Stays",
+            title: "Hostizzy® Stays",
             desc: "Ideal for traditional vacation rentals like apartments and homes.",
             icon: <Home size={32} color="#FE5858" />
         },
         {
-            title: "Hostizzy\u00ae Retreats",
+            title: "Hostizzy® Retreats",
             desc: "Perfect for cabins, beach houses, and experiential stays.",
             icon: <Palmtree size={32} color="#FE5858" />
         },
         {
-            title: "Hostizzy\u00ae Urban Spaces",
+            title: "Hostizzy® Urban Spaces",
             desc: "City apartments and lofts for urban explorers & business travelers.",
             icon: <Building size={32} color="#FE5858" />
         },
         {
-            title: "Hostizzy\u00ae Luxe",
+            title: "Hostizzy® Luxe",
             desc: "Luxury properties delivering premium accommodations & exclusive services.",
             icon: <Crown size={32} color="#FE5858" />
         },
@@ -195,7 +195,7 @@ export default function Services() {
                     <ScrollReveal>
                         <h1 className="page-header" style={{ color: 'white' }}>Property Management, <br /><span style={{ color: 'var(--color-primary)' }}>Evolved.</span></h1>
                         <p className="section-subtitle" style={{ maxWidth: '800px', margin: '0 auto', color: 'rgba(255,255,255,0.8)' }}>
-                            Hostizzy\u00ae blends high-touch hospitality with high-tech optimization to transform your property into a five-star asset. Explore our end-to-end management models.
+                            Hostizzy® blends high-touch hospitality with high-tech optimization to transform your property into a five-star asset. Explore our end-to-end management models.
                         </p>
                     </ScrollReveal>
                 </div>

@@ -8,6 +8,19 @@ import { sendCalculatorLeadNotification } from '@/lib/email';
 // GET /api/calculator-leads - Get all calculator leads (requires auth)
 const handleGET = async (request) => {
   try {
+    // Prefer Firebase when available
+    if (adminDb) {
+      try {
+        const snapshot = await adminDb.collection('calculator-leads').orderBy('createdAt', 'desc').limit(100).get();
+        if (!snapshot.empty) {
+          const leads = snapshot.docs.map(doc => doc.data());
+          return successResponse(leads);
+        }
+      } catch (fbErr) {
+        console.error('Firebase read failed, falling back to JSON:', fbErr);
+      }
+    }
+    // Fallback to JSON
     const leads = readJson(DATA_FILES.CALCULATOR_LEADS);
     return successResponse(leads || []);
   } catch (error) {
