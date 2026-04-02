@@ -17,7 +17,9 @@ const Hero = () => {
         }}>
             {/* Background Image */}
             <img
-                src="https://ik.imagekit.io/hostizzy/Hostizzy%20Web/DJI_0046-Enhanced-NR-Edit%20copy.jpg"
+                src="https://ik.imagekit.io/hostizzy/Hostizzy%20Web/DJI_0046-Enhanced-NR-Edit%20copy.jpg?tr=w-1920,q-80,f-auto"
+                loading="eager"
+                fetchPriority="high"
                 alt="Waarah Ville Jawai — luxury villa with pool at sunset, managed by Hostizzy"
                 style={{
                     position: 'absolute',

@@ -157,6 +157,7 @@ const FloatingConcierge = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsOpen(!isOpen)}
+                aria-label={isOpen ? 'Close concierge chat' : 'Open concierge chat'}
                 style={{
                     width: '64px',
                     height: '64px',
