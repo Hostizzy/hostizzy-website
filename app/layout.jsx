@@ -81,7 +81,19 @@ export default function RootLayout({ children }) {
             into the RSC payload and was injected by the Next runtime instead,
             so the address, rating, areaServed and offer catalogue were invisible
             to anything reading the served HTML. Every per-page schema in this
-            repo already uses a raw script tag; this one now matches. */}
+            repo already uses a raw script tag; this one now matches.
+
+            There is deliberately no aggregateRating in here — do not add one
+            back. It used to claim 4.9 from 150 reviews and nobody could source
+            the 150; the repo held six hand-written testimonials. The real
+            figures (HostSuite production, Sep 2026) are 4.87 from 253 reviews,
+            and they still do not belong in this block: Google's review-snippet
+            rules forbid aggregating ratings collected on other sites, and these
+            are Airbnb and MakeMyTrip; and reviews about a business served on
+            that business's own site are self-serving, so they are not eligible
+            for star snippets on Organization or LocalBusiness regardless. The
+            markup buys nothing and risks a manual action. Show the figure as
+            visible text credited to the OTAs with an as-of date instead. */}
         <script id="schema-org" type="application/ld+json" dangerouslySetInnerHTML={{ __html: `
             {
               "@context": "https://schema.org",
@@ -239,13 +251,6 @@ export default function RootLayout({ children }) {
                 "dynamic pricing",
                 "guest experience management"
               ],
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "4.9",
-                "reviewCount": "150",
-                "bestRating": "5",
-                "worstRating": "1"
-              },
               "contactPoint": {
                 "@type": "ContactPoint",
                 "contactType": "Customer Service",
