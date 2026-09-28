@@ -1,3 +1,5 @@
+import { OG_IMAGE } from '@/lib/og';
+
 export const metadata = {
   title: 'Careers | Join the Hostizzy Team',
   description: 'Join India\'s fastest-growing vacation rental management company. Open positions in Marketing, Engineering, Growth & Operations.',
@@ -7,6 +9,7 @@ export const metadata = {
     description: 'Join India\'s fastest-growing vacation rental management company. Open positions in Marketing, Engineering, Growth & Operations.',
     url: 'https://www.hostizzy.com/career',
     siteName: 'Hostizzy',
+    images: OG_IMAGE,
     type: 'website',
   },
   alternates: {

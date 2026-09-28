@@ -1,3 +1,5 @@
+import { OG_IMAGE } from '@/lib/og';
+
 export const metadata = {
   title: 'Revenue Calculator | Estimate Your Property Earnings | Hostizzy',
   description: 'Free AI-powered revenue calculator for vacation rentals across 40+ Indian cities. Instant estimates for villas, apartments & farmhouses.',
@@ -7,6 +9,7 @@ export const metadata = {
     description: 'Free AI-powered revenue calculator for vacation rentals across 40+ Indian cities. Instant estimates for villas, apartments & farmhouses.',
     url: 'https://www.hostizzy.com/calculator',
     siteName: 'Hostizzy',
+    images: OG_IMAGE,
     type: 'website',
   },
   alternates: {

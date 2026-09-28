@@ -1,3 +1,5 @@
+import { OG_IMAGE } from '@/lib/og';
+
 export const metadata = {
   title: 'Digital Marketing for Vacation Rentals | Hostizzy',
   description: "Professional social media, content marketing & digital strategy for vacation rental properties. Boost bookings with Hostizzy's marketing packages.",
@@ -7,6 +9,7 @@ export const metadata = {
     description: "Professional social media, content marketing & digital strategy for vacation rental properties. Boost bookings with Hostizzy's marketing packages.",
     url: 'https://www.hostizzy.com/marketing',
     siteName: 'Hostizzy',
+    images: OG_IMAGE,
     type: 'website',
   },
   alternates: {

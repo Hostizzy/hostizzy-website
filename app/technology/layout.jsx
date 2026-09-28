@@ -1,3 +1,5 @@
+import { OG_IMAGE } from '@/lib/og';
+
 export const metadata = {
   title: 'Hospitality Technology Platform | HostOS & ResIQ | Hostizzy',
   description: 'Purpose-built technology for Indian hospitality. HostOS smart PMS with GST invoicing, WhatsApp inbox & AI pricing. ResIQ operations dashboard for reservations & payments.',
@@ -7,6 +9,7 @@ export const metadata = {
     description: 'Purpose-built technology for Indian hospitality. HostOS smart PMS with GST invoicing, WhatsApp inbox & AI pricing. ResIQ operations dashboard for reservations & payments.',
     url: 'https://www.hostizzy.com/technology',
     siteName: 'Hostizzy',
+    images: OG_IMAGE,
     type: 'website',
   },
   alternates: {

@@ -1,4 +1,5 @@
 import Script from 'next/script';
+import { OG_IMAGE } from '@/lib/og';
 import { Providers } from './providers';
 import ConditionalLayout from '../components/ConditionalLayout';
 import './globals.css';
@@ -19,14 +20,7 @@ export const metadata = {
     locale: 'en_IN',
     url: 'https://www.hostizzy.com',
     siteName: 'Hostizzy',
-    images: [
-      {
-        url: '/images/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Hostizzy - India\'s Premier Vacation Rental Management',
-      },
-    ],
+    images: OG_IMAGE,
   },
   alternates: {
     canonical: 'https://www.hostizzy.com',

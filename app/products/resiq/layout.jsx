@@ -1,3 +1,5 @@
+import { OG_IMAGE } from '@/lib/og';
+
 export const metadata = {
   title: 'ResIQ | Operations Platform | Hostizzy',
   description: 'Staff-facing operations dashboard for reservations, payments, guest KYC & team coordination. Works offline. Built for Indian hospitality.',
@@ -7,6 +9,7 @@ export const metadata = {
     description: 'Staff-facing operations dashboard for reservations, payments, guest KYC & team coordination. Works offline. Built for Indian hospitality.',
     url: 'https://www.hostizzy.com/products/resiq',
     siteName: 'Hostizzy',
+    images: OG_IMAGE,
     type: 'website',
   },
   alternates: {

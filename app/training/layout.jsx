@@ -1,3 +1,5 @@
+import { OG_IMAGE } from '@/lib/og';
+
 export const metadata = {
   title: 'Host Training Programs | Hostizzy Academy',
   description: 'Free and premium training for vacation rental hosts. Learn pricing, guest management, OTA optimization & hospitality best practices.',
@@ -7,6 +9,7 @@ export const metadata = {
     description: 'Free and premium training for vacation rental hosts. Learn pricing, guest management, OTA optimization & hospitality best practices.',
     url: 'https://www.hostizzy.com/training',
     siteName: 'Hostizzy',
+    images: OG_IMAGE,
     type: 'website',
   },
   alternates: {

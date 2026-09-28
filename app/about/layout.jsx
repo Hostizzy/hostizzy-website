@@ -1,3 +1,5 @@
+import { OG_IMAGE } from '@/lib/og';
+
 export const metadata = {
   title: 'Our Story | About Hostizzy',
   description: "India's technology-driven vacation rental management company. Empowering property owners with professional hospitality management to maximize revenue.",
@@ -7,6 +9,7 @@ export const metadata = {
     description: "India's technology-driven vacation rental management company. Empowering property owners with professional hospitality management to maximize revenue.",
     url: 'https://www.hostizzy.com/about',
     siteName: 'Hostizzy',
+    images: OG_IMAGE,
     type: 'website',
   },
   alternates: {

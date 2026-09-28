@@ -1,3 +1,5 @@
+import { OG_IMAGE } from '@/lib/og';
+
 export const metadata = {
   title: 'Data Deletion Request | Hostizzy',
   description: 'Request deletion of your personal data from Hostizzy services.',
@@ -7,6 +9,7 @@ export const metadata = {
     description: 'Request deletion of your personal data from Hostizzy services.',
     url: 'https://www.hostizzy.com/data-deletion',
     siteName: 'Hostizzy',
+    images: OG_IMAGE,
     type: 'website',
   },
 };

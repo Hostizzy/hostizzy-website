@@ -1,3 +1,5 @@
+import { OG_IMAGE } from '@/lib/og';
+
 export const metadata = {
   title: 'Privacy Policy | Hostizzy',
   description: 'How Hostizzy collects, uses and protects your personal information. Our commitment to data privacy.',
@@ -6,6 +8,7 @@ export const metadata = {
     description: 'How Hostizzy collects, uses and protects your personal information. Our commitment to data privacy.',
     url: 'https://www.hostizzy.com/privacy',
     siteName: 'Hostizzy',
+    images: OG_IMAGE,
     type: 'website',
   },
   alternates: {

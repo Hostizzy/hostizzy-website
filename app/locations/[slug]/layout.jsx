@@ -1,4 +1,5 @@
 import { getLocation, getAllLocationSlugs } from '@/lib/locations';
+import { OG_IMAGE } from '@/lib/og';
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
@@ -22,6 +23,7 @@ export async function generateMetadata({ params }) {
       description,
       url: `https://www.hostizzy.com/locations/${slug}`,
       siteName: 'Hostizzy',
+      images: OG_IMAGE,
       type: 'website',
     },
     alternates: {

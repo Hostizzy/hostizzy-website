@@ -1,3 +1,5 @@
+import { OG_IMAGE } from '@/lib/og';
+
 export const metadata = {
   title: 'Blog | Vacation Rental Insights | Hostizzy',
   description: 'Expert insights on vacation rental management, Airbnb hosting tips, revenue optimization & Indian hospitality industry trends.',
@@ -7,6 +9,7 @@ export const metadata = {
     description: 'Expert insights on vacation rental management, Airbnb hosting tips, revenue optimization & Indian hospitality industry trends.',
     url: 'https://www.hostizzy.com/blogs',
     siteName: 'Hostizzy',
+    images: OG_IMAGE,
     type: 'website',
   },
   alternates: {

@@ -1,3 +1,5 @@
+import { OG_IMAGE } from '@/lib/og';
+
 export const metadata = {
   title: 'HostSuite | Smart Property Management System | Hostizzy',
   description: 'All-in-one PMS for Indian hospitality. GST invoicing, WhatsApp inbox, AI dynamic pricing, guest & owner portals. Built for Indian vacation rentals, homestays and hotels.',
@@ -7,6 +9,7 @@ export const metadata = {
     description: 'All-in-one PMS for Indian hospitality. GST invoicing, WhatsApp inbox, AI dynamic pricing, guest & owner portals. Built for Indian vacation rentals, homestays and hotels.',
     url: 'https://www.hostizzy.com/products/hostos',
     siteName: 'Hostizzy',
+    images: OG_IMAGE,
     type: 'website',
   },
   alternates: {

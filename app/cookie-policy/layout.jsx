@@ -1,3 +1,5 @@
+import { OG_IMAGE } from '@/lib/og';
+
 export const metadata = {
   title: 'Cookie Policy | Hostizzy',
   description: 'How Hostizzy uses cookies and similar technologies.',
@@ -7,6 +9,7 @@ export const metadata = {
     description: 'How Hostizzy uses cookies and similar technologies.',
     url: 'https://www.hostizzy.com/cookie-policy',
     siteName: 'Hostizzy',
+    images: OG_IMAGE,
     type: 'website',
   },
 };

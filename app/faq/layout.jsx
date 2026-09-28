@@ -1,3 +1,5 @@
+import { OG_IMAGE } from '@/lib/og';
+
 export const metadata = {
   title: 'FAQ | Vacation Rental Management Questions | Hostizzy',
   description: "Answers to common questions about listing your property, management fees, guest vetting, pricing & Hostizzy's vacation rental services across India.",
@@ -7,6 +9,7 @@ export const metadata = {
     description: "Answers to common questions about listing your property, management fees, guest vetting, pricing & Hostizzy's vacation rental services across India.",
     url: 'https://www.hostizzy.com/faq',
     siteName: 'Hostizzy',
+    images: OG_IMAGE,
     type: 'website',
   },
   alternates: {

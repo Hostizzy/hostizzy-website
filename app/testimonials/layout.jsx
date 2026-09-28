@@ -1,3 +1,5 @@
+import { OG_IMAGE } from '@/lib/og';
+
 export const metadata = {
   title: 'Reviews & Testimonials | Hostizzy',
   description: "What property owners say about Hostizzy's vacation rental management. Real reviews from hosts across India.",
@@ -7,6 +9,7 @@ export const metadata = {
     description: "What property owners say about Hostizzy's vacation rental management. Real reviews from hosts across India.",
     url: 'https://www.hostizzy.com/testimonials',
     siteName: 'Hostizzy',
+    images: OG_IMAGE,
     type: 'website',
   },
   alternates: {

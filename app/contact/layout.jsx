@@ -1,3 +1,5 @@
+import { OG_IMAGE } from '@/lib/og';
+
 export const metadata = {
   title: 'Contact Us | Partner With Hostizzy',
   description: "List your property with India's premier vacation rental manager. Property owners, guests & business partners welcome. Response within 24 hours.",
@@ -7,6 +9,7 @@ export const metadata = {
     description: "List your property with India's premier vacation rental manager. Property owners, guests & business partners welcome. Response within 24 hours.",
     url: 'https://www.hostizzy.com/contact',
     siteName: 'Hostizzy',
+    images: OG_IMAGE,
     type: 'website',
   },
   alternates: {

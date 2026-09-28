@@ -1,3 +1,5 @@
+import { OG_IMAGE } from '@/lib/og';
+
 export const metadata = {
   title: 'Terms & Conditions | Hostizzy',
   description: "Terms of service for Hostizzy's vacation rental management platform and services.",
@@ -6,6 +8,7 @@ export const metadata = {
     description: "Terms of service for Hostizzy's vacation rental management platform and services.",
     url: 'https://www.hostizzy.com/terms',
     siteName: 'Hostizzy',
+    images: OG_IMAGE,
     type: 'website',
   },
   alternates: {

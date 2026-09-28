@@ -1,3 +1,5 @@
+import { OG_IMAGE } from '@/lib/og';
+
 export const metadata = {
   title: 'Refund & Cancellation Policy | Hostizzy',
   description: 'Refund and cancellation policies for Hostizzy bookings and management services.',
@@ -7,6 +9,7 @@ export const metadata = {
     description: 'Refund and cancellation policies for Hostizzy bookings and management services.',
     url: 'https://www.hostizzy.com/refund-policy',
     siteName: 'Hostizzy',
+    images: OG_IMAGE,
     type: 'website',
   },
 };

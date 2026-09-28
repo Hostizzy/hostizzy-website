@@ -1,3 +1,5 @@
+import { OG_IMAGE } from '@/lib/og';
+
 export const metadata = {
   title: 'Property Management Plans & Pricing | Hostizzy',
   description: 'Choose from 5 flexible vacation rental management plans. From \u20B914,999 onboarding to full property management. SmartStart, ChannelPro, Hybrid Core, TotalCare360 & StayPrime.',
@@ -7,6 +9,7 @@ export const metadata = {
     description: 'Choose from 5 flexible vacation rental management plans. From \u20B914,999 onboarding to full property management. SmartStart, ChannelPro, Hybrid Core, TotalCare360 & StayPrime.',
     url: 'https://www.hostizzy.com/services',
     siteName: 'Hostizzy',
+    images: OG_IMAGE,
     type: 'website',
   },
   alternates: {

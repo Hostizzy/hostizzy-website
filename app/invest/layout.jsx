@@ -1,3 +1,5 @@
+import { OG_IMAGE } from '@/lib/og';
+
 export const metadata = {
   title: 'Invest in Hostizzy | Pre-Seed Round',
   description: "Investment opportunity in India's premier vacation rental management platform. Technology-driven hospitality with proven traction.",
@@ -7,6 +9,7 @@ export const metadata = {
     description: "Investment opportunity in India's premier vacation rental management platform. Technology-driven hospitality with proven traction.",
     url: 'https://www.hostizzy.com/invest',
     siteName: 'Hostizzy',
+    images: OG_IMAGE,
     type: 'website',
   },
   alternates: {

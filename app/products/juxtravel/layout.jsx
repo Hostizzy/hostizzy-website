@@ -1,3 +1,5 @@
+import { OG_IMAGE } from '@/lib/og';
+
 export const metadata = {
   title: 'JuxTravel | Trip-Matching Discovery for Indian Travellers | Hostizzy',
   description: "Don't just find a stay, find the trip that fits. Jux Fit matching, an honest Reality Layer before you book, and Passport to remember every trip. Independent hosts only.",
@@ -7,6 +9,7 @@ export const metadata = {
     description: "Don't just find a stay, find the trip that fits. Independent hosts only. Full launch September 2026.",
     url: 'https://www.hostizzy.com/products/juxtravel',
     siteName: 'Hostizzy',
+    images: OG_IMAGE,
     type: 'website',
   },
   alternates: {
