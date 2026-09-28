@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight, Star, Building2, Users } from 'lucide-react';
+import { ArrowRight, Star, Building2, Users, ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Hero = () => {
@@ -161,6 +161,16 @@ const Hero = () => {
                     }}>
                         Partner With Us <ArrowRight size={20} style={{ marginLeft: '0.5rem' }} />
                     </Link>
+                    {/* The guest exit. This page sells to property owners, so it
+                        stays visually secondary to "Partner With Us" — but a
+                        guest who lands here should be able to leave for the
+                        booking site in one glance rather than reading an owner
+                        pitch. Labelled "Book a Stay" to match the navbar CTA
+                        (it was "Explore Stays" here and "Book a Stay" there, two
+                        names for one destination), and carries an external-link
+                        mark because it leaves hostizzy.com. The surface is
+                        raised from 10% to 18% white so the label holds up over
+                        the bright parts of the photo. */}
                     <a
                         href="https://book.hostizzy.com/"
                         target="_blank"
@@ -169,14 +179,18 @@ const Hero = () => {
                         style={{
                             padding: '1rem 2.5rem',
                             fontSize: '1.1rem',
-                            background: 'rgba(255,255,255,0.1)',
+                            background: 'rgba(255,255,255,0.18)',
                             backdropFilter: 'blur(8px)',
-                            border: '1px solid rgba(255,255,255,0.3)',
+                            border: '1px solid rgba(255,255,255,0.55)',
                             color: 'white',
-                            textDecoration: 'none'
+                            textDecoration: 'none',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.5rem'
                         }}
                     >
-                        Explore Stays
+                        Book a Stay
+                        <ExternalLink size={17} aria-hidden="true" />
                     </a>
                 </motion.div>
 

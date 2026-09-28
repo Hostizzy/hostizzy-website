@@ -15,7 +15,7 @@ Hostizzy (brand of Hostsphere India Pvt Ltd) is a vertically integrated hospital
 ## Products
 - **HostOS** (https://hostos.hostizzy.com): Property management system with unified calendar, automated guest messaging, maintenance tracking, and built-in CRM
 - **ResIQ** (https://resiq.hostizzy.com): Revenue intelligence dashboard with real-time earnings, occupancy forecasting, and channel performance analytics
-- **JuxTravel** (Coming Soon): AI-powered travel marketplace connecting luxury hosts with discerning guests
+- **JuxTravel** (https://www.juxtravel.com): Trip-matching discovery for Indian travellers — starts from the trip you want rather than a city and two dates. Independent hosts only. Early access open; full launch 1 September 2026.
 - **Booking Site** (https://book.hostizzy.com): Direct booking platform for Hostizzy-managed properties
 
 ## Key Markets
@@ -25,9 +25,11 @@ Hostizzy (brand of Hostsphere India Pvt Ltd) is a vertically integrated hospital
 - Himachal Pradesh: Shimla, Manali, Kasauli, Dharamshala, Bir Billing, Dalhousie (https://www.hostizzy.com/locations/himachal-pradesh)
 - Uttarakhand: Mussoorie, Rishikesh, Mukteshwar, Nainital, Dehradun, Haridwar (https://www.hostizzy.com/locations/uttarakhand)
 - Rajasthan: Jaipur, Udaipur, Jodhpur, Pushkar, Jawai, Ranthambore (https://www.hostizzy.com/locations/rajasthan)
+- Uttar Pradesh
+- North East India
 
 ### Co-Hosting (Revenue Management + Marketing) — Pan India
-- Goa, Kerala, Maharashtra, Karnataka, Tamil Nadu, West Bengal, North East India, and more
+- Goa, Kerala, Maharashtra, Karnataka, Tamil Nadu, West Bengal, and the rest of India
 
 ## Service Plans
 - SmartStart: One-time onboarding for new hosts (₹14,999)

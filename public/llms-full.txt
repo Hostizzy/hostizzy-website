@@ -15,12 +15,16 @@ Hostizzy (brand of Hostsphere India Pvt Ltd) is a vertically integrated hospital
 ## Products
 - **HostOS** (https://hostos.hostizzy.com): Smart property management system with GST invoicing, WhatsApp + Instagram inbox, AI dynamic pricing, guest/owner portals, SignFlow digital agreements, and review automation
 - **ResIQ** (https://resiq.hostizzy.com): Daily operations dashboard for managing reservations, payments, guest KYC, and team coordination — with offline-first PWA design for rural India
-- **JuxTravel** (Coming Soon): AI-powered travel marketplace connecting luxury hosts with discerning guests
-- **TripMind AI** (Coming Soon): Neural concierge that predicts guest needs and personalizes travel recommendations
+- **JuxTravel** (https://www.juxtravel.com): Trip-matching discovery for Indian travellers — starts from the trip you want rather than a city and two dates, and surfaces the trade-offs of an independent homestay before you book. Early access open; full launch 1 September 2026.
 - **Booking Site** (https://book.hostizzy.com): Direct booking platform for Hostizzy-managed properties
 
 ## Key Markets
-Goa (North & South), Manali, Shimla, Kasauli (Himachal Pradesh), Mukteshwar, Nainital (Uttarakhand), Jaipur, Udaipur (Rajasthan), Delhi NCR, Sohna (Haryana)
+
+### Full Management (End-to-End)
+Delhi NCR (Delhi, Gurgaon, Noida, Sohna, Manesar), Himachal Pradesh (Shimla, Manali, Kasauli, Dharamshala, Bir Billing, Dalhousie), Uttarakhand (Mussoorie, Rishikesh, Mukteshwar, Nainital, Dehradun, Haridwar), Rajasthan (Jaipur, Udaipur, Jodhpur, Pushkar, Jawai, Ranthambore), Uttar Pradesh, North East India
+
+### Co-Hosting (Revenue Management + Marketing) — Pan India
+Goa, Kerala, Maharashtra, Karnataka, Tamil Nadu, West Bengal, and the rest of India
 
 ## Service Plans
 - SmartStart: One-time onboarding setup for new hosts (₹14,999)

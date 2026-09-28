@@ -620,6 +620,38 @@ const Navbar = () => {
                         </Link>
                     </div>
 
+                    {/* Guest exit, mobile only.
+                        Both header CTAs live in .desktop-menu, which is hidden
+                        below 1025px, and the hero's "Book a Stay" sits at y=781
+                        on a 375x812 phone — so a guest on mobile had no visible
+                        way off an owner-focused page without opening the
+                        hamburger. This keeps one persistent exit in the bar.
+                        Deliberately the quieter of the two CTAs: the page still
+                        sells to owners, this just lets guests leave quickly. */}
+                    <a
+                        href="https://book.hostizzy.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="nav-book-cta"
+                        style={{
+                            display: 'none',
+                            alignItems: 'center',
+                            gap: '4px',
+                            marginLeft: 'auto',
+                            marginRight: '0.5rem',
+                            padding: '0.5rem 0.85rem',
+                            borderRadius: '10px',
+                            border: '1px solid var(--color-border)',
+                            color: 'var(--color-primary-text)',
+                            fontSize: '0.85rem',
+                            fontWeight: 600,
+                            textDecoration: 'none',
+                            whiteSpace: 'nowrap'
+                        }}
+                    >
+                        Book a Stay <ArrowUpRight size={13} aria-hidden="true" />
+                    </a>
+
                     {/* Mobile Toggle */}
                     <button
                         className="mobile-menu-btn"
@@ -880,6 +912,7 @@ const Navbar = () => {
                 @media (max-width: 1024px) {
                     .desktop-menu { display: none !important; }
                     .mobile-menu-btn { display: block !important; }
+                    .nav-book-cta { display: inline-flex !important; }
                     .container {
                         justify-content: space-between !important;
                     }

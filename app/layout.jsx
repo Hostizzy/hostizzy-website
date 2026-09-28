@@ -115,10 +115,6 @@ export default function RootLayout({ children }) {
               "priceRange": "₹₹₹",
               "areaServed": [
                 {
-                  "@type": "State",
-                  "name": "Goa"
-                },
-                {
                   "@type": "City",
                   "name": "Manali",
                   "containedInPlace": { "@type": "State", "name": "Himachal Pradesh" }
@@ -161,6 +157,18 @@ export default function RootLayout({ children }) {
                   "@type": "City",
                   "name": "Sohna",
                   "containedInPlace": { "@type": "State", "name": "Haryana" }
+                },
+                {
+                  "@type": "State",
+                  "name": "Uttar Pradesh"
+                },
+                {
+                  "@type": "Place",
+                  "name": "North East India"
+                },
+                {
+                  "@type": "State",
+                  "name": "Goa"
                 }
               ],
               "hasOfferCatalog": {
