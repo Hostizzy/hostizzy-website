@@ -1,52 +1,230 @@
 [
   {
-    "id": "1",
-    "role": "Content Creator / Social Media Manager",
+    "id": "101",
+    "role": "Co-founder (with Investment)",
+    "department": "Leadership",
+    "location": "Open (India preferred)",
+    "experience": "10+ years",
+    "tagline": "Or \"Growth Partner\" or \"Chief Hustler\" — bring your entrepreneurial spirit!",
+    "commitment": "Full-time / Part-time (significant equity and capital investment required)",
+    "responsibilities": [
+      "Invest capital and expertise to help scale Hostizzy's operations, product, and reach",
+      "Co-lead strategic decisions, business development, and fundraising",
+      "Build teams, drive innovation, and open new verticals (marketplace, weddings, tech, and more)",
+      "Foster a culture of ownership, collaboration, and relentless growth",
+      "Leverage your network for partnerships, talent, and expansion"
+    ],
+    "whoShouldApply": [
+      "Experienced entrepreneurs or industry leaders looking for their next challenge",
+      "Ability to invest capital and work hands-on as a business partner",
+      "A passion for building disruptive consumer brands"
+    ],
+    "description": "Invest capital and expertise to help scale Hostizzy. Co-lead strategic decisions, business development, and fundraising. Build teams, drive innovation, and open new verticals.",
+    "postedDate": "2026-04-16",
+    "isActive": true
+  },
+  {
+    "id": "102",
+    "role": "Home Acquisition & Operations Manager",
+    "department": "Operations",
+    "location": "Delhi NCR, Uttarakhand, Himachal, North-East (Hybrid/Field)",
+    "experience": "3+ years",
+    "tagline": "Or call yourself the \"Stay Scout Supremo\" — we love creative titles!",
+    "commitment": "Full-time",
+    "responsibilities": [
+      "Lead property scouting, acquisition, and onboarding across your assigned region",
+      "Build and nurture relationships with homeowners, local partners, and vendors",
+      "Supervise property launches and manage ongoing operational excellence for multiple properties",
+      "Implement and monitor Hostizzy's SOPs, checklists, and compliance standards",
+      "Coordinate with guest relations and marketing to optimize occupancy and reviews",
+      "Troubleshoot operational challenges quickly, ensuring seamless guest experience",
+      "Analyze regional performance data and report actionable insights to leadership",
+      "Mentor, train, and support local field teams",
+      "Collaborate with central and local teams for process improvement and growth"
+    ],
+    "whoShouldApply": [
+      "Strong regional network and negotiation skills",
+      "Willingness to travel frequently within your region",
+      "Prior hospitality, property, or real estate experience preferred",
+      "Self-driven, solution-oriented, and eager to build at scale"
+    ],
+    "description": "Lead property scouting, acquisition, and onboarding across assigned regions. Build relationships with homeowners, local partners, and vendors.",
+    "postedDate": "2026-04-16",
+    "isActive": true
+  },
+  {
+    "id": "103",
+    "role": "Property Manager",
+    "department": "Operations",
+    "location": "Delhi NCR, Uttarakhand (Onsite/Field)",
+    "experience": "1-3 years",
+    "tagline": "Or be the \"Chief Guest Happiness Officer\" — add your personality to your role!",
+    "commitment": "Full-time",
+    "responsibilities": [
+      "Oversee daily property operations for assigned homes or clusters",
+      "Act as the main point of contact for owners, guests, vendors, and housekeeping teams",
+      "Conduct regular property inspections, maintenance, and repairs",
+      "Manage inventory, amenities, checklists, and vendor relationships",
+      "Ensure every stay meets Hostizzy's brand, safety, and hygiene standards",
+      "Support new property onboarding and listing documentation as needed",
+      "Handle guest escalations, last-minute requests, and feedback with empathy",
+      "Coordinate property readiness before every guest arrival and after every check-out",
+      "Liaise with guest relations, marketing, and central operations to drive guest delight"
+    ],
+    "whoShouldApply": [
+      "Organized, hands-on, and service-oriented",
+      "Experience in property, facility, or hospitality operations preferred",
+      "Comfortable with local travel and flexible hours"
+    ],
+    "description": "Oversee daily property operations for assigned homes or clusters. Act as the main point of contact for owners, guests, vendors, and housekeeping teams.",
+    "postedDate": "2026-04-16",
+    "isActive": true
+  },
+  {
+    "id": "104",
+    "role": "Guest Relations & Reservation Executive",
+    "department": "Operations",
+    "location": "Delhi NCR, Uttarakhand, Himachal (Hybrid/Remote)",
+    "experience": "1-3 years",
+    "tagline": "Want to be our \"Chief Booking Cheerleader\"? We're all for it!",
+    "commitment": "Full-time",
+    "responsibilities": [
+      "Respond to guest enquiries via phone, WhatsApp, email, and online platforms",
+      "Assist guests in selecting properties, explaining amenities, and confirming availability",
+      "Process bookings, collect payments, manage invoices and cancellation requests",
+      "Support smooth guest check-in/check-out and follow up for feedback and reviews",
+      "Address guest concerns, complaints, or special requests promptly and professionally",
+      "Coordinate with property managers, cleaning teams, and vendors to ensure guest readiness",
+      "Update OTAs, internal dashboards, and status trackers",
+      "Champion guest experience from first enquiry to repeat booking"
+    ],
+    "whoShouldApply": [
+      "Friendly, articulate, and customer-focused",
+      "Experience with OTA/property management systems is a plus",
+      "Problem-solver who thrives in fast-moving environments"
+    ],
+    "description": "Respond to guest enquiries via phone, WhatsApp, email, and OTAs. Process bookings, collect payments, and champion guest experience.",
+    "postedDate": "2026-04-16",
+    "isActive": true
+  },
+  {
+    "id": "105",
+    "role": "Social Media & Content Executive",
     "department": "Marketing",
-    "location": "Hybrid (Gurgaon/Remote)",
-    "experience": "2+ years",
-    "description": "Plan content calendars, capture reels, write compelling copy, and run social campaigns for Hostizzy & NextStop brands.",
-    "postedDate": "2026-03-15",
+    "location": "Gurgaon (Hybrid/Remote)",
+    "experience": "1-3 years",
+    "tagline": "Or \"Storyteller-in-Chief\" if that suits your vibe!",
+    "commitment": "Full-time",
+    "responsibilities": [
+      "Plan, create, and schedule daily content for Instagram, Facebook, LinkedIn, and YouTube",
+      "Capture and edit reels, walkthroughs, event stories, and UGC",
+      "Write compelling captions, property spotlights, and campaign copy",
+      "Engage with the online community — DMs, comments, tags, and brand collaborations",
+      "Track, analyze, and report performance metrics; optimize content accordingly",
+      "Collaborate with design, marketing, and founders for campaigns",
+      "Maintain content calendars and brainstorm new ideas"
+    ],
+    "whoShouldApply": [
+      "Passion for travel, content, and digital storytelling",
+      "Skills in Canva, video editing, and content planning are a plus",
+      "Strong written and verbal English; Hindi or regional languages a bonus"
+    ],
+    "description": "Plan, create, and schedule daily content across social platforms. Capture and edit reels, write compelling copy, and manage community engagement.",
+    "postedDate": "2026-04-16",
     "isActive": true
   },
   {
-    "id": "2",
-    "role": "SEO Strategist (Organic Growth Lead)",
-    "department": "Growth",
-    "location": "Hybrid (Gurgaon/Remote)",
+    "id": "106",
+    "role": "SEO Expert",
+    "department": "Marketing",
+    "location": "Gurgaon (Hybrid/Remote)",
     "experience": "2+ years",
-    "description": "Develop full-funnel SEO strategy, execute technical audits, build backlinks, and grow organic traffic across our platforms.",
-    "postedDate": "2026-03-10",
+    "tagline": "How about \"Google Whisperer\" or \"Search Sensei\"? Don't hold back!",
+    "commitment": "Full-time",
+    "responsibilities": [
+      "Develop and execute a full-funnel SEO strategy for all Hostizzy domains and microsites",
+      "Perform technical SEO audits, implement on-page and off-page optimizations",
+      "Research high-value keywords, create content briefs, and support content teams",
+      "Build and monitor backlinks, local citations, and online reputation",
+      "Analyze SEO performance, rankings, and share regular reports and insights",
+      "Collaborate with product, dev, and content teams for ongoing improvements"
+    ],
+    "whoShouldApply": [
+      "Solid grasp of technical SEO, on-page/off-page, and Google Analytics/Search Console",
+      "Prior experience with travel/hospitality SEO preferred",
+      "Results-driven with a growth hacking mindset"
+    ],
+    "description": "Develop and execute a full-funnel SEO strategy for all Hostizzy domains. Technical audits, keyword research, backlink building, and performance analysis.",
+    "postedDate": "2026-04-16",
     "isActive": true
   },
   {
-    "id": "3",
+    "id": "107",
     "role": "WordPress Developer",
     "department": "Engineering",
-    "location": "Hybrid (Gurgaon/Remote)",
+    "location": "Gurgaon (Hybrid/Remote)",
     "experience": "2+ years",
-    "description": "Build and maintain our property marketplace, integrate payment gateways, optimize site speed, and implement custom themes/plugins.",
-    "postedDate": "2026-03-20",
+    "tagline": "Or the \"Pixel Perfectionist\" — make it your own!",
+    "commitment": "Full-time",
+    "responsibilities": [
+      "Build, optimize, and maintain Hostizzy's main website and booking marketplace",
+      "Integrate and customize plugins (Elementor, Tourfic, Amelia, WooCommerce, etc.)",
+      "Ensure speed, security, and seamless experience across devices",
+      "Collaborate with content, SEO, and marketing teams for new features",
+      "Troubleshoot bugs, deploy updates, and monitor website health"
+    ],
+    "whoShouldApply": [
+      "Proficiency in WordPress, PHP, MySQL, and web performance best practices",
+      "Experience building travel, marketplace, or property websites is a plus"
+    ],
+    "description": "Build, optimize, and maintain Hostizzy's websites and booking marketplace. Plugin integration, performance optimization, and cross-device experience.",
+    "postedDate": "2026-04-16",
     "isActive": true
   },
   {
-    "id": "4",
-    "role": "Performance Marketer (Google Ads)",
+    "id": "108",
+    "role": "Google Ads Expert",
     "department": "Marketing",
-    "location": "Hybrid (Gurgaon/Remote)",
+    "location": "Gurgaon (Hybrid/Remote)",
     "experience": "2+ years",
-    "description": "Plan and launch Google Ads campaigns, optimize ROAS, A/B test creatives, and drive direct bookings for our properties.",
-    "postedDate": "2026-03-18",
+    "tagline": "Or \"Click Champion\" — if you've got the magic touch, show it off!",
+    "commitment": "Full-time",
+    "responsibilities": [
+      "Plan and launch Google Ads campaigns for bookings and brand awareness",
+      "Analyze performance data and optimize for ROAS and conversions",
+      "Conduct competitor research and experiment with new campaign types",
+      "Collaborate with creative teams for ad copy and landing pages",
+      "Prepare regular reports and present actionable recommendations"
+    ],
+    "whoShouldApply": [
+      "Strong experience with Google Ads, Analytics, and reporting tools",
+      "Data-driven and always optimizing"
+    ],
+    "description": "Plan and launch Google Ads campaigns for bookings and brand awareness. Optimize for ROAS, conduct competitor research, and drive conversions.",
+    "postedDate": "2026-04-16",
     "isActive": true
   },
   {
-    "id": "5",
+    "id": "109",
     "role": "Full Stack Developer",
     "department": "Engineering",
     "location": "Remote / Gurgaon",
     "experience": "2-5 years",
-    "description": "Architect our website, APIs, booking flows, and internal dashboards. Work with React, Node, Next.js, and modern cloud infrastructure.",
-    "postedDate": "2026-03-05",
+    "tagline": "\"Solution Sensei\" or \"Tech Trailblazer\" — choose what feels right!",
+    "commitment": "Full-time",
+    "responsibilities": [
+      "Architect, build, and maintain Hostizzy's website, APIs, and integrations",
+      "Customize booking and property flows for frictionless UX",
+      "Implement security, backup, and performance best practices",
+      "Collaborate with product, design, and operations for feature rollouts",
+      "Debug, document, and scale systems for rapid growth"
+    ],
+    "whoShouldApply": [
+      "Strong WordPress, PHP, MySQL, and API integration skills",
+      "Self-starter who loves building and shipping"
+    ],
+    "description": "Architect, build, and maintain Hostizzy's website, APIs, and integrations. Frictionless UX, security best practices, and rapid feature rollouts.",
+    "postedDate": "2026-04-16",
     "isActive": true
   }
 ]

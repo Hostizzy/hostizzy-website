@@ -7,46 +7,24 @@ import ScrollReveal from './ScrollReveal';
 const HomeBanners = () => {
     return (
         <section className="section container">
-            {/* Top Banners */}
-            <div className="grid desktop-2-col" style={{ gap: '2rem' }}>
-                {/* Banner 1: JuxTravel */}
-                <ScrollReveal x={-50}>
-                    <div className="glass" style={{
-                        padding: '3rem',
-                        borderRadius: '1rem',
-                        background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)',
-                        border: '1px solid #bae6fd',
-                        height: '100%'
-                    }}>
-                        <h3 style={{ marginBottom: '1rem', fontSize: '1.75rem', color: '#0369a1' }}>Looking to Book or Explore Unique Stays?</h3>
-                        <p style={{ marginBottom: '2rem', color: '#334155', lineHeight: 1.6 }}>
-                            Discover and book verified Hostizzy-managed properties across India—stays, experiences, and group trips all in one place.
-                        </p>
-                        <a href="https://book.hostizzy.com/" target="_blank" rel="noopener noreferrer" className="btn" style={{ background: '#0284c7', color: 'white' }}>
-                            Book Now <ExternalLink size={18} style={{ marginLeft: '0.5rem' }} />
-                        </a>
-                    </div>
-                </ScrollReveal>
-
-                {/* Banner 2: Partner */}
-                <ScrollReveal x={50}>
-                    <div className="glass" style={{
-                        padding: '3rem',
-                        borderRadius: '1rem',
-                        background: 'linear-gradient(135deg, #fefce8 0%, #fef9c3 100%)',
-                        border: '1px solid #fde047',
-                        height: '100%'
-                    }}>
-                        <h3 style={{ marginBottom: '1rem', fontSize: '1.75rem', color: '#854d0e' }}>Unlock Your Property's Potential</h3>
-                        <p style={{ marginBottom: '2rem', color: '#334155', lineHeight: 1.6 }}>
-                            Partner with us to create lasting value. Together, we can turn your space into an opportunity for growth with our comprehensive management.
-                        </p>
-                        <Link href="/contact" className="btn" style={{ background: '#ca8a04', color: 'white' }}>
-                            Partner With Us Today <ArrowRight size={18} style={{ marginLeft: '0.5rem' }} />
-                        </Link>
-                    </div>
-                </ScrollReveal>
-            </div>
+            {/* Book a Stay Banner */}
+            <ScrollReveal>
+                <div className="glass" style={{
+                    padding: '3rem',
+                    borderRadius: '1rem',
+                    background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)',
+                    border: '1px solid #bae6fd',
+                    textAlign: 'center'
+                }}>
+                    <h3 style={{ marginBottom: '1rem', fontSize: '1.75rem', color: '#0369a1' }}>Looking to Book or Explore Unique Stays?</h3>
+                    <p style={{ marginBottom: '2rem', color: '#334155', lineHeight: 1.6, maxWidth: '600px', margin: '0 auto 2rem' }}>
+                        Discover and book verified Hostizzy-managed properties across India—stays, experiences, and group trips all in one place.
+                    </p>
+                    <a href="https://book.hostizzy.com/" target="_blank" rel="noopener noreferrer" className="btn" style={{ background: '#0284c7', color: 'white' }}>
+                        Book Now <ExternalLink size={18} style={{ marginLeft: '0.5rem' }} />
+                    </a>
+                </div>
+            </ScrollReveal>
 
             {/* SEO & Story Section */}
             <div style={{ marginTop: '5rem' }}>

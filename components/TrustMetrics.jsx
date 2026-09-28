@@ -13,22 +13,22 @@ const TrustMetrics = () => {
     const metrics = [
         {
             icon: Building2,
-            value: 50,
+            value: 45,
             suffix: '+',
             label: 'Properties Managed',
             color: '#3b82f6'
         },
         {
             icon: TrendingUp,
-            value: 15,
+            value: 12,
             prefix: '₹',
             suffix: 'Cr+',
-            label: 'Revenue Generated',
+            label: 'GMV',
             color: '#22c55e'
         },
         {
             icon: Users,
-            value: 40000,
+            value: 30000,
             suffix: '+',
             label: 'Happy Guests',
             color: '#f59e0b',
@@ -67,12 +67,18 @@ const TrustMetrics = () => {
 };
 
 const MetricCard = ({ metric, inView, delay }) => {
-    const [count, setCount] = useState(0);
+    // Start at the real figure, not zero. Server render, no-JS, crawlers, link
+    // previews and slow devices all see the true number; the count-up only
+    // replays it for people whose browser actually runs the animation.
+    const [count, setCount] = useState(metric.value);
     const Icon = metric.icon;
 
     useEffect(() => {
         if (!inView) return;
+        if (typeof window === 'undefined') return;
+        if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
 
+        setCount(0);
         const timeout = setTimeout(() => {
             const duration = 2000; // 2 seconds
             const steps = 60;

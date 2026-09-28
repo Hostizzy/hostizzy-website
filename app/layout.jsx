@@ -4,14 +4,17 @@ import ConditionalLayout from '../components/ConditionalLayout';
 import './globals.css';
 
 export const metadata = {
-  title: 'Hostizzy | Premier Airbnb & Vacation Rental Management India',
-  description: 'Hostizzy: Premier Airbnb Property Management and Vacation Rental experts in India. We maximize revenue and guest satisfaction.',
+  title: 'Hostizzy | Premier Vacation Rental Management India',
+  description: "India's leading Airbnb & vacation rental management company. AI-powered pricing, 15+ OTA channels, full property management across Delhi NCR, Himachal, Uttarakhand & Rajasthan.",
+  keywords: ['vacation rental management india', 'airbnb property management india', 'holiday home management', 'property management company india'],
   icons: {
     icon: '/images/logo.jpg',
     apple: '/images/logo.jpg',
   },
   metadataBase: new URL('https://www.hostizzy.com'),
   openGraph: {
+    title: 'Hostizzy | Premier Vacation Rental Management India',
+    description: "India's leading Airbnb & vacation rental management company. AI-powered pricing, 15+ OTA channels, full property management across Delhi NCR, Himachal, Uttarakhand & Rajasthan.",
     type: 'website',
     locale: 'en_IN',
     url: 'https://www.hostizzy.com',
@@ -24,6 +27,9 @@ export const metadata = {
         alt: 'Hostizzy - India\'s Premier Vacation Rental Management',
       },
     ],
+  },
+  alternates: {
+    canonical: 'https://www.hostizzy.com',
   },
   twitter: {
     card: 'summary_large_image',
@@ -43,26 +49,37 @@ export const metadata = {
   },
 };
 
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-29EDHJHTDF';
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* Google Analytics 4 */}
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID || 'G-XXXXXXXXXX'}`}
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${process.env.NEXT_PUBLIC_GA_ID || 'G-XXXXXXXXXX'}', {
-              page_path: window.location.pathname,
-              send_page_view: true
-            });
-          `}
-        </Script>
+        {/* Google Analytics 4.
+            GA measurement IDs are public by design (they ship in the client
+            HTML), so the real ID is the default here. The env var still wins
+            where one is set, and if both are somehow empty the tag is not
+            rendered at all — a placeholder ID silently records nothing while
+            looking installed, which is worse than no analytics. */}
+        {GA_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_ID}', {
+                  page_path: window.location.pathname,
+                  send_page_view: true
+                });
+              `}
+            </Script>
+          </>
+        )}
 
         {/* Organization Schema Markup (Global) */}
         <Script id="schema-org" type="application/ld+json" strategy="beforeInteractive">
@@ -76,7 +93,7 @@ export default function RootLayout({ children }) {
               "logo": "https://www.hostizzy.com/images/logo.jpg",
               "image": "https://www.hostizzy.com/images/og-image.jpg",
               "sameAs": [
-                "https://www.instagram.com/hostizzy_official",
+                "https://www.instagram.com/hostizzy",
                 "https://www.facebook.com/hostizzy",
                 "https://www.linkedin.com/company/hostizzy",
                 "https://twitter.com/hostizzy"
@@ -148,8 +165,24 @@ export default function RootLayout({ children }) {
                     "@type": "Offer",
                     "itemOffered": {
                       "@type": "Service",
-                      "name": "StayPrime",
-                      "description": "Full-service management for premium properties"
+                      "name": "SmartStart",
+                      "description": "One-time onboarding setup for new hosts (₹14,999)"
+                    }
+                  },
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "ChannelPro",
+                      "description": "OTA channel management (₹15,000-40,000/month)"
+                    }
+                  },
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "Hybrid Core",
+                      "description": "Commission-based co-hosting (18% of net revenue)"
                     }
                   },
                   {
@@ -157,23 +190,15 @@ export default function RootLayout({ children }) {
                     "itemOffered": {
                       "@type": "Service",
                       "name": "TotalCare360",
-                      "description": "Comprehensive management with marketing"
+                      "description": "Complete villa and farmhouse management (30% profit share)"
                     }
                   },
                   {
                     "@type": "Offer",
                     "itemOffered": {
                       "@type": "Service",
-                      "name": "BrandEngage Pro",
-                      "description": "Marketing and digital presence services"
-                    }
-                  },
-                  {
-                    "@type": "Offer",
-                    "itemOffered": {
-                      "@type": "Service",
-                      "name": "DIY with Support",
-                      "description": "Tools and guidance for self-managing hosts"
+                      "name": "StayPrime",
+                      "description": "Full apartment management (50-50 revenue split)"
                     }
                   }
                 ]
@@ -190,7 +215,7 @@ export default function RootLayout({ children }) {
               "aggregateRating": {
                 "@type": "AggregateRating",
                 "ratingValue": "4.9",
-                "reviewCount": "156",
+                "reviewCount": "150",
                 "bestRating": "5",
                 "worstRating": "1"
               },

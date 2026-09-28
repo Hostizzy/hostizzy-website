@@ -1,8 +1,9 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, after } from 'next/server';
 import { adminDb } from '@/lib/firebase-admin';
 import { DATA_FILES, readJson, writeJson } from '@/lib/db';
 import { errorResponse, successResponse, getRequestBody, generateId } from '@/lib/utils';
 import { sendContactNotification } from '@/lib/email';
+import { checkSpam } from '@/lib/antispam';
 
 // POST /api/contact - Submit contact form (public - no auth required)
 export async function POST(request) {
@@ -13,11 +14,20 @@ export async function POST(request) {
       return errorResponse('Request body is required', 400);
     }
 
+    // Anti-spam: honeypot + rate limiting
+    const spam = checkSpam(body, request);
+    if (spam.isSpam) {
+      // Return success to not reveal detection (bots think it worked)
+      return successResponse({ success: true, message: 'Message received!' });
+    }
+
     const contacts = readJson(DATA_FILES.CONTACTS);
 
+    const now = new Date().toISOString();
     const newContact = {
       id: generateId(),
-      timestamp: new Date().toISOString(),
+      timestamp: now,
+      createdAt: now,
       ...body
     };
 
@@ -39,8 +49,14 @@ export async function POST(request) {
     console.log(newContact);
     console.log('-------------------');
 
-    // Fire-and-forget email notification
-    sendContactNotification(newContact).catch(() => {});
+    // Send email after response — form responds instantly
+    after(async () => {
+      try {
+        await sendContactNotification(newContact);
+      } catch (err) {
+        console.error('Contact email failed:', err.message);
+      }
+    });
 
     return successResponse({
       success: true,

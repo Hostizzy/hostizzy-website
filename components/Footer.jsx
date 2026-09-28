@@ -80,12 +80,15 @@ const Footer = () => {
                                 <li><Link href="/faq">FAQ</Link></li>
                                 <li><Link href="/privacy">Privacy Policy</Link></li>
                                 <li><Link href="/terms">Terms & Conditions</Link></li>
+                                <li><Link href="/refund-policy">Refund Policy</Link></li>
+                                <li><Link href="/cookie-policy">Cookie Policy</Link></li>
+                                <li><Link href="/data-deletion">Data Deletion</Link></li>
                             </ul>
                         </div>
                     </div>
 
                     <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '2rem', textAlign: 'center', opacity: 0.6, fontSize: '0.875rem' }}>
-                        © 2025 Hostizzy / Hostsphere India Pvt Ltd. All rights reserved.
+                        © 2026 Hostizzy / Hostsphere India Pvt Ltd. All rights reserved.
                     </div>
                 </div>
             </div>

@@ -7,6 +7,19 @@
   --color-primary-light: #ff7676;
   --color-accent: #FF8A80;
 
+  /* Accessible coral.
+     --color-primary behind white text measures 3.09:1, and on white as small
+     text 3.3:1 — both under the 4.5:1 WCAG AA threshold. These are the same
+     hue darkened until they pass, and are used ONLY where text is involved.
+     Decorative fills, glows, borders and large display type keep
+     --color-primary, so the brand colour is unchanged.
+       --color-primary-strong  white text on it   4.59:1
+       --color-primary-stronger hover state       5.80:1
+       --color-primary-text    coral text on white 5.40:1 */
+  --color-primary-strong: #D63A3A;
+  --color-primary-stronger: #BC3030;
+  --color-primary-text: #C0392F;
+
   /* Gradient Palettes */
   --color-primary-gradient: linear-gradient(135deg, #FE5858 0%, #FF8A80 100%);
   --color-success-gradient: linear-gradient(135deg, #22c55e 0%, #86efac 100%);
@@ -234,13 +247,14 @@ img {
 }
 
 .btn-primary {
-  background-color: var(--color-primary);
+  /* Accessible fill; the glow keeps the brand coral. */
+  background-color: var(--color-primary-strong);
   color: white;
   box-shadow: 0 4px 14px 0 rgba(254, 88, 88, 0.39);
 }
 
 .btn-primary:hover {
-  background-color: var(--color-primary-dark);
+  background-color: var(--color-primary-stronger);
   box-shadow: 0 6px 20px 0 rgba(254, 88, 88, 0.23);
   transform: translateY(-2px);
 }
@@ -258,7 +272,9 @@ img {
 
 /* Gradient Buttons */
 .btn-gradient {
-  background: var(--color-primary-gradient);
+  /* The brand gradient fades to #FF8A80, which leaves white text at 2.27:1.
+     This keeps the same direction and warmth at a passing depth. */
+  background: linear-gradient(135deg, var(--color-primary-strong) 0%, var(--color-primary-text) 100%);
   color: white;
   border: none;
   position: relative;

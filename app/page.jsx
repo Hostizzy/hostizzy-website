@@ -7,7 +7,7 @@ import HowItWorks from '../components/HowItWorks';
 import TheHostizzyDifference from '../components/TheHostizzyDifference';
 import Services from '../components/Services';
 import HomeBanners from '../components/HomeBanners';
-import SEO from '../components/SEO';
+
 import ScrollReveal from '../components/ScrollReveal';
 import VideoSection from '../components/VideoSection';
 import ChannelCarousel from '../components/ChannelCarousel';
@@ -18,20 +18,6 @@ import StickyCTABar from '../components/StickyCTABar';
 const Home = () => {
     return (
         <>
-            <SEO
-                title="Premier Vacation Rental Management Company India | Airbnb Property Management"
-                description="Expert Airbnb property management India. End-to-end vacation rental management services for villas in Goa, Uttarakhand & beyond. Professional hosting services with 4.9★ rating."
-                keywords={[
-                    'vacation rental management company',
-                    'Airbnb property management India',
-                    'villa management company India',
-                    'short term rental management',
-                    'professional hosting services India',
-                    'vacation rental management India',
-                    'Airbnb management services'
-                ]}
-                image="https://www.hostizzy.com/og-home.jpg"
-            />
             <script type="application/ld+json" dangerouslySetInnerHTML={{
                 __html: JSON.stringify({
                     "@context": "https://schema.org",
@@ -55,7 +41,7 @@ const Home = () => {
                     },
                     "sameAs": [
                         "https://www.facebook.com/hostizzy",
-                        "https://www.instagram.com/hostizzy_official",
+                        "https://www.instagram.com/hostizzy",
                         "https://www.linkedin.com/company/hostizzy"
                     ],
                     "contactPoint": {

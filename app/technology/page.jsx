@@ -3,388 +3,320 @@
 import React from 'react';
 import Link from 'next/link';
 import ScrollReveal from '../../components/ScrollReveal';
-import { MonitorPlay, Smartphone, Database, Lock, Check, Globe, Users, ArrowRight, AppWindow, CheckCircle2, TrendingUp, BrainCircuit } from 'lucide-react';
 import ChannelCarousel from '../../components/ChannelCarousel';
-import ProductDemo from '../../components/ProductDemo';
+import { ArrowUpRight, ArrowRight } from 'lucide-react';
+
+// Site tokens only.
+const INK = 'var(--color-foreground)';
+const CORAL = 'var(--color-primary)';
+const CORAL_TEXT = 'var(--color-primary-text)';
+const MUTED = 'var(--color-muted)';
+const RULE = 'var(--color-border)';
+const GROUND = 'var(--color-secondary)';
+
+const PRODUCTS = [
+    {
+        name: 'HostSuite',
+        status: 'Live',
+        line: 'The property management system.',
+        body: 'Bookings, guests, payments and team coordination in one place, with GST-compliant invoicing and an AI Concierge that works the inbox across ten Indian languages.',
+        does: [
+            'Reads OTA confirmation emails and turns them into bookings',
+            'Keeps four channel calendars in step, both directions',
+            'Splits CGST, SGST and IGST on every invoice',
+            'Carries an enquiry through seven stages to a paid booking',
+        ],
+        href: '/products/hostos',
+        external: 'https://hostos.hostizzy.com/',
+    },
+    {
+        name: 'ResIQ',
+        status: 'In production',
+        line: 'The field layer.',
+        body: 'What the people at the property actually use. Reservations, payments and guest verification, built to keep working when the network does not.',
+        does: [
+            'Creates and edits bookings with the connection down',
+            'Tracks cash, UPI, gateway and bank transfers against the booking',
+            'Verifies guests by QR, with documents deleted after sixty days',
+            'Gives owner, caretaker and guest each their own view',
+        ],
+        href: '/products/resiq',
+        external: 'https://resiq.hostizzy.com/',
+    },
+    {
+        name: 'JuxTravel',
+        status: 'Early access · launches 1 Sept 2026',
+        line: 'Discovery, from the traveller’s side.',
+        body: 'Travellers describe the trip they want rather than filtering a list. Independent hosts only — the family-run stays that rarely surface on the large platforms.',
+        does: [
+            'Matches travellers to stays by how they actually travel',
+            'Shows the honest trade-offs before booking, not after arrival',
+            'Plans the trip and coordinates the group in one place',
+            'Keeps a personal record of every trip taken',
+        ],
+        href: '/products/juxtravel',
+        external: 'https://www.juxtravel.com',
+    },
+];
 
 export default function Technology() {
     return (
         <>
-            <section className="section" style={{
-                background: '#0f172a',
-                color: 'white',
-                padding: 'calc(var(--header-height) + 3rem) 0 4rem',
-                position: 'relative',
-                overflow: 'hidden'
-            }}>
-                <div style={{
-                    position: 'absolute',
-                    inset: 0,
-                    backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0)`,
-                    backgroundSize: '40px 40px',
-                    opacity: 0.5
-                }} />
-                <div style={{
-                    position: 'absolute',
-                    top: '20%',
-                    right: '10%',
-                    width: '300px',
-                    height: '300px',
-                    background: 'var(--color-primary)',
-                    filter: 'blur(150px)',
-                    opacity: 0.15,
-                    zIndex: 0
-                }} />
-                <div className="container text-center" style={{ position: 'relative', zIndex: 1 }}>
-                    <ScrollReveal>
-                        <div className="badge mb-sm" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', color: 'white', padding: '0.5rem 1.25rem', borderRadius: '100px', letterSpacing: '1px' }}>THE PLATFORM ECOSYSTEM</div>
-                        <h1 style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', marginBottom: '1.5rem', fontWeight: 900, letterSpacing: '-0.02em', lineHeight: 1.1, color: 'white' }}>Engineering The <br /><span style={{ color: 'var(--color-primary)' }}>Future of Hosting.</span></h1>
-                        <p style={{ maxWidth: '800px', margin: '0 auto', fontSize: '1.25rem', opacity: 0.8, lineHeight: 1.7, fontWeight: 400 }}>
-                            A vertically integrated suite of hospitality technologies. From high-touch management to data-driven marketplaces, we build the tools that empower modern hospitality.
-                        </p>
-                    </ScrollReveal>
+            {/* ── Opening ── */}
+            <section style={{ background: 'var(--color-dark-gradient)', color: '#fff' }}>
+                <div
+                    className="container"
+                    style={{ paddingTop: 'calc(var(--header-height) + 5rem)', paddingBottom: '5rem' }}
+                >
+                    <h1
+                        style={{
+                            fontFamily: 'var(--font-display)',
+                            fontSize: 'clamp(2.5rem, 5.2vw, 4.25rem)',
+                            lineHeight: 1.05,
+                            letterSpacing: '-0.035em',
+                            margin: 0,
+                            maxWidth: '18ch',
+                            textWrap: 'balance',
+                        }}
+                    >
+                        We run properties. So we built the software.
+                    </h1>
+                    <p
+                        style={{
+                            marginTop: '1.75rem',
+                            fontSize: '1.15rem',
+                            lineHeight: 1.65,
+                            color: 'rgba(255,255,255,0.72)',
+                            maxWidth: '58ch',
+                        }}
+                    >
+                        Every tool here exists because a property we manage needed it first. Nothing on this page is a
+                        prototype waiting for a customer — it is the stack our own operation runs on, across
+                        forty-five properties in fifteen cities.
+                    </p>
                 </div>
             </section>
 
-            {/* Ecosystem Blueprint - Solar System Layout */}
-            <section className="section" style={{ padding: '6rem 0', background: 'white', overflow: 'hidden' }}>
-                <div className="container">
-                    <ScrollReveal>
-                        <div className="text-center mb-lg">
-                            <h2 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '1rem' }}>The Connected Marketplace</h2>
-                            <p style={{ fontSize: '1.25rem', color: '#64748b', maxWidth: '700px', margin: '0 auto' }}>
-                                A unified universe where smart supply meets verified demand.
-                            </p>
-                        </div>
-                    </ScrollReveal>
-
-                    <div style={{ position: 'relative', maxWidth: '1000px', margin: '2rem auto' }}>
-
-                        {/* SVG Connector Layer - Behind everything */}
-                        <svg viewBox="0 0 1000 800" preserveAspectRatio="none" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, overflow: 'visible' }}>
-                            {/* Define gradients */}
-                            <defs>
-                                <linearGradient id="grad-supply" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.1" />
-                                    <stop offset="50%" stopColor="#3b82f6" stopOpacity="0.6" />
-                                    <stop offset="100%" stopColor="#22c55e" stopOpacity="0.1" />
-                                </linearGradient>
-                                <linearGradient id="grad-intel" x1="100%" y1="0%" x2="0%" y2="100%">
-                                    <stop offset="0%" stopColor="#0f172a" stopOpacity="0.1" />
-                                    <stop offset="50%" stopColor="#64748b" stopOpacity="0.6" />
-                                    <stop offset="100%" stopColor="#22c55e" stopOpacity="0.1" />
-                                </linearGradient>
-                                <linearGradient id="grad-guest" x1="0%" y1="100%" x2="100%" y2="0%">
-                                    <stop offset="0%" stopColor="#ec4899" stopOpacity="0.1" />
-                                    <stop offset="50%" stopColor="#ec4899" stopOpacity="0.6" />
-                                    <stop offset="100%" stopColor="#22c55e" stopOpacity="0.1" />
-                                </linearGradient>
-                                <linearGradient id="grad-ai" x1="100%" y1="100%" x2="0%" y2="0%">
-                                    <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.1" />
-                                    <stop offset="50%" stopColor="#8b5cf6" stopOpacity="0.6" />
-                                    <stop offset="100%" stopColor="#22c55e" stopOpacity="0.1" />
-                                </linearGradient>
-                            </defs>
-
-                            {/* Connection Lines (Desktop Only) */}
-                            <g className="desktop-only" strokeWidth="3" fill="none">
-                                {/* Top Left (HostOS) -> Center */}
-                                <path d="M250,150 C250,250 400,350 500,400" stroke="url(#grad-supply)" className="animate-pulse-slow" />
-
-                                {/* Top Right (ResIQ) -> Center */}
-                                <path d="M750,150 C750,250 600,350 500,400" stroke="url(#grad-intel)" className="animate-pulse-slow" style={{ animationDelay: '0.5s' }} />
-
-                                {/* Bottom Center (TripMind AI) -> Center */}
-                                <path d="M500,700 C500,600 500,500 500,400" stroke="url(#grad-ai)" className="animate-pulse-slow" style={{ animationDelay: '1s' }} />
-                            </g>
-                        </svg>
-
-                        {/* CSS Grid Layout */}
-                        <div className="grid-ecosystem" style={{
-                            display: 'grid',
-                            gridTemplateColumns: 'repeat(12, 1fr)',
-                            gridTemplateRows: 'auto 1fr auto',
-                            gap: '2rem',
-                            position: 'relative',
-                            zIndex: 1,
-                            padding: '3rem 0'
-                        }}>
-
-                            {/* -- TOP ROW -- */}
-
-                            {/* HostOS (Top Left) */}
-                            <div style={{ gridColumn: '2 / span 4', display: 'flex', justifyContent: 'center' }}>
-                                <ScrollReveal delay={0.1}>
-                                    <div className="card glass-hover" style={{
-                                        width: '100%', maxWidth: '280px', padding: '2rem', borderRadius: '1.5rem',
-                                        background: 'white', border: '1px solid #eff6ff',
-                                        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)',
-                                        textAlign: 'center', transition: 'all 0.3s ease'
-                                    }}>
-                                        <div style={{ margin: '0 auto 1.5rem', background: '#eff6ff', width: '64px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '1rem' }}>
-                                            <MonitorPlay size={32} color="#3b82f6" />
-                                        </div>
-                                        <h4 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '0.5rem' }}>HostOS</h4>
-                                        <p style={{ fontSize: '0.9rem', color: '#64748b', lineHeight: 1.5 }}>
-                                            The operating system for suppliers. Manages inventory, pricing, operations, and guest CRM.
-                                        </p>
-                                    </div>
-                                </ScrollReveal>
-                            </div>
-
-                            {/* ResIQ (Top Right) */}
-                            <div style={{ gridColumn: '8 / span 4', display: 'flex', justifyContent: 'center' }}>
-                                <ScrollReveal delay={0.2}>
-                                    <div className="card glass-hover" style={{
-                                        width: '100%', maxWidth: '280px', padding: '2rem', borderRadius: '1.5rem',
-                                        background: '#0f172a', color: 'white',
-                                        textAlign: 'center', transition: 'all 0.3s ease',
-                                        boxShadow: '0 20px 25px -5px rgba(15, 23, 42, 0.3)'
-                                    }}>
-                                        <div style={{ margin: '0 auto 1.5rem', background: 'rgba(255,255,255,0.1)', width: '64px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '1rem' }}>
-                                            <Database size={32} color="white" />
-                                        </div>
-                                        <h4 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '0.5rem', color: 'white' }}>ResIQ</h4>
-                                        <p style={{ fontSize: '0.9rem', color: '#94a3b8', lineHeight: 1.5 }}>
-                                            Intelligence engine processing millions of data points to optimize yield.
-                                        </p>
-                                    </div>
-                                </ScrollReveal>
-                            </div>
-
-
-                            {/* -- MIDDLE ROW (CENTER) -- */}
-                            <div style={{ gridColumn: '5 / span 4', gridRow: '2', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '4rem 0' }}>
-                                <ScrollReveal>
-                                    <div className="card shadow-premium animate-float" style={{
-                                        width: '320px', height: '320px', borderRadius: '50%',
-                                        background: 'white',
-                                        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                                        border: '1px solid #f0fdf4',
-                                        position: 'relative',
-                                        zIndex: 10
-                                    }}>
-                                        {/* Outer pulsing ring */}
-                                        <div style={{
-                                            position: 'absolute', inset: '-20px', borderRadius: '50%',
-                                            border: '1px dashed #22c55e', opacity: 0.2, animation: 'spin 60s linear infinite'
-                                        }}></div>
-
-                                        <div style={{ marginBottom: '1.5rem', background: '#f0fdf4', padding: '1.5rem', borderRadius: '50%' }}>
-                                            <Globe size={64} color="#16a34a" />
-                                        </div>
-                                        <h3 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '0.5rem', color: '#0f172a', letterSpacing: '-1px' }}>JuxTravel</h3>
-                                        <div className="badge" style={{ background: '#16a34a', color: 'white', fontSize: '0.8rem', padding: '0.5rem 1.25rem', borderRadius: '100px', fontWeight: 600 }}>MARKETPLACE</div>
-                                    </div>
-                                </ScrollReveal>
-                            </div>
-
-
-                            {/* -- BOTTOM ROW -- */}
-
-                            {/* TripMind AI (Bottom Center) */}
-                            <div style={{ gridColumn: '5 / span 4', gridRow: '3', display: 'flex', justifyContent: 'center' }}>
-                                <ScrollReveal delay={0.4}>
-                                    <div className="card glass-hover" style={{
-                                        width: '100%', maxWidth: '280px', padding: '2rem', borderRadius: '1.5rem',
-                                        background: 'white', border: '1px solid #f5f3ff',
-                                        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)',
-                                        textAlign: 'center', transition: 'all 0.3s ease'
-                                    }}>
-                                        <div style={{ margin: '0 auto 1.5rem', background: '#f5f3ff', width: '64px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '1rem' }}>
-                                            <BrainCircuit size={32} color="#7c3aed" />
-                                        </div>
-                                        <h4 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '0.5rem' }}>TripMind AI</h4>
-                                        <p style={{ fontSize: '0.9rem', color: '#64748b', lineHeight: 1.5 }}>
-                                            Neural concierge that predicts guest needs before they happen.
-                                        </p>
-                                    </div>
-                                </ScrollReveal>
-                            </div>
-
-                        </div>
-
-                        {/* CSS Style for Responsive Grid */}
-                        <style>{`
-                            .glass-hover:hover {
-                                transform: translateY(-5px);
-                                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
-                            }
-                            .animate-pulse-slow {
-                                animation: pulse-line 3s infinite ease-in-out;
-                            }
-                            @keyframes pulse-line {
-                                0%, 100% { stroke-opacity: 0.3; stroke-width: 2; }
-                                50% { stroke-opacity: 0.8; stroke-width: 3; }
-                            }
-                            @media (max-width: 1024px) {
-                                .grid-ecosystem {
-                                    grid-template-columns: 1fr !important;
-                                    grid-template-rows: auto !important;
-                                    gap: 3rem !important;
-                                }
-                                .grid-ecosystem > div {
-                                    grid-column: 1 / -1 !important;
-                                    grid-row: auto !important;
-                                }
-                                 /* Hide SVG lines on mobile as they don't map to stacked layout */
-                                .desktop-only {
-                                    display: none;
-                                }
-                            }
-                        `}</style>
-                    </div>
-                </div>
-            </section>
-
-            {/* Interactive Product Demo Section */}
-            <ProductDemo />
-
-            {/* HostOS Section */}
-            <section className="section container">
-                <div className="grid desktop-2-col" style={{ alignItems: 'center', gap: '3rem' }}>
-                    <ScrollReveal x={-30}>
-                        <div>
-                            <div className="badge mb-sm" style={{ backgroundColor: 'rgba(254, 88, 88, 0.1)', color: 'var(--color-primary)' }}>HostOS v2.0</div>
-                            <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', lineHeight: 1.2 }}>The Central Nervous System of Hospitality</h2>
-                            <p style={{ fontSize: '1.125rem', color: 'var(--color-muted)', marginBottom: '2.5rem', lineHeight: 1.8 }}>
-                                HostOS integrates every aspect of vacation rental management—operations, guest CRM, and lead management—into one seamless interface. From dynamic pricing to guest communications, everything is automated.
-                            </p>
-
-                            <ul style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '3rem' }}>
-                                {[
-                                    "Unified Calendar for all channels",
-                                    "Automated Guest Communication with AI",
-                                    "Digital Guest Welcome Books",
-                                    "Smart Maintenance Tracking"
-                                ].map((item, i) => (
-                                    <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '1rem', fontSize: '1.1rem', color: 'var(--color-foreground)', fontWeight: 500 }}>
-                                        <div style={{ background: 'rgba(254, 88, 88, 0.1)', padding: '6px', borderRadius: '50%', display: 'flex' }}>
-                                            <Check size={18} color="var(--color-primary)" />
-                                        </div>
-                                        {item}
-                                    </li>
-                                ))}
-                            </ul>
-                            <a href="https://hostos.hostizzy.com/" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-                                Explore HostOS <ArrowRight size={18} />
-                            </a>
-                        </div>
-                    </ScrollReveal>
-
-                    <ScrollReveal x={30} delay={0.2}>
-                        <div className="card shadow-premium" style={{
-                            borderRadius: '2.5rem',
-                            padding: '3rem',
-                            background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
-                            border: '1px solid #e2e8f0',
-                            position: 'relative',
-                            overflow: 'hidden'
-                        }}>
-                            <div style={{ position: 'absolute', top: '-10%', right: '-10%', width: '150px', height: '150px', background: 'rgba(254, 88, 88, 0.05)', borderRadius: '50%', filter: 'blur(30px)' }} />
-
-                            <div className="card" style={{ padding: '1.5rem', marginBottom: '2rem', borderLeft: '6px solid #10b981', background: 'white', boxShadow: '0 10px 30px -5px rgba(0,0,0,0.05)', borderRadius: '1rem' }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                                    <div style={{ fontWeight: 800, color: '#1e293b', fontSize: '0.9rem', letterSpacing: '0.5px' }}>RESERVATION #1284</div>
-                                    <div className="badge" style={{ backgroundColor: '#dcfce7', color: '#059669', fontSize: '0.7rem', border: 'none' }}>ACTIVE</div>
-                                </div>
-                                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                                    <div style={{ width: '44px', height: '44px', background: 'var(--color-primary)', color: 'white', borderRadius: '50%', display: 'grid', placeItems: 'center', fontWeight: 800, fontSize: '1rem' }}>SJ</div>
+            {/* ── The three products ── */}
+            <section style={{ background: GROUND, borderBottom: `1px solid ${RULE}` }}>
+                <div className="container" style={{ paddingTop: '5.5rem', paddingBottom: '5.5rem' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4.5rem' }}>
+                        {PRODUCTS.map((p) => (
+                            <ScrollReveal key={p.name}>
+                                <article className="tech-product" style={{ borderTop: `1px solid ${RULE}`, paddingTop: '2rem' }}>
                                     <div>
-                                        <div style={{ fontWeight: 800, fontSize: '1rem', color: '#0f172a' }}>Sarah Jenkins</div>
-                                        <div style={{ fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: 500 }}>Villa Escape • Room 4B</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="card" style={{ padding: '1.5rem', borderLeft: '6px solid #ef4444', background: 'white', boxShadow: '0 10px 30px -5px rgba(0,0,0,0.05)', borderRadius: '1rem' }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                                    <div style={{ fontWeight: 800, color: '#1e293b', fontSize: '0.9rem' }}>MAINTENANCE ALERT</div>
-                                    <div className="badge" style={{ backgroundColor: '#fee2e2', color: '#dc2626', fontSize: '0.7rem' }}>URGENT</div>
-                                </div>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                                    <div style={{ width: '8px', height: '8px', background: '#ef4444', borderRadius: '50%', animation: 'pulse 2s infinite' }} />
-                                    <div style={{ fontSize: '1rem', color: '#334155', fontWeight: 600 }}>
-                                        AC Service required: <span style={{ color: 'var(--color-primary)' }}>Luxe Suite 102</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </ScrollReveal>
-                </div>
-            </section>
-
-            {/* ResIQ Section */}
-            <section className="section bg-secondary">
-                <div className="container">
-                    <div className="grid desktop-2-col" style={{ alignItems: 'center', gap: '3rem' }}>
-                        <ScrollReveal x={-30}>
-                            <div style={{ order: 1 }}>
-                                <div className="card shadow-premium" style={{ borderRadius: '2rem', padding: '3rem', background: 'white', border: '1px solid var(--color-border)' }}>
-                                    <div style={{ marginBottom: '2.5rem' }}>
-                                        <div style={{ fontSize: '0.9rem', color: 'var(--color-muted)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 700 }}>Total Revenue</div>
-                                        <div style={{ fontSize: '3rem', fontWeight: 800, color: '#0f172a', margin: '0.5rem 0', letterSpacing: '-1px' }}>₹ 4,25,000</div>
-                                        <div style={{ fontSize: '1rem', color: '#16a34a', fontWeight: 700 }}>↑ 12.5% vs Last Month</div>
-                                    </div>
-                                    <div style={{ height: '140px', display: 'flex', alignItems: 'flex-end', gap: '10px' }}>
-                                        {[40, 60, 45, 70, 50, 80, 65].map((h, i) => (
-                                            <div key={i} style={{ flex: 1, background: i === 6 ? 'var(--color-primary)' : '#e2e8f0', borderRadius: '4px', height: `${h}%` }}></div>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                        </ScrollReveal>
-
-                        <ScrollReveal x={30} delay={0.2}>
-                            <div style={{ order: 2 }}>
-                                <div className="badge mb-sm" style={{ backgroundColor: 'rgba(254, 88, 88, 0.1)', color: 'var(--color-primary)' }}>ResIQ Analytics</div>
-                                <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', lineHeight: 1.2 }}>Intelligence That Drives Revenue</h2>
-                                <p style={{ fontSize: '1.125rem', color: 'var(--color-muted)', marginBottom: '3rem', lineHeight: 1.8 }}>
-                                    Dynamic insights for property owners. Real-time access to financial performance, occupancy trends, and future projections.
-                                </p>
-                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '3rem' }}>
-                                    {[
-                                        { icon: <MonitorPlay size={24} />, title: "Real-time" },
-                                        { icon: <Database size={24} />, title: "Market Data" },
-                                        { icon: <Lock size={24} />, title: "Encrypted" },
-                                        { icon: <Smartphone size={24} />, title: "Owners App" }
-                                    ].map((f, i) => (
-                                        <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                            <div style={{ color: 'var(--color-primary)' }}>{f.icon}</div>
-                                            <div style={{ fontWeight: 700 }}>{f.title}</div>
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                alignItems: 'baseline',
+                                                gap: '1rem',
+                                                flexWrap: 'wrap',
+                                                marginBottom: '0.85rem',
+                                            }}
+                                        >
+                                            <h2
+                                                style={{
+                                                    fontFamily: 'var(--font-display)',
+                                                    fontSize: 'clamp(1.85rem, 3.2vw, 2.6rem)',
+                                                    letterSpacing: '-0.03em',
+                                                    color: INK,
+                                                    margin: 0,
+                                                    lineHeight: 1.1,
+                                                }}
+                                            >
+                                                {p.name}
+                                            </h2>
+                                            <span
+                                                style={{
+                                                    fontSize: '0.72rem',
+                                                    fontWeight: 700,
+                                                    letterSpacing: '0.04em',
+                                                    textTransform: 'uppercase',
+                                                    color: CORAL_TEXT,
+                                                }}
+                                            >
+                                                {p.status}
+                                            </span>
                                         </div>
-                                    ))}
-                                </div>
-                                <a href="https://resiq.hostizzy.com/" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-                                    Deep Dive into ResIQ <ArrowRight size={18} />
-                                </a>
-                            </div>
-                        </ScrollReveal>
+
+                                        <p style={{ fontSize: '1.05rem', fontWeight: 700, color: INK, margin: '0 0 0.6rem' }}>
+                                            {p.line}
+                                        </p>
+                                        <p style={{ fontSize: '0.98rem', lineHeight: 1.65, color: MUTED, margin: '0 0 1.5rem', maxWidth: '50ch' }}>
+                                            {p.body}
+                                        </p>
+
+                                        <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                                            <Link
+                                                href={p.href}
+                                                className="tech-link"
+                                                style={{
+                                                    display: 'inline-flex',
+                                                    alignItems: 'center',
+                                                    gap: '0.45rem',
+                                                    color: INK,
+                                                    fontWeight: 600,
+                                                    fontSize: '0.95rem',
+                                                    textDecoration: 'none',
+                                                    borderBottom: `1px solid ${INK}`,
+                                                    paddingBottom: '2px',
+                                                }}
+                                            >
+                                                How it works <ArrowRight size={15} strokeWidth={2} />
+                                            </Link>
+                                            <a
+                                                href={p.external}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="tech-link"
+                                                style={{
+                                                    display: 'inline-flex',
+                                                    alignItems: 'center',
+                                                    gap: '0.45rem',
+                                                    color: MUTED,
+                                                    fontWeight: 600,
+                                                    fontSize: '0.95rem',
+                                                    textDecoration: 'none',
+                                                }}
+                                            >
+                                                Open {p.name} <ArrowUpRight size={15} strokeWidth={2} />
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+                                        {p.does.map((d, i) => (
+                                            <li
+                                                key={d}
+                                                style={{
+                                                    padding: '0.85rem 0',
+                                                    borderBottom: i < p.does.length - 1 ? `1px solid ${RULE}` : 'none',
+                                                    fontSize: '0.93rem',
+                                                    lineHeight: 1.55,
+                                                    color: MUTED,
+                                                }}
+                                            >
+                                                {d}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </article>
+                            </ScrollReveal>
+                        ))}
                     </div>
                 </div>
             </section>
 
-            {/* Global Distribution Carousel */}
+            {/* ── How they fit together ── */}
+            <section style={{ background: '#fff', borderBottom: `1px solid ${RULE}` }}>
+                <div className="container" style={{ paddingTop: '5.5rem', paddingBottom: '5.5rem' }}>
+                    <h2
+                        style={{
+                            fontFamily: 'var(--font-display)',
+                            fontSize: 'clamp(1.9rem, 3.4vw, 2.75rem)',
+                            letterSpacing: '-0.03em',
+                            color: INK,
+                            margin: '0 0 2.75rem',
+                            maxWidth: '20ch',
+                            lineHeight: 1.12,
+                        }}
+                    >
+                        How the three fit together
+                    </h2>
+
+                    <div className="tech-fit">
+                        <div>
+                            <h3 style={{ fontSize: '1.02rem', fontWeight: 700, color: INK, margin: '0 0 0.5rem' }}>
+                                A booking arrives
+                            </h3>
+                            <p style={{ fontSize: '0.95rem', lineHeight: 1.62, color: MUTED, margin: 0, maxWidth: '44ch' }}>
+                                From an OTA, a direct enquiry or a WhatsApp message. HostSuite records it, prices it and
+                                invoices it, whichever way it came in.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 style={{ fontSize: '1.02rem', fontWeight: 700, color: INK, margin: '0 0 0.5rem' }}>
+                                Someone has to deliver it
+                            </h3>
+                            <p style={{ fontSize: '0.95rem', lineHeight: 1.62, color: MUTED, margin: 0, maxWidth: '44ch' }}>
+                                ResIQ is what the caretaker opens on site — the guest arriving, the ID to verify, the
+                                balance still to collect. It keeps working when the signal drops.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 style={{ fontSize: '1.02rem', fontWeight: 700, color: INK, margin: '0 0 0.5rem' }}>
+                                The next guest has to find you
+                            </h3>
+                            <p style={{ fontSize: '0.95rem', lineHeight: 1.62, color: MUTED, margin: 0, maxWidth: '44ch' }}>
+                                JuxTravel approaches that from the traveller&apos;s side, matching independent stays to
+                                the trip someone is actually trying to have.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ── Distribution ── */}
             <ChannelCarousel />
 
-            {/* JuxTravel Card */}
-            <section className="section container">
-                <div style={{ maxWidth: '700px', margin: '0 auto' }}>
-                    <ScrollReveal y={30}>
-                        <div className="card shadow-premium" style={{ padding: '4rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '2.5rem', textAlign: 'center' }}>
-                            <div className="badge mb-sm" style={{ background: '#8b5cf6', color: 'white' }}>COMING SOON</div>
-                            <Globe size={48} color="#8b5cf6" style={{ marginBottom: '2rem' }} />
-                            <h2 style={{ fontSize: '2.25rem', marginBottom: '1.5rem' }}>JuxTravel Marketplace</h2>
-                            <p style={{ fontSize: '1.1rem', color: 'var(--color-muted)', marginBottom: '2.5rem', lineHeight: 1.7, maxWidth: '500px', margin: '0 auto 2.5rem' }}>
-                                Direct bookings, AI-powered travel recommendations, and a community-driven travel marketplace for India's best villas.
-                            </p>
-                            <Link href="/products/juxtravel" className="btn" style={{ background: 'white', border: '1px solid #e2e8f0', padding: '1rem 2rem' }}>
-                                Learn More
-                            </Link>
-                        </div>
-                    </ScrollReveal>
+            {/* ── Close ── */}
+            <section style={{ background: 'var(--color-dark-gradient)' }}>
+                <div className="container" style={{ paddingTop: '5.5rem', paddingBottom: '5.5rem' }}>
+                    <div className="tech-close">
+                        <h2
+                            style={{
+                                fontFamily: 'var(--font-display)',
+                                fontSize: 'clamp(1.9rem, 3.6vw, 3rem)',
+                                letterSpacing: '-0.032em',
+                                color: '#fff',
+                                margin: 0,
+                                lineHeight: 1.1,
+                                maxWidth: '20ch',
+                            }}
+                        >
+                            Built by people who still run the properties.
+                        </h2>
+                        <Link
+                            href="/contact"
+                            className="btn btn-primary"
+                            style={{ textDecoration: 'none', padding: '0.9rem 1.75rem', justifySelf: 'start', alignSelf: 'center' }}
+                        >
+                            Talk to us <ArrowRight size={17} strokeWidth={2} />
+                        </Link>
+                    </div>
                 </div>
             </section>
+
+            <style>{`
+                .tech-product {
+                    display: grid;
+                    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+                    gap: 3rem;
+                    align-items: start;
+                }
+                .tech-fit {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+                    gap: 2.5rem 3rem;
+                }
+                .tech-close {
+                    display: grid;
+                    grid-template-columns: minmax(0, 1fr) auto;
+                    gap: 2.5rem;
+                    align-items: center;
+                }
+                .tech-link { transition: opacity 0.2s ease; }
+                .tech-link:hover { opacity: 0.65; }
+                .tech-cta { transition: transform 0.22s cubic-bezier(0.16,1,0.3,1), opacity 0.22s ease; }
+                .tech-cta:hover { transform: translateY(-2px); opacity: 0.92; }
+                .tech-link:focus-visible,
+                .tech-cta:focus-visible { outline: 2px solid ${CORAL}; outline-offset: 3px; }
+
+                @media (max-width: 900px) {
+                    .tech-product,
+                    .tech-close { grid-template-columns: 1fr; gap: 2rem; }
+                }
+            `}</style>
         </>
     );
 }

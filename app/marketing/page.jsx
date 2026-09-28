@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import ScrollReveal from '../../components/ScrollReveal';
-import SEO from '../../components/SEO';
+
 import {
     Check, ArrowRight, MessageCircle, Camera, Target,
     TrendingUp, Globe, Megaphone, BarChart3
@@ -95,18 +95,6 @@ const steps = [
 const Marketing = () => {
     return (
         <>
-            <SEO
-                title="Digital Marketing for Vacation Rentals | Hostizzy"
-                description="Professional social media, advertising, and SEO services for vacation rental properties across India. Packages from \u20B920,000/month."
-                keywords={[
-                    'vacation rental marketing India',
-                    'Airbnb marketing services',
-                    'property social media management',
-                    'hospitality digital marketing',
-                    'vacation rental SEO'
-                ]}
-            />
-
             {/* ── Hero Section ── */}
             <section style={{
                 padding: 'calc(var(--header-height) + 3rem) 0 4rem',

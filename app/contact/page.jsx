@@ -1,18 +1,24 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Link from 'next/link';
 import { useToast } from '../../components/Toast';
 import { useSettings } from '../../context/SettingsContext';
+import dynamic from 'next/dynamic';
 import ScrollReveal from '../../components/ScrollReveal';
 import { Mail, Send, Phone } from 'lucide-react';
-import PropertyLeadWizard from '../../components/PropertyLeadWizard';
+const PropertyLeadWizard = dynamic(() => import('../../components/PropertyLeadWizard'), {
+  ssr: false,
+  loading: () => <div style={{ minHeight: '460px' }} />
+});
 
 export default function Contact() {
     const { settings } = useSettings();
     const [userType, setUserType] = useState('owner'); // 'owner', 'guest', or 'business'
     const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '', inquiryType: '' });
     const [status, setStatus] = useState('');
+    const [honeypot, setHoneypot] = useState('');
+    const formLoadedAt = useRef(Date.now());
     const { addToast } = useToast();
 
     const departments = {
@@ -72,7 +78,9 @@ export default function Contact() {
                     ...formData,
                     department: userType,
                     departmentEmail: departments[userType].email,
-                    timestamp: new Date().toISOString()
+                    timestamp: new Date().toISOString(),
+                    _hp_website: honeypot,
+                    _formLoadedAt: formLoadedAt.current,
                 })
             });
             if (res.ok) {
@@ -444,6 +452,10 @@ export default function Contact() {
                                             <p style={{ color: '#64748b', fontSize: '0.95rem' }}>Fill out the form and we'll get back to you within 24 hours</p>
                                         </div>
                                         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                                            {/* Honeypot */}
+                                            <div style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, overflow: 'hidden' }} aria-hidden="true">
+                                                <input type="text" name="website_url" tabIndex={-1} autoComplete="off" value={honeypot} onChange={e => setHoneypot(e.target.value)} />
+                                            </div>
                                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
                                                 <div>
                                                     <label htmlFor="name" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 700, fontSize: '0.8rem', color: '#0f172a' }}>Full Name *</label>

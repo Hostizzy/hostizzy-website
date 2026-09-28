@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import SEO from '../../components/SEO';
+
 import ScrollReveal from '../../components/ScrollReveal';
 import Link from 'next/link';
 import { CheckCircle, Award, Users, Clock, Globe, TrendingUp, BookOpen, Video, FileText, MessageCircle, Star, Download, ChevronRight } from 'lucide-react';
@@ -119,10 +119,7 @@ const Training = () => {
 
     return (
         <>
-            <SEO
-                title="Host Training Program - Become a Professional Airbnb Host | Hostizzy"
-                description="Learn to become a successful vacation rental host with Hostizzy\'s comprehensive training program. Free basic course + paid advanced certification for Indian hosts."
-            />
+
 
             {/* Hero Section */}
             <section className="section bg-primary text-white" style={{
@@ -639,7 +636,7 @@ const Training = () => {
                                 </Link>
                             </div>
                             <p style={{ marginTop: '2rem', opacity: 0.7, fontSize: '0.9rem' }}>
-                                Questions? Email us at training@hostizzy.com or WhatsApp: +91 98765 43210
+                                Questions? Email us at training@hostizzy.com or WhatsApp: +91 95604 94001
                             </p>
                         </div>
                     </ScrollReveal>

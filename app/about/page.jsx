@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import SEO from '../../components/SEO';
+
 import ScrollReveal from '../../components/ScrollReveal';
 import {
     Award, Users, Target, Sparkles, TrendingUp, Shield,
@@ -45,47 +45,57 @@ const About = () => {
 
     const milestones = [
         {
-            year: '2019',
-            title: 'Hostizzy is Born',
-            text: 'Started managing 5 properties in Goa and Gurgaon with a vision to professionalize vacation rental management in India.'
+            year: '2021',
+            title: 'The Beginning',
+            text: 'Engaged with hundreds of property owners. Launched operations in Delhi NCR with 3 properties.'
         },
         {
-            year: '2021',
-            title: 'Expansion',
-            text: 'Scaled to 20+ properties across North and South India. Launched our proprietary tech stack, HostOS, to streamline operations.'
+            year: '2022',
+            title: 'Incorporation',
+            text: 'Registered as Pvt Ltd. Scaled to 10 properties. Entered Rajasthan.'
         },
         {
             year: '2023',
-            title: 'Financial Success',
-            text: 'Crossed \u20B910 Cr+ GMV. Expanded team to 15+ members. Hosted 20,000+ guests with a 4.8+ average rating across platforms.'
+            title: 'First Year of Growth',
+            text: '\u20B92.5 Cr+ GMV. 10+ team. 10,000+ guests hosted. First year as an incorporated company.'
         },
         {
             year: '2024',
-            title: 'Celebrating Success',
-            text: '50+ properties under management. \u20B915 Cr+ GMV milestone. Launched NextStop (experiential travel) and doubled team size.'
+            title: 'Multi-Market Expansion',
+            text: '20+ properties. \u20B98 Cr+ GMV. 20,000+ guests. Expanded to Uttarakhand, Himachal, Kochi & Sikkim. Wedding services pilot launched. Airbnb Superhost.'
+        },
+        {
+            year: '2025',
+            title: 'Technology & Scale',
+            text: '30+ properties. \u20B912 Cr+ GMV. 30,000+ guests. 25+ weddings. ResIQ completed. HostOS in pre-production. Hospitality SaaS roadmap planned. Airbnb Superhost.'
+        },
+        {
+            year: '2026',
+            title: 'The Platform Era',
+            text: '45+ properties. 40+ weddings. Three-tier service plans launched. HostOS in production. PMS-powered booking website live. Wedding pilot expanded to 3 villas in Delhi NCR. Airbnb Superhost.'
         }
     ];
 
     const awards = [
         {
+            title: 'Airbnb Superhost',
+            text: 'Consecutive Superhost status in 2024, 2025 & 2026 — recognized for exceptional hospitality and guest satisfaction.',
+            color: '#FF5A5F'
+        },
+        {
             title: 'Start-Up India',
-            text: 'Proud to be part of the Start-Up India initiative, demonstrating our commitment to innovation and excellence.',
+            text: 'Part of the Start-Up India initiative, demonstrating commitment to innovation and excellence.',
             color: '#3b82f6'
         },
         {
-            title: 'DPIIT Certification',
-            text: 'Our operations meet high standards of quality and service, ensuring trust and reliability.',
+            title: 'DPIIT Certified',
+            text: 'DPIIT-recognized startup meeting high standards of quality, service, and compliance.',
             color: '#22c55e'
         },
         {
-            title: "India's Favourite Homestays Awards",
-            text: "Finalists at IFHA by MakeMyTrip, with a win for 'Best Individual Host'.",
+            title: "India's Favourite Homestays",
+            text: "Finalists at IFHA by MakeMyTrip. Winner — 'Best Individual Host'.",
             color: '#f59e0b'
-        },
-        {
-            title: '300+ Guest Reviews',
-            text: 'Over 300 positive reviews across Airbnb, MakeMyTrip, and Google with exceptional ratings.',
-            color: '#a855f7'
         }
     ];
 
@@ -100,10 +110,7 @@ const About = () => {
 
     return (
         <>
-            <SEO
-                title="About Hostizzy - Our Story | Premier Vacation Rental Management India"
-                description="Learn about Hostizzy's journey from managing 3 properties to 50+. Founded by ex-Airbnb professionals, we've hosted 40,000+ guests with a 4.9-star rating."
-            />
+
 
             {/* ── Hero Section ── */}
             <section className="section text-white text-center" style={{
@@ -118,7 +125,7 @@ const About = () => {
                             marginBottom: '1.25rem',
                             display: 'inline-block'
                         }}>
-                            Since 2019
+                            Since 2021
                         </span>
                         <h1 style={{
                             fontFamily: 'var(--font-display)',
@@ -159,10 +166,10 @@ const About = () => {
                                     When guests stay at a property we manage, they remember the breathtaking sunrise from that Mukteshwar villa, the warm hospitality of that Rajasthan haveli, or the serene mornings at that Goa beachfront home. They don't remember us. And that's exactly how it should be.
                                 </p>
                                 <p style={{ marginBottom: '1.25rem' }}>
-                                    <strong>Ethan Barman</strong> and <strong>Ashutosh Karn</strong>, both ex-Airbnb professionals, founded Hostizzy in 2019 with a radical idea: What if property management wasn't about building the management company's brand, but about elevating each property's unique identity?
+                                    <strong>Ethan Barman</strong> and <strong>Ashutosh Karn</strong>, both ex-Airbnb professionals, founded Hostizzy with a radical idea: What if property management wasn't about building the management company's brand, but about elevating each property's unique identity?
                                 </p>
                                 <p>
-                                    Starting in 2019 as a hospitality startup, we've grown from managing 3 properties to over 50, generated <strong>{'\u20B9'}15 Cr+ in GMV</strong>, hosted over <strong>40,000 guests</strong>, and maintain a <strong>4.9{'\u2605'} average rating</strong>. Our approach combines technology-driven operations with genuine, personalized hospitality.
+                                    From 3 properties in Delhi NCR to 45+ across India, we've generated over <strong>{'\u20B9'}12 Cr+ in GMV</strong>, hosted <strong>30,000+ guests</strong>, and maintain a <strong>4.9{'\u2605'} average rating</strong>. Our approach combines technology-driven operations with genuine, personalized hospitality.
                                 </p>
                             </div>
                         </div>
@@ -622,76 +629,172 @@ const About = () => {
                                 color: '#64748b',
                                 fontSize: '1.1rem'
                             }}>
-                                Meet the people steering the ship.
+                                Meet the founders steering the ship.
                             </p>
                         </div>
                     </ScrollReveal>
 
-                    <ScrollReveal delay={0.1}>
-                        <div style={{
-                            maxWidth: '480px',
-                            margin: '0 auto'
-                        }}>
-                            <div className="card" style={{
-                                padding: '2.5rem',
-                                textAlign: 'center'
-                            }}>
-                                <div style={{
-                                    width: '130px',
-                                    height: '130px',
-                                    margin: '0 auto 1.5rem',
-                                    borderRadius: '50%',
-                                    background: 'url("/images/team.png") center / cover',
-                                    border: '4px solid #FE5858',
-                                    boxShadow: '0 8px 24px rgba(254, 88, 88, 0.2)'
-                                }} />
-                                <h3 style={{
-                                    fontSize: '1.5rem',
-                                    marginBottom: '0.35rem',
-                                    fontWeight: 700
+                    {/* Founders */}
+                    <div className="grid desktop-2-col" style={{ gap: '2rem', maxWidth: '800px', margin: '0 auto 4rem' }}>
+                        {[
+                            {
+                                name: 'Ethan Barman',
+                                initials: 'EB',
+                                role: 'Co-Founder & CEO',
+                                bio: 'Ex-Airbnb professional with deep expertise in hospitality and real estate. Ethan leads Hostizzy\'s vision of transforming vacation rental management in India through technology and personalized service.',
+                                linkedin: 'https://www.linkedin.com/in/ethanbarman',
+                                color: '#FE5858'
+                            },
+                            {
+                                name: 'Ashutosh Karn',
+                                initials: 'AK',
+                                role: 'Co-Founder & COO',
+                                bio: 'Ex-Airbnb professional with expertise in operations and business development. Ashutosh drives Hostizzy\'s expansion strategy, partnerships, and on-ground operations across India.',
+                                linkedin: 'https://www.linkedin.com/in/ashutoshkarn-co/',
+                                color: '#3b82f6'
+                            }
+                        ].map((founder, i) => (
+                            <ScrollReveal key={i} delay={i * 0.1}>
+                                <div className="card" style={{
+                                    padding: '2.5rem',
+                                    textAlign: 'center',
+                                    height: '100%'
                                 }}>
-                                    Ethan Barman
-                                </h3>
-                                <p style={{
-                                    color: '#FE5858',
-                                    fontWeight: 600,
-                                    fontSize: '0.95rem',
-                                    marginBottom: '1rem'
-                                }}>
-                                    Founder & CEO
-                                </p>
-                                <p style={{
-                                    color: '#64748b',
-                                    lineHeight: 1.7,
-                                    fontSize: '0.95rem',
-                                    marginBottom: '1.25rem'
-                                }}>
-                                    Ex-Airbnb professional with deep expertise in hospitality and real estate. Ethan leads Hostizzy's vision of transforming vacation rental management in India through technology and personalized service.
-                                </p>
-                                <a
-                                    href="https://www.linkedin.com/in/ethanbarman/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    style={{
-                                        display: 'inline-flex',
+                                    <div style={{
+                                        width: '110px',
+                                        height: '110px',
+                                        margin: '0 auto 1.25rem',
+                                        borderRadius: '50%',
+                                        background: `linear-gradient(135deg, ${founder.color}, ${founder.color}99)`,
+                                        border: `4px solid ${founder.color}`,
+                                        boxShadow: `0 8px 24px ${founder.color}33`,
+                                        display: 'flex',
                                         alignItems: 'center',
-                                        gap: '0.5rem',
-                                        color: '#0077b5',
+                                        justifyContent: 'center',
+                                        color: '#fff',
+                                        fontSize: '2rem',
+                                        fontWeight: 800,
+                                        fontFamily: 'var(--font-display)',
+                                        letterSpacing: '0.05em'
+                                    }}>
+                                        {founder.initials}
+                                    </div>
+                                    <h3 style={{
+                                        fontSize: '1.35rem',
+                                        marginBottom: '0.3rem',
+                                        fontWeight: 700
+                                    }}>
+                                        {founder.name}
+                                    </h3>
+                                    <p style={{
+                                        color: founder.color,
                                         fontWeight: 600,
-                                        fontSize: '0.95rem',
-                                        textDecoration: 'none',
-                                        transition: 'opacity 0.2s'
-                                    }}
-                                    onMouseEnter={e => e.currentTarget.style.opacity = '0.75'}
-                                    onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-                                >
-                                    <Linkedin size={18} />
-                                    Connect on LinkedIn
-                                    <ExternalLink size={14} />
-                                </a>
-                            </div>
+                                        fontSize: '0.9rem',
+                                        marginBottom: '1rem'
+                                    }}>
+                                        {founder.role}
+                                    </p>
+                                    <p style={{
+                                        color: '#64748b',
+                                        lineHeight: 1.7,
+                                        fontSize: '0.9rem',
+                                        marginBottom: '1.25rem'
+                                    }}>
+                                        {founder.bio}
+                                    </p>
+                                    <a
+                                        href={founder.linkedin}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        style={{
+                                            display: 'inline-flex',
+                                            alignItems: 'center',
+                                            gap: '0.5rem',
+                                            color: '#0077b5',
+                                            fontWeight: 600,
+                                            fontSize: '0.9rem',
+                                            textDecoration: 'none',
+                                            transition: 'opacity 0.2s'
+                                        }}
+                                        onMouseEnter={e => e.currentTarget.style.opacity = '0.75'}
+                                        onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+                                    >
+                                        <Linkedin size={18} />
+                                        Connect on LinkedIn
+                                        <ExternalLink size={14} />
+                                    </a>
+                                </div>
+                            </ScrollReveal>
+                        ))}
+                    </div>
+
+                    {/* Department Overview */}
+                    <ScrollReveal>
+                        <div className="text-center" style={{ marginBottom: '2rem' }}>
+                            <h3 style={{
+                                fontFamily: 'var(--font-display)',
+                                fontSize: '1.75rem',
+                                marginBottom: '0.5rem',
+                                fontWeight: 700
+                            }}>
+                                Our Teams
+                            </h3>
+                            <p style={{ color: '#64748b', fontSize: '1rem' }}>
+                                A multidisciplinary team powering every property.
+                            </p>
                         </div>
                     </ScrollReveal>
+
+                    <div className="grid desktop-4-col" style={{ gap: '1.25rem' }}>
+                        {[
+                            {
+                                name: 'Operations',
+                                icon: <Shield size={24} />,
+                                desc: 'On-ground property management, housekeeping, maintenance & vendor coordination across all locations.',
+                                color: '#22c55e'
+                            },
+                            {
+                                name: 'Digital Success',
+                                icon: <TrendingUp size={24} />,
+                                desc: 'OTA optimization, dynamic pricing, digital marketing, content strategy & revenue management.',
+                                color: '#3b82f6'
+                            },
+                            {
+                                name: 'Technology',
+                                icon: <Sparkles size={24} />,
+                                desc: 'Building HostOS, ResIQ & the booking platform. Full-stack engineering, AI/ML & product development.',
+                                color: '#8b5cf6'
+                            },
+                            {
+                                name: 'Guest Experience',
+                                icon: <Star size={24} />,
+                                desc: 'Concierge services, guest communications, quality assurance & experience curation for every stay.',
+                                color: '#f59e0b'
+                            }
+                        ].map((dept, i) => (
+                            <ScrollReveal key={i} delay={i * 0.08}>
+                                <div className="card" style={{
+                                    padding: '1.75rem',
+                                    height: '100%',
+                                    borderTop: `3px solid ${dept.color}`,
+                                    transition: 'transform 0.25s ease, box-shadow 0.25s ease'
+                                }}
+                                    onMouseEnter={e => {
+                                        e.currentTarget.style.transform = 'translateY(-3px)';
+                                        e.currentTarget.style.boxShadow = '0 8px 30px rgba(0,0,0,0.08)';
+                                    }}
+                                    onMouseLeave={e => {
+                                        e.currentTarget.style.transform = 'translateY(0)';
+                                        e.currentTarget.style.boxShadow = '';
+                                    }}
+                                >
+                                    <div style={{ color: dept.color, marginBottom: '0.75rem' }}>{dept.icon}</div>
+                                    <h4 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.5rem' }}>{dept.name}</h4>
+                                    <p style={{ color: '#64748b', fontSize: '0.85rem', lineHeight: 1.7, margin: 0 }}>{dept.desc}</p>
+                                </div>
+                            </ScrollReveal>
+                        ))}
+                    </div>
                 </div>
             </section>
 

@@ -12,7 +12,7 @@ export const SettingsProvider = ({ children }) => {
         supportEmail: 'stay@hostizzy.com',
         supportPhone: '+91 95604 94001',
         footerTagline: "India's leading vacation rental management firm. We transform properties into premium hospitality brands.",
-        instagramUrl: 'https://www.instagram.com/hostizy/',
+        instagramUrl: 'https://www.instagram.com/hostizzy',
         linkedinUrl: 'https://www.linkedin.com/company/hostizzy',
         whatsappNumber: '919560494001'
     });

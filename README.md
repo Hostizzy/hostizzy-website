@@ -6,11 +6,11 @@ Hostizzy is a modern, high-performance showcase website for India's leading vaca
 
 **The Website** is a speaker/showcase for our work - the front door where users discover Hostizzy.
 
-**The Heavy-Duty Products** (launching soon):
-- **HostOS**: Complete property management system
-- **ResIQ**: Revenue & market analytics platform
-- **TravelCRM**: Guest loyalty & lead management
-- **JuxTravel**: Full-fledged travel marketplace (currently properties & experiences listed on main site)
+**The Heavy-Duty Products**:
+- **HostOS** (https://hostos.hostizzy.com): Smart PMS with GST invoicing, WhatsApp inbox, AI pricing, guest/owner portals
+- **ResIQ** (https://resiq.hostizzy.com): Daily operations dashboard for reservations, payments, guest KYC
+- **JuxTravel**: Direct booking engine (coming soon)
+- **TripMind AI**: Neural concierge for personalized travel (coming soon)
 
 ## 🚀 Key Features
 
@@ -29,21 +29,24 @@ Hostizzy is a modern, high-performance showcase website for India's leading vaca
 - **Admin Panel**: Full JSON-based CMS at `/admin`
 
 ### User Engagement
+- **AI Chatbot**: GPT-5-mini powered conversational assistant on every page
+- **Lead Wizard**: 4-step property onboarding form with service plan education
 - **Unified Inquiries**: Contact forms, booking requests, calculator leads
-- **Live Chat**: Tawk.to integration for instant support
-- **WhatsApp**: Direct communication channel
-- **Social Proof**: Instagram feed, testimonials, reviews
+- **WhatsApp**: Direct communication fallback
+- **Social Proof**: Testimonials, reviews
 
 ## 🛠️ Tech Stack
 
 - **Framework**: Next.js 16.1.1 (App Router)
 - **Frontend**: React 19, Framer Motion, Lucide Icons
 - **Styling**: CSS-in-JS with modern CSS variables
-- **Data**: JSON-based flat-file system (server/data/)
+- **Database**: Firebase Firestore (leads, contacts, careers, blogs, chat-logs)
+- **AI**: OpenAI GPT-5-mini (chatbot, revenue estimates, blog writer)
+- **Email**: Nodemailer + Gmail OAuth2
 - **APIs**: RESTful API routes with Bearer token auth
 - **Deployment**: Vercel with automatic deployments
-- **Analytics**: Google Analytics 4 ready
-- **SEO**: Server-side rendering, meta tags, Schema markup
+- **Analytics**: Google Analytics 4
+- **SEO**: Server-side metadata (generateMetadata), per-page JSON-LD structured data, next-sitemap
 
 ## 📦 Quick Start
 
@@ -228,7 +231,7 @@ This is a private repository. For internal team members:
 
 - **Technical Issues**: Contact development team
 - **Content Updates**: Use admin panel at `/admin`
-- **Business Inquiries**: hello@hostizzy.com
+- **Business Inquiries**: founder@hostizzy.com
 
 ## 📄 License
 

@@ -3,9 +3,12 @@
 import React from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import ScrollReveal from '../../../components/ScrollReveal';
-import SEO from '../../../components/SEO';
-import PropertyLeadWizard from '../../../components/PropertyLeadWizard';
+const PropertyLeadWizard = dynamic(() => import('../../../components/PropertyLeadWizard'), {
+  ssr: false,
+  loading: () => <div style={{ minHeight: '460px' }} />
+});
 import { getLocation } from '@/lib/locations';
 import {
     Check, ArrowRight, MapPin, Home, Star, TrendingUp, Calendar,
@@ -81,8 +84,8 @@ export default function LocationPage() {
         "name": `Hostizzy - ${location.name}`,
         "description": location.description,
         "url": `https://www.hostizzy.com/locations/${location.slug}`,
-        "telephone": "+91-9220-4444-08",
-        "email": "hello@hostizzy.com",
+        "telephone": "+91-95604-94001",
+        "email": "stay@hostizzy.com",
         "areaServed": {
             "@type": "State",
             "name": location.name
@@ -104,12 +107,7 @@ export default function LocationPage() {
 
     return (
         <>
-            <SEO
-                title={location.heroTitle}
-                description={location.heroSubtitle}
-                keywords={location.keywords}
-                schema={localBusinessSchema}
-            />
+
 
             {/* Hero Section */}
             <section className="section text-center" style={{

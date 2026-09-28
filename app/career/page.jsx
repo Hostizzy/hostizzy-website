@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import Head from 'next/head';
-import SEO from '../../components/SEO';
+
+
 import ScrollReveal from '../../components/ScrollReveal';
 import {
     ArrowRight, MapPin, Briefcase, Coffee, Plane, BookOpen, Users,
@@ -16,12 +16,19 @@ const DEPT_COLORS = {
     Engineering: '#3b82f6',
     Growth: '#22c55e',
     Operations: '#f59e0b',
+    Leadership: '#FE5858',
 };
 
 const Career = () => {
     const [activeFilter, setActiveFilter] = useState('All');
     const [openings, setOpenings] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [expandedJob, setExpandedJob] = useState(null);
+    const [applyRole, setApplyRole] = useState('');
+    const [applyForm, setApplyForm] = useState({ firstName: '', lastName: '', phone: '', email: '', linkedin: '', resume: '', message: '' });
+    const [applyStatus, setApplyStatus] = useState(''); // '' | 'sending' | 'sent'
+    const [honeypot, setHoneypot] = useState('');
+    const formLoadedAt = useRef(Date.now());
 
     useEffect(() => {
         fetch('/api/careers')
@@ -91,7 +98,7 @@ const Career = () => {
 
     return (
         <>
-            <SEO title="Careers at Hostizzy - Join India's Leading VRM Company" />
+
 
             {/* JobPosting Schema for Google Jobs */}
             {openings.length > 0 && (
@@ -208,119 +215,314 @@ const Career = () => {
                 </div>
             </section>
 
-            {/* ── Job Listings ── */}
+            {/* ── Current Openings + Apply Form (Two-Column) ── */}
+            <style>{`
+                @media (max-width: 768px) {
+                    .career-two-col { flex-direction: column !important; }
+                    .career-apply-col { width: 100% !important; position: static !important; }
+                }
+            `}</style>
             <section className="section" style={{ background: '#f8fafc' }}>
                 <div className="container">
                     <ScrollReveal>
                         <div style={{ marginBottom: '2rem' }}>
-                            <h2 style={{ fontSize: '1.75rem', fontWeight: 700, marginBottom: '0.35rem' }}>Open Positions</h2>
+                            <h2 style={{ fontSize: '1.75rem', fontWeight: 700, marginBottom: '0.35rem' }}>Current Openings</h2>
                             <p style={{ color: '#64748b', fontSize: '0.95rem' }}>
                                 {loading ? 'Loading...' : `${filteredOpenings.length} role${filteredOpenings.length !== 1 ? 's' : ''} available`}
                             </p>
                         </div>
                     </ScrollReveal>
 
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '960px' }}>
-                        {loading ? (
-                            // Loading skeletons
-                            Array.from({ length: 3 }).map((_, i) => (
-                                <div key={i} className="card" style={{
-                                    padding: '1.75rem 2rem',
-                                    borderLeft: '4px solid #e2e8f0',
-                                }}>
-                                    <div style={{ height: '1.2rem', width: '60%', background: '#e2e8f0', borderRadius: '6px', marginBottom: '0.75rem' }} />
-                                    <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.75rem' }}>
-                                        <div style={{ height: '1rem', width: '80px', background: '#f1f5f9', borderRadius: '999px' }} />
-                                        <div style={{ height: '1rem', width: '120px', background: '#f1f5f9', borderRadius: '999px' }} />
-                                        <div style={{ height: '1rem', width: '80px', background: '#f1f5f9', borderRadius: '999px' }} />
+                    <div className="career-two-col" style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
+                        {/* Left Column — Accordion Job Listings */}
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                            {loading ? (
+                                Array.from({ length: 3 }).map((_, i) => (
+                                    <div key={i} style={{
+                                        background: '#fff', borderRadius: '10px', border: '1px solid #e2e8f0',
+                                        padding: '1.25rem 1.5rem', marginBottom: '0.75rem'
+                                    }}>
+                                        <div style={{ height: '1.1rem', width: '55%', background: '#e2e8f0', borderRadius: '6px', marginBottom: '0.5rem' }} />
+                                        <div style={{ height: '0.85rem', width: '30%', background: '#f1f5f9', borderRadius: '999px' }} />
                                     </div>
-                                    <div style={{ height: '0.9rem', width: '90%', background: '#f1f5f9', borderRadius: '4px', marginBottom: '0.4rem' }} />
-                                    <div style={{ height: '0.9rem', width: '70%', background: '#f1f5f9', borderRadius: '4px' }} />
-                                </div>
-                            ))
-                        ) : (
-                            filteredOpenings.map((job, i) => {
-                                const deptColor = DEPT_COLORS[job.department] || '#64748b';
-                                return (
-                                    <ScrollReveal key={job.id || i} delay={i * 0.05}>
-                                        <div className="card" style={{
-                                            padding: '1.75rem 2rem',
-                                            borderLeft: `4px solid ${deptColor}`,
-                                            display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start',
-                                            gap: '1.5rem', flexWrap: 'wrap',
-                                            transition: 'box-shadow 0.25s ease, border-color 0.25s ease',
-                                            cursor: 'pointer'
-                                        }}
-                                            onMouseEnter={e => {
-                                                e.currentTarget.style.boxShadow = '0 8px 30px rgba(0,0,0,0.1)';
-                                                e.currentTarget.style.borderLeftWidth = '5px';
-                                            }}
-                                            onMouseLeave={e => {
-                                                e.currentTarget.style.boxShadow = '';
-                                                e.currentTarget.style.borderLeftWidth = '4px';
-                                            }}
-                                        >
-                                            <div style={{ flex: 1, minWidth: '260px' }}>
-                                                {/* Title row */}
-                                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.6rem', flexWrap: 'wrap' }}>
-                                                    <h3 style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0, lineHeight: 1.3 }}>{job.role}</h3>
-                                                    <span style={{
-                                                        display: 'inline-flex', alignItems: 'center', gap: '0.3rem',
-                                                        fontSize: '0.75rem', fontWeight: 600, color: '#475569',
-                                                        background: '#f1f5f9', padding: '0.2rem 0.6rem', borderRadius: '4px'
-                                                    }}>
-                                                        <Building2 size={12} /> Hostizzy
+                                ))
+                            ) : (
+                                <div style={{ background: '#fff', borderRadius: '12px', border: '1px solid #e2e8f0', overflow: 'hidden' }}>
+                                    {filteredOpenings.map((job, i) => {
+                                        const deptColor = DEPT_COLORS[job.department] || '#64748b';
+                                        const isExpanded = expandedJob === (job.id || i);
+                                        return (
+                                            <div key={job.id || i} style={{ borderBottom: i < filteredOpenings.length - 1 ? '1px solid #e2e8f0' : 'none' }}>
+                                                {/* Accordion Header */}
+                                                <button
+                                                    onClick={() => setExpandedJob(isExpanded ? null : (job.id || i))}
+                                                    style={{
+                                                        width: '100%', display: 'flex', alignItems: 'center', gap: '0.75rem',
+                                                        padding: '1.1rem 1.5rem', background: 'none', border: 'none',
+                                                        cursor: 'pointer', textAlign: 'left', fontFamily: 'inherit',
+                                                        transition: 'background 0.15s ease',
+                                                    }}
+                                                    onMouseEnter={e => e.currentTarget.style.background = '#f8fafc'}
+                                                    onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                                                >
+                                                    <div style={{ width: '4px', height: '28px', borderRadius: '2px', background: deptColor, flexShrink: 0 }} />
+                                                    <div style={{ flex: 1, minWidth: 0 }}>
+                                                        <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, lineHeight: 1.3, color: '#0f172a' }}>{job.role}</h3>
+                                                        <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.3rem', flexWrap: 'wrap' }}>
+                                                            <span style={{ fontSize: '0.78rem', color: deptColor, fontWeight: 600 }}>{job.department}</span>
+                                                            <span style={{ fontSize: '0.78rem', color: '#94a3b8' }}>{job.location}</span>
+                                                        </div>
+                                                    </div>
+                                                    <span style={{ fontSize: '1.3rem', color: '#94a3b8', flexShrink: 0, fontWeight: 300, lineHeight: 1 }}>
+                                                        {isExpanded ? '\u2212' : '+'}
                                                     </span>
-                                                </div>
+                                                </button>
 
-                                                {/* Tags */}
-                                                <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
-                                                    <span style={{
-                                                        fontSize: '0.8rem', padding: '0.2rem 0.65rem', borderRadius: '999px',
-                                                        background: `${deptColor}14`, color: deptColor, fontWeight: 600,
-                                                        border: `1px solid ${deptColor}30`
-                                                    }}>
-                                                        {job.department}
-                                                    </span>
-                                                    <span style={{
-                                                        fontSize: '0.8rem', padding: '0.2rem 0.65rem', borderRadius: '999px',
-                                                        background: '#f1f5f9', color: '#475569',
-                                                        display: 'inline-flex', alignItems: 'center', gap: '0.3rem'
-                                                    }}>
-                                                        <MapPin size={12} /> {job.location}
-                                                    </span>
-                                                    <span style={{
-                                                        fontSize: '0.8rem', padding: '0.2rem 0.65rem', borderRadius: '999px',
-                                                        background: '#f1f5f9', color: '#475569',
-                                                        display: 'inline-flex', alignItems: 'center', gap: '0.3rem'
-                                                    }}>
-                                                        <Briefcase size={12} /> {job.experience}
-                                                    </span>
-                                                </div>
+                                                {/* Accordion Body */}
+                                                {isExpanded && (
+                                                    <div style={{ padding: '0 1.5rem 1.5rem 2.75rem' }}>
+                                                        {job.tagline && (
+                                                            <p style={{ fontStyle: 'italic', color: '#64748b', fontSize: '0.92rem', margin: '0 0 1rem 0', lineHeight: 1.6 }}>
+                                                                {job.tagline}
+                                                            </p>
+                                                        )}
 
-                                                {/* Desc */}
-                                                <p style={{ color: '#475569', lineHeight: 1.6, fontSize: '0.92rem', margin: 0 }}>{job.description}</p>
+                                                        {/* Metadata pills */}
+                                                        <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
+                                                            <span style={{
+                                                                fontSize: '0.8rem', padding: '0.25rem 0.7rem', borderRadius: '999px',
+                                                                background: '#f1f5f9', color: '#475569',
+                                                                display: 'inline-flex', alignItems: 'center', gap: '0.3rem'
+                                                            }}>
+                                                                <MapPin size={12} /> {job.location}
+                                                            </span>
+                                                            <span style={{
+                                                                fontSize: '0.8rem', padding: '0.25rem 0.7rem', borderRadius: '999px',
+                                                                background: '#f1f5f9', color: '#475569',
+                                                                display: 'inline-flex', alignItems: 'center', gap: '0.3rem'
+                                                            }}>
+                                                                <Briefcase size={12} /> {job.experience}
+                                                            </span>
+                                                            {job.commitment && (
+                                                                <span style={{
+                                                                    fontSize: '0.8rem', padding: '0.25rem 0.7rem', borderRadius: '999px',
+                                                                    background: '#f1f5f9', color: '#475569',
+                                                                    display: 'inline-flex', alignItems: 'center', gap: '0.3rem'
+                                                                }}>
+                                                                    <Clock size={12} /> {job.commitment}
+                                                                </span>
+                                                            )}
+                                                        </div>
 
-                                                {/* Posted */}
-                                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: '0.75rem', fontSize: '0.8rem', color: '#94a3b8' }}>
-                                                    <Clock size={13} />
-                                                    Posted {getDaysAgo(job.postedDate)}
-                                                </div>
+                                                        {/* Responsibilities */}
+                                                        {job.responsibilities && job.responsibilities.length > 0 && (
+                                                            <div style={{ marginBottom: '1.25rem' }}>
+                                                                <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: '#FE5858', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                                                                    Role &amp; Responsibilities
+                                                                </h4>
+                                                                <ul style={{ margin: 0, paddingLeft: '1.15rem', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+                                                                    {job.responsibilities.map((item, ri) => (
+                                                                        <li key={ri} style={{ fontSize: '0.9rem', color: '#475569', lineHeight: 1.6 }}>{item}</li>
+                                                                    ))}
+                                                                </ul>
+                                                            </div>
+                                                        )}
+
+                                                        {/* Who Should Apply */}
+                                                        {job.whoShouldApply && job.whoShouldApply.length > 0 && (
+                                                            <div style={{ marginBottom: '1.25rem' }}>
+                                                                <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: '#334155', marginBottom: '0.5rem' }}>
+                                                                    Who should apply?
+                                                                </h4>
+                                                                <ul style={{ margin: 0, paddingLeft: '1.15rem', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+                                                                    {job.whoShouldApply.map((item, wi) => (
+                                                                        <li key={wi} style={{ fontSize: '0.9rem', color: '#475569', lineHeight: 1.6 }}>{item}</li>
+                                                                    ))}
+                                                                </ul>
+                                                            </div>
+                                                        )}
+
+                                                        <button
+                                                            onClick={() => {
+                                                                setApplyRole(job.role);
+                                                                if (window.innerWidth < 768) {
+                                                                    document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth' });
+                                                                }
+                                                            }}
+                                                            className="btn btn-gradient"
+                                                            style={{
+                                                                padding: '0.6rem 1.4rem', fontSize: '0.88rem', fontWeight: 600,
+                                                                display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
+                                                                cursor: 'pointer', border: 'none',
+                                                            }}
+                                                        >
+                                                            Apply for this role <ArrowRight size={15} />
+                                                        </button>
+                                                    </div>
+                                                )}
                                             </div>
-
-                                            {/* Apply */}
-                                            <Link href="/contact" className="btn btn-gradient" style={{
-                                                padding: '0.65rem 1.5rem', whiteSpace: 'nowrap',
-                                                fontSize: '0.9rem', fontWeight: 600, flexShrink: 0,
-                                                display: 'inline-flex', alignItems: 'center', gap: '0.4rem'
-                                            }}>
-                                                Apply <ArrowRight size={15} />
-                                            </Link>
+                                        );
+                                    })}
+                                    {filteredOpenings.length === 0 && (
+                                        <div style={{ padding: '2.5rem', textAlign: 'center', color: '#94a3b8', fontSize: '0.95rem' }}>
+                                            No openings found for this department.
                                         </div>
-                                    </ScrollReveal>
-                                );
-                            })
-                        )}
+                                    )}
+                                </div>
+                            )}
+
+                            {/* Why Hostizzy mini section */}
+                            <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#fff', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+                                <h4 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.75rem', color: '#0f172a' }}>Why Hostizzy?</h4>
+                                <ul style={{ margin: 0, paddingLeft: '1.15rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                                    <li style={{ fontSize: '0.9rem', color: '#475569', lineHeight: 1.6 }}>
+                                        High-growth startup with 45+ properties and Rs 12 Cr+ GMV -- be part of the journey from the ground up.
+                                    </li>
+                                    <li style={{ fontSize: '0.9rem', color: '#475569', lineHeight: 1.6 }}>
+                                        Flat hierarchy with zero bureaucracy -- your ideas ship in days, not months.
+                                    </li>
+                                    <li style={{ fontSize: '0.9rem', color: '#475569', lineHeight: 1.6 }}>
+                                        Flexible work, learning budget, epic offsites, and a culture that values craft over clock-watching.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        {/* Right Column — Sticky Apply Form */}
+                        <div id="apply-form" className="career-apply-col" style={{ width: '380px', flexShrink: 0, position: 'sticky', top: '100px' }}>
+                            {applyStatus === 'sent' ? (
+                                <div style={{ background: '#fff', borderRadius: '12px', border: '1px solid #e2e8f0', padding: '2.5rem 1.5rem', textAlign: 'center' }}>
+                                    <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🎉</div>
+                                    <h3 style={{ fontSize: '1.3rem', fontWeight: 700, marginBottom: '0.5rem' }}>Application Received!</h3>
+                                    <p style={{ color: '#64748b', marginBottom: '1.5rem', fontSize: '0.9rem' }}>We&apos;ll review your application and get back to you within 5 business days.</p>
+                                    <button onClick={() => { setApplyStatus(''); setApplyForm({ firstName: '', lastName: '', phone: '', email: '', linkedin: '', resume: '', message: '' }); setApplyRole(''); }}
+                                        style={{ padding: '0.55rem 1.25rem', borderRadius: '8px', border: '1px solid #e2e8f0', background: '#fff', cursor: 'pointer', fontSize: '0.88rem', fontWeight: 600 }}>
+                                        Submit Another
+                                    </button>
+                                </div>
+                            ) : (
+                                <div style={{ background: '#fff', borderRadius: '12px', border: '1px solid #e2e8f0', padding: '1.5rem' }}>
+                                    <h3 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '1.25rem', color: '#0f172a' }}>Apply Now</h3>
+                                    {/* Honeypot */}
+                                    <div style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, overflow: 'hidden' }} aria-hidden="true">
+                                        <input type="text" name="website_url" tabIndex={-1} autoComplete="off" value={honeypot} onChange={e => setHoneypot(e.target.value)} />
+                                    </div>
+
+                                    {/* First Name + Last Name */}
+                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                                        <div>
+                                            <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>First Name *</label>
+                                            <input type="text" placeholder="First name" value={applyForm.firstName}
+                                                onChange={e => setApplyForm(p => ({ ...p, firstName: e.target.value }))}
+                                                style={{ width: '100%', padding: '0.6rem 0.75rem', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>Last Name</label>
+                                            <input type="text" placeholder="Last name" value={applyForm.lastName}
+                                                onChange={e => setApplyForm(p => ({ ...p, lastName: e.target.value }))}
+                                                style={{ width: '100%', padding: '0.6rem 0.75rem', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {/* Contact + Email */}
+                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                                        <div>
+                                            <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>Contact *</label>
+                                            <input type="tel" placeholder="Phone number" value={applyForm.phone}
+                                                onChange={e => setApplyForm(p => ({ ...p, phone: e.target.value }))}
+                                                style={{ width: '100%', padding: '0.6rem 0.75rem', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>Email *</label>
+                                            <input type="email" placeholder="Email address" value={applyForm.email}
+                                                onChange={e => setApplyForm(p => ({ ...p, email: e.target.value }))}
+                                                style={{ width: '100%', padding: '0.6rem 0.75rem', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {/* Applying For */}
+                                    <div style={{ marginBottom: '0.75rem' }}>
+                                        <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>Applying For *</label>
+                                        <select value={applyRole} onChange={e => setApplyRole(e.target.value)}
+                                            style={{ width: '100%', padding: '0.6rem 0.75rem', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', fontFamily: 'inherit', background: '#fff', boxSizing: 'border-box' }}>
+                                            <option value="">Select a role</option>
+                                            {openings.map(o => <option key={o.id} value={o.role}>{o.role}</option>)}
+                                            <option value="Open Application">Open Application</option>
+                                        </select>
+                                    </div>
+
+                                    {/* LinkedIn */}
+                                    <div style={{ marginBottom: '0.75rem' }}>
+                                        <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>LinkedIn Profile</label>
+                                        <input type="url" placeholder="https://linkedin.com/in/..." value={applyForm.linkedin}
+                                            onChange={e => setApplyForm(p => ({ ...p, linkedin: e.target.value }))}
+                                            style={{ width: '100%', padding: '0.6rem 0.75rem', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}
+                                        />
+                                    </div>
+
+                                    {/* Resume / Portfolio */}
+                                    <div style={{ marginBottom: '0.75rem' }}>
+                                        <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>Resume / Portfolio Link</label>
+                                        <input type="url" placeholder="Google Drive / Dropbox link" value={applyForm.resume}
+                                            onChange={e => setApplyForm(p => ({ ...p, resume: e.target.value }))}
+                                            style={{ width: '100%', padding: '0.6rem 0.75rem', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}
+                                        />
+                                    </div>
+
+                                    {/* Message */}
+                                    <div style={{ marginBottom: '1rem' }}>
+                                        <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.3rem' }}>Message / Cover Note</label>
+                                        <textarea placeholder="Tell us why you'd be a great fit..." rows={3} value={applyForm.message}
+                                            onChange={e => setApplyForm(p => ({ ...p, message: e.target.value }))}
+                                            style={{ width: '100%', padding: '0.6rem 0.75rem', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', fontFamily: 'inherit', resize: 'vertical', boxSizing: 'border-box' }}
+                                        />
+                                    </div>
+
+                                    <button
+                                        disabled={!applyForm.firstName || !applyForm.phone || !applyForm.email || !applyRole || applyStatus === 'sending'}
+                                        onClick={async () => {
+                                            setApplyStatus('sending');
+                                            try {
+                                                await fetch('/api/contact', {
+                                                    method: 'POST',
+                                                    headers: { 'Content-Type': 'application/json' },
+                                                    body: JSON.stringify({
+                                                        name: `${applyForm.firstName} ${applyForm.lastName}`.trim(),
+                                                        email: applyForm.email,
+                                                        phone: applyForm.phone,
+                                                        message: `[Job Application: ${applyRole}]${applyForm.linkedin ? `\nLinkedIn: ${applyForm.linkedin}` : ''}${applyForm.resume ? `\nResume: ${applyForm.resume}` : ''}${applyForm.message ? `\n\n${applyForm.message}` : ''}`,
+                                                        department: 'careers',
+                                                        departmentEmail: 'founder@hostizzy.com',
+                                                        subject: `Job Application: ${applyRole}`,
+                                                        _hp_website: honeypot,
+                                                        _formLoadedAt: formLoadedAt.current,
+                                                    }),
+                                                });
+                                                setApplyStatus('sent');
+                                            } catch {
+                                                setApplyStatus('');
+                                                alert('Something went wrong. Please try again or email careers@hostizzy.com');
+                                            }
+                                        }}
+                                        className="btn btn-gradient"
+                                        style={{
+                                            width: '100%', padding: '0.75rem', fontSize: '0.95rem', fontWeight: 700,
+                                            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
+                                            opacity: (!applyForm.firstName || !applyForm.phone || !applyForm.email || !applyRole || applyStatus === 'sending') ? 0.5 : 1,
+                                            cursor: (!applyForm.firstName || !applyForm.phone || !applyForm.email || !applyRole || applyStatus === 'sending') ? 'not-allowed' : 'pointer',
+                                            border: 'none',
+                                        }}
+                                    >
+                                        {applyStatus === 'sending' ? 'Submitting...' : 'Apply Now'}
+                                        {applyStatus !== 'sending' && <ArrowRight size={18} />}
+                                    </button>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             </section>
@@ -420,7 +622,7 @@ const Career = () => {
                         {
                             icon: <Rocket size={28} />,
                             title: 'High Growth',
-                            desc: '45+ properties, \u20b915 Cr+ GMV, and we\'re just getting started. Grow with us.',
+                            desc: '45+ properties, \u20b912 Cr+ GMV, and we\'re just getting started. Grow with us.',
                             gradient: 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)',
                             iconColor: '#2563eb'
                         },

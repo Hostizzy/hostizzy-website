@@ -55,7 +55,19 @@ export default function Certification() {
 
                 <div className="container text-center" style={{ position: 'relative', zIndex: 1 }}>
                     <ScrollReveal>
-                        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem', marginBottom: '2rem' }}>
+                            <div style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.5rem',
+                                background: 'linear-gradient(135deg, rgba(254, 88, 88, 0.1) 0%, rgba(255, 138, 128, 0.1) 100%)',
+                                border: '1px solid rgba(254, 88, 88, 0.2)',
+                                padding: '0.5rem 1.25rem',
+                                borderRadius: '100px'
+                            }}>
+                                <Sparkles size={16} color="var(--color-primary)" />
+                                <span style={{ fontWeight: 700, color: 'var(--color-primary)', fontSize: '0.8rem', letterSpacing: '0.5px' }}>EARLY ACCESS — LAUNCHING SOON</span>
+                            </div>
                             <div style={{
                                 display: 'flex',
                                 alignItems: 'center',
@@ -295,7 +307,7 @@ export default function Certification() {
                 <ScrollReveal>
                     <div className="card" style={{
                         padding: '5rem 2rem',
-                        background: 'linear-gradient(135deg, #FE5858 0%, #ff8a8a 100%)',
+                        background: 'linear-gradient(135deg, var(--color-primary-strong) 0%, var(--color-primary-text) 100%)',
                         color: 'white',
                         borderRadius: '2.5rem',
                         position: 'relative',
@@ -305,14 +317,14 @@ export default function Certification() {
                         <div style={{ position: 'relative', zIndex: 1 }}>
                             <Award size={48} style={{ marginBottom: '1.5rem', opacity: 0.9 }} />
                             <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 900, marginBottom: '1.5rem', color: 'white' }}>
-                                Ready to Elevate Your Hosting?
+                                Be Among the First Certified Hosts
                             </h2>
                             <p style={{ fontSize: '1.2rem', maxWidth: '600px', margin: '0 auto 2.5rem', opacity: 0.95 }}>
-                                Join hundreds of certified hosts who are earning more, stressing less, and building lasting guest relationships.
+                                Join the waitlist for early access to India's first host certification program. Get certified, earn more, and stand out on every platform.
                             </p>
                             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-                                <Link href="/contact" className="btn" style={{ background: 'white', color: 'var(--color-primary)', padding: '1rem 2.5rem', fontWeight: 800 }}>
-                                    Apply for Certification <ArrowRight size={18} style={{ marginLeft: '0.5rem' }} />
+                                <Link href="/contact?subject=Certification%20Early%20Access" className="btn" style={{ background: 'white', color: 'var(--color-primary)', padding: '1rem 2.5rem', fontWeight: 800 }}>
+                                    Join the Waitlist <ArrowRight size={18} style={{ marginLeft: '0.5rem' }} />
                                 </Link>
                                 <Link href="/services" className="btn btn-outline" style={{ borderColor: 'white', color: 'white', padding: '1rem 2.5rem', fontWeight: 800 }}>
                                     Learn About Our Services

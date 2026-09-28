@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, after } from 'next/server';
 import { withAuth } from '@/lib/auth';
 import { adminDb } from '@/lib/firebase-admin';
 import { DATA_FILES, readJson, writeJson } from '@/lib/db';
@@ -56,8 +56,14 @@ export async function POST(request) {
       }
     }
 
-    // Fire-and-forget email notification
-    sendCalculatorLeadNotification(newLead).catch(() => {});
+    // Send email after response — form responds instantly
+    after(async () => {
+      try {
+        await sendCalculatorLeadNotification(newLead);
+      } catch (err) {
+        console.error('Calculator lead email failed:', err.message);
+      }
+    });
 
     return successResponse({
       success: true,
@@ -69,5 +75,71 @@ export async function POST(request) {
   }
 }
 
+// PUT /api/calculator-leads — update status or add note (requires auth)
+const handlePUT = async (request) => {
+  try {
+    const body = await getRequestBody(request);
+    if (!body || !body.id) return errorResponse('Lead ID is required', 400);
+
+    const { id, status, note } = body;
+    const updates = { updatedAt: new Date().toISOString() };
+    if (status) updates.status = status;
+
+    if (adminDb) {
+      const docRef = adminDb.collection('calculator-leads').doc(id);
+      const doc = await docRef.get();
+      if (!doc.exists) return errorResponse('Lead not found', 404);
+      if (note) {
+        const existing = doc.data();
+        const notes = existing.notes || [];
+        notes.push({ text: note, timestamp: new Date().toISOString(), author: 'admin' });
+        updates.notes = notes;
+      }
+      await docRef.update(updates);
+    } else {
+      const leads = readJson(DATA_FILES.CALCULATOR_LEADS);
+      const idx = leads.findIndex(l => l.id === id);
+      if (idx === -1) return errorResponse('Lead not found', 404);
+      if (note) {
+        if (!leads[idx].notes) leads[idx].notes = [];
+        leads[idx].notes.push({ text: note, timestamp: new Date().toISOString(), author: 'admin' });
+      }
+      Object.assign(leads[idx], updates);
+      writeJson(DATA_FILES.CALCULATOR_LEADS, leads);
+    }
+
+    return successResponse({ success: true, message: 'Lead updated' });
+  } catch (error) {
+    console.error('Calculator lead update error:', error);
+    return errorResponse('Failed to update lead', 500);
+  }
+};
+
+// DELETE /api/calculator-leads — bulk delete (requires auth)
+const handleDELETE = async (request) => {
+  try {
+    const body = await getRequestBody(request);
+    if (!body || !body.ids || !Array.isArray(body.ids)) return errorResponse('Lead IDs array is required', 400);
+
+    const { ids } = body;
+    if (adminDb) {
+      const batch = adminDb.batch();
+      ids.forEach(id => batch.delete(adminDb.collection('calculator-leads').doc(id)));
+      await batch.commit();
+    } else {
+      const leads = readJson(DATA_FILES.CALCULATOR_LEADS);
+      const filtered = leads.filter(l => !ids.includes(l.id));
+      writeJson(DATA_FILES.CALCULATOR_LEADS, filtered);
+    }
+
+    return successResponse({ success: true, message: `${ids.length} lead(s) deleted` });
+  } catch (error) {
+    console.error('Calculator lead delete error:', error);
+    return errorResponse('Failed to delete leads', 500);
+  }
+};
+
 // GET endpoint requires auth (skipGetAuth: false)
 export const GET = withAuth(handleGET, { skipGetAuth: false });
+export const PUT = withAuth(handlePUT);
+export const DELETE = withAuth(handleDELETE);

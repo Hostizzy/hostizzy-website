@@ -3,7 +3,7 @@
 > India's premier vacation rental management company. We empower property owners with technology-driven management and deliver exceptional guest experiences.
 
 ## About
-Hostizzy (brand of Hostsphere India Pvt Ltd) is a vertically integrated hospitality technology company managing 50+ premium vacation rentals across India. We combine professional property management with proprietary technology (HostOS, ResIQ) to maximize owner revenue and guest satisfaction.
+Hostizzy (brand of Hostsphere India Pvt Ltd) is a vertically integrated hospitality technology company managing 45+ premium vacation rentals across India. We combine professional property management with proprietary technology (HostOS, ResIQ) to maximize owner revenue and guest satisfaction.
 
 ## What We Do
 - **Full-Service Property Management**: End-to-end vacation rental management including marketing, guest communication, housekeeping, maintenance, and revenue optimization
@@ -42,9 +42,9 @@ Hostizzy (brand of Hostsphere India Pvt Ltd) is a vertically integrated hospital
 - Premium Digital: ₹50,000/month (everything + website + SEO + complete digital presence)
 
 ## Stats
-- 50+ Properties Managed
-- ₹15 Crore+ Revenue Generated
-- 40,000+ Happy Guests
+- 45+ Properties Managed
+- ₹12 Crore+ GMV
+- 30,000+ Happy Guests
 - 4.9★ Average Rating
 
 ## Contact

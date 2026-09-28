@@ -105,6 +105,8 @@ const Navbar = () => {
                         <img
                             src={settings.logoUrl}
                             alt={settings.siteName}
+                            width={160}
+                            height={52}
                             style={{
                                 height: isScrolled ? '42px' : '52px',
                                 width: 'auto',
@@ -116,7 +118,7 @@ const Navbar = () => {
                         />
                     </Link>
 
-                    {/* Desktop Menu - Left-aligned */}
+                    {/* Desktop Menu - Centered between logo and CTAs */}
                     <ul className="desktop-menu" style={{
                         display: 'flex',
                         gap: '0.5rem',
@@ -124,9 +126,9 @@ const Navbar = () => {
                         margin: 0,
                         padding: 0,
                         listStyle: 'none',
-                        marginLeft: '3rem',
+                        marginLeft: 'auto',
+                        marginRight: 'auto',
                         whiteSpace: 'nowrap',
-                        flex: 1
                     }}>
                         {/* Home */}
                         <li>
@@ -541,10 +543,14 @@ const Navbar = () => {
                                             minWidth: '180px', display: 'flex', flexDirection: 'column', gap: '2px'
                                         }}
                                     >
-                                        {aboutLinks.map((link) => (
-                                            <Link
+                                        {aboutLinks.map((link) => {
+                                            const LinkTag = link.external ? 'a' : Link;
+                                            const extraProps = link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+                                            return (
+                                            <LinkTag
                                                 key={link.path}
                                                 href={link.path}
+                                                {...extraProps}
                                                 style={{
                                                     padding: '0.75rem 1rem',
                                                     borderRadius: '10px',
@@ -559,8 +565,8 @@ const Navbar = () => {
                                                 onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.transform = 'translateX(0)'; }}
                                             >
                                                 {link.name}
-                                            </Link>
-                                        ))}
+                                            </LinkTag>
+                                        );})}
                                     </motion.div>
                                 )}
                             </AnimatePresence>
@@ -598,7 +604,7 @@ const Navbar = () => {
                             fontWeight: 600,
                             boxShadow: '0 4px 12px rgba(254, 88, 88, 0.25)',
                             textDecoration: 'none',
-                            background: 'linear-gradient(135deg, #FE5858 0%, #FF6B6B 100%)',
+                            background: 'linear-gradient(135deg, var(--color-primary-strong) 0%, var(--color-primary-text) 100%)',
                             transition: 'all 0.2s ease',
                             whiteSpace: 'nowrap'
                         }}
@@ -682,7 +688,7 @@ const Navbar = () => {
                         >
                             {/* Header */}
                             <div style={{ padding: '2rem 1.5rem 1.5rem', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                <img src={settings.logoUrl} alt={settings.siteName} style={{ height: '42px', width: 'auto' }} />
+                                <img src={settings.logoUrl} alt={settings.siteName} width={160} height={42} style={{ height: '42px', width: 'auto' }} />
                                 <button
                                     onClick={() => setIsMobileMenuOpen(false)}
                                     style={{
@@ -838,11 +844,18 @@ const Navbar = () => {
                                                 transition={{ duration: 0.2 }}
                                                 style={{ overflow: 'hidden', backgroundColor: 'var(--color-secondary)' }}
                                             >
-                                                {aboutLinks.map((link) => (
-                                                    <Link key={link.path} href={link.path} onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.85rem 1.5rem 0.85rem 3.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>
-                                                        {link.name}
-                                                    </Link>
-                                                ))}
+                                                {aboutLinks.map((link) => {
+                                                    if (link.external) return (
+                                                        <a key={link.path} href={link.path} target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.85rem 1.5rem 0.85rem 3.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>
+                                                            {link.name}
+                                                        </a>
+                                                    );
+                                                    return (
+                                                        <Link key={link.path} href={link.path} onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', padding: '0.85rem 1.5rem 0.85rem 3.5rem', color: 'var(--color-foreground)', fontSize: '0.95rem', textDecoration: 'none' }}>
+                                                            {link.name}
+                                                        </Link>
+                                                    );
+                                                })}
                                             </motion.div>
                                         )}
                                     </AnimatePresence>
@@ -854,7 +867,7 @@ const Navbar = () => {
                                 <a href="https://book.hostizzy.com/" target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ width: '100%', textDecoration: 'none', justifyContent: 'center', padding: '0.875rem', fontSize: '0.95rem', fontWeight: 600 }}>
                                     Book a Stay <ArrowUpRight size={16} />
                                 </a>
-                                <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="btn btn-primary" style={{ width: '100%', textDecoration: 'none', justifyContent: 'center', padding: '0.875rem', fontSize: '0.95rem', fontWeight: 600, background: 'linear-gradient(135deg, #FE5858 0%, #FF6B6B 100%)' }}>
+                                <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="btn btn-primary" style={{ width: '100%', textDecoration: 'none', justifyContent: 'center', padding: '0.875rem', fontSize: '0.95rem', fontWeight: 600, background: 'linear-gradient(135deg, var(--color-primary-strong) 0%, var(--color-primary-text) 100%)' }}>
                                     Partner With Us
                                 </Link>
                             </div>

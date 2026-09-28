@@ -2,9 +2,13 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import ScrollReveal from '../../components/ScrollReveal';
 import VideoSection from '../../components/VideoSection';
-import PropertyLeadWizard from '../../components/PropertyLeadWizard';
+const PropertyLeadWizard = dynamic(() => import('../../components/PropertyLeadWizard'), {
+  ssr: false,
+  loading: () => <div style={{ minHeight: '460px' }} />
+});
 import {
     Check, ArrowRight, Zap, Star, Shield, TrendingUp, Smartphone, Globe,
     Home, Building, Palmtree, Crown, HelpCircle
@@ -124,7 +128,7 @@ export default function Services() {
                 description: "For villas, farmhouses & boutique homes — we manage everything, you bear the operational costs.",
                 features: [
                     "Complete booking & reservation management",
-                    "Dynamic pricing across 14+ channels",
+                    "Dynamic pricing across 15+ channels",
                     "24/7 guest communication & support",
                     "Staff & housekeeping coordination",
                     "Maintenance & vendor management",
@@ -143,7 +147,7 @@ export default function Services() {
                 description: "Complete hands-off hosting for apartments — we manage AND bear all operational costs.",
                 features: [
                     "Complete booking & reservation management",
-                    "Dynamic pricing across 14+ channels",
+                    "Dynamic pricing across 15+ channels",
                     "24/7 guest communication & support",
                     "Staff hiring & management by Hostizzy",
                     "All consumables & supplies covered",
@@ -241,6 +245,70 @@ export default function Services() {
                         ))}
                     </div>
                 </ScrollReveal>
+            </section>
+
+            {/* Your Property, Our Passion */}
+            <section className="section" style={{ background: '#f8fafc' }}>
+                <div className="container">
+                    <ScrollReveal>
+                        <div className="grid desktop-2-col" style={{ alignItems: 'center', gap: '3rem' }}>
+                            <div>
+                                <span style={{ fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#FE5858', display: 'block', marginBottom: '0.75rem' }}>
+                                    LOCAL EXPERTISE, LUXURY STANDARDS
+                                </span>
+                                <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '2.25rem', fontWeight: 700, marginBottom: '1.25rem', lineHeight: 1.25 }}>
+                                    Your Property, Our Passion
+                                </h2>
+                                <p style={{ color: '#475569', fontSize: '1.05rem', lineHeight: 1.8, marginBottom: '1.5rem' }}>
+                                    From the breathtaking villas of Uttarakhand to the heritage havelis of Rajasthan — we bring local expertise and luxury hospitality standards to every property we manage. Our team lives and breathes hospitality, ensuring every guest experience is memorable and every owner sees real returns.
+                                </p>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                                    {[
+                                        'Dedicated property manager for every home',
+                                        'On-ground teams in every market we serve',
+                                        'Personalized guest experiences, not cookie-cutter stays',
+                                        'Transparent reporting and real-time owner dashboards',
+                                    ].map((item, i) => (
+                                        <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.95rem', color: '#334155' }}>
+                                            <span style={{ width: '20px', height: '20px', borderRadius: '50%', background: '#dcfce7', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#16a34a', fontSize: '0.7rem', fontWeight: 700 }}>{'\u2713'}</span>
+                                            {item}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                            <div>
+                                <div style={{
+                                    borderRadius: '1.5rem', overflow: 'hidden',
+                                    boxShadow: '0 20px 60px rgba(0,0,0,0.1)',
+                                    background: 'linear-gradient(135deg, #fef2f2, #fff1f2)',
+                                    padding: '3rem', textAlign: 'center',
+                                }}>
+                                    <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>{'\uD83C\uDFE1'}</div>
+                                    <h3 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.5rem' }}>
+                                        Trusted by 45+ Property Owners
+                                    </h3>
+                                    <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: 1.6 }}>
+                                        Across Delhi NCR, Uttarakhand, Himachal Pradesh, Rajasthan & more
+                                    </p>
+                                    <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', marginTop: '1.5rem' }}>
+                                        <div>
+                                            <div style={{ fontSize: '1.75rem', fontWeight: 800, color: '#FE5858' }}>6+</div>
+                                            <div style={{ fontSize: '0.8rem', color: '#64748b' }}>States</div>
+                                        </div>
+                                        <div>
+                                            <div style={{ fontSize: '1.75rem', fontWeight: 800, color: '#22c55e' }}>10+</div>
+                                            <div style={{ fontSize: '0.8rem', color: '#64748b' }}>Cities</div>
+                                        </div>
+                                        <div>
+                                            <div style={{ fontSize: '1.75rem', fontWeight: 800, color: '#3b82f6' }}>40+</div>
+                                            <div style={{ fontSize: '0.8rem', color: '#64748b' }}>Weddings</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ScrollReveal>
+                </div>
             </section>
 
             {/* Trusted Across India */}

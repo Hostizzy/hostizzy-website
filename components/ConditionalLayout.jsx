@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import dynamic from 'next/dynamic';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import FloatingConcierge from './FloatingConcierge';
+const FloatingConcierge = dynamic(() => import('./FloatingConcierge'), { ssr: false });
 
 export default function ConditionalLayout({ children }) {
   const pathname = usePathname();

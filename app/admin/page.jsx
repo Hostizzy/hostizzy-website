@@ -4,7 +4,8 @@ import { useState, useEffect, useCallback } from 'react';
 import {
   LayoutDashboard, FileText, Briefcase, Users, LogOut,
   Plus, Trash2, Edit, Sparkles, Loader, X, Eye, EyeOff,
-  Mail, Calculator, ChevronRight, Building2
+  Mail, Calculator, ChevronRight, Building2, MessageSquare,
+  Check, Clock, Phone, ArrowRight, StickyNote
 } from 'lucide-react';
 
 const PRIMARY = '#FE5858';
@@ -61,7 +62,7 @@ export default function AdminPage() {
   const [careers, setCareers] = useState([]);
   const [careersLoading, setCareersLoading] = useState(false);
   const [careerModal, setCareerModal] = useState(false);
-  const [careerForm, setCareerForm] = useState({ role: '', department: 'Marketing', location: '', experience: '', description: '' });
+  const [careerForm, setCareerForm] = useState({ role: '', department: 'Marketing', location: '', experience: '', description: '', tagline: '', commitment: '', responsibilities: '', whoShouldApply: '' });
   const [careerSaving, setCareerSaving] = useState(false);
 
   // Property Leads state
@@ -73,6 +74,15 @@ export default function AdminPage() {
   const [contacts, setContacts] = useState([]);
   const [calcLeads, setCalcLeads] = useState([]);
   const [leadsLoading, setLeadsLoading] = useState(false);
+
+  // Lead management state
+  const [leadStatusFilter, setLeadStatusFilter] = useState('all');
+  const [selectedLeads, setSelectedLeads] = useState(new Set());
+  const [leadDetailPanel, setLeadDetailPanel] = useState(null); // { lead, type }
+  const [deleteLeadConfirm, setDeleteLeadConfirm] = useState(null); // { ids, type }
+  const [noteText, setNoteText] = useState('');
+  const [leadSaving, setLeadSaving] = useState(false);
+  const [statusDropdownId, setStatusDropdownId] = useState(null);
 
   // ─── Auth ──────────────────────────────────────────
 
@@ -206,6 +216,21 @@ export default function AdminPage() {
     if (activeTab === 'leads' && propertyLeads.length === 0) fetchPropertyLeads();
   }, [isAuthenticated, activeTab, fetchStats, fetchBlogs, fetchCareers, fetchLeads, fetchPropertyLeads]);
 
+  // Clear lead selection when switching sub-tabs
+  useEffect(() => {
+    setSelectedLeads(new Set());
+    setLeadStatusFilter('all');
+    setLeadDetailPanel(null);
+  }, [leadsSubTab]);
+
+  // Close status dropdown on outside click
+  useEffect(() => {
+    if (!statusDropdownId) return;
+    const handler = () => setStatusDropdownId(null);
+    document.addEventListener('click', handler);
+    return () => document.removeEventListener('click', handler);
+  }, [statusDropdownId]);
+
   // ─── Blog Actions ─────────────────────────────────
 
   const openNewBlog = () => {
@@ -274,7 +299,7 @@ export default function AdminPage() {
   // ─── Career Actions ───────────────────────────────
 
   const openNewCareer = () => {
-    setCareerForm({ role: '', department: 'Marketing', location: '', experience: '', description: '' });
+    setCareerForm({ role: '', department: 'Marketing', location: '', experience: '', description: '', tagline: '', commitment: '', responsibilities: '', whoShouldApply: '' });
     setCareerModal(true);
   };
 
@@ -282,16 +307,156 @@ export default function AdminPage() {
     if (!careerForm.role.trim()) return;
     setCareerSaving(true);
     try {
+      const payload = {
+        ...careerForm,
+        responsibilities: careerForm.responsibilities ? careerForm.responsibilities.split('\n').map(s => s.trim()).filter(Boolean) : [],
+        whoShouldApply: careerForm.whoShouldApply ? careerForm.whoShouldApply.split('\n').map(s => s.trim()).filter(Boolean) : [],
+      };
       await fetch('/api/careers', {
         method: 'POST',
         headers: authHeaders(token),
-        body: JSON.stringify(careerForm)
+        body: JSON.stringify(payload)
       });
       setCareerModal(false);
       fetchCareers();
       fetchStats();
     } catch (err) { console.error('Save career failed:', err); }
     setCareerSaving(false);
+  };
+
+  // ─── Lead Management Actions ────────────────────────
+
+  const LEAD_STATUSES = ['new', 'contacted', 'follow-up', 'converted', 'lost'];
+
+  const STATUS_COLORS = {
+    new: { text: '#3b82f6', bg: '#eff6ff' },
+    contacted: { text: '#d97706', bg: '#fffbeb' },
+    'follow-up': { text: '#7c3aed', bg: '#f5f3ff' },
+    converted: { text: '#16a34a', bg: '#f0fdf4' },
+    lost: { text: '#64748b', bg: '#f8fafc' },
+  };
+
+  const leadApiEndpoint = (type) => {
+    if (type === 'property') return '/api/property-leads';
+    if (type === 'calculator') return '/api/calculator-leads';
+    return '/api/contacts';
+  };
+
+  const getLeadsForTab = () => {
+    if (leadsSubTab === 'property') return propertyLeads;
+    if (leadsSubTab === 'calculator') return calcLeads;
+    return contacts;
+  };
+
+  const filterLeads = (leads) => {
+    if (leadStatusFilter === 'all') return leads;
+    return leads.filter(l => (l.status || 'new') === leadStatusFilter);
+  };
+
+  const refreshCurrentLeads = () => {
+    if (leadsSubTab === 'property') fetchPropertyLeads();
+    else fetchLeads();
+  };
+
+  const updateLeadStatus = async (id, type, status) => {
+    setLeadSaving(true);
+    try {
+      await fetch(leadApiEndpoint(type), {
+        method: 'PUT',
+        headers: authHeaders(token),
+        body: JSON.stringify({ id, status })
+      });
+      // Update local state immediately
+      const updateFn = (leads) => leads.map(l => l.id === id ? { ...l, status } : l);
+      if (type === 'property') setPropertyLeads(prev => updateFn(prev));
+      else if (type === 'calculator') setCalcLeads(prev => updateFn(prev));
+      else setContacts(prev => updateFn(prev));
+      // Update detail panel if open
+      if (leadDetailPanel?.lead?.id === id) {
+        setLeadDetailPanel(prev => ({ ...prev, lead: { ...prev.lead, status } }));
+      }
+    } catch (err) { console.error('Status update failed:', err); }
+    setLeadSaving(false);
+  };
+
+  const bulkUpdateStatus = async (status) => {
+    if (selectedLeads.size === 0) return;
+    setLeadSaving(true);
+    try {
+      const ids = Array.from(selectedLeads);
+      await Promise.all(ids.map(id =>
+        fetch(leadApiEndpoint(leadsSubTab), {
+          method: 'PUT',
+          headers: authHeaders(token),
+          body: JSON.stringify({ id, status })
+        })
+      ));
+      refreshCurrentLeads();
+      setSelectedLeads(new Set());
+    } catch (err) { console.error('Bulk status update failed:', err); }
+    setLeadSaving(false);
+  };
+
+  const addNote = async () => {
+    if (!noteText.trim() || !leadDetailPanel) return;
+    setLeadSaving(true);
+    try {
+      await fetch(leadApiEndpoint(leadDetailPanel.type), {
+        method: 'PUT',
+        headers: authHeaders(token),
+        body: JSON.stringify({ id: leadDetailPanel.lead.id, note: noteText.trim() })
+      });
+      const newNote = { text: noteText.trim(), timestamp: new Date().toISOString(), author: 'admin' };
+      const updatedNotes = [...(leadDetailPanel.lead.notes || []), newNote];
+      setLeadDetailPanel(prev => ({ ...prev, lead: { ...prev.lead, notes: updatedNotes } }));
+      // Update in list
+      const updateFn = (leads) => leads.map(l => l.id === leadDetailPanel.lead.id ? { ...l, notes: updatedNotes } : l);
+      if (leadDetailPanel.type === 'property') setPropertyLeads(prev => updateFn(prev));
+      else if (leadDetailPanel.type === 'calculator') setCalcLeads(prev => updateFn(prev));
+      else setContacts(prev => updateFn(prev));
+      setNoteText('');
+    } catch (err) { console.error('Add note failed:', err); }
+    setLeadSaving(false);
+  };
+
+  const deleteLeads = async () => {
+    if (!deleteLeadConfirm) return;
+    setLeadSaving(true);
+    try {
+      await fetch(leadApiEndpoint(deleteLeadConfirm.type), {
+        method: 'DELETE',
+        headers: authHeaders(token),
+        body: JSON.stringify({ ids: deleteLeadConfirm.ids })
+      });
+      // Remove from local state
+      const removeFn = (leads) => leads.filter(l => !deleteLeadConfirm.ids.includes(l.id));
+      if (deleteLeadConfirm.type === 'property') setPropertyLeads(prev => removeFn(prev));
+      else if (deleteLeadConfirm.type === 'calculator') setCalcLeads(prev => removeFn(prev));
+      else setContacts(prev => removeFn(prev));
+      setDeleteLeadConfirm(null);
+      setSelectedLeads(new Set());
+      if (leadDetailPanel && deleteLeadConfirm.ids.includes(leadDetailPanel.lead.id)) {
+        setLeadDetailPanel(null);
+      }
+    } catch (err) { console.error('Delete leads failed:', err); }
+    setLeadSaving(false);
+  };
+
+  const toggleLeadSelect = (id) => {
+    setSelectedLeads(prev => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
+  };
+
+  const toggleSelectAll = () => {
+    const filtered = filterLeads(getLeadsForTab());
+    if (selectedLeads.size === filtered.length) {
+      setSelectedLeads(new Set());
+    } else {
+      setSelectedLeads(new Set(filtered.map(l => l.id)));
+    }
   };
 
   // ─── Styles ───────────────────────────────────────
@@ -811,6 +976,22 @@ export default function AdminPage() {
                 <label style={styles.label}>Description</label>
                 <textarea style={styles.textarea(5)} value={careerForm.description} onChange={(e) => setCareerForm({ ...careerForm, description: e.target.value })} placeholder="Job description..." />
               </div>
+              <div style={styles.inputGroup}>
+                <label style={styles.label}>Tagline</label>
+                <input style={styles.input} value={careerForm.tagline} onChange={(e) => setCareerForm({ ...careerForm, tagline: e.target.value })} placeholder="e.g. Or 'Chief Guest Happiness Officer' — add your personality!" />
+              </div>
+              <div style={styles.inputGroup}>
+                <label style={styles.label}>Commitment</label>
+                <input style={styles.input} value={careerForm.commitment} onChange={(e) => setCareerForm({ ...careerForm, commitment: e.target.value })} placeholder="e.g. Full-time, Part-time, Contract" />
+              </div>
+              <div style={styles.inputGroup}>
+                <label style={styles.label}>Responsibilities</label>
+                <textarea style={styles.textarea(5)} value={careerForm.responsibilities} onChange={(e) => setCareerForm({ ...careerForm, responsibilities: e.target.value })} placeholder="One responsibility per line" />
+              </div>
+              <div style={styles.inputGroup}>
+                <label style={styles.label}>Who Should Apply</label>
+                <textarea style={styles.textarea(3)} value={careerForm.whoShouldApply} onChange={(e) => setCareerForm({ ...careerForm, whoShouldApply: e.target.value })} placeholder="One requirement per line" />
+              </div>
             </div>
             <div style={styles.modalFooter}>
               <button style={styles.btnSecondary} onClick={() => setCareerModal(false)}>Cancel</button>
@@ -829,60 +1010,121 @@ export default function AdminPage() {
     </>
   );
 
-  const renderPropertyLeads = () => (
-    <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-        <h2 style={{ fontSize: '1.5rem', fontWeight: 700, margin: 0 }}>Property Leads</h2>
-        <button onClick={fetchPropertyLeads} style={{ padding: '0.5rem 1rem', borderRadius: '0.5rem', border: '1px solid #e2e8f0', background: 'white', cursor: 'pointer', fontSize: '0.85rem' }}>
-          Refresh
-        </button>
-      </div>
+  // ─── Lead Status Badge Component ─────────────────
 
-      {propertyLeadsLoading ? (
-        <div style={{ textAlign: 'center', padding: '3rem', color: '#64748b' }}><Loader size={20} className="spin" /> Loading...</div>
-      ) : propertyLeads.length === 0 ? (
-        <div style={{ textAlign: 'center', padding: '3rem', color: '#64748b' }}>No property leads yet.</div>
-      ) : (
-        <div style={{ overflowX: 'auto' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem' }}>
-            <thead>
-              <tr style={{ borderBottom: '2px solid #e2e8f0', textAlign: 'left' }}>
-                <th style={{ padding: '0.75rem', color: '#64748b', fontWeight: 600 }}>Name</th>
-                <th style={{ padding: '0.75rem', color: '#64748b', fontWeight: 600 }}>Phone</th>
-                <th style={{ padding: '0.75rem', color: '#64748b', fontWeight: 600 }}>Email</th>
-                <th style={{ padding: '0.75rem', color: '#64748b', fontWeight: 600 }}>City</th>
-                <th style={{ padding: '0.75rem', color: '#64748b', fontWeight: 600 }}>Property Type</th>
-                <th style={{ padding: '0.75rem', color: '#64748b', fontWeight: 600 }}>Bedrooms</th>
-                <th style={{ padding: '0.75rem', color: '#64748b', fontWeight: 600 }}>Service Interest</th>
-                <th style={{ padding: '0.75rem', color: '#64748b', fontWeight: 600 }}>Revenue</th>
-                <th style={{ padding: '0.75rem', color: '#64748b', fontWeight: 600 }}>Source</th>
-                <th style={{ padding: '0.75rem', color: '#64748b', fontWeight: 600 }}>Date</th>
+  const StatusBadge = ({ status, onClick }) => {
+    const s = status || 'new';
+    const color = STATUS_COLORS[s] || STATUS_COLORS.new;
+    return (
+      <span
+        onClick={onClick}
+        style={{
+          display: 'inline-block', padding: '4px 10px', borderRadius: '12px', fontSize: '11px',
+          fontWeight: '600', background: color.bg, color: color.text, cursor: onClick ? 'pointer' : 'default',
+          textTransform: 'capitalize', whiteSpace: 'nowrap'
+        }}
+      >
+        {s}
+      </span>
+    );
+  };
+
+  // ─── Status Dropdown (inline) ───────────────────
+
+  const StatusDropdown = ({ leadId, currentStatus, type }) => {
+    if (statusDropdownId !== leadId) return null;
+    return (
+      <div style={{
+        position: 'absolute', top: '100%', left: 0, zIndex: 50, background: '#fff',
+        border: '1px solid #e2e8f0', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+        padding: '4px', minWidth: '130px', marginTop: '4px'
+      }}>
+        {LEAD_STATUSES.map(s => (
+          <button key={s} onClick={(e) => { e.stopPropagation(); updateLeadStatus(leadId, type, s); setStatusDropdownId(null); }}
+            style={{
+              display: 'block', width: '100%', padding: '8px 12px', border: 'none', background: s === (currentStatus || 'new') ? '#f1f5f9' : 'transparent',
+              cursor: 'pointer', fontSize: '13px', textAlign: 'left', borderRadius: '4px', textTransform: 'capitalize',
+              color: STATUS_COLORS[s]?.text || '#334155', fontWeight: s === (currentStatus || 'new') ? '600' : '400'
+            }}
+          >
+            {s}
+          </button>
+        ))}
+      </div>
+    );
+  };
+
+  // ─── Render Lead Table (shared across tabs) ─────
+
+  const renderLeadTable = (leads, type) => {
+    const filtered = filterLeads(leads);
+    const isLoading = type === 'property' ? propertyLeadsLoading : leadsLoading;
+
+    if (isLoading) return <div style={styles.emptyState}><Loader size={20} className="spin" /> Loading...</div>;
+    if (leads.length === 0) return <div style={styles.emptyState}>No leads yet.</div>;
+    if (filtered.length === 0) return <div style={styles.emptyState}>No leads match the selected filter.</div>;
+
+    const columns = type === 'property'
+      ? [{ key: 'name', label: 'Name' }, { key: 'phone', label: 'Phone' }, { key: 'city', label: 'City' }, { key: 'propertyType', label: 'Type' }, { key: 'serviceInterest', label: 'Service' }]
+      : type === 'contacts'
+      ? [{ key: 'name', label: 'Name' }, { key: 'email', label: 'Email' }, { key: 'phone', label: 'Phone' }, { key: 'department', label: 'Dept' }]
+      : [{ key: 'email', label: 'Email' }, { key: 'city', label: 'City' }, { key: 'propertyType', label: 'Type' }, { key: 'bedrooms', label: 'BHK' }];
+
+    return (
+      <div style={{ overflowX: 'auto' }}>
+        <table style={styles.table}>
+          <thead>
+            <tr>
+              <th style={{ ...styles.th, width: '40px' }}>
+                <input type="checkbox" checked={selectedLeads.size === filtered.length && filtered.length > 0} onChange={toggleSelectAll} style={{ cursor: 'pointer' }} />
+              </th>
+              {columns.map(col => <th key={col.key} style={styles.th}>{col.label}</th>)}
+              <th style={styles.th}>Status</th>
+              <th style={styles.th}>Date</th>
+              <th style={{ ...styles.th, width: '80px' }}>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filtered.map((lead, i) => (
+              <tr key={lead.id || i} style={{ cursor: 'pointer' }} onClick={() => { setLeadDetailPanel({ lead, type }); setNoteText(''); }}>
+                <td style={{ ...styles.td(i), width: '40px' }} onClick={e => e.stopPropagation()}>
+                  <input type="checkbox" checked={selectedLeads.has(lead.id)} onChange={() => toggleLeadSelect(lead.id)} style={{ cursor: 'pointer' }} />
+                </td>
+                {columns.map(col => (
+                  <td key={col.key} style={{ ...styles.td(i), ...(col.key === 'name' ? { fontWeight: '600', whiteSpace: 'nowrap' } : {}), ...(col.key === 'phone' ? { whiteSpace: 'nowrap' } : {}) }}>
+                    {col.key === 'phone' && lead[col.key] ? <a href={`tel:${lead[col.key]}`} style={{ color: '#3b82f6' }} onClick={e => e.stopPropagation()}>{lead[col.key]}</a>
+                      : col.key === 'email' && lead[col.key] ? <a href={`mailto:${lead[col.key]}`} style={{ color: '#3b82f6' }} onClick={e => e.stopPropagation()}>{lead[col.key]}</a>
+                      : (lead[col.key] || lead.inquiryType || '—')}
+                  </td>
+                ))}
+                <td style={{ ...styles.td(i), position: 'relative' }} onClick={e => e.stopPropagation()}>
+                  <StatusBadge status={lead.status} onClick={(e) => { e.stopPropagation(); setStatusDropdownId(statusDropdownId === lead.id ? null : lead.id); }} />
+                  <StatusDropdown leadId={lead.id} currentStatus={lead.status} type={type} />
+                </td>
+                <td style={{ ...styles.td(i), whiteSpace: 'nowrap', fontSize: '13px', color: '#64748b' }}>
+                  {formatDate(lead.createdAt || lead.timestamp)}
+                </td>
+                <td style={{ ...styles.td(i) }} onClick={e => e.stopPropagation()}>
+                  <div style={{ display: 'flex', gap: '4px' }}>
+                    <button style={{ ...styles.btnSmall, padding: '4px 8px' }} onClick={() => { setLeadDetailPanel({ lead, type }); setNoteText(''); }} title="View details">
+                      <Eye size={14} />
+                    </button>
+                    <button style={{ ...styles.btnDanger, padding: '4px 8px', border: 'none' }} onClick={() => setDeleteLeadConfirm({ ids: [lead.id], type })} title="Delete">
+                      <Trash2 size={14} />
+                    </button>
+                  </div>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {propertyLeads.map((lead, i) => (
-                <tr key={lead.id || i} style={{ borderBottom: '1px solid #f1f5f9', background: i % 2 === 0 ? 'white' : '#fafafa' }}>
-                  <td style={{ padding: '0.75rem', fontWeight: 600 }}>{lead.name}</td>
-                  <td style={{ padding: '0.75rem' }}><a href={`tel:${lead.phone}`} style={{ color: '#3b82f6' }}>{lead.phone}</a></td>
-                  <td style={{ padding: '0.75rem' }}><a href={`mailto:${lead.email}`} style={{ color: '#3b82f6' }}>{lead.email}</a></td>
-                  <td style={{ padding: '0.75rem' }}>{lead.city || '\u2014'}</td>
-                  <td style={{ padding: '0.75rem' }}>{lead.propertyType || '\u2014'}</td>
-                  <td style={{ padding: '0.75rem' }}>{lead.bedrooms || '\u2014'}</td>
-                  <td style={{ padding: '0.75rem' }}>{lead.serviceInterest || '\u2014'}</td>
-                  <td style={{ padding: '0.75rem' }}>{lead.currentRevenue || '\u2014'}</td>
-                  <td style={{ padding: '0.75rem' }}><span style={{ padding: '0.2rem 0.5rem', borderRadius: '999px', background: '#f0f9ff', color: '#3b82f6', fontSize: '0.75rem', fontWeight: 600 }}>{lead.source || 'website'}</span></td>
-                  <td style={{ padding: '0.75rem', color: '#94a3b8', fontSize: '0.8rem' }}>{lead.createdAt ? new Date(lead.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '\u2014'}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-    </div>
-  );
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  };
 
   const renderLeads = () => (
     <>
+      {/* Sub-tabs */}
       <div style={{ marginBottom: '20px', borderBottom: '1px solid #e2e8f0' }}>
         <button style={styles.subTab(leadsSubTab === 'property')} onClick={() => { setLeadsSubTab('property'); if (propertyLeads.length === 0) fetchPropertyLeads(); }}>
           <Building2 size={14} style={{ marginRight: '6px', verticalAlign: 'middle' }} /> Property Leads ({propertyLeads.length})
@@ -895,114 +1137,176 @@ export default function AdminPage() {
         </button>
       </div>
 
-      <div style={styles.card}>
-        {leadsSubTab === 'property' ? (
-          propertyLeadsLoading ? (
-            <div style={styles.emptyState}><Loader size={20} className="spin" /> Loading...</div>
-          ) : propertyLeads.length === 0 ? (
-            <div style={styles.emptyState}>No property leads yet.</div>
-          ) : (
-            <div style={{ overflowX: 'auto' }}>
-              <table style={styles.table}>
-                <thead>
-                  <tr>
-                    <th style={styles.th}>Name</th>
-                    <th style={styles.th}>Phone</th>
-                    <th style={styles.th}>Email</th>
-                    <th style={styles.th}>City</th>
-                    <th style={styles.th}>Type</th>
-                    <th style={styles.th}>BHK</th>
-                    <th style={styles.th}>Service</th>
-                    <th style={styles.th}>Revenue</th>
-                    <th style={styles.th}>Source</th>
-                    <th style={styles.th}>Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {propertyLeads.map((lead, i) => (
-                    <tr key={lead.id || i}>
-                      <td style={{ ...styles.td(i), fontWeight: '600', whiteSpace: 'nowrap' }}>{lead.name}</td>
-                      <td style={{ ...styles.td(i), whiteSpace: 'nowrap' }}><a href={`tel:${lead.phone}`} style={{ color: '#3b82f6' }}>{lead.phone}</a></td>
-                      <td style={styles.td(i)}><a href={`mailto:${lead.email}`} style={{ color: '#3b82f6' }}>{lead.email}</a></td>
-                      <td style={styles.td(i)}>{lead.city || '—'}</td>
-                      <td style={styles.td(i)}>{lead.propertyType || '—'}</td>
-                      <td style={styles.td(i)}>{lead.bedrooms || '—'}</td>
-                      <td style={styles.td(i)}>{lead.serviceInterest || '—'}</td>
-                      <td style={styles.td(i)}>{lead.currentRevenue || '—'}</td>
-                      <td style={styles.td(i)}><span style={{ padding: '0.15rem 0.5rem', borderRadius: '999px', background: '#f0f9ff', color: '#3b82f6', fontSize: '0.7rem', fontWeight: 600 }}>{lead.source || 'web'}</span></td>
-                      <td style={{ ...styles.td(i), whiteSpace: 'nowrap' }}>{formatDate(lead.createdAt)}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )
-        ) : leadsLoading ? (
-          <div style={styles.emptyState}><Loader size={20} className="spin" /> Loading...</div>
-        ) : leadsSubTab === 'contacts' ? (
-          contacts.length === 0 ? (
-            <div style={styles.emptyState}>No contact inquiries yet.</div>
-          ) : (
-            <div style={{ overflowX: 'auto' }}>
-              <table style={styles.table}>
-                <thead>
-                  <tr>
-                    <th style={styles.th}>Name</th>
-                    <th style={styles.th}>Email</th>
-                    <th style={styles.th}>Phone</th>
-                    <th style={styles.th}>Department</th>
-                    <th style={styles.th}>Message</th>
-                    <th style={styles.th}>Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {contacts.map((c, i) => (
-                    <tr key={c.id || i}>
-                      <td style={{ ...styles.td(i), fontWeight: '500', whiteSpace: 'nowrap' }}>{c.name || '-'}</td>
-                      <td style={styles.td(i)}>{c.email || '-'}</td>
-                      <td style={{ ...styles.td(i), whiteSpace: 'nowrap' }}>{c.phone || '-'}</td>
-                      <td style={styles.td(i)}>{c.department || c.inquiryType || '-'}</td>
-                      <td style={{ ...styles.td(i), maxWidth: '200px', color: '#64748b' }}>{truncate(c.message, 50)}</td>
-                      <td style={{ ...styles.td(i), whiteSpace: 'nowrap' }}>{formatDate(c.timestamp || c.createdAt)}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )
-        ) : (
-          calcLeads.length === 0 ? (
-            <div style={styles.emptyState}>No calculator leads yet.</div>
-          ) : (
-            <div style={{ overflowX: 'auto' }}>
-              <table style={styles.table}>
-                <thead>
-                  <tr>
-                    <th style={styles.th}>Email</th>
-                    <th style={styles.th}>City</th>
-                    <th style={styles.th}>Property Type</th>
-                    <th style={styles.th}>Bedrooms</th>
-                    <th style={styles.th}>Revenue Est.</th>
-                    <th style={styles.th}>Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {calcLeads.map((l, i) => (
-                    <tr key={l.id || i}>
-                      <td style={{ ...styles.td(i), fontWeight: '500' }}>{l.email || '-'}</td>
-                      <td style={styles.td(i)}>{l.city || '-'}</td>
-                      <td style={styles.td(i)}>{l.propertyType || '-'}</td>
-                      <td style={styles.td(i)}>{l.bedrooms || '-'}</td>
-                      <td style={styles.td(i)}>{l.revenue ? `₹${Number(l.revenue).toLocaleString('en-IN')}` : '-'}</td>
-                      <td style={{ ...styles.td(i), whiteSpace: 'nowrap' }}>{formatDate(l.createdAt || l.timestamp)}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )
-        )}
+      {/* Filter bar */}
+      <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <label style={{ fontSize: '13px', color: '#64748b', fontWeight: '500' }}>Status:</label>
+          <select value={leadStatusFilter} onChange={e => setLeadStatusFilter(e.target.value)}
+            style={{ padding: '6px 12px', border: '1px solid #e2e8f0', borderRadius: '6px', fontSize: '13px', background: '#fff' }}>
+            <option value="all">All</option>
+            {LEAD_STATUSES.map(s => <option key={s} value={s} style={{ textTransform: 'capitalize' }}>{s.charAt(0).toUpperCase() + s.slice(1)}</option>)}
+          </select>
+        </div>
+        <button onClick={refreshCurrentLeads} style={{ ...styles.btnSmall, marginLeft: 'auto' }}>
+          Refresh
+        </button>
       </div>
+
+      {/* Bulk action bar */}
+      {selectedLeads.size > 0 && (
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: '12px', padding: '12px 16px', marginBottom: '12px',
+          background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: '8px', flexWrap: 'wrap'
+        }}>
+          <span style={{ fontSize: '13px', fontWeight: '600', color: '#1e40af' }}>{selectedLeads.size} selected</span>
+          <select onChange={e => { if (e.target.value) bulkUpdateStatus(e.target.value); e.target.value = ''; }}
+            style={{ padding: '6px 10px', border: '1px solid #93c5fd', borderRadius: '6px', fontSize: '12px', background: '#fff' }}>
+            <option value="">Change Status...</option>
+            {LEAD_STATUSES.map(s => <option key={s} value={s}>{s.charAt(0).toUpperCase() + s.slice(1)}</option>)}
+          </select>
+          <button style={{ ...styles.btnDanger, fontSize: '12px' }} onClick={() => setDeleteLeadConfirm({ ids: Array.from(selectedLeads), type: leadsSubTab })}>
+            <Trash2 size={12} /> Delete
+          </button>
+          <button onClick={() => setSelectedLeads(new Set())} style={{ background: 'none', border: 'none', color: '#3b82f6', fontSize: '12px', cursor: 'pointer', textDecoration: 'underline' }}>
+            Clear
+          </button>
+        </div>
+      )}
+
+      {/* Table */}
+      <div style={styles.card}>
+        {leadsSubTab === 'property' && renderLeadTable(propertyLeads, 'property')}
+        {leadsSubTab === 'contacts' && renderLeadTable(contacts, 'contacts')}
+        {leadsSubTab === 'calculator' && renderLeadTable(calcLeads, 'calculator')}
+      </div>
+
+      {/* Detail slide-over panel */}
+      {leadDetailPanel && (
+        <>
+          <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.3)', zIndex: 200 }} onClick={() => setLeadDetailPanel(null)} />
+          <div style={{
+            position: 'fixed', top: 0, right: 0, bottom: 0, width: '420px', maxWidth: '100vw',
+            background: '#fff', zIndex: 201, boxShadow: '-4px 0 20px rgba(0,0,0,0.1)',
+            display: 'flex', flexDirection: 'column', overflow: 'hidden'
+          }}>
+            {/* Header */}
+            <div style={{ padding: '20px 24px', borderBottom: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div>
+                <div style={{ fontSize: '18px', fontWeight: '700', color: '#0f172a' }}>{leadDetailPanel.lead.name || leadDetailPanel.lead.email || 'Lead Detail'}</div>
+                <div style={{ fontSize: '12px', color: '#64748b', marginTop: '2px' }}>{formatDate(leadDetailPanel.lead.createdAt || leadDetailPanel.lead.timestamp)}</div>
+              </div>
+              <button onClick={() => setLeadDetailPanel(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#64748b', padding: '4px' }}>
+                <X size={20} />
+              </button>
+            </div>
+
+            {/* Body */}
+            <div style={{ flex: 1, overflow: 'auto', padding: '24px' }}>
+              {/* Status */}
+              <div style={{ marginBottom: '24px' }}>
+                <label style={{ fontSize: '12px', color: '#64748b', fontWeight: '600', display: 'block', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Status</label>
+                <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                  {LEAD_STATUSES.map(s => (
+                    <button key={s} onClick={() => updateLeadStatus(leadDetailPanel.lead.id, leadDetailPanel.type, s)}
+                      style={{
+                        padding: '6px 14px', borderRadius: '20px', border: '2px solid', cursor: 'pointer', fontSize: '12px', fontWeight: '600',
+                        textTransform: 'capitalize', transition: 'all 0.15s',
+                        background: (leadDetailPanel.lead.status || 'new') === s ? STATUS_COLORS[s].bg : '#fff',
+                        color: STATUS_COLORS[s].text,
+                        borderColor: (leadDetailPanel.lead.status || 'new') === s ? STATUS_COLORS[s].text : '#e2e8f0',
+                      }}>
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Lead fields */}
+              <div style={{ marginBottom: '24px' }}>
+                <label style={{ fontSize: '12px', color: '#64748b', fontWeight: '600', display: 'block', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Details</label>
+                <div style={{ display: 'grid', gap: '12px' }}>
+                  {Object.entries(leadDetailPanel.lead)
+                    .filter(([k]) => !['id', 'status', 'notes', 'createdAt', 'updatedAt', 'timestamp', 'departmentEmail'].includes(k))
+                    .map(([key, value]) => value ? (
+                      <div key={key} style={{ display: 'flex', gap: '12px', fontSize: '14px' }}>
+                        <span style={{ color: '#64748b', minWidth: '110px', fontWeight: '500', textTransform: 'capitalize' }}>{key.replace(/([A-Z])/g, ' $1').trim()}</span>
+                        <span style={{ color: '#0f172a', wordBreak: 'break-word' }}>
+                          {key === 'email' ? <a href={`mailto:${value}`} style={{ color: '#3b82f6' }}>{value}</a>
+                            : key === 'phone' ? <a href={`tel:${value}`} style={{ color: '#3b82f6' }}>{value}</a>
+                            : String(value)}
+                        </span>
+                      </div>
+                    ) : null)}
+                </div>
+              </div>
+
+              {/* Notes */}
+              <div>
+                <label style={{ fontSize: '12px', color: '#64748b', fontWeight: '600', display: 'block', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  <StickyNote size={12} style={{ verticalAlign: 'middle', marginRight: '4px' }} /> Notes ({(leadDetailPanel.lead.notes || []).length})
+                </label>
+
+                {/* Existing notes */}
+                {(leadDetailPanel.lead.notes || []).length > 0 ? (
+                  <div style={{ marginBottom: '16px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {(leadDetailPanel.lead.notes || []).map((n, i) => (
+                      <div key={i} style={{ padding: '12px', background: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                        <div style={{ fontSize: '13px', color: '#0f172a', lineHeight: '1.5' }}>{n.text}</div>
+                        <div style={{ fontSize: '11px', color: '#94a3b8', marginTop: '6px' }}>
+                          {new Date(n.timestamp).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div style={{ fontSize: '13px', color: '#94a3b8', marginBottom: '16px' }}>No notes yet.</div>
+                )}
+
+                {/* Add note */}
+                <div>
+                  <textarea
+                    value={noteText}
+                    onChange={e => setNoteText(e.target.value)}
+                    placeholder="Add a note..."
+                    style={{ ...styles.textarea(3), fontSize: '13px' }}
+                  />
+                  <button onClick={addNote} disabled={!noteText.trim() || leadSaving}
+                    style={{ ...styles.btnPrimary, marginTop: '8px', fontSize: '12px', padding: '8px 16px', opacity: (!noteText.trim() || leadSaving) ? 0.5 : 1 }}>
+                    {leadSaving ? <Loader size={12} className="spin" /> : <Plus size={12} />} Add Note
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div style={{ padding: '16px 24px', borderTop: '1px solid #e2e8f0' }}>
+              <button onClick={() => { setDeleteLeadConfirm({ ids: [leadDetailPanel.lead.id], type: leadDetailPanel.type }); }}
+                style={{ ...styles.btnDanger, width: '100%', justifyContent: 'center', padding: '10px' }}>
+                <Trash2 size={14} /> Delete this lead
+              </button>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* Delete confirmation modal */}
+      {deleteLeadConfirm && (
+        <div style={styles.confirmOverlay} onClick={() => setDeleteLeadConfirm(null)}>
+          <div style={styles.confirmBox} onClick={e => e.stopPropagation()}>
+            <Trash2 size={32} color="#dc2626" style={{ marginBottom: '16px' }} />
+            <div style={{ fontSize: '18px', fontWeight: '600', marginBottom: '8px' }}>
+              Delete {deleteLeadConfirm.ids.length} lead{deleteLeadConfirm.ids.length > 1 ? 's' : ''}?
+            </div>
+            <div style={{ fontSize: '14px', color: '#64748b', marginBottom: '24px' }}>This action cannot be undone.</div>
+            <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
+              <button style={styles.btnSecondary} onClick={() => setDeleteLeadConfirm(null)}>Cancel</button>
+              <button style={{ ...styles.btnPrimary, background: '#dc2626' }} onClick={deleteLeads} disabled={leadSaving}>
+                {leadSaving ? <Loader size={14} className="spin" /> : <Trash2 size={14} />} Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 

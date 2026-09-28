@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import ScrollReveal from '../../components/ScrollReveal';
-import SEO from '../../components/SEO';
+
 import { LOCATIONS } from '@/lib/locations';
 import { MapPin, ArrowRight, Building } from 'lucide-react';
 
@@ -12,11 +12,6 @@ const locationList = Object.values(LOCATIONS);
 export default function LocationsIndex() {
     return (
         <>
-            <SEO
-                title="Where We Operate"
-                description="Hostizzy provides professional vacation rental management across Delhi NCR, Himachal Pradesh, Uttarakhand, and Rajasthan. Explore our locations."
-                keywords={['Hostizzy locations', 'vacation rental management India', 'property management Delhi', 'Airbnb management Himachal', 'villa management Rajasthan']}
-            />
 
             {/* Hero Section */}
             <section className="section text-center" style={{

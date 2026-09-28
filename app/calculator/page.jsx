@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
-import SEO from '../../components/SEO';
+
 import ScrollReveal from '../../components/ScrollReveal';
 import {
     Home, Building2, Trees, House, Sparkles, ArrowRight, TrendingUp,
@@ -430,7 +430,7 @@ export default function Calculator() {
 
     return (
         <>
-            <SEO title="Revenue Calculator | Hostizzy" description="AI-powered vacation rental revenue calculator for 50+ Indian markets. Estimate your property earnings with Hostizzy." />
+
 
             <style>{`
                 @keyframes spin { to { transform: rotate(360deg); } }

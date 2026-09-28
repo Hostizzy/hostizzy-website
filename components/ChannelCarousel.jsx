@@ -70,6 +70,8 @@ const ChannelCarousel = () => {
                                 src={channel.logo}
                                 alt={channel.name}
                                 loading="lazy"
+                                width={180}
+                                height={48}
                                 style={{
                                     height: channel.height,
                                     width: 'auto',
