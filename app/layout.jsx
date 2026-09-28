@@ -94,7 +94,26 @@ export default function RootLayout({ children }) {
               "@type": "ProfessionalService",
               "@id": "https://www.hostizzy.com/#organization",
               "name": "Hostizzy",
-              "description": "India's leading vacation rental management platform",
+              "additionalType": [
+                "https://en.wikipedia.org/wiki/Property_management",
+                "https://en.wikipedia.org/wiki/Vacation_rental"
+              ],
+              "description": "India's leading vacation rental and Airbnb management company, for villa, farmstay and apartment owners across India.",
+              "makesOffer": {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Vacation Rental Management",
+                  "serviceType": [
+                    "Vacation rental management",
+                    "Short-term rental management",
+                    "Airbnb management",
+                    "Homestay management"
+                  ],
+                  "provider": { "@id": "https://www.hostizzy.com/#organization" },
+                  "areaServed": { "@type": "Country", "name": "India" }
+                }
+              },
               "url": "https://www.hostizzy.com",
               "logo": "https://www.hostizzy.com/images/logo.jpg",
               "image": "https://www.hostizzy.com/images/og-image.jpg",
