@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { ArrowRight, Star, Building2, Users, ExternalLink } from 'lucide-react';
+import { REVIEW_RATING } from '@/lib/reviews';
 import { motion } from 'framer-motion';
 
 const Hero = () => {
@@ -126,7 +127,10 @@ const Hero = () => {
                         // directly below this hero — these badges read 50+/40,000+
                         // against its 45+/30,000+ and the two contradicted each
                         // other within one screen.
-                        { icon: Star, label: '4.9 Rating', color: '#FFD700' },
+                        // Rounded to 1dp for a compact chip, but derived from the
+                        // same constant the attributed figure below uses, so the
+                        // two can never drift when the number is next refreshed.
+                        { icon: Star, label: `${REVIEW_RATING.toFixed(1)} Rating`, color: '#FFD700' },
                         { icon: Building2, label: '45+ Properties', color: '#60a5fa' },
                         { icon: Users, label: '30,000+ Guests', color: '#34d399' }
                     ].map(({ icon: Icon, label, color }) => (

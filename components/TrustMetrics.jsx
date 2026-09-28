@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { Building2, TrendingUp, Users, Star } from 'lucide-react';
+import { REVIEW_RATING, REVIEW_COUNT, REVIEWS_UPDATED } from '@/lib/reviews';
 
 const TrustMetrics = () => {
     const [ref, inView] = useInView({
@@ -35,12 +36,15 @@ const TrustMetrics = () => {
             format: (val) => val.toLocaleString()
         },
         {
+            // The precise figure, not a rounded one, because it is attributed
+            // in the source line below the grid. HostSuite production, Sep 2026:
+            // Airbnb 238 @ 4.87, MakeMyTrip 14 @ 4.93, Google 1 @ 5.0 = 253 @ 4.87.
             icon: Star,
-            value: 4.9,
+            value: REVIEW_RATING,
             suffix: '★',
             label: 'Average Rating',
             color: '#FE5858',
-            decimals: 1
+            decimals: 2
         }
     ];
 
@@ -61,6 +65,24 @@ const TrustMetrics = () => {
                         />
                     ))}
                 </div>
+
+                {/* Attribution for the rating. A published average needs to say
+                    what it is an average of — and this one cannot go in
+                    aggregateRating schema (see the note in app/layout.jsx), so
+                    visible text credited to the platforms is the way it is
+                    shown. "Last updated" describes when the figure was
+                    compiled, not how recent the reviews are: the Airbnb import
+                    currently runs to April 2026, so the true count is higher. */}
+                <p style={{
+                    marginTop: '2rem',
+                    textAlign: 'center',
+                    fontSize: '0.85rem',
+                    color: 'var(--color-muted)',
+                    lineHeight: 1.6
+                }}>
+                    Average rating based on {REVIEW_COUNT} guest reviews across Airbnb, MakeMyTrip and Google.
+                    Last updated {REVIEWS_UPDATED}.
+                </p>
             </div>
         </section>
     );
