@@ -122,9 +122,13 @@ const Hero = () => {
                     }}
                 >
                     {[
+                        // Keep in step with components/TrustMetrics.jsx, which sits
+                        // directly below this hero — these badges read 50+/40,000+
+                        // against its 45+/30,000+ and the two contradicted each
+                        // other within one screen.
                         { icon: Star, label: '4.9 Rating', color: '#FFD700' },
-                        { icon: Building2, label: '50+ Properties', color: '#60a5fa' },
-                        { icon: Users, label: '40,000+ Guests', color: '#34d399' }
+                        { icon: Building2, label: '45+ Properties', color: '#60a5fa' },
+                        { icon: Users, label: '30,000+ Guests', color: '#34d399' }
                     ].map(({ icon: Icon, label, color }) => (
                         <span key={label} style={{
                             display: 'inline-flex',

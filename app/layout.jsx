@@ -81,12 +81,18 @@ export default function RootLayout({ children }) {
           </>
         )}
 
-        {/* Organization Schema Markup (Global) */}
-        <Script id="schema-org" type="application/ld+json" strategy="beforeInteractive">
-          {`
+        {/* Organization schema, global.
+            This is a plain <script>, not next/script. With next/script the
+            markup never reached the HTML as a parseable ld+json tag — it went
+            into the RSC payload and was injected by the Next runtime instead,
+            so the address, rating, areaServed and offer catalogue were invisible
+            to anything reading the served HTML. Every per-page schema in this
+            repo already uses a raw script tag; this one now matches. */}
+        <script id="schema-org" type="application/ld+json" dangerouslySetInnerHTML={{ __html: `
             {
               "@context": "https://schema.org",
               "@type": "ProfessionalService",
+              "@id": "https://www.hostizzy.com/#organization",
               "name": "Hostizzy",
               "description": "India's leading vacation rental management platform",
               "url": "https://www.hostizzy.com",
@@ -227,8 +233,7 @@ export default function RootLayout({ children }) {
                 "availableLanguage": ["en", "hi"]
               }
             }
-          `}
-        </Script>
+          ` }} />
       </head>
       <body>
         <Providers>

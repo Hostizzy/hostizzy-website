@@ -18,49 +18,14 @@ import StickyCTABar from '../components/StickyCTABar';
 const Home = () => {
     return (
         <>
-            <script type="application/ld+json" dangerouslySetInnerHTML={{
-                __html: JSON.stringify({
-                    "@context": "https://schema.org",
-                    "@type": "LocalBusiness",
-                    "name": "Hostizzy",
-                    "description": "Premier vacation rental management company in India specializing in Airbnb property management and professional hosting services",
-                    "url": "https://www.hostizzy.com",
-                    "logo": "https://www.hostizzy.com/images/logo.jpg",
-                    "image": "https://www.hostizzy.com/og-home.jpg",
-                    "priceRange": "₹₹₹",
-                    "address": {
-                        "@type": "PostalAddress",
-                        "addressCountry": "IN"
-                    },
-                    "aggregateRating": {
-                        "@type": "AggregateRating",
-                        "ratingValue": "4.9",
-                        "reviewCount": "150",
-                        "bestRating": "5",
-                        "worstRating": "1"
-                    },
-                    "sameAs": [
-                        "https://www.facebook.com/hostizzy",
-                        "https://www.instagram.com/hostizzy",
-                        "https://www.linkedin.com/company/hostizzy"
-                    ],
-                    "contactPoint": {
-                        "@type": "ContactPoint",
-                        "telephone": "+91-95604-94001",
-                        "contactType": "customer service",
-                        "areaServed": "IN",
-                        "availableLanguage": ["English", "Hindi"]
-                    },
-                    "serviceArea": {
-                        "@type": "GeoCircle",
-                        "geoMidpoint": {
-                            "@type": "GeoCoordinates",
-                            "latitude": "28.6139",
-                            "longitude": "77.2090"
-                        }
-                    }
-                })
-            }} />
+            {/* No business schema here on purpose.
+                This page used to emit its own LocalBusiness node alongside the
+                ProfessionalService node in app/layout.jsx, which meant two
+                unlinked entities describing one company on the same page —
+                including two aggregateRating blocks, which Google treats as a
+                rich-result error. The layout node is strictly richer (full
+                postal address, real areaServed list, offer catalogue), so it is
+                now the single source of truth and carries a stable @id. */}
 
             <Hero />
 
