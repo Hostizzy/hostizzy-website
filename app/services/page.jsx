@@ -285,7 +285,7 @@ export default function Services() {
                                 }}>
                                     <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>{'\uD83C\uDFE1'}</div>
                                     <h3 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.5rem' }}>
-                                        Trusted by 45+ Property Owners
+                                        Trusted with 35+ homes
                                     </h3>
                                     <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: 1.6 }}>
                                         Across Delhi NCR, Uttarakhand, Himachal Pradesh, Rajasthan & more
