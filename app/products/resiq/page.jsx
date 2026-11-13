@@ -40,7 +40,7 @@ export default function ResIQ() {
                 panel={
                     <RowPanel
                         title="Conditions it works under"
-                        meta="Live · Google Play + web"
+                        meta="Live"
                         rows={[
                             { label: 'The network is down', state: 'Still works' },
                             { label: 'The caretaker is not technical', state: 'Built for it' },

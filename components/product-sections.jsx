@@ -415,11 +415,11 @@ export function ProductStyles() {
             .ps-split { display: grid; grid-template-columns: minmax(0,1.3fr) minmax(0,1fr); gap: 4rem; align-items: start; }
             .ps-pairing { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 4rem; align-items: start; }
             .ps-blocks { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem,1fr)); gap: 1.75rem; }
-            .ps-blocks.is-two { grid-template-columns: repeat(auto-fit, minmax(23rem,1fr)); gap: 2rem; }
+            .ps-blocks.is-two { grid-template-columns: repeat(auto-fit, minmax(min(23rem,100%),1fr)); gap: 2rem; }
             .ps-reg-head { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 2.5rem; align-items: end; }
             .ps-reg-row { display: grid; grid-template-columns: minmax(0,14rem) minmax(0,1fr); gap: 1.5rem; padding: 1.4rem 1.75rem; align-items: baseline; }
             .ps-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem,1fr)); gap: 1.75rem; }
-            .ps-terms { display: grid; grid-template-columns: repeat(auto-fit, minmax(20rem,1fr)); gap: 2.5rem 3rem; }
+            .ps-terms { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(20rem,100%),1fr)); gap: 2.5rem 3rem; }
             .ps-close { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 2.5rem; align-items: center; }
             .ps-band { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 2.5rem; align-items: center; }
             .ps-phones { display: flex; gap: 1.25rem; justify-content: center; align-items: flex-start; }
