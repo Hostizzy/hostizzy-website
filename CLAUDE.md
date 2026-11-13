@@ -79,7 +79,7 @@ Tabs: New Host | Co-Hosting | Complete Management
 - `/app/marketing/page.jsx` — Digital marketing services page
 - `/lib/firebase-admin.js` — Firebase Admin SDK setup
 - `/lib/email.js` — Email helpers (OAuth2, contact/calculator/welcome notifications)
-- `/lib/auth.js` — Static token auth (withAuth wrapper)
+- `/lib/auth.js` — Admin auth: env-only credentials, HMAC-signed tokens with 12h expiry (withAuth wrapper). Optional ADMIN_TOKEN_SECRET env; otherwise the key derives from ADMIN_PASSWORD. The repo is public — never commit secrets.
 - `/lib/locations.js` — Location data for SEO pages
 - `/middleware.js` — Subdomain routing
 
@@ -140,7 +140,6 @@ Key vars: ADMIN_USERNAME, ADMIN_PASSWORD, OPENAI_API_KEY, GMAIL_USER, GMAIL_CLIE
 - Training/Certification pages: No actual enrollment flow (cert launching June 2026)
 - Location page expansion (Goa, Kerala, Maharashtra, etc.)
 - A/B testing on CTAs and lead forms
-- Admin auth hardening (currently static token, should be JWT with expiry)
 - Rate limiting on public API endpoints
 
 ## Development Notes
