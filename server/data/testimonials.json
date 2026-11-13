@@ -28,13 +28,6 @@
         "role": "Guest"
     },
     {
-        "id": 5,
-        "name": "Amit K.",
-        "text": "Best management company in Goa. My apartment is always booked.",
-        "rating": 5,
-        "role": "Property Owner"
-    },
-    {
         "id": 6,
         "name": "Sarah J.",
         "text": "Loved the local recommendations provided by the concierge. Made our trip unique.",

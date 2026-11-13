@@ -131,7 +131,7 @@ const Hero = () => {
                         // same constant the attributed figure below uses, so the
                         // two can never drift when the number is next refreshed.
                         { icon: Star, label: `${REVIEW_RATING.toFixed(1)} Rating`, color: '#FFD700' },
-                        { icon: Building2, label: '45+ Properties', color: '#60a5fa' },
+                        { icon: Building2, label: '35+ Properties', color: '#60a5fa' },
                         { icon: Users, label: '30,000+ Guests', color: '#34d399' }
                     ].map(({ icon: Icon, label, color }) => (
                         <span key={label} style={{

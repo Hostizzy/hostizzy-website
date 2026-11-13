@@ -72,6 +72,17 @@ const Footer = () => {
                             </ul>
                         </div>
 
+                        {/* Technology — the only other path to the product pages is the nav dropdown */}
+                        <div>
+                            <h4 style={{ fontSize: '1.1rem', marginBottom: '1.25rem', color: '#f8fafc' }}>Technology</h4>
+                            <ul style={{ listStyle: 'none', opacity: 0.8, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                                <li><Link href="/technology">Our platform</Link></li>
+                                <li><Link href="/products/hostsuite">HostSuite</Link></li>
+                                <li><Link href="/products/resiq">ResIQ</Link></li>
+                                <li><Link href="/products/juxtravel">JuxTravel</Link></li>
+                            </ul>
+                        </div>
+
                         {/* Resources & Legal */}
                         <div>
                             <h4 style={{ fontSize: '1.1rem', marginBottom: '1.25rem', color: '#f8fafc' }}>Resources</h4>
@@ -79,6 +90,7 @@ const Footer = () => {
                                 <li><Link href="/training">Training</Link></li>
                                 <li><Link href="/certification">Certification</Link></li>
                                 <li><Link href="/faq">FAQ</Link></li>
+                                <li><Link href="/testimonials">Testimonials</Link></li>
                                 <li><Link href="/privacy">Privacy Policy</Link></li>
                                 <li><Link href="/terms">Terms & Conditions</Link></li>
                                 <li><Link href="/refund-policy">Refund Policy</Link></li>

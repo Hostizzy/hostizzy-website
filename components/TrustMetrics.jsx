@@ -14,7 +14,7 @@ const TrustMetrics = () => {
     const metrics = [
         {
             icon: Building2,
-            value: 45,
+            value: 35,
             suffix: '+',
             label: 'Properties Managed',
             color: '#3b82f6'

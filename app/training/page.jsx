@@ -78,7 +78,7 @@ const Training = () => {
     const features = [
         { icon: <Video size={24} />, title: 'HD Video Lessons', desc: '50+ hours of professional video content' },
         { icon: <FileText size={24} />, title: 'Templates & Tools', desc: '100+ ready-to-use templates & checklists' },
-        { icon: <Users size={24} />, title: 'Community Access', desc: 'Join 500+ hosts in our private community' },
+        { icon: <Users size={24} />, title: 'Community Access', desc: 'Join our private community of hosts' },
         { icon: <Award size={24} />, title: 'Certification', desc: 'Get Host Certified™ badge on completion' },
         { icon: <MessageCircle size={24} />, title: 'Live Q&A Sessions', desc: 'Monthly live sessions with experts' },
         { icon: <Globe size={24} />, title: 'India-First Content', desc: '40% India-specific modules & guidance' }
@@ -91,30 +91,6 @@ const Training = () => {
         'Access to exclusive vendor network',
         'Priority support for course queries',
         'Job opportunities board for graduates'
-    ];
-
-    const testimonials = [
-        {
-            name: 'Rajesh Kumar',
-            role: 'Villa Owner, Lonavala',
-            rating: 5,
-            text: 'The free course helped me start hosting confidently. I earned ₹45,000 in my first month! Now enrolled in the advanced program to scale further.',
-            revenue: '₹45K/month'
-        },
-        {
-            name: 'Priya Sharma',
-            role: 'Apartment Host, Bangalore',
-            rating: 5,
-            text: 'As a complete beginner, the India-specific content was invaluable. The GST and legal modules saved me from costly mistakes.',
-            revenue: '₹38K/month'
-        },
-        {
-            name: 'Amit Patel',
-            role: 'Managing 4 Properties, Goa',
-            rating: 5,
-            text: 'Started with the free course, upgraded to advanced. Now managing 4 properties earning ₹2.5L monthly. Best investment I\'ve made!',
-            revenue: '₹2.5L/month'
-        }
     ];
 
     return (
@@ -564,48 +540,7 @@ const Training = () => {
                 </div>
             </section>
 
-            {/* Testimonials */}
-            <section className="section container">
-                <ScrollReveal>
-                    <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-                        <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Success Stories</h2>
-                        <p style={{ fontSize: '1.1rem', color: '#64748b' }}>
-                            Hear from hosts who transformed their properties into thriving businesses
-                        </p>
-                    </div>
-
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
-                        {testimonials.map((testimonial, i) => (
-                            <div key={i} className="card shadow-premium" style={{ padding: '2rem' }}>
-                                <div style={{ display: 'flex', marginBottom: '1rem' }}>
-                                    {[...Array(testimonial.rating)].map((_, j) => (
-                                        <Star key={j} size={20} fill="#FE5858" color="#FE5858" />
-                                    ))}
-                                </div>
-                                <p style={{ fontSize: '1rem', lineHeight: 1.6, marginBottom: '1.5rem', color: '#475569', fontStyle: 'italic' }}>
-                                    "{testimonial.text}"
-                                </p>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '1rem', borderTop: '1px solid #e2e8f0' }}>
-                                    <div>
-                                        <div style={{ fontWeight: 700 }}>{testimonial.name}</div>
-                                        <div style={{ fontSize: '0.9rem', color: '#64748b' }}>{testimonial.role}</div>
-                                    </div>
-                                    <div style={{
-                                        padding: '0.5rem 1rem',
-                                        background: 'linear-gradient(135deg, #10b981, #059669)',
-                                        color: 'white',
-                                        borderRadius: '0.5rem',
-                                        fontWeight: 700,
-                                        fontSize: '0.9rem'
-                                    }}>
-                                        {testimonial.revenue}
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </ScrollReveal>
-            </section>
+            {/* Success stories return once the course has real graduates. */}
 
             {/* CTA Section */}
             <section className="section" style={{

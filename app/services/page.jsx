@@ -128,7 +128,7 @@ export default function Services() {
                 description: "For villas, farmhouses & boutique homes — we manage everything, you bear the operational costs.",
                 features: [
                     "Complete booking & reservation management",
-                    "Dynamic pricing across 15+ channels",
+                    "Dynamic pricing across 10+ booking channels",
                     "24/7 guest communication & support",
                     "Staff & housekeeping coordination",
                     "Maintenance & vendor management",
@@ -147,7 +147,7 @@ export default function Services() {
                 description: "Complete hands-off hosting for apartments — we manage AND bear all operational costs.",
                 features: [
                     "Complete booking & reservation management",
-                    "Dynamic pricing across 15+ channels",
+                    "Dynamic pricing across 10+ booking channels",
                     "24/7 guest communication & support",
                     "Staff hiring & management by Hostizzy",
                     "All consumables & supplies covered",
@@ -174,8 +174,8 @@ export default function Services() {
         { q: "Can I upgrade or downgrade my plan later?", a: "Yes! We offer flexibility. You can switch plans with 30 days notice to suit your changing needs." },
         { q: "What if I only need marketing services?", a: "Our Add-ons like 'Social Media' or 'Premium Digital' are perfect for hosts who need marketing boost without full management." },
         { q: "Do you provide housekeeping and maintenance?", a: "Yes, our 'TotalCare360' and 'StayPrime' plans include full coordination of housekeeping, laundry, and maintenance." },
-        { q: "How does JuxTravel relate to Hostizzy?", a: "JuxTravel is our upcoming open marketplace for unique stays. Once launched, all Hostizzy-managed properties will get featured listing priority." },
-        { q: "What locations do you serve?", a: "We offer Complete Management in Delhi NCR, Uttarakhand, Himachal Pradesh, Rajasthan, and North East India. Co-Hosting services are available across all major Indian leisure markets including Goa, Kerala, and Karnataka." },
+        { q: "How does JuxTravel relate to Hostizzy?", a: "JuxTravel, our traveller app, has been live across India since 15 September 2026. Hostizzy-managed homes are listed on it on the same terms as every other independent host." },
+        { q: "What locations do you serve?", a: "We offer Complete Management in Delhi NCR, Uttarakhand, Himachal Pradesh, Rajasthan, Uttar Pradesh and North East India. Co-Hosting services are available across all major Indian leisure markets including Goa, Kerala, and Karnataka." },
         { q: "Is there a minimum contract period?", a: "Standard contracts are 1 year, ensuring we have time to optimize and grow your property's performance effectively." }
     ];
 
@@ -611,6 +611,36 @@ export default function Services() {
                                 ))}
                             </motion.div>
                         </AnimatePresence>
+                    </div>
+
+                    {/* Every plan in one table. The tabs above show one group at a
+                        time; this keeps all plans and prices on the page (and in the
+                        HTML search engines read) and gives owners a quick comparison. */}
+                    <div className="container" style={{ maxWidth: '1000px', marginTop: '3.5rem' }}>
+                        <h3 style={{ fontSize: '1.35rem', fontWeight: 700, marginBottom: '1rem', textAlign: 'center' }}>All plans at a glance</h3>
+                        <div style={{ overflowX: 'auto', background: 'white', border: '1px solid #e2e8f0', borderRadius: '1rem' }}>
+                            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.95rem', minWidth: '560px' }}>
+                                <thead>
+                                    <tr style={{ textAlign: 'left', color: '#64748b', fontSize: '0.85rem' }}>
+                                        <th style={{ padding: '0.9rem 1rem' }}>Plan</th>
+                                        <th style={{ padding: '0.9rem 1rem' }}>Price</th>
+                                        <th style={{ padding: '0.9rem 1rem' }}>Best for</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {['newhost', 'cohosting', 'complete'].flatMap((k) => plans[k]).map((plan) => (
+                                        <tr key={plan.name} style={{ borderTop: '1px solid #e2e8f0' }}>
+                                            <td style={{ padding: '0.9rem 1rem', fontWeight: 700, color: '#1e293b' }}>{plan.name}</td>
+                                            <td style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>{plan.price} <span style={{ color: '#64748b', fontSize: '0.85rem' }}>{plan.period}</span></td>
+                                            <td style={{ padding: '0.9rem 1rem', color: '#475569' }}>{plan.description}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                        <p style={{ textAlign: 'center', marginTop: '1rem', color: '#64748b' }}>
+                            Not sure which fits? <Link href="/calculator" style={{ color: 'var(--color-primary)', fontWeight: 600 }}>Compare them for your home in the revenue calculator</Link>.
+                        </p>
                     </div>
                 </div>
             </section>

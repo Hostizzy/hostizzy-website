@@ -20,7 +20,7 @@ const HowItWorks = () => {
         {
             icon: <Rocket size={32} color="white" />,
             title: "Go Live",
-            desc: "We launch across Airbnb, Booking.com, and 30+ channels.",
+            desc: "We launch across Airbnb, Booking.com, MakeMyTrip and 10+ booking channels.",
             color: "#ec4899"
         },
         {

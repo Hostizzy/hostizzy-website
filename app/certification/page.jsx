@@ -66,7 +66,7 @@ export default function Certification() {
                                 borderRadius: '100px'
                             }}>
                                 <Sparkles size={16} color="var(--color-primary)" />
-                                <span style={{ fontWeight: 700, color: 'var(--color-primary)', fontSize: '0.8rem', letterSpacing: '0.5px' }}>EARLY ACCESS — LAUNCHING SOON</span>
+                                <span style={{ fontWeight: 700, color: 'var(--color-primary)', fontSize: '0.8rem', letterSpacing: '0.5px' }}>EARLY ACCESS — WAITLIST OPEN</span>
                             </div>
                             <div style={{
                                 display: 'flex',
