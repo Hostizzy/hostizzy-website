@@ -6,18 +6,17 @@ Hostizzy is a modern, high-performance showcase website for India's leading vaca
 
 **The Website** is a speaker/showcase for our work - the front door where users discover Hostizzy.
 
-**The Heavy-Duty Products**:
-- **HostOS** (https://hostos.hostizzy.com): Smart PMS with GST invoicing, WhatsApp inbox, AI pricing, guest/owner portals
-- **ResIQ** (https://resiq.hostizzy.com): Daily operations dashboard for reservations, payments, guest KYC
-- **JuxTravel**: Direct booking engine (coming soon)
-- **TripMind AI**: Neural concierge for personalized travel (coming soon)
+**The Products** (single source of truth: `lib/products.js`):
+- **HostSuite**, formerly HostOS (https://hostos.hostizzy.com, domain unchanged): the PMS our own operation runs on, sold to other hosts as self-serve SaaS from ₹999/month with a 14-day free trial. Powers book.hostizzy.com. Android app coming to Google Play.
+- **ResIQ** (https://resiq.hostizzy.com): app for independent homestay, villa and farmstay owners. Live on Google Play and web.
+- **JuxTravel** (https://juxtravel.com): trip-matching app for travellers. Launched 15 September 2026, live across India on Android.
 
 ## 🚀 Key Features
 
 ### Showcase & Marketing
 - **Premium Design**: Fully responsive with smooth animations (Framer Motion)
 - **Trust Metrics**: 50+ properties, ₹15Cr+ revenue, 40,000+ happy guests
-- **Product Previews**: Interactive previews of HostOS, ResIQ, TravelCRM, JuxTravel
+- **Product Pages**: HostSuite, ResIQ and JuxTravel pages plus a /technology overview, all reading `lib/products.js`
 - **Host Training Academy**: Free & paid certification programs
 - **Revenue Calculator**: Dynamic earnings estimator for property owners
 
@@ -93,10 +92,9 @@ hostizzy-website/
 │   ├── properties/               # Property listings
 │   ├── experiences/              # Travel experiences
 │   ├── calculator/               # Revenue calculator
-│   ├── products/                 # Product previews
-│   │   ├── hostos/
+│   ├── products/                 # Product pages (/products/hostos 301s to /products/hostsuite)
+│   │   ├── hostsuite/
 │   │   ├── resiq/
-│   │   ├── travelcrm/
 │   │   └── juxtravel/
 │   ├── admin/                    # Admin CMS
 │   ├── api/                      # API routes
@@ -137,7 +135,7 @@ hostizzy-website/
 - `/experiences` - Travel experiences & NextStop
 - `/weddings` - Wedding venue properties
 - `/calculator` - Revenue estimation tool
-- `/products/*` - HostOS, ResIQ, TravelCRM, JuxTravel previews
+- `/products/*` - HostSuite, ResIQ and JuxTravel product pages
 - `/about` - Company story
 - `/contact` - Contact form
 
@@ -204,8 +202,8 @@ Comprehensive SEO strategy documented in [SEO_CONTENT_STRATEGY.md](./SEO_CONTENT
 - ⚪ Advanced SEO implementation
 
 ### Near-Term (Q2-Q3 2025)
-- Product launches (HostOS, ResIQ, TravelCRM)
-- JuxTravel marketplace MVP
+- ✅ HostSuite (formerly HostOS) live as self-serve SaaS; ResIQ on Google Play
+- ✅ JuxTravel launched 15 September 2026
 - AI-powered pricing engine
 - Multi-city expansion (15+ cities)
 

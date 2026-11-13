@@ -43,7 +43,7 @@ Corporate website for Hostizzy — India's premier vacation rental management co
 Text-only labels (no icons on desktop, icons kept in mobile menu):
 - Home
 - Services (dropdown): Property Management, Digital Marketing, Revenue Calculator
-- Technology (dropdown): Platform Overview, HostOS, ResIQ, JuxTravel
+- Technology (dropdown): Platform Overview, HostSuite, ResIQ, JuxTravel (names, one-liners and paths come from `lib/products.js`)
 - Host Academy (dropdown): Training Programs, Host Certified
 - Careers
 - Our Story (dropdown): Our Story, Blog, Invest
@@ -61,6 +61,11 @@ Tabs: New Host | Co-Hosting | Complete Management
 - TotalCare360: 30% profit share (villas)
 - StayPrime: 50-50 split (apartments — full management including staff, consumables)
 
+## Products (Nov 2026)
+- **HostSuite** ("HostSuite by Hostizzy", formerly HostOS): our PMS, at hostos.hostizzy.com (the domain did NOT change). Self-serve from ₹999/month, 14-day free trial at /register. Android app coming to Play. Guests never see the HostSuite brand; book.hostizzy.com is powered by it. Managed owners use the HostSuite owner portal.
+- **ResIQ**: app for independent homestay/villa/farmstay owners (one owner + caretaker). Live on Google Play and web. Not for management companies and not an analytics dashboard.
+- **JuxTravel**: trip-matching app for travellers, independent hosts only. Launched 15 Sep 2026, Android only. Do not recolour or crop its brand art; never present Hostizzy's homes as marketplace traction.
+
 ## Contact Emails
 - Property Owners: partnerships@hostizzy.com
 - Guests: stay@hostizzy.com
@@ -72,7 +77,8 @@ Tabs: New Host | Co-Hosting | Complete Management
 - `/components/Hero.jsx` — Homepage hero with ImageKit image
 - `/components/FloatingConcierge.jsx` — AI chatbot widget (GPT-5-mini, bottom-right)
 - `/components/PropertyLeadWizard.jsx` — 4-step owner lead capture form with service plan cards
-- `/components/ProductPage.jsx` — Reusable product page with heroMockup prop
+- `/lib/products.js` — Single source for product names, one-liners, URLs, statuses, Play links, `PROPERTY_COUNT` ('35+') and the `RESIQ_PUBLIC_SIGNUP` switch. Change product facts here, not in pages
+- `/components/product-sections.jsx` — Shared sections for the product pages (Opening, Pairing, Register, Steps, Blocks, Terms, CtaBand, Close, StoreLink, ProductMark)
 - `/app/services/page.jsx` — Pricing/plans page
 - `/app/calculator/page.jsx` — AI-powered revenue calculator
 - `/app/admin/page.jsx` — Admin panel (blog manager, careers, lead management)
@@ -128,7 +134,7 @@ Key vars: ADMIN_USERNAME, ADMIN_PASSWORD, OPENAI_API_KEY, GMAIL_USER, GMAIL_CLIE
 - Lead management: status pipeline, notes, bulk actions, detail panel in admin
 - Property Lead Wizard: 4-step with service plan cards, quality routing, location/OTA URL fields
 - Performance: dynamic imports for PropertyLeadWizard, FloatingConcierge; image dimension optimization
-- HostOS/ResIQ product pages with styled React dashboard mockups
+- Product pages for HostSuite (/products/hostsuite; /products/hostos 301s there), ResIQ and JuxTravel, with real brand marks and JuxTravel app screens in `public/products/` (no fabricated screenshots)
 - Technology page updated to match live products
 - Schema/structured data: current 5 plans in layout.jsx
 - Certification page: "Launching Soon" teaser, waitlist CTA (June 2026 launch)
