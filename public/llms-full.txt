@@ -3,20 +3,20 @@
 > India's premier vacation rental management company. We empower property owners with technology-driven management and deliver exceptional guest experiences.
 
 ## About
-Hostizzy (brand of Hostsphere India Pvt Ltd) is a vertically integrated hospitality technology company managing 45+ premium vacation rentals across India. We combine professional property management with proprietary technology (HostOS, ResIQ) to maximize owner revenue and guest satisfaction.
+Hostizzy (brand of Hostsphere India Pvt Ltd) is a vertically integrated hospitality technology company managing 35+ premium vacation rentals across India. We combine professional property management with proprietary technology (HostSuite, formerly HostOS) to maximize owner revenue and guest satisfaction.
 
 ## What We Do
 - **Full-Service Property Management**: End-to-end vacation rental management including marketing, guest communication, housekeeping, maintenance, and revenue optimization
-- **Technology Platform**: HostOS (smart PMS with GST, WhatsApp, AI pricing) and ResIQ (daily operations dashboard) for data-driven hospitality
+- **Technology**: HostSuite, our property management system (formerly HostOS), which also powers book.hostizzy.com. We also build ResIQ, an app for independent homestay owners, and JuxTravel, a trip-matching app for travellers
 - **Multi-Channel Distribution**: Properties listed on Airbnb, Booking.com, Agoda, MakeMyTrip, and direct booking channels
 - **Revenue Optimization**: Dynamic pricing, occupancy forecasting, and channel performance analytics
 - **Guest Experience**: Curated luxury stays with concierge services, personalized itineraries, and quality assurance
 
 ## Products
-- **HostOS** (https://hostos.hostizzy.com): Smart property management system with GST invoicing, WhatsApp + Instagram inbox, AI dynamic pricing, guest/owner portals, SignFlow digital agreements, and review automation
-- **ResIQ** (https://resiq.hostizzy.com): Daily operations dashboard for managing reservations, payments, guest KYC, and team coordination — with offline-first PWA design for rural India
-- **JuxTravel** (https://www.juxtravel.com): Trip-matching discovery for Indian travellers — starts from the trip you want rather than a city and two dates, and surfaces the trade-offs of an independent homestay before you book. Early access open; full launch 1 September 2026.
-- **Booking Site** (https://book.hostizzy.com): Direct booking platform for Hostizzy-managed properties
+- **HostSuite** (https://hostos.hostizzy.com), formerly HostOS: Hostizzy's property management system, "HostSuite by Hostizzy". The system Hostizzy's own operation runs on, and self-serve SaaS for other hosts from ₹999/month with a 14-day free trial (no card). Unified inbox (WhatsApp, Instagram, webchat, Gmail) with an AI Concierge and Niva, the AI agent; Email Intelligence that turns OTA confirmation emails into bookings; bidirectional iCal sync; GST invoicing; owner statements and payouts. The domain stays hostos.hostizzy.com. Android app coming to Google Play.
+- **ResIQ** (https://resiq.hostizzy.com): App for independent homestay, villa and farmstay owners, usually working with a caretaker. Bookings, payments, guest ID verification, WhatsApp templates; works offline. Live on Google Play (https://play.google.com/store/apps/details?id=com.hostizzy.resiq) and the web. Not aimed at management companies. Founding offer: the first 10 owners keep their first property free.
+- **JuxTravel** (https://juxtravel.com): Trip-matching app for Indian travellers. Starts from the trip you want rather than a city and two dates. Independent hosts only. Launched 15 September 2026, live across India on Android (https://play.google.com/store/apps/details?id=com.hostsphere.juxtravel).
+- **Booking Site** (https://book.hostizzy.com): Direct booking site for Hostizzy-managed properties, powered by HostSuite
 
 ## Key Markets
 
@@ -34,7 +34,7 @@ Goa, Kerala, Maharashtra, Karnataka, Tamil Nadu, West Bengal, and the rest of In
 - StayPrime: Full apartment management (50-50 revenue split)
 
 ## Stats
-- 45+ Properties Managed
+- 35+ Properties Managed
 - ₹12 Crore+ GMV
 - 30,000+ Happy Guests
 - 4.9★ Average Rating
@@ -56,37 +56,36 @@ Goa, Kerala, Maharashtra, Karnataka, Tamil Nadu, West Bengal, and the rest of In
 
 ## Detailed Product Information
 
-### HostOS - Smart Property Management System
-HostOS is Hostizzy's proprietary smart PMS built specifically for the Indian vacation rental market. It serves as the central management hub for properties across multiple locations, providing a unified interface for bookings, guests, payments, and team operations.
+### HostSuite (formerly HostOS) - Property Management System
+HostSuite, "HostSuite by Hostizzy", is Hostizzy's property management system, built for the Indian vacation rental market. It is the system Hostizzy's own operation runs on, and since 2026 it is sold to other hosting businesses as self-serve SaaS at https://hostos.hostizzy.com (the domain did not change with the rename). Plans start at ₹999/month, with custom pricing for large portfolios; every plan has a 14-day free trial with no card required. Tagline: "Everything a host needs. Together."
 
 Key capabilities include:
-- **Smart Calendar**: Unified booking calendar that syncs availability across all OTAs (Airbnb, Booking.com, Agoda, MakeMyTrip) and direct channels in real time, preventing double bookings.
-- **WhatsApp + Instagram Inbox**: All guest conversations from WhatsApp and Instagram DMs managed in one unified inbox — the way Indian guests prefer to communicate.
-- **GST Invoicing**: Automatic GST-compliant invoicing with CGST/SGST/IGST and HSN codes for every booking, ready for tax filing.
-- **Guest Portal**: Self-service check-in, KYC verification, meal pre-ordering, and payment collection via QR code access.
-- **Owner Dashboard**: Real-time property performance, revenue tracking, occupancy analytics, and payout visibility for property owners.
-- **AI Dynamic Pricing**: Intelligent rate optimization based on demand, seasons, local events, and competitor analysis.
-- **SignFlow**: Digital agreements and contracts with WhatsApp OTP verification and e-signature capture.
-- **Review Automation**: Automated review collection, negative review gating, and response management across all platforms.
-- **Three Portals**: Guest Portal (self-service), Owner Portal (performance dashboards), and Mobile App (coming soon).
-- **Go Direct**: Zero-commission direct booking channel vs 15-25% OTA fees, with integrated payment gateway and UPI support.
-- **Made in India**: Full GST compliance, UPI payments, WhatsApp-native design, Hindi + English support.
+- **Unified Inbox**: WhatsApp through the official Meta Cloud API, Instagram DMs, webchat and Gmail in one inbox.
+- **AI Concierge**: Off / Suggest / Autopilot modes, a lead parser, drafts in the guest's language across 10 Indian languages, polish and hot-lead alerts.
+- **Niva**: The AI agent. Answers guests on WhatsApp and Instagram, quotes, holds dates and sends payment links; the team approves discounts.
+- **Email Intelligence**: Turns confirmation emails from Airbnb, Booking.com, MakeMyTrip, Goibibo, Agoda, Expedia and VRBO into reservations, and extracts payout, commission, GST, TDS and TCS.
+- **Channel Sync**: Bidirectional iCal sync with a monitoring dashboard, plus a 7-stage enquiries pipeline.
+- **Money**: GST and non-GST invoicing with CGST/SGST/IGST and HSN codes; Razorpay payment links; owner portal with statements, payouts and P&L; expenses.
+- **Guests and Agreements**: Guest portal (check-in, KYC, meal pre-order, payment, review); SignFlow digital agreements with WhatsApp OTP and e-signature.
+- **Marketing and Reviews**: Broadcasts; review import from Airbnb, Booking.com, MakeMyTrip and Google with AI summaries.
+- **Also**: Activity and event bookings, loyalty programme, AI listing agent, multi-room inventory, a direct booking website (it powers book.hostizzy.com), and English + Hindi interface.
+- **Mobile**: Android app "HostSuite by Hostizzy" coming to Google Play. No iOS app yet.
 
-### ResIQ - Daily Operations Dashboard
-ResIQ is Hostizzy's staff-facing operations dashboard — not just analytics, but a complete tool for managing the daily reservation lifecycle from enquiry to checkout. Built with an offline-first PWA architecture for properties in areas with poor network connectivity.
+### ResIQ - App for Independent Homestay Owners
+ResIQ (https://resiq.hostizzy.com) is an app for people who own a homestay, villa or farmstay in India and run it themselves, usually with a caretaker on site. It is a separate product from HostSuite and is not aimed at property management companies. Live on Google Play (https://play.google.com/store/apps/details?id=com.hostizzy.resiq) and on the web.
 
 Key capabilities include:
-- **Reservation Pipeline**: Kanban-style board to track every reservation from enquiry through checkout with drag-and-drop interface.
-- **Payment Tracking**: Real-time payment status across multiple methods (UPI, bank transfer, cash) with pending collection alerts and reconciliation.
-- **Guest KYC & Documents**: QR-based guest portal for ID verification and document upload, with automatic data deletion after 60 days for compliance.
-- **WhatsApp & Email**: Templated communication hub for guest confirmations, check-in instructions, and team coordination.
-- **Enquiry & Lead Pipeline**: Multi-stage Kanban to capture and convert enquiries from all channels into confirmed bookings.
-- **Business Analytics**: Revenue, occupancy, and channel performance insights for data-driven property decisions.
-- **OTA Calendar Sync**: Real-time iCal integration with Airbnb, Booking.com, and other OTAs to prevent double bookings.
-- **Smart Automation**: Automated workflows for check-in reminders, payment follow-ups, review requests, and checkout tasks.
-- **Works Offline (PWA)**: Progressive Web App with 95+ Lighthouse score — works where networks don't reach, built for rural Indian properties.
-- **Three Portals**: Staff RMS (reservation management), Owner Portal (performance visibility), Guest Portal (QR-code self-service).
-- **Enterprise Security**: End-to-end encryption, role-based access control (5 levels), auto data cleanup (60-day retention), token-based sessions.
+- **Bookings**: Enquiries and bookings in one place; calendar feeds from Airbnb, Booking.com, Agoda, MakeMyTrip and Goibibo, and booking emails imported from Gmail. One-way into ResIQ today; two-way sync is in testing.
+- **Payments**: Advances and balances across cash, UPI, gateway and bank transfer, with payment reminders.
+- **Guest KYC**: Guests scan a QR code, upload Aadhaar or passport, take a selfie and pick meals; documents auto-delete 60 days after checkout.
+- **WhatsApp Templates**: Confirmations, directions, payment nudges and thank-yous in English or Hindi, logged against the booking.
+- **Caretaker Login**: Caretakers see arrivals and departures and can check guests in, without seeing revenue, payouts or bank details. Invite by email, revoke in one tap.
+- **Works Offline**: Bookings, payments and check-ins work with no network and sync when signal returns.
+- **Android and Web**: Native Android app with offline mode, push notifications and biometric login; web app on any device.
+- **Pricing**: Founding offer, the first 10 owners keep their first property free permanently. Accounts are approved by the team, usually the same day.
+
+### JuxTravel - Trip-Matching App for Travellers
+JuxTravel (https://juxtravel.com) launched on 15 September 2026 and is live across India on Android (https://play.google.com/store/apps/details?id=com.hostsphere.juxtravel). No iOS app yet. Travellers describe the trip they want; Jux Fit matches them to independent homestays and villas, the Reality Layer shows honest trade-offs before booking, an AI travel companion helps on the go, and Passport keeps a record of every trip. Independent hosts only, no chains. Hosts can list at https://juxtravel.com/homestay-owners. Hostizzy-managed homes are listed on the same terms as any other host.
 
 ## Host Academy
 Hostizzy's Host Academy is an educational initiative designed to elevate the standard of vacation rental hosting across India. The program offers structured training for property owners who want to improve their hosting skills, whether they self-manage or use professional management services.
@@ -109,7 +108,7 @@ Simply visit our Contact page or use the Property Lead form. We'll schedule a di
 We offer five plans: SmartStart (₹14,999 one-time setup), ChannelPro (₹15K-40K/month channel management), Hybrid Core (18% commission), TotalCare360 (30% profit share for villas), and StayPrime (50-50 split for apartments with full management including staff and consumables).
 
 ### Do you handle guest vetting?
-Yes, we use strict verification processes across all booking platforms to ensure high-quality guests. ResIQ includes built-in Guest KYC with document verification.
+Yes, we use strict verification processes across all booking platforms to ensure high-quality guests. Our guest portal (in HostSuite) includes built-in guest KYC with document verification.
 
 ### What happens if a guest damages my property?
 We collect security deposits and assist with insurance claims through platforms like Airbnb AirCover.
@@ -122,7 +121,7 @@ Hostizzy is a growing hospitality technology company always looking for talented
 
 ### Open Positions
 - **City Managers**: On-ground operations leads for new and existing markets (Goa, Himachal Pradesh, Uttarakhand, Rajasthan)
-- **Full-Stack Developers**: Building and maintaining HostOS, ResIQ, and JuxTravel platforms (Next.js, Node.js, Firebase, Supabase)
+- **Full-Stack Developers**: Building and maintaining HostSuite, ResIQ and JuxTravel (Next.js, Node.js, Firebase, Supabase)
 - **Digital Marketing Specialists**: Managing multi-channel digital campaigns, SEO, content strategy, and social media
 - **Guest Experience Associates**: Handling guest communications, concierge services, and quality assurance
 - **Business Development Executives**: Onboarding new property owners and expanding the Hostizzy portfolio
@@ -141,7 +140,7 @@ Hostizzy is positioned at the forefront of India's rapidly growing vacation rent
 ### Growth Highlights
 - Revenue growth driven by expanding property portfolio and technology licensing
 - Asset-light business model with high operating leverage
-- Proprietary technology stack (HostOS, ResIQ, JuxTravel) creating competitive moats
+- Proprietary technology (HostSuite, ResIQ, JuxTravel) creating competitive moats
 - First-mover advantage in organized vacation rental management in tier-2 Indian tourist destinations
 
 For investment inquiries, contact invest@hostizzy.com.
@@ -149,7 +148,7 @@ For investment inquiries, contact invest@hostizzy.com.
 ## Detailed Service Plan Features
 
 ### SmartStart
-One-time onboarding for new hosts entering the vacation rental market. Includes property audit, professional photography, listing creation and optimization across major OTAs, initial pricing strategy, and access to HostOS and ResIQ platforms. Priced at ₹14,999 as a one-time setup fee.
+One-time onboarding for new hosts entering the vacation rental market. Includes property audit, professional photography, listing creation and optimization across major OTAs, initial pricing strategy, and access to HostSuite. Priced at ₹14,999 as a one-time setup fee.
 
 ### ChannelPro
 Ongoing OTA channel management for hosts who handle operations themselves. Includes multi-channel listing management, calendar synchronization, pricing optimization, booking coordination, and monthly performance reporting. Priced at ₹15,000-40,000/month based on property portfolio size.
@@ -168,7 +167,7 @@ Hostizzy's technology infrastructure is built on modern, scalable frameworks des
 
 - **Frontend**: Next.js (React), Framer Motion for animations, Tailwind-inspired custom CSS
 - **Backend**: Node.js, Firebase (Firestore, Authentication, Cloud Functions, Storage), Supabase (PostgreSQL)
-- **Hosting**: Vercel (website), Firebase Hosting (HostOS), Vercel (ResIQ)
+- **Hosting**: Vercel (website), Vercel + Supabase (HostSuite)
 - **Analytics**: Google Analytics 4, custom event tracking
 - **Communication**: WhatsApp Business API, automated email systems
 - **Payments**: Razorpay integration for direct bookings, UPI support

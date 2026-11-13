@@ -3,20 +3,20 @@
 > India's premier vacation rental management company. We empower property owners with technology-driven management and deliver exceptional guest experiences.
 
 ## About
-Hostizzy (brand of Hostsphere India Pvt Ltd) is a vertically integrated hospitality technology company managing 45+ premium vacation rentals across India. We combine professional property management with proprietary technology (HostOS, ResIQ) to maximize owner revenue and guest satisfaction.
+Hostizzy (brand of Hostsphere India Pvt Ltd) is a vertically integrated hospitality technology company managing 35+ premium vacation rentals across India. We combine professional property management with proprietary technology (HostSuite, formerly HostOS) to maximize owner revenue and guest satisfaction.
 
 ## What We Do
 - **Full-Service Property Management**: End-to-end vacation rental management including marketing, guest communication, housekeeping, maintenance, and revenue optimization
-- **Technology Platform**: HostOS (property management system) and ResIQ (revenue analytics dashboard) for data-driven hospitality
+- **Technology**: HostSuite, our property management system (formerly HostOS), which also powers book.hostizzy.com. We also build ResIQ, an app for independent homestay owners, and JuxTravel, a trip-matching app for travellers
 - **Multi-Channel Distribution**: Properties listed on Airbnb, Booking.com, Agoda, MakeMyTrip, and direct booking channels
 - **Revenue Optimization**: Dynamic pricing, occupancy forecasting, and channel performance analytics
 - **Guest Experience**: Curated luxury stays with concierge services, personalized itineraries, and quality assurance
 
 ## Products
-- **HostOS** (https://hostos.hostizzy.com): Property management system with unified calendar, automated guest messaging, maintenance tracking, and built-in CRM
-- **ResIQ** (https://resiq.hostizzy.com): Revenue intelligence dashboard with real-time earnings, occupancy forecasting, and channel performance analytics
-- **JuxTravel** (https://www.juxtravel.com): Trip-matching discovery for Indian travellers — starts from the trip you want rather than a city and two dates. Independent hosts only. Early access open; full launch 1 September 2026.
-- **Booking Site** (https://book.hostizzy.com): Direct booking platform for Hostizzy-managed properties
+- **HostSuite** (https://hostos.hostizzy.com), formerly HostOS: Hostizzy's property management system, "HostSuite by Hostizzy". The system Hostizzy's own operation runs on, and self-serve SaaS for other hosts from ₹999/month with a 14-day free trial (no card). Unified inbox (WhatsApp, Instagram, webchat, Gmail) with an AI Concierge and Niva, the AI agent; Email Intelligence that turns OTA confirmation emails into bookings; bidirectional iCal sync; GST invoicing; owner statements and payouts. The domain stays hostos.hostizzy.com. Android app coming to Google Play.
+- **ResIQ** (https://resiq.hostizzy.com): App for independent homestay, villa and farmstay owners, usually working with a caretaker. Bookings, payments, guest ID verification, WhatsApp templates; works offline. Live on Google Play (https://play.google.com/store/apps/details?id=com.hostizzy.resiq) and the web. Not aimed at management companies. Founding offer: the first 10 owners keep their first property free.
+- **JuxTravel** (https://juxtravel.com): Trip-matching app for Indian travellers. Starts from the trip you want rather than a city and two dates. Independent hosts only. Launched 15 September 2026, live across India on Android (https://play.google.com/store/apps/details?id=com.hostsphere.juxtravel).
+- **Booking Site** (https://book.hostizzy.com): Direct booking site for Hostizzy-managed properties, powered by HostSuite
 
 ## Key Markets
 
@@ -44,7 +44,7 @@ Hostizzy (brand of Hostsphere India Pvt Ltd) is a vertically integrated hospital
 - Premium Digital: ₹50,000/month (everything + website + SEO + complete digital presence)
 
 ## Stats
-- 45+ Properties Managed
+- 35+ Properties Managed
 - ₹12 Crore+ GMV
 - 30,000+ Happy Guests
 - 4.9★ Average Rating

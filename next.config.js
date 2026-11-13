@@ -1,11 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    // Only the hosts the site actually serves images from. A '**' wildcard let
+    // the optimiser fetch any URL on the internet at our cost.
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
+      { protocol: 'https', hostname: 'ik.imagekit.io' },
+      { protocol: 'https', hostname: 'images.pexels.com' },
+      { protocol: 'https', hostname: 'images.unsplash.com' },
+      { protocol: 'https', hostname: 'www.hostizzy.com' },
     ],
     unoptimized: false,
   },
@@ -14,7 +16,7 @@ const nextConfig = {
   },
   experimental: {
     serverActions: {
-      allowedOrigins: ['localhost:3000', 'hostizzy.com', '*.vercel.app'],
+      allowedOrigins: ['localhost:3000', 'hostizzy.com', 'www.hostizzy.com', '*.vercel.app'],
     },
   },
   async redirects() {

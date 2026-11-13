@@ -6,7 +6,7 @@ import './globals.css';
 
 export const metadata = {
   title: 'Hostizzy | Premier Vacation Rental Management India',
-  description: "India's leading Airbnb & vacation rental management company. AI-powered pricing, 15+ OTA channels, full property management across Delhi NCR, Himachal, Uttarakhand & Rajasthan.",
+  description: "India's leading Airbnb & vacation rental management company. AI-powered pricing, 10+ booking channels, full property management across Delhi NCR, Himachal, Uttarakhand & Rajasthan.",
   keywords: ['vacation rental management india', 'airbnb property management india', 'holiday home management', 'property management company india'],
   icons: {
     icon: '/images/logo.jpg',
@@ -15,7 +15,7 @@ export const metadata = {
   metadataBase: new URL('https://www.hostizzy.com'),
   openGraph: {
     title: 'Hostizzy | Premier Vacation Rental Management India',
-    description: "India's leading Airbnb & vacation rental management company. AI-powered pricing, 15+ OTA channels, full property management across Delhi NCR, Himachal, Uttarakhand & Rajasthan.",
+    description: "India's leading Airbnb & vacation rental management company. AI-powered pricing, 10+ booking channels, full property management across Delhi NCR, Himachal, Uttarakhand & Rajasthan.",
     type: 'website',
     locale: 'en_IN',
     url: 'https://www.hostizzy.com',
@@ -47,7 +47,7 @@ const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-29EDHJHTDF';
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en-IN">
       <head>
         {/* Google Analytics 4.
             GA measurement IDs are public by design (they ship in the client
@@ -100,6 +100,12 @@ export default function RootLayout({ children }) {
               "@type": "ProfessionalService",
               "@id": "https://www.hostizzy.com/#organization",
               "name": "Hostizzy",
+              "legalName": "Hostsphere India Private Limited",
+              "brand": [
+                { "@type": "Brand", "name": "HostSuite" },
+                { "@type": "Brand", "name": "ResIQ" },
+                { "@type": "Brand", "name": "JuxTravel" }
+              ],
               "additionalType": [
                 "https://en.wikipedia.org/wiki/Property_management",
                 "https://en.wikipedia.org/wiki/Vacation_rental"

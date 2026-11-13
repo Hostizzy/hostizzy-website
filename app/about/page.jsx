@@ -8,6 +8,7 @@ import {
     Award, Users, Target, Sparkles, TrendingUp, Shield,
     ArrowRight, Star, ExternalLink, Linkedin, CheckCircle
 } from 'lucide-react';
+import { HOSTSUITE, RESIQ, JUXTRAVEL, PROPERTY_COUNT } from '../../lib/products';
 
 const About = () => {
     const advantages = [
@@ -67,12 +68,12 @@ const About = () => {
         {
             year: '2025',
             title: 'Technology & Scale',
-            text: '30+ properties. \u20B912 Cr+ GMV. 30,000+ guests. 25+ weddings. ResIQ completed. HostOS in pre-production. Hospitality SaaS roadmap planned. Airbnb Superhost.'
+            text: '30+ properties. \u20B912 Cr+ GMV. 30,000+ guests. 25+ weddings. ResIQ completed. HostOS (now HostSuite) in pre-production. Hospitality SaaS roadmap planned. Airbnb Superhost.'
         },
         {
             year: '2026',
             title: 'The Platform Era',
-            text: '45+ properties. 40+ weddings. Three-tier service plans launched. HostOS in production. PMS-powered booking website live. Wedding pilot expanded to 3 villas in Delhi NCR. Airbnb Superhost.'
+            text: `${PROPERTY_COUNT} properties. 40+ weddings. Three-tier service plans launched. HostOS in production, then renamed HostSuite and opened to other hosts as self-serve SaaS (from ${HOSTSUITE.priceFrom}). book.hostizzy.com, powered by HostSuite, live. ResIQ on Google Play. JuxTravel launched ${JUXTRAVEL.launchDate}. Wedding pilot expanded to 3 villas in Delhi NCR. Airbnb Superhost.`
         }
     ];
 
@@ -169,7 +170,7 @@ const About = () => {
                                     <strong>Ethan Barman</strong> and <strong>Ashutosh Karn</strong>, both ex-Airbnb professionals, founded Hostizzy with a radical idea: What if property management wasn't about building the management company's brand, but about elevating each property's unique identity?
                                 </p>
                                 <p>
-                                    From 3 properties in Delhi NCR to 45+ across India, we've generated over <strong>{'\u20B9'}12 Cr+ in GMV</strong>, hosted <strong>30,000+ guests</strong>, and maintain a <strong>4.9{'\u2605'} average rating</strong>. Our approach combines technology-driven operations with genuine, personalized hospitality.
+                                    From 3 properties in Delhi NCR to {PROPERTY_COUNT} across India, we've generated over <strong>{'\u20B9'}12 Cr+ in GMV</strong>, hosted <strong>30,000+ guests</strong>, and maintain a <strong>4.9{'\u2605'} average rating</strong>. Our approach combines technology-driven operations with genuine, personalized hospitality.
                                 </p>
                             </div>
                         </div>
@@ -333,35 +334,35 @@ const About = () => {
                     <div className="grid desktop-3-col" style={{ gap: '2rem', marginBottom: '3rem' }}>
                         {[
                             {
-                                title: 'HostOS',
-                                subtitle: 'Property Management System',
-                                desc: 'The central nervous system of hospitality. Unified calendar, automated guest messaging, maintenance tracking, and built-in CRM — all in one platform.',
-                                badge: 'Live',
+                                title: HOSTSUITE.name,
+                                subtitle: 'Property management system',
+                                desc: 'An AI inbox with Niva answering guests on WhatsApp and Instagram, Email Intelligence that turns OTA confirmations into bookings, GST invoicing, and an owner portal with statements and payouts.',
+                                badge: HOSTSUITE.status,
                                 badgeColor: '#22c55e',
                                 accentColor: '#3b82f6',
-                                href: 'https://hostos.hostizzy.com/',
-                                linkText: 'Explore HostOS',
-                                external: true
+                                href: HOSTSUITE.path,
+                                linkText: 'Explore HostSuite',
+                                external: false
                             },
                             {
-                                title: 'ResIQ',
-                                subtitle: 'Revenue Intelligence Dashboard',
-                                desc: 'Real-time financial performance, occupancy forecasting, and channel analytics. Complete transparency for property owners.',
-                                badge: 'Live',
+                                title: RESIQ.name,
+                                subtitle: 'App for independent owners',
+                                desc: 'Bookings, payments and guest ID checks for an owner running their own homestay, villa or farmstay. Works offline, with a caretaker login that never shows the money.',
+                                badge: RESIQ.status,
                                 badgeColor: '#22c55e',
                                 accentColor: '#FE5858',
-                                href: 'https://resiq.hostizzy.com/',
+                                href: RESIQ.path,
                                 linkText: 'Explore ResIQ',
-                                external: true
+                                external: false
                             },
                             {
-                                title: 'JuxTravel',
-                                subtitle: 'Travel Marketplace',
-                                desc: 'AI-powered travel marketplace connecting luxury hosts with discerning guests. Direct bookings, lower commissions, community trust.',
-                                badge: 'Coming Soon',
-                                badgeColor: '#8b5cf6',
+                                title: JUXTRAVEL.name,
+                                subtitle: 'Trip-matching app for travellers',
+                                desc: 'Travellers describe the trip they want and get matched to independent homestays and villas, with the honest trade-offs shown before they book. Live across India on Android.',
+                                badge: JUXTRAVEL.status,
+                                badgeColor: '#22c55e',
                                 accentColor: '#8b5cf6',
-                                href: '/products/juxtravel',
+                                href: JUXTRAVEL.path,
                                 linkText: 'Learn More',
                                 external: false
                             }
@@ -762,7 +763,7 @@ const About = () => {
                             {
                                 name: 'Technology',
                                 icon: <Sparkles size={24} />,
-                                desc: 'Building HostOS, ResIQ & the booking platform. Full-stack engineering, AI/ML & product development.',
+                                desc: 'Building HostSuite, ResIQ, JuxTravel & the booking platform. Full-stack engineering, AI/ML & product development.',
                                 color: '#8b5cf6'
                             },
                             {

@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 
 import ScrollReveal from '../../components/ScrollReveal';
+import { PROPERTY_COUNT } from '../../lib/products';
 import {
     ArrowRight, MapPin, Briefcase, Coffee, Plane, BookOpen, Users,
     Rocket, Heart, Zap, Target, Search, Building2, Clock, ChevronRight,
@@ -376,7 +377,7 @@ const Career = () => {
                                 <h4 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.75rem', color: '#0f172a' }}>Why Hostizzy?</h4>
                                 <ul style={{ margin: 0, paddingLeft: '1.15rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                                     <li style={{ fontSize: '0.9rem', color: '#475569', lineHeight: 1.6 }}>
-                                        High-growth startup with 45+ properties and Rs 12 Cr+ GMV -- be part of the journey from the ground up.
+                                        High-growth startup with {PROPERTY_COUNT} properties and Rs 12 Cr+ GMV -- be part of the journey from the ground up.
                                     </li>
                                     <li style={{ fontSize: '0.9rem', color: '#475569', lineHeight: 1.6 }}>
                                         Flat hierarchy with zero bureaucracy -- your ideas ship in days, not months.
@@ -622,7 +623,7 @@ const Career = () => {
                         {
                             icon: <Rocket size={28} />,
                             title: 'High Growth',
-                            desc: '45+ properties, \u20b912 Cr+ GMV, and we\'re just getting started. Grow with us.',
+                            desc: `${PROPERTY_COUNT} properties, \u20b912 Cr+ GMV, and we're just getting started. Grow with us.`,
                             gradient: 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)',
                             iconColor: '#2563eb'
                         },
