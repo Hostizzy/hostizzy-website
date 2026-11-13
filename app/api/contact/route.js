@@ -4,6 +4,7 @@ import { DATA_FILES, readJson, writeJson } from '@/lib/db';
 import { errorResponse, successResponse, getRequestBody, generateId } from '@/lib/utils';
 import { sendContactNotification } from '@/lib/email';
 import { checkSpam } from '@/lib/antispam';
+import { forwardLeadToHostSuite } from '@/lib/hostsuite';
 
 // POST /api/contact - Submit contact form (public - no auth required)
 export async function POST(request) {
@@ -51,6 +52,9 @@ export async function POST(request) {
 
     // Send email after response — form responds instantly
     after(async () => {
+      // Owners and guests go to HostSuite; business enquiries stay email-only.
+      const kind = { owner: 'owner', guest: 'guest' }[newContact.department];
+      if (kind) await forwardLeadToHostSuite({ kind, form: 'contact', lead: newContact });
       try {
         await sendContactNotification(newContact);
       } catch (err) {

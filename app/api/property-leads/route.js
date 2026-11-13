@@ -5,6 +5,7 @@ import { adminDb } from '@/lib/firebase-admin';
 import { DATA_FILES, readJson, writeJson } from '@/lib/db';
 import { errorResponse, successResponse, getRequestBody, generateId } from '@/lib/utils';
 import { sendEmail, sendPropertyLeadWelcome } from '@/lib/email';
+import { forwardLeadToHostSuite } from '@/lib/hostsuite';
 
 // POST /api/property-leads — public, captures property owner lead
 export async function POST(request) {
@@ -45,6 +46,7 @@ export async function POST(request) {
         after(async () => {
             try {
                 await Promise.allSettled([
+                    forwardLeadToHostSuite({ kind: 'owner', form: 'property-wizard', lead }),
                     sendEmail({
                         to: 'partnerships@hostizzy.com',
                         subject: `🏠 [${quality.toUpperCase()}] New Property Lead: ${body.name} — ${body.city || 'N/A'} (${body.propertyType || 'N/A'})`,

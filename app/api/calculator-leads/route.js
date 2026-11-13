@@ -4,6 +4,7 @@ import { adminDb } from '@/lib/firebase-admin';
 import { DATA_FILES, readJson, writeJson } from '@/lib/db';
 import { errorResponse, successResponse, getRequestBody, generateId } from '@/lib/utils';
 import { sendCalculatorLeadNotification } from '@/lib/email';
+import { forwardLeadToHostSuite } from '@/lib/hostsuite';
 
 // GET /api/calculator-leads - Get all calculator leads (requires auth)
 const handleGET = async (request) => {
@@ -58,6 +59,7 @@ export async function POST(request) {
 
     // Send email after response — form responds instantly
     after(async () => {
+      await forwardLeadToHostSuite({ kind: 'owner', form: 'calculator', lead: newLead });
       try {
         await sendCalculatorLeadNotification(newLead);
       } catch (err) {
