@@ -169,14 +169,14 @@ const Hero = () => {
                         stays visually secondary to "Partner With Us" — but a
                         guest who lands here should be able to leave for the
                         booking site in one glance rather than reading an owner
-                        pitch. Labelled "Book a Stay" to match the navbar CTA
-                        (it was "Explore Stays" here and "Book a Stay" there, two
-                        names for one destination), and carries an external-link
+                        pitch. Labelled "Find a villa or farmstay" so a guest knows
+                        what they will find (the navbar keeps the shorter "Book a
+                        Stay"; both go to the booking site's all-stays page), and carries an external-link
                         mark because it leaves hostizzy.com. The surface is
                         raised from 10% to 18% white so the label holds up over
                         the bright parts of the photo. */}
                     <a
-                        href="https://book.hostizzy.com/"
+                        href="https://book.hostizzy.com/stays"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="btn"
@@ -193,7 +193,7 @@ const Hero = () => {
                             gap: '0.5rem'
                         }}
                     >
-                        Book a Stay
+                        Find a villa or farmstay
                         <ExternalLink size={17} aria-hidden="true" />
                     </a>
                 </motion.div>

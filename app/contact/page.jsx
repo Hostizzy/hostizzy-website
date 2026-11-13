@@ -301,7 +301,7 @@ export default function Contact() {
                                     <>
                                         Whether you're planning a stay or need help with an existing booking, our concierge team is here for you.
                                         <div style={{ marginTop: '1rem' }}>
-                                            <a href="https://book.hostizzy.com/" target="_blank" rel="noopener noreferrer" style={{
+                                            <a href="https://book.hostizzy.com/stays" target="_blank" rel="noopener noreferrer" style={{
                                                 display: 'inline-flex',
                                                 alignItems: 'center',
                                                 gap: '0.5rem',
@@ -310,7 +310,7 @@ export default function Contact() {
                                                 fontSize: '1.05rem',
                                                 textDecoration: 'none'
                                             }}>
-                                                Looking to book? Visit book.hostizzy.com &rarr;
+                                                Looking to book? Browse villas and farmstays &rarr;
                                             </a>
                                         </div>
                                     </>

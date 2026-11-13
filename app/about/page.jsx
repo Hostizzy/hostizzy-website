@@ -836,7 +836,7 @@ const About = () => {
                                 <ArrowRight size={18} />
                             </Link>
                             <a
-                                href="https://book.hostizzy.com"
+                                href="https://book.hostizzy.com/stays"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="btn"
@@ -858,7 +858,7 @@ const About = () => {
                                     e.currentTarget.style.background = 'transparent';
                                 }}
                             >
-                                Book a Stay
+                                Book a villa or farmstay
                                 <ExternalLink size={16} />
                             </a>
                         </div>

@@ -1,29 +1,17 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, ExternalLink } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
+import StayWithHostizzy from './StayWithHostizzy';
 
 const HomeBanners = () => {
     return (
         <section className="section container">
-            {/* Book a Stay Banner */}
+            {/* Guest exit: deep links to specific booking-site pages
+                rather than one generic "Book Now" to its home page. */}
             <ScrollReveal>
-                <div className="glass" style={{
-                    padding: '3rem',
-                    borderRadius: '1rem',
-                    background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)',
-                    border: '1px solid #bae6fd',
-                    textAlign: 'center'
-                }}>
-                    <h3 style={{ marginBottom: '1rem', fontSize: '1.75rem', color: '#0369a1' }}>Looking to Book or Explore Unique Stays?</h3>
-                    <p style={{ marginBottom: '2rem', color: '#334155', lineHeight: 1.6, maxWidth: '600px', margin: '0 auto 2rem' }}>
-                        Discover and book verified Hostizzy-managed properties across India—stays, experiences, and group trips all in one place.
-                    </p>
-                    <a href="https://book.hostizzy.com/" target="_blank" rel="noopener noreferrer" className="btn" style={{ background: '#0284c7', color: 'white' }}>
-                        Book Now <ExternalLink size={18} style={{ marginLeft: '0.5rem' }} />
-                    </a>
-                </div>
+                <StayWithHostizzy />
             </ScrollReveal>
 
             {/* SEO & Story Section */}

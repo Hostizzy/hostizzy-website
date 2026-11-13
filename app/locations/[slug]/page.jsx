@@ -10,6 +10,7 @@ const PropertyLeadWizard = dynamic(() => import('../../../components/PropertyLea
   loading: () => <div style={{ minHeight: '460px' }} />
 });
 import { getLocation } from '@/lib/locations';
+import { LOCATION_STAYS } from '@/lib/bookingLinks';
 import {
     Check, ArrowRight, MapPin, Home, Star, TrendingUp, Calendar,
     Building, Phone, MessageCircle
@@ -444,6 +445,36 @@ export default function LocationPage() {
                     </ScrollReveal>
                 </div>
             </section>
+
+            {/* Guest exit — secondary to the owner lead form above. Sends a
+                traveller who landed on this owner page to the matching city
+                pages on the booking site instead of its home page. */}
+            {LOCATION_STAYS[slug] && (
+                <section style={{ background: '#f8fafc', padding: '2.5rem 0', borderTop: '1px solid #e2e8f0' }}>
+                    <div className="container" style={{ textAlign: 'center' }}>
+                        <p style={{ color: '#475569', margin: '0 0 1rem', fontSize: '1rem' }}>
+                            Planning a trip to {location.name} rather than listing a property?
+                        </p>
+                        <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexWrap: 'wrap', gap: '0.6rem', justifyContent: 'center' }}>
+                            {LOCATION_STAYS[slug].map((l) => (
+                                <li key={l.href}>
+                                    <a href={l.href} style={{
+                                        display: 'inline-block',
+                                        padding: '0.55rem 1rem',
+                                        borderRadius: '999px',
+                                        background: 'white',
+                                        border: '1px solid #cbd5e1',
+                                        color: '#0f172a',
+                                        fontSize: '0.95rem',
+                                        fontWeight: 500,
+                                        textDecoration: 'none'
+                                    }}>{l.label}</a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </section>
+            )}
 
             {/* Mobile Stats Responsive Override */}
             <style jsx>{`

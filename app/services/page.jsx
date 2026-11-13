@@ -690,7 +690,7 @@ export default function Services() {
                             Discover and book Hostizzy-managed stays, experiences, and group trips across India—villas, retreats, urban lofts and luxe homes.
                         </p>
                         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-                            <a href="https://book.hostizzy.com/" target="_blank" rel="noopener noreferrer" className="btn" style={{ background: 'white', color: '#0f172a', textDecoration: 'none' }}>Book Now</a>
+                            <a href="https://book.hostizzy.com/stays" target="_blank" rel="noopener noreferrer" className="btn" style={{ background: 'white', color: '#0f172a', textDecoration: 'none' }}>Browse Hostizzy stays</a>
                             <Link href="/contact" className="btn btn-outline" style={{ borderColor: 'white', color: 'white' }}>List Your Property</Link>
                         </div>
                     </div>

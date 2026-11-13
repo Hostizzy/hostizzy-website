@@ -575,7 +575,7 @@ const Navbar = () => {
 
                     {/* Right Side Actions */}
                     <div className="desktop-menu" style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flexShrink: 0 }}>
-                        <a href="https://book.hostizzy.com/" target="_blank" rel="noopener noreferrer"
+                        <a href="https://book.hostizzy.com/stays" target="_blank" rel="noopener noreferrer"
                             className="btn btn-outline"
                             style={{
                                 fontWeight: 600,
@@ -629,7 +629,7 @@ const Navbar = () => {
                         Deliberately the quieter of the two CTAs: the page still
                         sells to owners, this just lets guests leave quickly. */}
                     <a
-                        href="https://book.hostizzy.com/"
+                        href="https://book.hostizzy.com/stays"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="nav-book-cta"
@@ -896,7 +896,7 @@ const Navbar = () => {
 
                             {/* Bottom Actions */}
                             <div style={{ padding: '1.5rem', borderTop: '1px solid var(--color-border)', display: 'flex', flexDirection: 'column', gap: '0.75rem', background: 'var(--color-secondary)' }}>
-                                <a href="https://book.hostizzy.com/" target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ width: '100%', textDecoration: 'none', justifyContent: 'center', padding: '0.875rem', fontSize: '0.95rem', fontWeight: 600 }}>
+                                <a href="https://book.hostizzy.com/stays" target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ width: '100%', textDecoration: 'none', justifyContent: 'center', padding: '0.875rem', fontSize: '0.95rem', fontWeight: 600 }}>
                                     Book a Stay <ArrowUpRight size={16} />
                                 </a>
                                 <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="btn btn-primary" style={{ width: '100%', textDecoration: 'none', justifyContent: 'center', padding: '0.875rem', fontSize: '0.95rem', fontWeight: 600, background: 'linear-gradient(135deg, var(--color-primary-strong) 0%, var(--color-primary-text) 100%)' }}>

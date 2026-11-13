@@ -3,6 +3,7 @@ import React from 'react';
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 import Link from 'next/link';
 import TrustBadges from './TrustBadges';
+import StayWithHostizzy from './StayWithHostizzy';
 import { useSettings } from '../context/SettingsContext';
 
 const Footer = () => {
@@ -35,7 +36,7 @@ const Footer = () => {
                                 <li><Link href="/">Home</Link></li>
                                 <li><Link href="/services">Services</Link></li>
                                 <li><Link href="/calculator">Calculator</Link></li>
-                                <li><a href="https://book.hostizzy.com/" target="_blank" rel="noreferrer">Book Now</a></li>
+                                <li><a href="https://book.hostizzy.com/stays" target="_blank" rel="noreferrer">Book a villa or farmstay</a></li>
                                 <li><Link href="/contact">Contact Us</Link></li>
                             </ul>
                         </div>
@@ -86,6 +87,8 @@ const Footer = () => {
                             </ul>
                         </div>
                     </div>
+
+                    <StayWithHostizzy variant="footer" />
 
                     <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '2rem', textAlign: 'center', opacity: 0.6, fontSize: '0.875rem' }}>
                         © 2026 Hostizzy / Hostsphere India Pvt Ltd. All rights reserved.
