@@ -55,7 +55,7 @@ const StickyCTABar = ({
         },
         booking: {
             text: 'Find your perfect getaway today',
-            buttonText: 'Find a villa or farmstay',
+            buttonText: 'Find a stay',
             buttonLink: 'https://book.hostizzy.com/stays',
             icon: <ArrowRight size={20} />
         }

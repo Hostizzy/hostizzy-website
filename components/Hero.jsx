@@ -169,8 +169,7 @@ const Hero = () => {
                         stays visually secondary to "Partner With Us" — but a
                         guest who lands here should be able to leave for the
                         booking site in one glance rather than reading an owner
-                        pitch. Labelled "Find a villa or farmstay" so a guest knows
-                        what they will find (the navbar keeps the shorter "Book a
+                        pitch. Labelled "Find a stay" (the navbar says "Book a
                         Stay"; both go to the booking site's all-stays page), and carries an external-link
                         mark because it leaves hostizzy.com. The surface is
                         raised from 10% to 18% white so the label holds up over
@@ -193,7 +192,7 @@ const Hero = () => {
                             gap: '0.5rem'
                         }}
                     >
-                        Find a villa or farmstay
+                        Find a stay
                         <ExternalLink size={17} aria-hidden="true" />
                     </a>
                 </motion.div>
