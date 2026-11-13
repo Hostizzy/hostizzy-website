@@ -102,7 +102,7 @@ Tabs: New Host | Co-Hosting | Complete Management
 - `/api/login` — POST (admin auth)
 
 ## Env Variables
-Key vars: ADMIN_USERNAME, ADMIN_PASSWORD, OPENAI_API_KEY, GMAIL_USER, GMAIL_CLIENT_ID, GMAIL_CLIENT_SECRET, GMAIL_REFRESH_TOKEN, FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY
+Key vars: HOSTSUITE_LEADS_URL + WEBSITE_LEADS_KEY (forward leads to HostSuite via lib/hostsuite.js; both unset = off; contract in the HostSuite repo docs/plans/2026-11-14-website-leads-contract.md), ADMIN_USERNAME, ADMIN_PASSWORD, OPENAI_API_KEY, GMAIL_USER, GMAIL_CLIENT_ID, GMAIL_CLIENT_SECRET, GMAIL_REFRESH_TOKEN, FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY
 
 ## Property Lead Wizard (4-step flow)
 1. Contact Details — name, phone (international OK), email
