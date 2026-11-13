@@ -3,37 +3,109 @@
 // Revenue calculator for property owners.
 //
 // Built on public market data (lib/calculator/markets.js) and Hostizzy's
-// published plan terms (lib/calculator/model.js). It shows a range (low /
-// typical / strong) rather than one number, says where every figure comes
-// from, and lets the owner edit the assumptions that matter most.
+// published plan terms (lib/calculator/model.js). Four plain questions on
+// the left, a live answer on the right: what you'd keep, and where every
+// ₹100 a guest pays ends up. Sliders start at the city's typical figures
+// and show the low / typical / strong marks so owners can see the range.
 
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
-import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
-import { ArrowRight, Check, Info, MapPin, MessageCircle } from 'lucide-react';
-import ScrollReveal from '../../components/ScrollReveal';
+import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Cell } from 'recharts';
+import { Check, Info, MessageCircle } from 'lucide-react';
 import { MARKETS, REGIONS, SOURCES, DATA_PERIOD, DATA_CHECKED } from '../../lib/calculator/markets';
 import {
-    PROPERTY_TYPES, FINISH_LEVELS, ASSUMPTIONS, defaultCosts, estimate, eligiblePlans,
+    PROPERTY_TYPES, FINISH_LEVELS, ASSUMPTIONS, defaultCosts, eligiblePlans,
+    nightlyRate, scenarios, planResult, breakEvenOccupancy,
 } from '../../lib/calculator/model';
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-const inr = (n) => '₹' + Math.round(n || 0).toLocaleString('en-IN');
-const lakh = (n) => {
-    const v = (n || 0) / 1e5;
-    return '₹' + (Math.abs(v) >= 10 ? v.toFixed(1) : v.toFixed(2)) + 'L';
+const C = {
+    ink: '#1E293B', muted: '#64748B', line: '#E2E8F0', surface: '#F8FAFC',
+    coral: '#FE5858', coralText: '#C0392F', keep: '#0E9F6E', cost: '#D97706', ota: '#94A3B8',
 };
 
-const card = { background: 'white', border: '1px solid #e2e8f0', borderRadius: '1rem', padding: 'clamp(1.25rem, 3vw, 2rem)' };
-const label = { display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#475569', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.6rem' };
-const chip = (active) => ({
-    padding: '0.55rem 0.95rem', borderRadius: '999px', fontSize: '0.92rem', fontWeight: 600, cursor: 'pointer',
-    border: active ? '1.5px solid var(--color-primary)' : '1px solid #cbd5e1',
-    background: active ? 'rgba(254,88,88,0.08)' : 'white',
-    color: active ? 'var(--color-primary-text, #c53030)' : '#334155',
-});
-const input = { width: '100%', padding: '0.7rem 0.9rem', border: '1px solid #cbd5e1', borderRadius: '0.6rem', fontSize: '1rem', background: 'white' };
+const inr = (n) => '₹' + Math.round(n || 0).toLocaleString('en-IN');
+const lakhs = (n) => {
+    const v = (n || 0) / 1e5;
+    return `₹${Math.abs(v) >= 10 ? v.toFixed(1) : v.toFixed(2)} lakh`;
+};
+const nightsPerMonth = (occ) => Math.round((occ * 30.4) / 100);
+
+// Eases a displayed number towards its new value after a change.
+function useTween(value, ms = 450) {
+    const [shown, setShown] = useState(value);
+    const from = useRef(value);
+    useEffect(() => {
+        const reduce = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+        if (reduce) { setShown(value); from.current = value; return; }
+        const start = performance.now();
+        const a = from.current;
+        let raf;
+        const step = (t) => {
+            const k = Math.min(1, (t - start) / ms);
+            const v = a + (value - a) * (1 - Math.pow(1 - k, 3));
+            setShown(v);
+            if (k < 1) raf = requestAnimationFrame(step);
+            else from.current = value;
+        };
+        raf = requestAnimationFrame(step);
+        return () => { cancelAnimationFrame(raf); from.current = value; };
+    }, [value, ms]);
+    return shown;
+}
+
+const Step = ({ n, title, hint, children }) => (
+    <section style={{ display: 'grid', gridTemplateColumns: '2rem 1fr', gap: '0 1rem', padding: '1.75rem 0', borderTop: `1px solid ${C.line}` }}>
+        <span aria-hidden="true" style={{ width: '2rem', height: '2rem', borderRadius: '50%', border: `1.5px solid ${C.coral}`, color: C.coralText, display: 'grid', placeItems: 'center', fontWeight: 700, fontSize: '0.9rem' }}>{n}</span>
+        <div>
+            <h2 className="calc-step-title" style={{ color: C.ink, margin: '0.15rem 0 0.25rem' }}>{title}</h2>
+            {hint && <p style={{ margin: '0 0 1rem', color: C.muted, fontSize: '0.92rem' }}>{hint}</p>}
+            {!hint && <div style={{ height: '0.75rem' }} />}
+            {children}
+        </div>
+    </section>
+);
+
+const Pill = ({ active, onClick, children }) => (
+    <button type="button" onClick={onClick} aria-pressed={active} className="calc-pill" style={{
+        padding: '0.5rem 0.95rem', borderRadius: '999px', fontSize: '0.92rem', fontWeight: 600, cursor: 'pointer',
+        border: `1.5px solid ${active ? C.coral : C.line}`, background: active ? '#FFF1F1' : 'white', color: active ? C.coralText : C.ink,
+    }}>{children}</button>
+);
+
+const Row = ({ label, children }) => (
+    <div style={{ marginBottom: '1rem' }}>
+        <div style={{ fontSize: '0.88rem', color: C.muted, marginBottom: '0.5rem' }}>{label}</div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>{children}</div>
+    </div>
+);
+
+// A range slider with labelled market marks underneath.
+const Slider = ({ id, label, value, display, min, max, step, onChange, marks }) => (
+    <div style={{ marginBottom: '1.5rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '1rem' }}>
+            <label htmlFor={id} style={{ fontSize: '0.92rem', color: C.ink, fontWeight: 600 }}>{label}</label>
+            <span style={{ fontSize: '1.05rem', fontWeight: 700, color: C.ink, fontVariantNumeric: 'tabular-nums' }}>{display}</span>
+        </div>
+        <input id={id} type="range" min={min} max={max} step={step} value={value} onChange={(e) => onChange(+e.target.value)} className="calc-range" style={{ width: '100%', accentColor: C.coral, margin: '0.6rem 0 0' }} />
+        <div style={{ position: 'relative', height: '2.4rem' }}>
+            {marks.map((m, i) => {
+                const left = ((m.value - min) / (max - min)) * 100;
+                // Close marks would overlap, so every other label sits a line lower.
+                const crowded = i > 0 && Math.abs(m.value - marks[i - 1].value) / (max - min) < 0.12;
+                return (
+                    <button key={m.label} type="button" onClick={() => onChange(m.value)} title={`Set to ${m.label.toLowerCase()}`} style={{
+                        position: 'absolute', left: `${left}%`, transform: 'translateX(-50%)', top: crowded && i % 2 === 1 ? '1rem' : 0, background: 'none', border: 'none', padding: '0.15rem 0.25rem', cursor: 'pointer',
+                        fontSize: '0.75rem', color: m.value === value ? C.coralText : C.muted, fontWeight: m.value === value ? 700 : 500, textAlign: 'center', lineHeight: 1.25, whiteSpace: 'nowrap',
+                    }}>
+                        <span aria-hidden="true" style={{ display: 'block', width: 1, height: 6, background: 'currentColor', margin: '0 auto 2px' }} />
+                        {m.label}
+                    </button>
+                );
+            })}
+        </div>
+    </div>
+);
 
 export default function Calculator() {
     const [regionKey, setRegionKey] = useState('ncr');
@@ -42,30 +114,55 @@ export default function Calculator() {
     const [bedrooms, setBedrooms] = useState(3);
     const [finish, setFinish] = useState('premium');
     const [planKey, setPlanKey] = useState('totalcare');
+    const [occOverride, setOccOverride] = useState(null);
+    const [adrOverride, setAdrOverride] = useState(null);
     const [costOverride, setCostOverride] = useState(null);
     const [currentEarnings, setCurrentEarnings] = useState('');
-
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [leadState, setLeadState] = useState('idle');
 
+    // Any change to the home resets the sliders to that market's figures.
+    const reset = () => { setOccOverride(null); setAdrOverride(null); setCostOverride(null); };
+    const pickRegion = (key) => { setRegionKey(key); setCity(Object.entries(MARKETS).find(([, m]) => m.region === key)[0]); reset(); };
+
+    const market = MARKETS[city];
+    const region = REGIONS.find((r) => r.key === market.region);
+    const occ = scenarios(city);
+    const marketRate = nightlyRate(city, bedrooms, propertyType, finish);
+    const adr = adrOverride ?? marketRate;
+    const occupancy = occOverride ?? occ.typical;
     const costs = costOverride || defaultCosts(propertyType, bedrooms);
     const plans = eligiblePlans(city, propertyType);
-    const activePlanKey = plans.some((p) => p.key === planKey) ? planKey : plans[plans.length - 1].key;
+    const plan = plans.find((p) => p.key === planKey) || plans[plans.length - 1];
 
-    const est = useMemo(
-        () => estimate({ city, bedrooms, propertyType, finish, planKey: activePlanKey, costs }),
-        [city, bedrooms, propertyType, finish, activePlanKey, costs.perNight, costs.monthly] // eslint-disable-line react-hooks/exhaustive-deps
-    );
+    const result = useMemo(() => planResult(plan, { adr, occupancy, costs }), [plan, adr, occupancy, costs]);
+    const comparison = useMemo(() => plans.map((p) => ({
+        plan: p,
+        result: planResult(p, { adr, occupancy, costs }),
+        breakEven: breakEvenOccupancy(p, { adr, baseOcc: occupancy, costs }),
+    })), [plans, adr, occupancy, costs]);
+    const bestKeep = Math.max(...comparison.map((c) => c.result.owner), 1);
+
+    const seasonSum = region.season.reduce((a, b) => a + b, 0);
+    const monthly = region.season.map((s, i) => ({ m: MONTHS[i], v: Math.round((result.gross * s) / seasonSum) }));
+    const peakIdx = region.season.indexOf(Math.max(...region.season));
+
+    const shownYear = useTween(result.owner);
+    const g = result.gross || 1;
+    const split = [
+        { key: 'keep', label: 'You keep', value: result.owner, color: C.keep },
+        { key: 'fee', label: 'Hostizzy', value: result.fee, color: C.coral },
+        { key: 'cost', label: 'Running costs', value: result.ownerCosts, color: C.cost },
+        { key: 'ota', label: 'Booking sites & payments', value: result.otaFees, color: C.ota },
+    ].filter((s) => s.value > 0);
+    const per100 = (v) => Math.round((v / g) * 100);
 
     const citiesInRegion = Object.entries(MARKETS).filter(([, m]) => m.region === regionKey).map(([name]) => name);
     const current = parseInt(String(currentEarnings).replace(/[^\d]/g, ''), 10) || 0;
-
-    const pickRegion = (key) => {
-        setRegionKey(key);
-        setCity(Object.entries(MARKETS).find(([, m]) => m.region === key)[0]);
-    };
-    const changeProperty = (fn) => { fn(); setCostOverride(null); };
+    const typeLabel = PROPERTY_TYPES.find((t) => t.key === propertyType).label.toLowerCase();
+    const rateMin = Math.max(1000, Math.round((marketRate * 0.4) / 500) * 500);
+    const rateMax = Math.round((marketRate * 2.5) / 500) * 500;
 
     const submitLead = async (e) => {
         e.preventDefault();
@@ -76,11 +173,8 @@ export default function Calculator() {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    email, phone, city, propertyType, bedrooms, finishes: finish, plan: est.plan.name,
-                    nightlyRate: est.adr,
-                    occupancy: est.occ.typical,
-                    revenue: est.typical.gross,
-                    netIncome: est.typical.owner,
+                    email, phone, city, propertyType, bedrooms, finishes: finish, plan: plan.name,
+                    nightlyRate: adr, occupancy, revenue: result.gross, netIncome: result.owner,
                 }),
             });
             setLeadState(res.ok ? 'sent' : 'error');
@@ -89,265 +183,296 @@ export default function Calculator() {
         }
     };
 
-    const breakdown = est && [
-        { name: 'You keep', value: est.typical.owner, color: '#10b981' },
-        { name: 'Hostizzy fee', value: est.typical.fee, color: '#FE5858' },
-        { name: 'Running costs you pay', value: est.typical.ownerCosts, color: '#f59e0b' },
-        { name: 'OTA & payment fees', value: est.typical.otaFees, color: '#94a3b8' },
-    ].filter((b) => b.value > 0);
+    const resultPanel = (
+        <div id="calc-result" style={{ background: 'white', border: `1px solid ${C.line}`, borderRadius: '1.25rem', padding: 'clamp(1.25rem, 3vw, 1.75rem)', boxShadow: 'var(--shadow-premium)' }}>
+            <p style={{ margin: 0, color: C.muted, fontSize: '0.95rem' }}>
+                Your {bedrooms === 5 ? '5+' : bedrooms}-bedroom {typeLabel} in {city} on {plan.name}
+            </p>
+            <p style={{ margin: '0.75rem 0 0', color: C.ink, fontSize: '1rem' }}>You'd keep about</p>
+            <p aria-live="polite" style={{ margin: '0.1rem 0 0', fontFamily: 'var(--font-display)', fontSize: 'clamp(2.4rem, 5vw, 3.2rem)', fontWeight: 700, lineHeight: 1.1, color: result.owner < 0 ? '#B91C1C' : C.ink, fontVariantNumeric: 'tabular-nums' }}>
+                {lakhs(shownYear)}
+                <span style={{ fontFamily: 'var(--font-sans)', fontSize: '1rem', fontWeight: 500, color: C.muted }}> a year</span>
+            </p>
+            <p style={{ margin: '0.35rem 0 0', color: C.muted }}>
+                {inr(result.owner / 12)} a month on average, from {result.nights} booked nights ({nightsPerMonth(occupancy)} a month) at {inr(adr)} a night.
+            </p>
+
+            <div style={{ marginTop: '1.5rem' }}>
+                <p style={{ margin: '0 0 0.6rem', fontWeight: 600, color: C.ink }}>Of every ₹100 a guest pays</p>
+                <div role="img" aria-label={split.map((s) => `${s.label} ₹${per100(s.value)}`).join(', ')} style={{ display: 'flex', height: '0.9rem', borderRadius: '999px', overflow: 'hidden', background: C.line }}>
+                    {split.map((s) => <div key={s.key} className="calc-seg" style={{ width: `${Math.max(0, (s.value / g) * 100)}%`, background: s.color }} />)}
+                </div>
+                <ul style={{ listStyle: 'none', padding: 0, margin: '0.9rem 0 0', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem 1rem' }}>
+                    {split.map((s) => (
+                        <li key={s.key} style={{ display: 'flex', alignItems: 'baseline', gap: '0.45rem', fontSize: '0.9rem', color: C.muted }}>
+                            <span aria-hidden="true" style={{ width: 9, height: 9, borderRadius: 2, background: s.color, flexShrink: 0 }} />
+                            <span>{s.label}</span>
+                            <strong style={{ marginLeft: 'auto', color: C.ink, fontVariantNumeric: 'tabular-nums' }}>₹{per100(s.value)}</strong>
+                        </li>
+                    ))}
+                </ul>
+                {!plan.ownerPaysCosts && <p style={{ fontSize: '0.85rem', color: C.keep, margin: '0.75rem 0 0' }}>On StayPrime, Hostizzy pays the running costs from its half.</p>}
+            </div>
+
+            <div style={{ marginTop: '1.5rem', paddingTop: '1rem', borderTop: `1px solid ${C.line}`, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem', textAlign: 'center' }}>
+                {[['Quiet year', occ.low], ['Typical', occ.typical], ['Strong', occ.strong]].map(([name, o]) => {
+                    const r = planResult(plan, { adr, occupancy: o, costs });
+                    const on = o === occupancy;
+                    return (
+                        <button key={name} type="button" onClick={() => setOccOverride(o)} style={{ background: on ? '#FFF1F1' : 'transparent', border: `1px solid ${on ? C.coral : 'transparent'}`, borderRadius: '0.75rem', padding: '0.5rem 0.25rem', cursor: 'pointer' }}>
+                            <div style={{ fontSize: '0.78rem', color: C.muted }}>{name}</div>
+                            <div style={{ fontWeight: 700, color: C.ink, fontVariantNumeric: 'tabular-nums' }}>{lakhs(r.owner).replace(' lakh', 'L')}</div>
+                            <div style={{ fontSize: '0.72rem', color: C.muted }}>{nightsPerMonth(o)} nights/mo</div>
+                        </button>
+                    );
+                })}
+            </div>
+        </div>
+    );
 
     return (
         <>
-            {/* Hero */}
-            <section style={{ background: 'linear-gradient(160deg, #0f172a 0%, #1e293b 100%)', padding: 'calc(var(--header-height) + 3rem) 0 3.5rem' }}>
-                <div className="container" style={{ textAlign: 'center', maxWidth: '760px' }}>
-                    <ScrollReveal>
-                        <p style={{ display: 'inline-block', padding: '0.35rem 0.9rem', borderRadius: '999px', background: 'rgba(16,185,129,0.15)', color: '#6ee7b7', fontSize: '0.8rem', fontWeight: 600, marginBottom: '1.25rem' }}>
-                            Based on real market data · {DATA_PERIOD}
-                        </p>
-                        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 5vw, 3.1rem)', fontWeight: 700, color: 'white', lineHeight: 1.15, marginBottom: '1rem' }}>
-                            What could your property really earn?
-                        </h1>
-                        <p style={{ fontSize: '1.1rem', color: '#94a3b8', lineHeight: 1.6, margin: 0 }}>
-                            Honest ranges for {Object.keys(MARKETS).length} Indian holiday markets, built from what similar homes actually earned in the last 12 months, with every fee and cost shown.
-                        </p>
-                    </ScrollReveal>
+            <style>{`
+                .calc-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 3rem; align-items: start; }
+                .calc-sticky { position: sticky; top: calc(var(--header-height) + 1rem); }
+                .calc-mobile-bar { display: none; }
+                .calc-pill:focus-visible, .calc-range:focus-visible, .calc-plan:focus-visible { outline: 3px solid rgba(254,88,88,0.45); outline-offset: 2px; }
+                .calc-step-title { font-family: var(--font-display) !important; font-size: 1.35rem !important; font-weight: 700 !important; line-height: 1.3 !important; }
+                .calc-seg { transition: width 0.35s cubic-bezier(0.4,0,0.2,1); }
+                @media (prefers-reduced-motion: reduce) { .calc-seg { transition: none; } }
+                @media (max-width: 900px) {
+                    .calc-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+                    .calc-sticky { position: static; }
+                    .calc-mobile-bar { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; }
+                }
+            `}</style>
+
+            <section style={{ padding: 'calc(var(--header-height) + 2.5rem) 0 1rem', background: 'white' }}>
+                <div className="container" style={{ maxWidth: '1120px' }}>
+                    <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 4.5vw, 3rem)', fontWeight: 700, color: C.ink, lineHeight: 1.15, margin: '0 0 0.75rem', maxWidth: '18ch' }}>
+                        What would your home earn as a holiday rental?
+                    </h1>
+                    <p style={{ color: C.muted, fontSize: '1.1rem', lineHeight: 1.6, margin: 0, maxWidth: '62ch' }}>
+                        Answer four questions. The figures come from what similar homes in {Object.keys(MARKETS).length} Indian markets actually earned ({DATA_PERIOD}), with every fee and cost taken out.
+                    </p>
                 </div>
             </section>
 
-            {/* Inputs */}
-            <section className="section" style={{ background: '#f8fafc' }}>
-                <div className="container" style={{ maxWidth: '960px', display: 'grid', gap: '1.5rem' }}>
-                    <div style={card}>
-                        <span style={label}><MapPin size={14} style={{ verticalAlign: '-2px' }} /> Where is the property?</span>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1rem' }}>
-                            {REGIONS.map((r) => (
-                                <button key={r.key} type="button" onClick={() => pickRegion(r.key)} style={chip(regionKey === r.key)}>{r.label}</button>
-                            ))}
-                        </div>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                            {citiesInRegion.map((c) => (
-                                <button key={c} type="button" onClick={() => setCity(c)} style={chip(city === c)}>{c}</button>
-                            ))}
-                        </div>
-                        <p style={{ fontSize: '0.85rem', color: '#64748b', margin: '1rem 0 0' }}>
-                            City not listed? <Link href="/contact" style={{ color: 'var(--color-primary)' }}>Ask us for a property-specific estimate</Link>.
-                        </p>
-                    </div>
-
-                    <div style={{ ...card, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem' }}>
-                        <div>
-                            <span style={label}>Property type</span>
-                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                                {PROPERTY_TYPES.map((t) => (
-                                    <button key={t.key} type="button" onClick={() => changeProperty(() => setPropertyType(t.key))} style={chip(propertyType === t.key)}>{t.label}</button>
-                                ))}
-                            </div>
-                        </div>
-                        <div>
-                            <span style={label}>Bedrooms</span>
-                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                                {[1, 2, 3, 4, 5].map((b) => (
-                                    <button key={b} type="button" onClick={() => changeProperty(() => setBedrooms(b))} style={chip(bedrooms === b)}>{b === 5 ? '5+' : b}</button>
-                                ))}
-                            </div>
-                        </div>
-                        <div>
-                            <span style={label}>Finish</span>
-                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                                {FINISH_LEVELS.map((f) => (
-                                    <button key={f.key} type="button" onClick={() => setFinish(f.key)} style={chip(finish === f.key)}>{f.label}</button>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div style={card}>
-                        <span style={label}>Plan</span>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.75rem' }}>
-                            {plans.map((p) => (
-                                <button key={p.key} type="button" onClick={() => setPlanKey(p.key)} style={{ ...chip(activePlanKey === p.key), borderRadius: '0.75rem', textAlign: 'left', padding: '0.9rem 1rem' }}>
-                                    <span style={{ display: 'block', fontWeight: 700 }}>{p.name}</span>
-                                    <span style={{ display: 'block', fontSize: '0.8rem', fontWeight: 500, color: '#64748b', marginTop: '0.2rem' }}>{p.price}</span>
-                                </button>
-                            ))}
-                        </div>
-                        <p style={{ fontSize: '0.9rem', color: '#475569', margin: '0.9rem 0 0' }}>{est.plan.summary}</p>
-                        {plans.length < 5 && (
-                            <p style={{ fontSize: '0.8rem', color: '#64748b', margin: '0.4rem 0 0' }}>
-                                {!plans.some((p) => p.fullManagement) && 'Full management is available in Delhi NCR, the hills, Rajasthan and the North East; elsewhere we co-host remotely. '}
-                                {plans.some((p) => p.fullManagement) && propertyType !== 'apartment' && 'StayPrime is for apartments only.'}
+            <section style={{ padding: '1rem 0 4rem', background: 'white' }}>
+                <div className="container calc-grid" style={{ maxWidth: '1120px' }}>
+                    {/* Questions */}
+                    <div>
+                        <Step n={1} title="Where is it?">
+                            <Row label="Region">
+                                {REGIONS.map((r) => <Pill key={r.key} active={regionKey === r.key} onClick={() => pickRegion(r.key)}>{r.label}</Pill>)}
+                            </Row>
+                            <Row label="Town">
+                                {citiesInRegion.map((c) => <Pill key={c} active={city === c} onClick={() => { setCity(c); reset(); }}>{c}</Pill>)}
+                            </Row>
+                            <p style={{ fontSize: '0.88rem', color: C.muted, margin: 0 }}>
+                                Somewhere else? <Link href="/contact" style={{ color: C.coralText, fontWeight: 600 }}>Ask us for an estimate</Link>.
                             </p>
-                        )}
+                        </Step>
+
+                        <Step n={2} title="What kind of home?">
+                            <Row label="Type">
+                                {PROPERTY_TYPES.map((t) => <Pill key={t.key} active={propertyType === t.key} onClick={() => { setPropertyType(t.key); reset(); }}>{t.label}</Pill>)}
+                            </Row>
+                            <Row label="Bedrooms">
+                                {[1, 2, 3, 4, 5].map((b) => <Pill key={b} active={bedrooms === b} onClick={() => { setBedrooms(b); reset(); }}>{b === 5 ? '5+' : b}</Pill>)}
+                            </Row>
+                            <Row label="Interiors">
+                                {FINISH_LEVELS.map((f) => <Pill key={f.key} active={finish === f.key} onClick={() => { setFinish(f.key); setAdrOverride(null); }}>{f.label}</Pill>)}
+                            </Row>
+                        </Step>
+
+                        <Step n={3} title="How busy, and at what price?" hint={`We've started you at a typical ${city} home of this size. Drag to try your own numbers.`}>
+                            <Slider
+                                id="calc-nights" label="Nights booked a month"
+                                value={occupancy} display={`${nightsPerMonth(occupancy)} nights · ${occupancy}%`}
+                                min={5} max={75} step={1} onChange={setOccOverride}
+                                marks={[
+                                    { label: 'Quiet', value: occ.low },
+                                    { label: 'Typical', value: occ.typical },
+                                    { label: 'Strong', value: occ.strong },
+                                ]}
+                            />
+                            <Slider
+                                id="calc-rate" label="Price per night"
+                                value={adr} display={inr(adr)}
+                                min={rateMin} max={rateMax} step={100} onChange={setAdrOverride}
+                                marks={[{ label: `${city} median`, value: marketRate }]}
+                            />
+                            <p style={{ fontSize: '0.85rem', color: C.muted, margin: 0 }}>
+                                Busiest month here is {market.peak}, quietest {market.low}. Prices exclude GST, which guests pay on top.
+                            </p>
+                        </Step>
+
+                        <Step n={4} title="Who runs it?">
+                            <div role="radiogroup" aria-label="Plan" style={{ display: 'grid', gap: '0.6rem' }}>
+                                {plans.map((p) => {
+                                    const on = p.key === plan.key;
+                                    return (
+                                        <button key={p.key} type="button" role="radio" aria-checked={on} onClick={() => setPlanKey(p.key)} className="calc-plan" style={{
+                                            display: 'grid', gridTemplateColumns: '1.25rem 1fr auto', gap: '0.75rem', alignItems: 'start', textAlign: 'left', cursor: 'pointer',
+                                            padding: '0.9rem 1rem', borderRadius: '0.9rem', border: `1.5px solid ${on ? C.coral : C.line}`, background: on ? '#FFF7F7' : 'white',
+                                        }}>
+                                            <span aria-hidden="true" style={{ width: '1.1rem', height: '1.1rem', marginTop: '0.15rem', borderRadius: '50%', border: `2px solid ${on ? C.coral : '#CBD5E1'}`, boxShadow: on ? `inset 0 0 0 3px white, inset 0 0 0 10px ${C.coral}` : 'none' }} />
+                                            <span>
+                                                <span style={{ display: 'block', fontWeight: 700, color: C.ink }}>{p.name}</span>
+                                                <span style={{ display: 'block', fontSize: '0.88rem', color: C.muted, marginTop: '0.15rem' }}>{p.summary}</span>
+                                            </span>
+                                            <span style={{ fontSize: '0.82rem', color: C.ink, fontWeight: 600, textAlign: 'right', maxWidth: '9rem' }}>{p.price}</span>
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                            {!plans.some((p) => p.fullManagement) && (
+                                <p style={{ fontSize: '0.85rem', color: C.muted, margin: '0.75rem 0 0' }}>In {region.label} we co-host remotely. Full management is available in Delhi NCR, the hills, Rajasthan and the North East.</p>
+                            )}
+                            {plans.some((p) => p.fullManagement) && propertyType !== 'apartment' && (
+                                <p style={{ fontSize: '0.85rem', color: C.muted, margin: '0.75rem 0 0' }}>StayPrime, where we also pay the running costs, is for apartments.</p>
+                            )}
+                        </Step>
                     </div>
+
+                    {/* Live answer */}
+                    <div className="calc-sticky">{resultPanel}</div>
                 </div>
             </section>
 
-            {/* Results */}
-            {est && (
-                <section className="section" style={{ paddingTop: 0, background: '#f8fafc' }}>
-                    <div className="container" style={{ maxWidth: '960px', display: 'grid', gap: '1.5rem' }}>
-                        {/* Headline range */}
-                        <div style={{ ...card, background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)', border: 'none', color: 'white' }}>
-                            <p style={{ margin: 0, color: '#94a3b8', fontSize: '0.95rem' }}>
-                                {bedrooms === 5 ? '5+' : bedrooms}-bedroom {PROPERTY_TYPES.find((t) => t.key === propertyType).label.toLowerCase()} in {city} on {est.plan.name}: what you keep each year
+            {/* Detail */}
+            <section style={{ background: C.surface, padding: '4rem 0' }}>
+                <div className="container" style={{ maxWidth: '1120px', display: 'grid', gap: '3rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem' }}>
+                        <div>
+                            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.6rem', color: C.ink, margin: '0 0 0.4rem' }}>How the year plays out</h2>
+                            <p style={{ color: C.muted, margin: '0 0 1.25rem' }}>Bookings by month in {region.label}. {MONTHS[peakIdx]} is the high point.</p>
+                            <div style={{ height: 240 }}>
+                                <ResponsiveContainer width="100%" height="100%">
+                                    <BarChart data={monthly} margin={{ top: 4, right: 0, left: -12, bottom: 0 }}>
+                                        <XAxis dataKey="m" tick={{ fontSize: 11, fill: C.muted }} axisLine={false} tickLine={false} interval={0} />
+                                        <YAxis tickFormatter={(v) => (v >= 1e5 ? (v / 1e5).toFixed(1) + 'L' : (v / 1000).toFixed(0) + 'k')} tick={{ fontSize: 11, fill: C.muted }} axisLine={false} tickLine={false} />
+                                        <Tooltip formatter={(v) => [inr(v), 'Bookings']} cursor={{ fill: 'rgba(148,163,184,0.15)' }} />
+                                        <Bar dataKey="v" radius={[5, 5, 0, 0]}>
+                                            {monthly.map((d, i) => <Cell key={d.m} fill={i === peakIdx ? C.coral : '#FDBABA'} />)}
+                                        </Bar>
+                                    </BarChart>
+                                </ResponsiveContainer>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.6rem', color: C.ink, margin: '0 0 0.4rem' }}>Every plan at {nightsPerMonth(occupancy)} nights a month</h2>
+                            <p style={{ color: C.muted, margin: '0 0 1.25rem' }}>
+                                At the same bookings, running it yourself keeps the most. A managed plan pays for itself by filling more nights; the note under each bar shows how many.
                             </p>
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))', gap: '1rem', marginTop: '1.25rem' }}>
-                                {[['Low', est.low, est.occ.low], ['Typical', est.typical, est.occ.typical], ['Strong', est.strong, est.occ.strong]].map(([name, r, o]) => (
-                                    <div key={name} style={{ padding: '1rem', borderRadius: '0.75rem', background: name === 'Typical' ? 'rgba(16,185,129,0.15)' : 'rgba(255,255,255,0.05)', border: name === 'Typical' ? '1px solid rgba(16,185,129,0.4)' : '1px solid rgba(255,255,255,0.08)' }}>
-                                        <div style={{ fontSize: '0.8rem', color: '#cbd5e1', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{name} · {o}% booked</div>
-                                        <div style={{ fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', fontWeight: 800, color: r.owner < 0 ? '#fca5a5' : name === 'Typical' ? '#6ee7b7' : 'white', margin: '0.3rem 0' }}>{lakh(r.owner)}</div>
-                                        <div style={{ fontSize: '0.85rem', color: '#94a3b8' }}>{inr(r.owner / 12)} a month · {lakh(r.gross)} bookings</div>
-                                    </div>
+                            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '1rem' }}>
+                                {comparison.map(({ plan: p, result: r, breakEven }) => (
+                                    <li key={p.key}>
+                                        <button type="button" onClick={() => setPlanKey(p.key)} style={{ all: 'unset', cursor: 'pointer', display: 'block', width: '100%' }}>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.95rem', marginBottom: '0.35rem' }}>
+                                                <span style={{ fontWeight: p.key === plan.key ? 700 : 600, color: C.ink }}>{p.name}</span>
+                                                <span style={{ fontWeight: 700, color: C.ink, fontVariantNumeric: 'tabular-nums' }}>{lakhs(r.owner)}</span>
+                                            </div>
+                                            <div style={{ height: '0.6rem', borderRadius: '999px', background: C.line, overflow: 'hidden' }}>
+                                                <div className="calc-seg" style={{ height: '100%', width: `${Math.max(2, (Math.max(0, r.owner) / bestKeep) * 100)}%`, background: p.key === plan.key ? C.keep : '#9FD8C4' }} />
+                                            </div>
+                                            <div style={{ fontSize: '0.8rem', color: C.muted, marginTop: '0.3rem' }}>
+                                                {p.key === 'smartstart' ? 'You do everything yourself'
+                                                    : breakEven == null ? 'Does not beat running it yourself at this price'
+                                                        : breakEven <= occupancy ? 'Already ahead of running it yourself'
+                                                            : `Beats running it yourself from ${nightsPerMonth(breakEven)} nights a month`}
+                                            </div>
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem' }}>
+                        <div>
+                            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.6rem', color: C.ink, margin: '0 0 0.4rem' }}>Your running costs</h2>
+                            <p style={{ color: C.muted, margin: '0 0 1.25rem' }}>Our estimate for a home this size. Change them to match yours.</p>
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                                {[
+                                    ['perNight', 'Per booked night', 'Cleaning, laundry, amenities, power', 100],
+                                    ['monthly', 'Per month', 'Caretaker, upkeep, internet', 1000],
+                                ].map(([k, l, h, s]) => (
+                                    <label key={k} style={{ display: 'block' }}>
+                                        <span style={{ display: 'block', fontWeight: 600, color: C.ink, fontSize: '0.92rem', marginBottom: '0.35rem' }}>{l}</span>
+                                        <span style={{ display: 'flex', alignItems: 'center', border: `1px solid ${C.line}`, borderRadius: '0.7rem', background: 'white', padding: '0 0.75rem' }}>
+                                            <span style={{ color: C.muted }}>₹</span>
+                                            <input type="number" min="0" step={s} value={costs[k]} onChange={(e) => setCostOverride({ ...costs, [k]: Math.max(0, +e.target.value || 0) })} style={{ width: '100%', border: 'none', outline: 'none', padding: '0.7rem 0.4rem', fontSize: '1rem', background: 'transparent' }} />
+                                        </span>
+                                        <span style={{ display: 'block', fontSize: '0.8rem', color: C.muted, marginTop: '0.3rem' }}>{h}</span>
+                                    </label>
                                 ))}
                             </div>
-                            <p style={{ margin: '1.25rem 0 0', fontSize: '0.85rem', color: '#94a3b8', lineHeight: 1.6 }}>
-                                Nightly rate {inr(est.adr)} (city median for this size{est.market.basis === 'city' || est.market.est?.includes(bedrooms - 1) ? ', estimated from the city average' : ''}). Busiest month {est.market.peak}, quietest {est.market.low}.
-                            </p>
                         </div>
-
-                        {/* Breakdown + monthly */}
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
-                            <div style={card}>
-                                <h2 style={{ fontSize: '1.1rem', fontWeight: 700, margin: '0 0 1rem' }}>Where a typical year's bookings go</h2>
-                                <div style={{ display: 'flex', height: '14px', borderRadius: '999px', overflow: 'hidden', marginBottom: '1rem' }}>
-                                    {breakdown.map((b) => <div key={b.name} style={{ width: `${(b.value / est.typical.gross) * 100}%`, background: b.color }} />)}
-                                </div>
-                                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '0.6rem' }}>
-                                    <li style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700 }}><span>Bookings ({est.typical.nights} nights)</span><span>{inr(est.typical.gross)}</span></li>
-                                    {breakdown.map((b) => (
-                                        <li key={b.name} style={{ display: 'flex', justifyContent: 'space-between', color: '#475569', fontSize: '0.95rem' }}>
-                                            <span><span style={{ display: 'inline-block', width: 10, height: 10, borderRadius: 3, background: b.color, marginRight: 8 }} />{b.name}</span>
-                                            <span>{inr(b.value)}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                                {!est.plan.ownerPaysCosts && <p style={{ fontSize: '0.85rem', color: '#059669', margin: '1rem 0 0' }}>On StayPrime, Hostizzy pays the running costs ({inr(est.typical.runningCosts)} a year) out of its share.</p>}
-                            </div>
-                            <div style={card}>
-                                <h2 style={{ fontSize: '1.1rem', fontWeight: 700, margin: '0 0 1rem' }}>Bookings by month, typical year</h2>
-                                <div style={{ height: 220 }}>
-                                    <ResponsiveContainer width="100%" height="100%">
-                                        <BarChart data={est.monthly.map((v, i) => ({ m: MONTHS[i], v }))} margin={{ top: 4, right: 4, left: -10, bottom: 0 }}>
-                                            <CartesianGrid vertical={false} stroke="#e2e8f0" />
-                                            <XAxis dataKey="m" tick={{ fontSize: 11, fill: '#64748b' }} axisLine={false} tickLine={false} />
-                                            <YAxis tickFormatter={(v) => (v / 1000).toFixed(0) + 'k'} tick={{ fontSize: 11, fill: '#64748b' }} axisLine={false} tickLine={false} />
-                                            <Tooltip formatter={(v) => inr(v)} cursor={{ fill: 'rgba(148,163,184,0.15)' }} />
-                                            <Bar dataKey="v" fill="#FE5858" radius={[4, 4, 0, 0]} />
-                                        </BarChart>
-                                    </ResponsiveContainer>
-                                </div>
-                                <p style={{ fontSize: '0.8rem', color: '#64748b', margin: '0.75rem 0 0' }}>Shape follows the reported peak and quiet months for {est.region.label}.</p>
-                            </div>
-                        </div>
-
-                        {/* Plan comparison */}
-                        <div style={card}>
-                            <h2 style={{ fontSize: '1.1rem', fontWeight: 700, margin: '0 0 0.4rem' }}>Every plan, side by side</h2>
-                            <p style={{ fontSize: '0.9rem', color: '#64748b', margin: '0 0 1rem' }}>
-                                At the same {est.occ.typical}% occupancy, running it yourself always keeps the most. A managed plan earns its fee by filling more nights and pricing better. The last column shows how far occupancy has to rise for each plan to beat doing it yourself.
-                            </p>
-                            <div style={{ overflowX: 'auto' }}>
-                                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.92rem', minWidth: '520px' }}>
-                                    <thead>
-                                        <tr style={{ textAlign: 'left', color: '#64748b', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                                            <th style={{ padding: '0.5rem' }}>Plan</th>
-                                            <th style={{ padding: '0.5rem' }}>Who runs the property</th>
-                                            <th style={{ padding: '0.5rem', textAlign: 'right' }}>You keep / yr</th>
-                                            <th style={{ padding: '0.5rem', textAlign: 'right' }}>Beats self-managing at</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {est.comparison.map(({ plan, result, breakEven }) => (
-                                            <tr key={plan.key} style={{ borderTop: '1px solid #e2e8f0', background: plan.key === est.plan.key ? 'rgba(254,88,88,0.05)' : 'transparent' }}>
-                                                <td style={{ padding: '0.65rem 0.5rem', fontWeight: 700 }}>{plan.name}<div style={{ fontWeight: 400, fontSize: '0.8rem', color: '#64748b' }}>{plan.price}</div></td>
-                                                <td style={{ padding: '0.65rem 0.5rem', color: '#475569' }}>{plan.fullManagement ? 'Hostizzy runs everything' : plan.key === 'smartstart' ? 'You run everything' : 'You; we handle bookings'}</td>
-                                                <td style={{ padding: '0.65rem 0.5rem', textAlign: 'right', fontWeight: 600 }}>{lakh(result.owner)}</td>
-                                                <td style={{ padding: '0.65rem 0.5rem', textAlign: 'right', color: '#475569' }}>
-                                                    {plan.key === 'smartstart' ? 'baseline' : breakEven == null ? 'n/a' : breakEven <= est.occ.typical ? 'already ahead' : `${breakEven}% booked`}
-                                                </td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <p style={{ fontSize: '0.8rem', color: '#64748b', margin: '0.9rem 0 0' }}>
-                                Well-run full-time listings in {city} can reach about {est.occ.strong}%. Running it yourself also costs your time: pricing, messages, check-ins and staff.
-                            </p>
-                        </div>
-
-                        {/* Edit assumptions */}
-                        <div style={{ ...card, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem' }}>
-                            <div style={{ gridColumn: '1 / -1' }}>
-                                <h2 style={{ fontSize: '1.1rem', fontWeight: 700, margin: 0 }}>Make it yours</h2>
-                                <p style={{ fontSize: '0.9rem', color: '#64748b', margin: '0.3rem 0 0' }}>Running costs are our estimate for this size of property. Change them to match yours.</p>
-                            </div>
-                            <label>
-                                <span style={label}>Cost per booked night (₹)</span>
-                                <input type="number" min="0" step="100" value={costs.perNight} onChange={(e) => setCostOverride({ ...costs, perNight: Math.max(0, +e.target.value || 0) })} style={input} />
-                                <span style={{ fontSize: '0.8rem', color: '#64748b' }}>Cleaning, laundry, amenities, electricity</span>
-                            </label>
-                            <label>
-                                <span style={label}>Fixed cost per month (₹)</span>
-                                <input type="number" min="0" step="1000" value={costs.monthly} onChange={(e) => setCostOverride({ ...costs, monthly: Math.max(0, +e.target.value || 0) })} style={input} />
-                                <span style={{ fontSize: '0.8rem', color: '#64748b' }}>Caretaker, maintenance, internet</span>
-                            </label>
-                            <label>
-                                <span style={label}>What you earn today per month (₹)</span>
-                                <input inputMode="numeric" placeholder="Optional" value={currentEarnings} onChange={(e) => setCurrentEarnings(e.target.value)} style={input} />
-                                {current > 0 && (
-                                    <span style={{ fontSize: '0.85rem', fontWeight: 600, color: est.typical.owner / 12 >= current ? '#059669' : '#b45309' }}>
-                                        Typical case on {est.plan.name}: {est.typical.owner / 12 >= current ? '+' : '−'}{inr(Math.abs(est.typical.owner / 12 - current))} a month vs today
-                                    </span>
-                                )}
-                            </label>
-                        </div>
-
-                        {/* Lead capture */}
-                        <div style={{ ...card, background: 'linear-gradient(135deg, #fff1f1 0%, #fff 100%)', border: '1px solid #fecaca' }}>
-                            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '0 0 0.4rem' }}>Get an estimate for your actual property</h2>
-                            <p style={{ color: '#475569', margin: '0 0 1.25rem', maxWidth: '620px' }}>
-                                City averages can't see your view, your pool or your reviews. Share your details and our revenue team will send a property-specific forecast within 24 hours.
-                            </p>
-                            {leadState === 'sent' ? (
-                                <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#059669', fontWeight: 600, margin: 0 }}><Check size={18} /> Thanks, we'll be in touch within 24 hours.</p>
-                            ) : (
-                                <form onSubmit={submitLead} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.75rem' }}>
-                                    <input type="email" required placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} style={input} aria-label="Email" />
-                                    <input type="tel" placeholder="Phone (optional)" value={phone} onChange={(e) => setPhone(e.target.value)} style={input} aria-label="Phone" />
-                                    <button type="submit" className="btn btn-gradient" disabled={leadState === 'sending'} style={{ justifyContent: 'center' }}>
-                                        {leadState === 'sending' ? 'Sending…' : 'Send my forecast'} <ArrowRight size={18} style={{ marginLeft: 6 }} />
-                                    </button>
-                                    {leadState === 'error' && <p style={{ gridColumn: '1 / -1', color: '#b91c1c', margin: 0, fontSize: '0.9rem' }}>Something went wrong. Please try again or <Link href="/contact">contact us</Link>.</p>}
-                                </form>
+                        <div>
+                            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.6rem', color: C.ink, margin: '0 0 0.4rem' }}>Compare with today</h2>
+                            <p style={{ color: C.muted, margin: '0 0 1.25rem' }}>Already renting it out? Enter what you take home in a month.</p>
+                            <span style={{ display: 'flex', alignItems: 'center', border: `1px solid ${C.line}`, borderRadius: '0.7rem', background: 'white', padding: '0 0.75rem', maxWidth: '20rem' }}>
+                                <span style={{ color: C.muted }}>₹</span>
+                                <input inputMode="numeric" aria-label="What you take home in a month today" placeholder="e.g. 40,000" value={currentEarnings} onChange={(e) => setCurrentEarnings(e.target.value)} style={{ width: '100%', border: 'none', outline: 'none', padding: '0.7rem 0.4rem', fontSize: '1rem', background: 'transparent' }} />
+                            </span>
+                            {current > 0 && (
+                                <p style={{ margin: '0.75rem 0 0', fontWeight: 600, color: result.owner / 12 >= current ? C.keep : C.cost }}>
+                                    {result.owner / 12 >= current
+                                        ? `About ${inr(result.owner / 12 - current)} a month more than today on ${plan.name}.`
+                                        : `About ${inr(current - result.owner / 12)} a month less than today at these numbers. Try the Strong case, or ask us to look at your listing.`}
+                                </p>
                             )}
                         </div>
-
-                        {/* Method */}
-                        <details style={card}>
-                            <summary style={{ cursor: 'pointer', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem' }}><Info size={16} /> How we calculated this</summary>
-                            <ul style={{ color: '#475569', lineHeight: 1.7, fontSize: '0.92rem', margin: '1rem 0' }}>
-                                {ASSUMPTIONS.map((a) => <li key={a}>{a}</li>)}
-                                <li>Holiday-rental supply in India grew 30–100% in the last year while revenue per listing fell in most markets, so treat past results as a guide, not a promise.</li>
-                            </ul>
-                            <p style={{ fontSize: '0.85rem', color: '#64748b', margin: 0 }}>
-                                Sources (checked {DATA_CHECKED}):{' '}
-                                {SOURCES.map((s, i) => (
-                                    <span key={s.url}>{i > 0 && '; '}<a href={s.url} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-primary)' }}>{s.name}</a> ({s.period})</span>
-                                ))}.
-                                {' '}Estimates are indicative and not a guarantee of earnings.
-                            </p>
-                        </details>
-
-                        <div style={{ textAlign: 'center', display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-                            <Link href="/services" className="btn btn-outline">Compare plans in detail</Link>
-                            <a href="https://wa.me/919560493335?text=Hi%20Hostizzy%2C%20I%20used%20the%20revenue%20calculator%20and%20would%20like%20to%20talk." target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-                                <MessageCircle size={18} /> WhatsApp us
-                            </a>
-                        </div>
                     </div>
-                </section>
-            )}
+
+                    <div style={{ background: 'white', border: `1px solid ${C.line}`, borderRadius: '1.25rem', padding: 'clamp(1.5rem, 4vw, 2.5rem)', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem 3rem', alignItems: 'center' }}>
+                        <div>
+                            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.6rem', color: C.ink, margin: '0 0 0.5rem' }}>Get a forecast for your own home</h2>
+                            <p style={{ color: C.muted, margin: 0 }}>Town averages can't see your view, your pool or your reviews. Our revenue team will send a forecast for your property within 24 hours.</p>
+                        </div>
+                        {leadState === 'sent' ? (
+                            <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: C.keep, fontWeight: 600, margin: 0 }}><Check size={18} /> Sent. We'll email your forecast within 24 hours.</p>
+                        ) : (
+                            <form onSubmit={submitLead} style={{ display: 'grid', gap: '0.75rem' }}>
+                                <input type="email" required placeholder="Email" aria-label="Email" value={email} onChange={(e) => setEmail(e.target.value)} style={{ padding: '0.8rem 1rem', border: `1px solid ${C.line}`, borderRadius: '0.7rem', fontSize: '1rem' }} />
+                                <input type="tel" placeholder="Phone (optional)" aria-label="Phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{ padding: '0.8rem 1rem', border: `1px solid ${C.line}`, borderRadius: '0.7rem', fontSize: '1rem' }} />
+                                <button type="submit" className="btn btn-gradient" disabled={leadState === 'sending'}>{leadState === 'sending' ? 'Sending…' : 'Send my forecast'}</button>
+                                {leadState === 'error' && <p style={{ color: '#B91C1C', margin: 0, fontSize: '0.9rem' }}>That didn't go through. Try again, or <Link href="/contact">contact us</Link>.</p>}
+                            </form>
+                        )}
+                    </div>
+
+                    <details style={{ color: C.muted }}>
+                        <summary style={{ cursor: 'pointer', fontWeight: 600, color: C.ink, display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}><Info size={16} /> How these numbers are worked out</summary>
+                        <ul style={{ lineHeight: 1.7, fontSize: '0.92rem', margin: '1rem 0', maxWidth: '75ch' }}>
+                            {ASSUMPTIONS.map((a) => <li key={a}>{a}</li>)}
+                            <li>Holiday-rental supply in India grew 30–100% in the last year while revenue per listing fell in most markets. Treat past results as a guide, not a promise.</li>
+                        </ul>
+                        <p style={{ fontSize: '0.85rem', margin: 0, maxWidth: '75ch' }}>
+                            Sources, checked {DATA_CHECKED}:{' '}
+                            {SOURCES.map((s, i) => (
+                                <span key={s.url}>{i > 0 && '; '}<a href={s.url} target="_blank" rel="noopener noreferrer" style={{ color: C.coralText }}>{s.name}</a> ({s.period})</span>
+                            ))}. Estimates are indicative, not a guarantee of earnings.
+                        </p>
+                    </details>
+
+                    <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                        <Link href="/services" className="btn btn-outline">See what each plan includes</Link>
+                        <a href="https://wa.me/919560493335?text=Hi%20Hostizzy%2C%20I%20used%20the%20revenue%20calculator%20and%20would%20like%20to%20talk." target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ gap: '0.4rem' }}>
+                            <MessageCircle size={18} /> Talk to us on WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            {/* Phone: the answer stays in view while the questions scroll */}
+            <a href="#calc-result" className="calc-mobile-bar" style={{ justifyContent: 'flex-start', alignItems: 'baseline', gap: '0.5rem', padding: '0.9rem 6rem 0.9rem 1.25rem', background: C.ink, color: 'white', textDecoration: 'none', boxShadow: '0 -6px 20px rgba(15,23,42,0.18)' }}>
+                <span style={{ fontSize: '0.85rem', opacity: 0.8 }}>You'd keep</span>
+                <span style={{ fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>{inr(result.owner / 12)} a month</span>
+            </a>
         </>
     );
 }
