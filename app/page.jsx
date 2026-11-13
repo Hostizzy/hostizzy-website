@@ -13,6 +13,7 @@ import VideoSection from '../components/VideoSection';
 import ChannelCarousel from '../components/ChannelCarousel';
 import TrustMetrics from '../components/TrustMetrics';
 import StickyCTABar from '../components/StickyCTABar';
+import { HOSTSUITE, RESIQ } from '../lib/products';
 
 
 const Home = () => {
@@ -44,7 +45,7 @@ const Home = () => {
                 <div className="grid desktop-3-col" style={{ gap: '2rem' }}>
                     {[
                         { title: "Exclusive Branding", desc: "Every property, a unique micro brand. We don't just list; we build an identity." },
-                        { title: "Transparency & Security", desc: "Stay updated with real-time insights via our ResIQ Dashboard." },
+                        { title: "Transparency & Security", desc: "Stay updated with real-time bookings, statements and payouts via your HostSuite owner portal." },
                         { title: "Flexible Plans", desc: "Custom solutions for every property type — from co-hosting to complete management." },
                         { title: "Optimized Listings", desc: "Maximize visibility and appeal with professional photography and SEO." },
                         { title: "Exceptional Hospitality", desc: "Seamless experiences for every guest, leading to 5-star reviews." },
@@ -101,11 +102,11 @@ const Home = () => {
                             <ul style={{ listStyle: 'none', padding: 0, color: '#334155', fontSize: '0.95rem' }}>
                                 <li style={{ marginBottom: '0.75rem', display: 'flex', alignItems: 'start', gap: '0.5rem' }}>
                                     <span style={{ color: '#22c55e', marginTop: '2px' }}>✓</span>
-                                    <span>ResIQ revenue analytics dashboard</span>
+                                    <span><Link href={HOSTSUITE.path} style={{ color: 'inherit', textDecoration: 'underline', textUnderlineOffset: '3px' }}>HostSuite</Link> property management system</span>
                                 </li>
                                 <li style={{ marginBottom: '0.75rem', display: 'flex', alignItems: 'start', gap: '0.5rem' }}>
                                     <span style={{ color: '#22c55e', marginTop: '2px' }}>✓</span>
-                                    <span>HostOS property management system</span>
+                                    <span>Owner portal with statements and payouts, in HostSuite</span>
                                 </li>
                                 <li style={{ marginBottom: '0.75rem', display: 'flex', alignItems: 'start', gap: '0.5rem' }}>
                                     <span style={{ color: '#22c55e', marginTop: '2px' }}>✓</span>
@@ -114,6 +115,10 @@ const Home = () => {
                                 <li style={{ marginBottom: '0.75rem', display: 'flex', alignItems: 'start', gap: '0.5rem' }}>
                                     <span style={{ color: '#22c55e', marginTop: '2px' }}>✓</span>
                                     <span>Automated pricing optimization</span>
+                                </li>
+                                <li style={{ marginBottom: '0.75rem', display: 'flex', alignItems: 'start', gap: '0.5rem' }}>
+                                    <span style={{ color: '#22c55e', marginTop: '2px' }}>✓</span>
+                                    <span><Link href={RESIQ.path} style={{ color: 'inherit', textDecoration: 'underline', textUnderlineOffset: '3px' }}>ResIQ</Link> app for independent owners</span>
                                 </li>
                             </ul>
                         </div>
@@ -196,7 +201,7 @@ const Home = () => {
 
                         <div className="grid desktop-4-col" style={{ gap: '2rem' }}>
                             <div style={{ textAlign: 'center', padding: '1.5rem', background: 'rgba(255,255,255,0.05)', borderRadius: '1rem' }}>
-                                <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#86efac', marginBottom: '0.5rem' }}>14+</div>
+                                <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#86efac', marginBottom: '0.5rem' }}>10+</div>
                                 <div style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.8)' }}>Booking Channels</div>
                             </div>
                             <div style={{ textAlign: 'center', padding: '1.5rem', background: 'rgba(255,255,255,0.05)', borderRadius: '1rem' }}>

@@ -1,12 +1,12 @@
 import { OG_IMAGE } from '@/lib/og';
 
 export const metadata = {
-  title: 'Hospitality Technology Platform | HostOS & ResIQ | Hostizzy',
-  description: 'Purpose-built technology for Indian hospitality. HostOS smart PMS with GST invoicing, WhatsApp inbox & AI pricing. ResIQ operations dashboard for reservations & payments.',
-  keywords: ['hospitality technology india', 'property management software', 'hotel pms india', 'vacation rental software'],
+  title: 'Hospitality Technology: HostSuite, ResIQ & JuxTravel | Hostizzy',
+  description: 'Three products from Hostizzy: HostSuite, the PMS for hosting businesses (formerly HostOS); ResIQ, the app for independent homestay owners; and JuxTravel, the trip-matching app for travellers.',
+  keywords: ['hostsuite', 'resiq', 'juxtravel', 'hospitality technology india', 'property management software', 'hotel pms india', 'vacation rental software'],
   openGraph: {
-    title: 'Hospitality Technology Platform | HostOS & ResIQ | Hostizzy',
-    description: 'Purpose-built technology for Indian hospitality. HostOS smart PMS with GST invoicing, WhatsApp inbox & AI pricing. ResIQ operations dashboard for reservations & payments.',
+    title: 'Hospitality Technology: HostSuite, ResIQ & JuxTravel | Hostizzy',
+    description: 'Three products from Hostizzy: HostSuite, the PMS for hosting businesses (formerly HostOS); ResIQ, the app for independent homestay owners; and JuxTravel, the trip-matching app for travellers.',
     url: 'https://www.hostizzy.com/technology',
     siteName: 'Hostizzy',
     images: OG_IMAGE,

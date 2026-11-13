@@ -6,6 +6,7 @@ import { Menu, X, ArrowUpRight, ChevronDown, Zap, TrendingUp, BadgeCheck, Chevro
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { useSettings } from '../context/SettingsContext';
+import { HOSTSUITE, RESIQ, JUXTRAVEL } from '../lib/products';
 
 const Navbar = () => {
     const { settings } = useSettings();
@@ -41,9 +42,9 @@ const Navbar = () => {
 
     const platformLinks = [
         { path: "/technology", name: "Platform Overview", desc: "Explore the Hostizzy Ecosystem", icon: <Zap size={16} /> },
-        { path: "/products/hostos", name: "HostOS", desc: "Property Management System", icon: <Building2 size={16} /> },
-        { path: "/products/resiq", name: "ResIQ", desc: "Revenue & Market Analytics", icon: <TrendingUp size={16} /> },
-        { path: "/products/juxtravel", name: "JuxTravel", desc: "Multi-Channel Marketplace", icon: <MapPin size={16} /> },
+        { path: HOSTSUITE.path, name: HOSTSUITE.name, desc: HOSTSUITE.navDesc, icon: <Building2 size={16} /> },
+        { path: RESIQ.path, name: RESIQ.name, desc: RESIQ.navDesc, icon: <Home size={16} /> },
+        { path: JUXTRAVEL.path, name: JUXTRAVEL.name, desc: JUXTRAVEL.navDesc, icon: <MapPin size={16} /> },
     ];
 
     const aboutLinks = [

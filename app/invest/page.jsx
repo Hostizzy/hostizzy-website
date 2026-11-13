@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import ScrollReveal from '../../components/ScrollReveal';
 import { TrendingUp, ShieldCheck, PieChart, ArrowUpRight, CheckCircle2, Layout, BarChart, Globe } from 'lucide-react';
+import { HOSTSUITE, RESIQ, JUXTRAVEL } from '../../lib/products';
 
 export default function Invest() {
     return (
@@ -43,7 +44,7 @@ export default function Invest() {
                                 "I am Ethan — founder of Hostizzy. We're building more than just a property management firm; we're creating an end-to-end ecosystem that empowers owners and delights guests through technology."
                             </p>
                             <p style={{ fontSize: '1.15rem', lineHeight: 1.8, color: 'var(--color-muted)' }}>
-                                Our platform integrates <strong>VRM Operations</strong>, <strong>HostOS PMS</strong> (with built-in CRM), and <strong>ResIQ Analytics</strong> into a single, seamless powerhouse—with our <strong>JuxTravel Marketplace</strong> on the horizon.
+                                Our platform combines <strong>VRM Operations</strong> with three live products: <strong>HostSuite</strong>, the property management system our operation runs on and now sold to other hosts as self-serve SaaS; <strong>ResIQ</strong>, the app for independent homestay owners on Google Play; and <strong>JuxTravel</strong>, the trip-matching app for travellers, live across India since 15 September 2026.
                             </p>
                         </div>
                     </ScrollReveal>
@@ -87,9 +88,9 @@ export default function Invest() {
                     <div className="grid desktop-4-col" style={{ gap: '1.5rem' }}>
                         {[
                             { icon: <TrendingUp size={32} />, title: "VRM Ops", desc: "Expert on-ground management for premium properties." },
-                            { icon: <Layout size={32} />, title: "HostOS", desc: "Proprietary PMS with built-in CRM & operations." },
-                            { icon: <BarChart size={32} />, title: "ResIQ", desc: "Data-driven revenue management & analytics." },
-                            { icon: <Globe size={32} />, title: "JuxTravel", desc: "Our upcoming marketplace for curated stays." }
+                            { icon: <Layout size={32} />, title: HOSTSUITE.name, desc: `Our PMS, formerly HostOS. Self-serve SaaS from ${HOSTSUITE.priceFrom}.` },
+                            { icon: <BarChart size={32} />, title: RESIQ.name, desc: "Bookings app for independent homestay owners. Live on Google Play and web." },
+                            { icon: <Globe size={32} />, title: JUXTRAVEL.name, desc: `Trip-matching app for travellers. Live since ${JUXTRAVEL.launchDate}.` }
                         ].map((pillar, i) => (
                             <ScrollReveal key={i} delay={i * 0.1}>
                                 <div className="card" style={{ padding: '2rem', textAlign: 'center', height: '100%' }}>

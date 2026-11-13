@@ -32,7 +32,7 @@ module.exports = {
       '/marketing':                 { priority: 0.85, changefreq: 'monthly' },
 
       // Product pages
-      '/products/hostos':           { priority: 0.85, changefreq: 'weekly' },
+      '/products/hostsuite':        { priority: 0.85, changefreq: 'weekly' },
       '/products/resiq':            { priority: 0.85, changefreq: 'weekly' },
       '/products/juxtravel':        { priority: 0.7, changefreq: 'monthly' },
 
