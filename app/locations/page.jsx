@@ -108,7 +108,7 @@ export default function LocationsIndex() {
                                             <span>{loc.cities.length} cities</span>
                                             <span style={{ margin: '0 0.25rem' }}>&middot;</span>
                                             <Building size={16} color="var(--color-primary)" />
-                                            <span>{loc.stats.properties} properties</span>
+                                            <span>{loc.serviceModel === 'full' ? 'Full management' : 'Co-hosting'}</span>
                                         </div>
 
                                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.5rem' }}>

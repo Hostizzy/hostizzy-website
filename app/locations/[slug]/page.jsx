@@ -12,7 +12,7 @@ const PropertyLeadWizard = dynamic(() => import('../../../components/PropertyLea
 import { getLocation } from '@/lib/locations';
 import { LOCATION_STAYS } from '@/lib/bookingLinks';
 import {
-    Check, ArrowRight, MapPin, Home, Star, TrendingUp, Calendar,
+    Check, ArrowRight, MapPin, Home, TrendingUp, Calendar,
     Building, Phone, MessageCircle
 } from 'lucide-react';
 
@@ -92,11 +92,27 @@ export default function LocationPage() {
                 overflow: 'hidden',
                 color: 'white'
             }}>
-                <div style={{
-                    position: 'absolute', inset: 0, opacity: 0.05,
-                    backgroundImage: 'radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)',
-                    backgroundSize: '40px 40px'
-                }} />
+                {location.heroImage ? (
+                    <>
+                        <img
+                            src={`${location.heroImage.src}?tr=w-1920,q-75,f-auto`}
+                            alt={location.heroImage.alt}
+                            fetchPriority="high"
+                            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+                        />
+                        {/* Darkens the photo enough for white text to stay readable. */}
+                        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(15,23,42,0.78) 0%, rgba(15,23,42,0.62) 55%, rgba(15,23,42,0.85) 100%)' }} />
+                        <a href={location.heroImage.href} style={{ position: 'absolute', right: '1rem', bottom: '0.75rem', zIndex: 2, fontSize: '0.78rem', color: 'rgba(255,255,255,0.8)', textDecoration: 'underline', textUnderlineOffset: '2px' }}>
+                            A Hostizzy-managed home in {location.heroImage.town}
+                        </a>
+                    </>
+                ) : (
+                    <div style={{
+                        position: 'absolute', inset: 0, opacity: 0.05,
+                        backgroundImage: 'radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)',
+                        backgroundSize: '40px 40px'
+                    }} />
+                )}
 
                 <div className="container" style={{ position: 'relative', zIndex: 1 }}>
                     <ScrollReveal>
@@ -167,10 +183,10 @@ export default function LocationPage() {
                         textAlign: 'center'
                     }}>
                         {[
-                            { icon: <Building size={22} color="var(--color-primary)" />, label: 'Properties', value: location.stats.properties },
-                            { icon: <TrendingUp size={22} color="var(--color-primary)" />, label: 'Avg Occupancy', value: location.stats.avgOccupancy },
-                            { icon: <Star size={22} color="var(--color-primary)" />, label: 'Guest Rating', value: location.stats.avgRating },
-                            { icon: <Calendar size={22} color="var(--color-primary)" />, label: 'Peak Season', value: location.stats.peakSeason }
+                            { icon: <Building size={22} color="var(--color-primary)" />, label: 'Management', value: isFull ? 'Full service' : 'Co-hosting' },
+                            { icon: <MapPin size={22} color="var(--color-primary)" />, label: 'Towns covered', value: location.cities.length },
+                            { icon: <TrendingUp size={22} color="var(--color-primary)" />, label: 'Booking channels', value: '10+' },
+                            { icon: <Calendar size={22} color="var(--color-primary)" />, label: 'Peak season', value: location.stats.peakSeason }
                         ].map((stat, i) => (
                             <div key={i} style={{
                                 padding: '1.25rem',
