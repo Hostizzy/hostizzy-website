@@ -48,7 +48,9 @@ const ChannelCarousel = () => {
                     }}
                 >
                     {[...channels, ...channels, ...channels].map((channel, i) => (
-                        <div key={i} style={{
+                        // The list repeats three times for the marquee; only the first
+                        // copy is announced to screen readers.
+                        <div key={i} aria-hidden={i >= channels.length ? 'true' : undefined} style={{
                             display: 'flex',
                             alignItems: 'center',
                             height: '80px',
@@ -68,7 +70,7 @@ const ChannelCarousel = () => {
                         >
                             <img
                                 src={channel.logo}
-                                alt={channel.name}
+                                alt={i >= channels.length ? '' : channel.name}
                                 loading="lazy"
                                 width={180}
                                 height={48}

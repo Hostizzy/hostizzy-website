@@ -1,4 +1,12 @@
+import { notFound } from 'next/navigation';
 import { getLocation, getAllLocationSlugs } from '@/lib/locations';
+
+// Only the known locations exist. Prerendering them puts them in the
+// sitemap; anything else is a real 404 instead of a 200 "not found" page.
+export const dynamicParams = false;
+export function generateStaticParams() {
+  return getAllLocationSlugs().map((slug) => ({ slug }));
+}
 import { OG_IMAGE } from '@/lib/og';
 
 export async function generateMetadata({ params }) {
@@ -12,7 +20,7 @@ export async function generateMetadata({ params }) {
   }
 
   const title = `Vacation Rental Management in ${location.name} | Hostizzy`;
-  const description = `Professional Airbnb & vacation rental management in ${location.name}. AI pricing, 15+ OTA channels, full property management. List your ${location.name} property today.`;
+  const description = `Professional Airbnb & vacation rental management in ${location.name}. AI pricing, 10+ booking channels, full property management. List your ${location.name} property today.`;
 
   return {
     title,
@@ -35,7 +43,8 @@ export async function generateMetadata({ params }) {
 export default async function LocationSlugLayout({ children, params }) {
   const { slug } = await params;
   const location = getLocation(slug);
-  const locationName = location ? location.name : slug;
+  if (!location) notFound();
+  const locationName = location.name;
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",

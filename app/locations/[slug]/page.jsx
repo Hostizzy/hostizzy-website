@@ -80,32 +80,6 @@ export default function LocationPage() {
     const isFull = location.serviceModel === 'full';
     const services = isFull ? fullManagementServices : sharedServices;
 
-    const localBusinessSchema = {
-        "@type": "LocalBusiness",
-        "name": `Hostizzy - ${location.name}`,
-        "description": location.description,
-        "url": `https://www.hostizzy.com/locations/${location.slug}`,
-        "telephone": "+91-95604-94001",
-        "email": "stay@hostizzy.com",
-        "areaServed": {
-            "@type": "State",
-            "name": location.name
-        },
-        "parentOrganization": {
-            "@type": "Organization",
-            "name": "Hostizzy",
-            "url": "https://www.hostizzy.com"
-        },
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "E 13/29, 1st Floor, Harsha Bhawan, Connaught Place",
-            "addressLocality": "New Delhi",
-            "addressRegion": "Delhi",
-            "postalCode": "110001",
-            "addressCountry": "IN"
-        }
-    };
-
     return (
         <>
 
@@ -422,7 +396,7 @@ export default function LocationPage() {
                                 Partner With Us
                             </Link>
                             <a
-                                href="https://wa.me/919220444408?text=Hi%20Hostizzy%2C%20I%20have%20a%20property%20I%27d%20like%20to%20discuss."
+                                href="https://wa.me/919560493335?text=Hi%20Hostizzy%2C%20I%20have%20a%20property%20I%27d%20like%20to%20discuss."
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="btn btn-outline"

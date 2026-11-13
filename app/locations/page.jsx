@@ -9,9 +9,19 @@ import { MapPin, ArrowRight, Building } from 'lucide-react';
 
 const locationList = Object.values(LOCATIONS);
 
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.hostizzy.com" },
+        { "@type": "ListItem", "position": 2, "name": "Locations", "item": "https://www.hostizzy.com/locations" }
+    ]
+};
+
 export default function LocationsIndex() {
     return (
         <>
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
             {/* Hero Section */}
             <section className="section text-center" style={{

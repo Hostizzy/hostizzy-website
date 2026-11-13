@@ -17,20 +17,8 @@ export const metadata = {
   },
 };
 
+// The Home › Locations breadcrumb lives on app/locations/page.jsx, so the
+// city pages (which add their own 3-level breadcrumb) don't carry two.
 export default function LocationsLayout({ children }) {
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.hostizzy.com" },
-      { "@type": "ListItem", "position": 2, "name": "Locations", "item": "https://www.hostizzy.com/locations" }
-    ]
-  };
-
-  return (
-    <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      {children}
-    </>
-  );
+  return children;
 }

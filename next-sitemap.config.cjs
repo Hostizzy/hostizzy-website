@@ -44,7 +44,7 @@ module.exports = {
 
       // Content & trust pages
       '/about':                     { priority: 0.8, changefreq: 'monthly' },
-      '/blogs':                     { priority: 0.8, changefreq: 'daily' },
+      '/blogs':                     { priority: 0.8, changefreq: 'monthly' },
       '/testimonials':              { priority: 0.75, changefreq: 'monthly' },
       '/faq':                       { priority: 0.75, changefreq: 'monthly' },
 
@@ -65,7 +65,6 @@ module.exports = {
     if (path.startsWith('/locations/') && !pageConfig[path]) {
       return {
         loc: path,
-        lastmod: new Date().toISOString(),
         priority: 0.85,
         changefreq: 'weekly',
       };
@@ -74,7 +73,6 @@ module.exports = {
     const custom = pageConfig[path] || {};
     return {
       loc: path,
-      lastmod: new Date().toISOString(),
       priority: custom.priority || config.priority,
       changefreq: custom.changefreq || config.changefreq,
     };
