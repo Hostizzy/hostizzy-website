@@ -858,7 +858,7 @@ const About = () => {
                                     e.currentTarget.style.background = 'transparent';
                                 }}
                             >
-                                Book a villa or farmstay
+                                Find a stay
                                 <ExternalLink size={16} />
                             </a>
                         </div>
