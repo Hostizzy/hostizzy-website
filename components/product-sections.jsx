@@ -19,8 +19,9 @@ import { ArrowUpRight, ArrowRight } from 'lucide-react';
 /* ── Opening ─────────────────────────────────────────────
    variant "split" — question left, panel right
    variant "wide"  — question alone, full measure, no panel
+   brand — optional product mark set above the question
 */
-export function Opening({ variant = 'split', question, answer, cta, ctaNote, panel }) {
+export function Opening({ variant = 'split', brand, question, answer, cta, ctaNote, panel }) {
     const wide = variant === 'wide';
     return (
         <section
@@ -66,6 +67,7 @@ export function Opening({ variant = 'split', question, answer, cta, ctaNote, pan
                 }}
             >
                 <div>
+                    {brand && <div style={{ marginBottom: '1.75rem' }}>{brand}</div>}
                     <h1
                         style={{
                             fontFamily: 'var(--font-display)',
@@ -289,7 +291,7 @@ export function Close({ line, cta }) {
             <div className="container">
                 <div className="ps-close">
                     <h2 style={{ fontFamily: 'var(--font-display)', color: 'white', maxWidth: '20ch' }}>{line}</h2>
-                    {cta}
+                    {cta && <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>{cta}</div>}
                 </div>
             </div>
         </section>
@@ -323,6 +325,89 @@ export function OutlineLink({ href, children, onDark = false }) {
     );
 }
 
+/* ── Google Play button ─────────────────────────────────
+   Our own button, not Google's badge artwork: the Play glyph plus text.
+*/
+export function StoreLink({ href, label = 'Get it on Google Play', onDark = true }) {
+    return (
+        <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn"
+            style={{
+                textDecoration: 'none',
+                padding: '0.8rem 1.4rem',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.7rem',
+                background: onDark ? 'white' : 'var(--color-foreground)',
+                color: onDark ? 'var(--color-foreground)' : 'white',
+                fontWeight: 600,
+            }}
+        >
+            <img src="/products/google-play.svg" alt="" width={20} height={20} style={{ display: 'block' }} />
+            {label}
+        </a>
+    );
+}
+
+/* ── Quiet text link for a third action ─────────────────*/
+export function TextLink({ href, children, onDark = true }) {
+    return (
+        <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+                fontWeight: 600,
+                fontSize: '0.95rem',
+                textDecoration: 'none',
+                color: onDark ? 'rgba(255,255,255,0.85)' : 'var(--color-foreground)',
+                borderBottom: onDark ? '1px solid rgba(255,255,255,0.4)' : '1px solid var(--color-foreground)',
+                paddingBottom: '2px',
+            }}
+        >
+            {children} <ArrowUpRight size={15} strokeWidth={2} />
+        </a>
+    );
+}
+
+/* ── Product mark: a logo image beside the product name ─*/
+export function ProductMark({ src, name, sub, size = 44, onDark = true, radius = 10 }) {
+    return (
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.85rem' }}>
+            <img src={src} alt="" width={size} height={size} style={{ display: 'block', borderRadius: radius }} />
+            <div style={{ lineHeight: 1.15 }}>
+                <div style={{ fontSize: '1.25rem', fontWeight: 700, letterSpacing: '-0.01em', color: onDark ? 'white' : 'var(--color-foreground)' }}>{name}</div>
+                {sub && (
+                    <div style={{ fontSize: '0.85rem', color: onDark ? 'rgba(255,255,255,0.65)' : 'var(--color-muted)' }}>{sub}</div>
+                )}
+            </div>
+        </div>
+    );
+}
+
+/* ── Band with a short pitch and actions ────────────────*/
+export function CtaBand({ heading, text, actions, background = 'white' }) {
+    return (
+        <section className="section" style={{ background, borderBottom: '1px solid var(--color-border)' }}>
+            <div className="container">
+                <div className="ps-band">
+                    <div>
+                        <h2 style={{ fontFamily: 'var(--font-display)', marginBottom: '1rem', maxWidth: '20ch' }}>{heading}</h2>
+                        <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: 'var(--color-muted)', margin: 0, maxWidth: '56ch' }}>{text}</p>
+                    </div>
+                    <div style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap', alignItems: 'center' }}>{actions}</div>
+                </div>
+            </div>
+        </section>
+    );
+}
+
 /* ── Layout rules only — no colour, no type ──────────────*/
 export function ProductStyles() {
     return (
@@ -336,9 +421,13 @@ export function ProductStyles() {
             .ps-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem,1fr)); gap: 1.75rem; }
             .ps-terms { display: grid; grid-template-columns: repeat(auto-fit, minmax(20rem,1fr)); gap: 2.5rem 3rem; }
             .ps-close { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 2.5rem; align-items: center; }
+            .ps-band { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 2.5rem; align-items: center; }
+            .ps-phones { display: flex; gap: 1.25rem; justify-content: center; align-items: flex-start; }
+            .ps-phones img { width: min(38vw, 220px); height: auto; border-radius: 28px; box-shadow: var(--shadow-premium); display: block; }
+            .ps-phones img + img { margin-top: 3rem; }
 
             @media (max-width: 900px) {
-                .ps-split, .ps-pairing, .ps-reg-head, .ps-close { grid-template-columns: 1fr; gap: 2.5rem; }
+                .ps-split, .ps-pairing, .ps-reg-head, .ps-close, .ps-band { grid-template-columns: 1fr; gap: 2.5rem; }
                 .ps-reg-row { grid-template-columns: 1fr; gap: .4rem; padding: 1.2rem 1.5rem; }
             }
         `}</style>

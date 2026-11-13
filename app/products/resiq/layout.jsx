@@ -1,19 +1,25 @@
 import { OG_IMAGE } from '@/lib/og';
+import { RESIQ, RESIQ_PUBLIC_SIGNUP, ORG_ID, SITE_URL, productSchemaId } from '@/lib/products';
+
+const PAGE_URL = `${SITE_URL}${RESIQ.path}`;
+const TITLE = 'ResIQ | Homestay & Villa Booking App for Owners | Hostizzy';
+const DESCRIPTION = 'Bookings, payments, guest IDs and WhatsApp templates in one app for homestay, villa and farmstay owners. Works offline. Android + web.'
+  + (RESIQ_PUBLIC_SIGNUP ? ' First property free for founding owners.' : '');
 
 export const metadata = {
-  title: 'ResIQ | Operations Platform | Hostizzy',
-  description: 'Staff-facing operations dashboard for reservations, payments, guest KYC & team coordination. Works offline. Built for Indian hospitality.',
-  keywords: ['hotel operations dashboard', 'reservation management india', 'hospitality operations'],
+  title: TITLE,
+  description: DESCRIPTION,
+  keywords: ['homestay management app', 'villa booking app for owners', 'homestay software india', 'guest kyc app'],
   openGraph: {
-    title: 'ResIQ | Operations Platform | Hostizzy',
-    description: 'Staff-facing operations dashboard for reservations, payments, guest KYC & team coordination. Works offline. Built for Indian hospitality.',
-    url: 'https://www.hostizzy.com/products/resiq',
+    title: TITLE,
+    description: DESCRIPTION,
+    url: PAGE_URL,
     siteName: 'Hostizzy',
     images: OG_IMAGE,
     type: 'website',
   },
   alternates: {
-    canonical: 'https://www.hostizzy.com/products/resiq',
+    canonical: PAGE_URL,
   },
 };
 
@@ -21,21 +27,23 @@ export default function ResIQLayout({ children }) {
   const softwareSchema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "ResIQ",
-    "applicationCategory": "Hotel Operations Software",
-    "operatingSystem": "Web",
-    "description": "Daily operations dashboard for reservations, payments, guest KYC, and team coordination. Works offline as a PWA.",
-    "provider": { "@type": "Organization", "name": "Hostizzy" },
-    "url": "https://resiq.hostizzy.com"
+    "@id": productSchemaId(RESIQ),
+    "name": RESIQ.name,
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Android, Web",
+    "description": "App for independent homestay, villa and farmstay owners: bookings, payments, guest ID verification and WhatsApp templates, with a caretaker login. Works offline.",
+    "installUrl": RESIQ.playUrl,
+    "provider": { "@id": ORG_ID },
+    "url": RESIQ.url
   };
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.hostizzy.com" },
-      { "@type": "ListItem", "position": 2, "name": "Technology", "item": "https://www.hostizzy.com/technology" },
-      { "@type": "ListItem", "position": 3, "name": "ResIQ", "item": "https://www.hostizzy.com/products/resiq" }
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": SITE_URL },
+      { "@type": "ListItem", "position": 2, "name": "Technology", "item": `${SITE_URL}/technology` },
+      { "@type": "ListItem", "position": 3, "name": RESIQ.name, "item": PAGE_URL }
     ]
   };
 

@@ -27,6 +27,9 @@ const nextConfig = {
       { source: '/contact-us/', destination: '/contact', permanent: true },
       { source: '/host-academy', destination: '/training', permanent: true },
       { source: '/host-academy/', destination: '/training', permanent: true },
+      // HostOS was renamed HostSuite (Nov 2026). The product domain stays hostos.hostizzy.com.
+      { source: '/products/hostos', destination: '/products/hostsuite', permanent: true },
+      { source: '/products/hostos/', destination: '/products/hostsuite', permanent: true },
     ];
   },
 }
