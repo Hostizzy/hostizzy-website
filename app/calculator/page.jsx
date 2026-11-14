@@ -143,7 +143,9 @@ export default function Calculator() {
     const marketRate = nightlyRate(city, bedrooms, propertyType, finish);
     const adr = adrOverride ?? marketRate;
     const occupancy = occOverride ?? occ.typical;
-    const costs = costOverride || defaultCosts(propertyType, bedrooms);
+    // Costs follow the market rate, not the price slider, so dragging the
+    // price doesn't quietly change the running costs too.
+    const costs = costOverride || defaultCosts(propertyType, marketRate, occ.typical);
     const plans = eligiblePlans(city, propertyType);
     const plan = plans.find((p) => p.key === planKey) || plans[plans.length - 1];
 
@@ -358,7 +360,7 @@ export default function Calculator() {
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem' }}>
                         <div>
                             <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.6rem', color: C.ink, margin: '0 0 0.4rem' }}>How the year plays out</h2>
-                            <p style={{ color: C.muted, margin: '0 0 1.25rem' }}>Bookings by month in {region.label}. {MONTHS[peakIdx]} is the high point.</p>
+                            <p style={{ color: C.muted, margin: '0 0 1.25rem' }}>Bookings by month in {region.label}. {MONTHS[peakIdx]} is the high point, and busy months cost more to run too: cleaning, laundry, supplies and power follow booked nights.</p>
                             <div style={{ height: 240 }}>
                                 <ResponsiveContainer width="100%" height="100%">
                                     <BarChart data={monthly} margin={{ top: 4, right: 0, left: -12, bottom: 0 }}>
