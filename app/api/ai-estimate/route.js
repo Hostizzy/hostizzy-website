@@ -57,9 +57,7 @@ export async function POST(request) {
 
     // Determine service model based on state
     const fullManagementStates = [
-      'Delhi', 'Haryana', 'Uttarakhand', 'Rajasthan', 'Himachal Pradesh',
-      'Assam', 'Meghalaya', 'Arunachal Pradesh', 'Sikkim', 'West Bengal',
-      'Uttar Pradesh'
+      'Delhi', 'Haryana', 'Uttarakhand', 'Himachal Pradesh', 'Uttar Pradesh'
     ];
     const cityLower = city.toLowerCase();
     const isFullManagement = fullManagementStates.some(s => cityLower.includes(s.toLowerCase()));

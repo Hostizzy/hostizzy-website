@@ -24,12 +24,15 @@ Hostizzy (brand of Hostsphere India Pvt Ltd) is a vertically integrated hospital
 - Delhi NCR: Delhi, Gurgaon, Noida, Sohna, Manesar (https://www.hostizzy.com/locations/delhi-ncr)
 - Himachal Pradesh: Shimla, Manali, Kasauli, Dharamshala, Bir Billing, Dalhousie (https://www.hostizzy.com/locations/himachal-pradesh)
 - Uttarakhand: Mussoorie, Rishikesh, Mukteshwar, Nainital, Dehradun, Haridwar (https://www.hostizzy.com/locations/uttarakhand)
-- Rajasthan: Jaipur, Udaipur, Jodhpur, Pushkar, Jawai, Ranthambore (https://www.hostizzy.com/locations/rajasthan)
 - Uttar Pradesh
+
+### Full management coming soon (co-hosting available now)
+- Rajasthan: Jaipur, Udaipur, Jodhpur, Pushkar, Jawai, Ranthambore (https://www.hostizzy.com/locations/rajasthan)
+- Goa
 - North East India
 
 ### Co-Hosting (Revenue Management + Marketing) — Pan India
-- Goa, Kerala, Maharashtra, Karnataka, Tamil Nadu, West Bengal, and the rest of India
+- Rajasthan, Goa, North East, Kerala, Maharashtra, Karnataka, Tamil Nadu, West Bengal, and the rest of India
 
 ## Service Plans
 - SmartStart: One-time onboarding for new hosts (₹14,999)

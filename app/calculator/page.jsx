@@ -341,7 +341,7 @@ export default function Calculator() {
                                 })}
                             </div>
                             {!plans.some((p) => p.fullManagement) && (
-                                <p style={{ fontSize: '0.85rem', color: C.muted, margin: '0.75rem 0 0' }}>In {region.label} we co-host remotely. Full management is available in Delhi NCR, the hills, Rajasthan and the North East.</p>
+                                <p style={{ fontSize: '0.85rem', color: C.muted, margin: '0.75rem 0 0' }}>In {region.label} we co-host remotely. Full management is available in Delhi NCR, Uttarakhand, Himachal Pradesh and Uttar Pradesh, and coming soon to Rajasthan, Goa and North East India.</p>
                             )}
                             {plans.some((p) => p.fullManagement) && propertyType !== 'apartment' && (
                                 <p style={{ fontSize: '0.85rem', color: C.muted, margin: '0.75rem 0 0' }}>StayPrime, where we also pay the running costs, is for apartments.</p>

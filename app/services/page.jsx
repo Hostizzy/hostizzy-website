@@ -180,7 +180,7 @@ export default function Services() {
         { q: "What if I only need marketing services?", a: "Our Add-ons like 'Social Media' or 'Premium Digital' are perfect for hosts who need marketing boost without full management." },
         { q: "Do you provide housekeeping and maintenance?", a: "Yes, our 'TotalCare360' and 'StayPrime' plans include full coordination of housekeeping, laundry, and maintenance." },
         { q: "How does JuxTravel relate to Hostizzy?", a: "JuxTravel, our traveller app, has been live across India since 15 September 2026. Hostizzy-managed homes are listed on it on the same terms as every other independent host." },
-        { q: "What locations do you serve?", a: "We offer Complete Management in Delhi NCR, Uttarakhand, Himachal Pradesh, Rajasthan, Uttar Pradesh and North East India. Co-Hosting services are available across all major Indian leisure markets including Goa, Kerala, and Karnataka." },
+        { q: "What locations do you serve?", a: "We offer Complete Management (TotalCare360 and StayPrime) in Delhi NCR, Uttarakhand, Himachal Pradesh and Uttar Pradesh, and it is coming soon to Rajasthan, Goa and North East India. Co-Hosting services are available across all major Indian leisure markets including Goa, Kerala, and Karnataka." },
         { q: "Is there a minimum contract period?", a: "Standard contracts are 1 year, ensuring we have time to optimize and grow your property's performance effectively." }
     ];
 
@@ -338,9 +338,9 @@ export default function Services() {
                                     { name: 'Delhi NCR', slug: 'delhi-ncr', cities: 'Delhi, Gurgaon, Noida, Sohna' },
                                     { name: 'Himachal Pradesh', slug: 'himachal-pradesh', cities: 'Shimla, Manali, Kasauli, Dharamshala' },
                                     { name: 'Uttarakhand', slug: 'uttarakhand', cities: 'Mussoorie, Rishikesh, Mukteshwar, Nainital' },
-                                    { name: 'Rajasthan', slug: 'rajasthan', cities: 'Jaipur, Udaipur, Jodhpur, Jawai' },
+                                    { name: 'Uttar Pradesh', slug: null, cities: 'Talk to us about your town' },
                                 ].map((region) => (
-                                    <Link key={region.slug} href={`/locations/${region.slug}`} style={{ textDecoration: 'none' }}>
+                                    <Link key={region.name} href={region.slug ? `/locations/${region.slug}` : '/contact'} style={{ textDecoration: 'none' }}>
                                         <div style={{
                                             background: 'rgba(255,255,255,0.05)',
                                             border: '1px solid rgba(255,255,255,0.1)',
@@ -368,7 +368,7 @@ export default function Services() {
                         <div>
                             <p style={{ textAlign: 'center', color: '#94a3b8', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem' }}>Co-Hosting — Pan India</p>
                             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', justifyContent: 'center' }}>
-                                {['Goa', 'Kerala', 'Maharashtra', 'Karnataka', 'Tamil Nadu', 'West Bengal', 'North East'].map((state) => (
+                                {['Rajasthan', 'Goa', 'North East', 'Kerala', 'Maharashtra', 'Karnataka', 'Tamil Nadu', 'West Bengal'].map((state) => (
                                     <span key={state} style={{
                                         padding: '0.4rem 1rem',
                                         borderRadius: '999px',

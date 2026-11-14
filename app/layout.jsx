@@ -6,7 +6,7 @@ import './globals.css';
 
 export const metadata = {
   title: 'Hostizzy | Premier Vacation Rental Management India',
-  description: "India's leading Airbnb & vacation rental management company. AI-powered pricing, 10+ booking channels, full property management across Delhi NCR, Himachal, Uttarakhand & Rajasthan.",
+  description: "India's leading Airbnb & vacation rental management company. AI-powered pricing, 10+ booking channels, full property management across Delhi NCR, Himachal, Uttarakhand & Uttar Pradesh, and co-hosting across India.",
   keywords: ['vacation rental management india', 'airbnb property management india', 'holiday home management', 'property management company india'],
   icons: {
     icon: '/images/logo.jpg',
@@ -15,7 +15,7 @@ export const metadata = {
   metadataBase: new URL('https://www.hostizzy.com'),
   openGraph: {
     title: 'Hostizzy | Premier Vacation Rental Management India',
-    description: "India's leading Airbnb & vacation rental management company. AI-powered pricing, 10+ booking channels, full property management across Delhi NCR, Himachal, Uttarakhand & Rajasthan.",
+    description: "India's leading Airbnb & vacation rental management company. AI-powered pricing, 10+ booking channels, full property management across Delhi NCR, Himachal, Uttarakhand & Uttar Pradesh, and co-hosting across India.",
     type: 'website',
     locale: 'en_IN',
     url: 'https://www.hostizzy.com',

@@ -95,7 +95,7 @@ export default function LocationsIndex() {
                                                 color: loc.serviceModel === 'full' ? '#16a34a' : '#2563eb',
                                                 letterSpacing: '0.03em'
                                             }}>
-                                                {loc.serviceModel === 'full' ? 'Full Management' : 'Shared Services'}
+                                                {loc.serviceModel === 'full' ? 'Full Management' : loc.fullManagementSoon ? 'Co-hosting · Full soon' : 'Co-hosting'}
                                             </span>
                                         </div>
 

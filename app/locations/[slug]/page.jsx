@@ -128,7 +128,7 @@ export default function LocationPage() {
                                 color: isFull ? '#4ade80' : '#60a5fa',
                                 border: `1px solid ${isFull ? 'rgba(34, 197, 94, 0.3)' : 'rgba(59, 130, 246, 0.3)'}`
                             }}>
-                                {isFull ? 'Full Management' : 'Shared Services'}
+                                {isFull ? 'Full Management' : 'Co-hosting'}
                             </span>
                         </div>
                         <h1 className="page-header" style={{
@@ -324,6 +324,7 @@ export default function LocationPage() {
                             {isFull
                                 ? 'We offer end-to-end property management so you can earn passive income without the operational hassle.'
                                 : 'We offer revenue management and marketing services to help you maximize your property\'s earning potential.'}
+                            {location.fullManagementSoon && ' Full management (TotalCare360 and StayPrime) is coming soon here.'}
                         </p>
                     </ScrollReveal>
                     <ScrollReveal>

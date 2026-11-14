@@ -2,11 +2,11 @@ import { OG_IMAGE } from '@/lib/og';
 
 export const metadata = {
   title: 'Vacation Rental Management Locations | Hostizzy',
-  description: 'Professional vacation rental management across India. Delhi NCR, Himachal Pradesh, Uttarakhand, Rajasthan & pan-India co-hosting services.',
+  description: 'Professional vacation rental management across India. Full management in Delhi NCR, Himachal Pradesh, Uttarakhand & Uttar Pradesh; co-hosting across India.',
   keywords: ['vacation rental management locations', 'property management india locations', 'airbnb management cities india'],
   openGraph: {
     title: 'Vacation Rental Management Locations | Hostizzy',
-    description: 'Professional vacation rental management across India. Delhi NCR, Himachal Pradesh, Uttarakhand, Rajasthan & pan-India co-hosting services.',
+    description: 'Professional vacation rental management across India. Full management in Delhi NCR, Himachal Pradesh, Uttarakhand & Uttar Pradesh; co-hosting across India.',
     url: 'https://www.hostizzy.com/locations',
     siteName: 'Hostizzy',
     images: OG_IMAGE,

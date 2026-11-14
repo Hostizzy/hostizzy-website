@@ -20,7 +20,7 @@ export async function generateMetadata({ params }) {
   }
 
   const title = `Vacation Rental Management in ${location.name} | Hostizzy`;
-  const description = `Professional Airbnb & vacation rental management in ${location.name}. AI pricing, 10+ booking channels, full property management. List your ${location.name} property today.`;
+  const description = `Professional Airbnb & vacation rental management in ${location.name}. Dynamic pricing, 10+ booking channels, ${location.serviceModel === 'full' ? 'full property management' : 'co-hosting'}. List your ${location.name} property today.`;
 
   return {
     title,

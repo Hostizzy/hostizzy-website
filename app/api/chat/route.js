@@ -16,7 +16,8 @@ SERVICE PLANS:
 5. StayPrime — 50-50 revenue split. Full apartment management where Hostizzy covers all operational costs (staff, consumables, maintenance). Truly zero involvement for the owner.
 
 SERVICE AREAS:
-- Full Management: Delhi NCR, Uttarakhand, Rajasthan, Himachal Pradesh, Northeast India, Uttar Pradesh
+- Full Management (TotalCare360, StayPrime): Delhi NCR, Uttarakhand, Himachal Pradesh and Uttar Pradesh only
+- Full management coming soon: Rajasthan, Goa and North East India (co-hosting available there now)
 - Co-Hosting (Shared Services): Available pan-India
 
 TECHNOLOGY:
