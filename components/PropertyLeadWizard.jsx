@@ -38,7 +38,7 @@ const servicePlans = [
         period: 'of net revenue',
         category: 'cohost',
         popular: true,
-        features: ['Everything in ChannelPro', 'Direct booking website', 'Dedicated account manager'],
+        features: ['Everything in ChannelPro', 'Direct booking website (at actual cost)', 'Dedicated account manager'],
     },
     {
         value: 'TotalCare360',

@@ -85,6 +85,7 @@ export default function Services() {
                     "Guest communication templates",
                     "One-on-one consultation session"
                 ],
+                note: "Direct booking site and channel manager are extra, billed at actual cost.",
                 cta: "Get Started",
                 popular: false
             }
@@ -101,6 +102,7 @@ export default function Services() {
                     "24/7 guest messaging & reservations",
                     "Monthly performance reports"
                 ],
+                note: "Direct booking site and channel manager are extra, billed at actual cost.",
                 cta: "Choose Plan",
                 popular: false
             },
@@ -108,14 +110,15 @@ export default function Services() {
                 name: "Hybrid Core",
                 price: "18%",
                 period: "Of net revenue (Gross - OTA fees)",
-                description: "Everything in ChannelPro plus your own direct booking channel",
+                description: "Everything in ChannelPro plus a direct booking channel and an account manager",
                 features: [
                     "Everything in ChannelPro",
-                    "Direct booking website for your property",
+                    "Direct booking website for your property (at actual cost)",
                     "Festival & surge pricing management",
                     "Dedicated account manager",
                     "Priority customer support"
                 ],
+                note: "Direct booking site and channel manager are extra, billed at actual cost.",
                 cta: "Choose Plan",
                 popular: true
             }
@@ -134,7 +137,8 @@ export default function Services() {
                     "Maintenance & vendor management",
                     "OTA listing optimization & marketing",
                     "Monthly P&L with transparent accounting",
-                    "Quarterly strategy review sessions"
+                    "Quarterly strategy review sessions",
+                    "Direct booking site & channel manager included"
                 ],
                 note: "Your property, professionally managed. Full operational control by our expert team.",
                 cta: "Choose Plan",
@@ -153,7 +157,8 @@ export default function Services() {
                     "All consumables & supplies covered",
                     "Housekeeping & maintenance fully paid",
                     "Monthly performance reports",
-                    "Zero owner involvement — true passive income"
+                    "Zero owner involvement — true passive income",
+                    "Direct booking site & channel manager included"
                 ],
                 note: "The easiest way to earn from your apartment — we take care of everything.",
                 cta: "Choose Plan",
@@ -638,7 +643,10 @@ export default function Services() {
                                 </tbody>
                             </table>
                         </div>
-                        <p style={{ textAlign: 'center', marginTop: '1rem', color: '#64748b' }}>
+                        <p style={{ textAlign: 'center', marginTop: '1rem', color: '#64748b', fontSize: '0.9rem' }}>
+                            On SmartStart, ChannelPro and Hybrid Core, the direct booking site and channel manager are extra and billed at actual cost. TotalCare360 and StayPrime include them.
+                        </p>
+                        <p style={{ textAlign: 'center', marginTop: '0.5rem', color: '#64748b' }}>
                             Not sure which fits? <Link href="/calculator" style={{ color: 'var(--color-primary)', fontWeight: 600 }}>Compare them for your home in the revenue calculator</Link>.
                         </p>
                     </div>
