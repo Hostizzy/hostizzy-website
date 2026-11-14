@@ -1,32 +1,12 @@
 import { NextResponse } from 'next/server';
 
+// admin.hostizzy.com used to serve this site's admin panel. The panel is
+// gone (website leads go to HostSuite), so the subdomain sends people there.
 export function middleware(request) {
     const hostname = request.headers.get('host') || '';
-
-    // If accessing via admin.hostizzy.com, rewrite to /admin routes
     if (hostname.startsWith('admin.')) {
-        const url = request.nextUrl.clone();
-        const path = url.pathname;
-
-        // Don't rewrite API routes or static files
-        if (path.startsWith('/api/') || path.startsWith('/_next/') || path.startsWith('/images/')) {
-            return NextResponse.next();
-        }
-
-        // Root of admin subdomain → /admin
-        if (path === '/') {
-            url.pathname = '/admin';
-            return NextResponse.rewrite(url);
-        }
-
-        // admin.hostizzy.com/blogs → /admin (single page app handles tabs)
-        // admin.hostizzy.com/anything → /admin
-        if (!path.startsWith('/admin')) {
-            url.pathname = '/admin';
-            return NextResponse.rewrite(url);
-        }
+        return NextResponse.redirect('https://hostos.hostizzy.com', 307);
     }
-
     return NextResponse.next();
 }
 

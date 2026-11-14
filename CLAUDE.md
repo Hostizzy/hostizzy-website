@@ -5,7 +5,7 @@ Corporate website for Hostizzy — India's premier vacation rental management co
 
 **Live:** www.hostizzy.com
 **Booking Engine:** book.hostizzy.com (separate site, not in this repo)
-**Admin Panel:** admin.hostizzy.com (subdomain rewrite to /admin via middleware.js)
+**Leads:** worked in HostSuite (hostos.hostizzy.com). The old admin panel was removed on 2026-11-14; admin.hostizzy.com and /admin redirect to HostSuite.
 
 ## Tech Stack
 - **Framework:** Next.js 16 (App Router)
@@ -22,9 +22,9 @@ Corporate website for Hostizzy — India's premier vacation rental management co
 
 ## Key Architecture Decisions
 - JSON files in `/data/` as fallback when Firebase is unavailable
-- API routes use `withAuth` wrapper from `/lib/auth.js` for admin endpoints
-- Middleware handles subdomain routing: `admin.hostizzy.com` → `/admin`
-- ConditionalLayout in layout.jsx hides navbar/footer on admin subdomain
+- No admin or login on this site. Public form endpoints only; leads forward to HostSuite (`lib/hostsuite.js`) and email the team
+- Middleware redirects `admin.hostizzy.com` to HostSuite
+- Blogs, careers, testimonials and settings are edited as files in the repo (data/, server/data/), not through an API
 - `next-sitemap` (config in `next-sitemap.config.cjs`) for auto sitemap generation
 - Server-side `generateMetadata()` via per-page `layout.jsx` files (NOT client-side SEO component)
 - Per-page JSON-LD structured data: FAQPage, Service, SoftwareApplication, BreadcrumbList schemas
@@ -80,29 +80,25 @@ Tabs: New Host | Co-Hosting | Complete Management
 - `/lib/products.js` — Single source for product names, one-liners, URLs, statuses, Play links, `PROPERTY_COUNT` ('35+') and the `RESIQ_PUBLIC_SIGNUP` switch. Change product facts here, not in pages
 - `/components/product-sections.jsx` — Shared sections for the product pages (Opening, Pairing, Register, Steps, Blocks, Terms, CtaBand, Close, StoreLink, ProductMark)
 - `/app/services/page.jsx` — Pricing/plans page
-- `/app/calculator/page.jsx` — AI-powered revenue calculator
-- `/app/admin/page.jsx` — Admin panel (blog manager, careers, lead management)
+- `/app/calculator/page.jsx` — Revenue calculator (market data in lib/calculator/)
 - `/app/marketing/page.jsx` — Digital marketing services page
 - `/lib/firebase-admin.js` — Firebase Admin SDK setup
 - `/lib/email.js` — Email helpers (OAuth2, contact/calculator/welcome notifications)
-- `/lib/auth.js` — Admin auth: env-only credentials, HMAC-signed tokens with 12h expiry (withAuth wrapper). Optional ADMIN_TOKEN_SECRET env; otherwise the key derives from ADMIN_PASSWORD. The repo is public — never commit secrets.
+- `/lib/hostsuite.js` — Forwards website leads to HostSuite. The repo is public — never commit secrets.
 - `/lib/locations.js` — Location data for SEO pages
-- `/middleware.js` — Subdomain routing
+- `/middleware.js` — Redirects admin.hostizzy.com to HostSuite
 
 ## API Routes
-- `/api/property-leads` — POST (public), GET/PUT/DELETE (auth). Quality routing: high/medium → property-leads, low → contacts
-- `/api/contact` — POST (public, sends email via `after()` + saves to Firebase)
-- `/api/contacts` — GET/PUT/DELETE (auth)
-- `/api/calculator-leads` — POST (public), GET/PUT/DELETE (auth)
+- `/api/property-leads` — POST (public). Quality routing: high/medium → property-leads, low → contacts. Forwards to HostSuite
+- `/api/contact` — POST (public, sends email via `after()` + saves to Firebase, forwards owner/guest enquiries to HostSuite)
+- `/api/calculator-leads` — POST (public). Forwards to HostSuite
 - `/api/chat` — POST (public, GPT-5-mini conversational AI with Hostizzy context)
 - `/api/ai-estimate` — POST (GPT-5-mini revenue estimation)
-- `/api/ai-blog` — POST (GPT-5-mini blog writer)
-- `/api/careers` — GET/POST/PUT/DELETE (auth for mutations)
-- `/api/blogs` — GET/POST/PUT/DELETE (auth for mutations)
-- `/api/login` — POST (admin auth)
+- `/api/careers` — GET (public, active roles)
+- `/api/settings` — GET (public, site settings)
 
 ## Env Variables
-Key vars: HOSTSUITE_LEADS_URL + WEBSITE_LEADS_KEY (forward leads to HostSuite via lib/hostsuite.js; both unset = off; contract in the HostSuite repo docs/plans/2026-11-14-website-leads-contract.md), ADMIN_USERNAME, ADMIN_PASSWORD, OPENAI_API_KEY, GMAIL_USER, GMAIL_CLIENT_ID, GMAIL_CLIENT_SECRET, GMAIL_REFRESH_TOKEN, FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY
+Key vars: HOSTSUITE_LEADS_URL + WEBSITE_LEADS_KEY (forward leads to HostSuite via lib/hostsuite.js; both unset = off; contract in the HostSuite repo docs/plans/2026-11-14-website-leads-contract.md), OPENAI_API_KEY, GMAIL_USER, GMAIL_CLIENT_ID, GMAIL_CLIENT_SECRET, GMAIL_REFRESH_TOKEN, FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY
 
 ## Property Lead Wizard (4-step flow)
 1. Contact Details — name, phone (international OK), email
@@ -111,13 +107,8 @@ Key vars: HOSTSUITE_LEADS_URL + WEBSITE_LEADS_KEY (forward leads to HostSuite vi
 4. Additional Info — revenue dropdown + message (all optional)
 - Quality-based routing: high (plan selected) → Property Leads + welcome email, medium (Not Sure) → Property Leads + welcome email, low (missing details) → Contacts only
 
-## Admin Panel Lead Management
-- Status pipeline: New → Contacted → Follow-up → Converted / Lost
-- Click any lead row → slide-over detail panel with all fields + notes timeline
-- Add notes with timestamps
-- Bulk actions: select multiple → bulk status change or bulk delete
-- Status filter dropdown
-- Delete confirmation modal
+## Lead management
+Done in HostSuite (Owner enquiries / Enquiries). This site only captures and forwards.
 
 ## SEO Architecture
 - Server-side metadata via `layout.jsx` files in each page directory (NOT client-side react-helmet)
@@ -131,7 +122,7 @@ Key vars: HOSTSUITE_LEADS_URL + WEBSITE_LEADS_KEY (forward leads to HostSuite vi
 - Full SEO overhaul: server-side metadata on all pages, per-page structured data, enhanced sitemap
 - AI chatbot (FloatingConcierge) with GPT-5-mini, chat persistence, WhatsApp fallback
 - Email notifications: Gmail OAuth2, department routing, welcome email with attachment
-- Lead management: status pipeline, notes, bulk actions, detail panel in admin
+- Website leads forward to HostSuite; the site's admin panel was removed (2026-11-14)
 - Property Lead Wizard: 4-step with service plan cards, quality routing, location/OTA URL fields
 - Performance: dynamic imports for PropertyLeadWizard, FloatingConcierge; image dimension optimization
 - Product pages for HostSuite (/products/hostsuite; /products/hostos 301s there), ResIQ and JuxTravel, with real brand marks and JuxTravel app screens in `public/products/` (no fabricated screenshots)

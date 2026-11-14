@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import { withAuth } from '@/lib/auth';
 import { DATA_FILES } from '@/lib/db';
 import { errorResponse, successResponse, getRequestBody } from '@/lib/utils';
 import fs from 'fs';
@@ -24,22 +23,3 @@ export async function GET(request) {
     return errorResponse('Failed to load settings', 500);
   }
 }
-
-// PUT /api/settings - Update settings (requires auth)
-const handlePUT = async (request) => {
-  try {
-    const body = await getRequestBody(request);
-
-    if (!body) {
-      return errorResponse('Request body is required', 400);
-    }
-
-    await fs.promises.writeFile(DATA_FILES.SETTINGS, JSON.stringify(body, null, 2), 'utf8');
-    return successResponse({ message: 'Settings updated successfully' });
-  } catch (error) {
-    console.error('Error saving settings:', error);
-    return errorResponse('Failed to save settings', 500);
-  }
-};
-
-export const PUT = withAuth(handlePUT);

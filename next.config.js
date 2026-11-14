@@ -31,6 +31,9 @@ const nextConfig = {
       { source: '/host-academy/', destination: '/training', permanent: true },
       // HostOS was renamed HostSuite (Nov 2026). The product domain stays hostos.hostizzy.com.
       { source: '/products/hostos', destination: '/products/hostsuite', permanent: true },
+      // The admin panel is gone: leads are worked in HostSuite now.
+      { source: '/admin', destination: 'https://hostos.hostizzy.com', permanent: false },
+      { source: '/admin/:path*', destination: 'https://hostos.hostizzy.com', permanent: false },
       { source: '/products/hostos/', destination: '/products/hostsuite', permanent: true },
     ];
   },
