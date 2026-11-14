@@ -16,7 +16,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Services() {
-    const [activeTab, setActiveTab] = useState('cohosting'); // 'newhost', 'cohosting', 'complete'
+    const [activeTab, setActiveTab] = useState('cohosting'); // 'newhost', 'cohosting', 'complete', 'premium'
 
     const propertyCategories = [
         {
@@ -62,13 +62,21 @@ export default function Services() {
             name: 'Complete Management',
             description: 'Full-service property management, end to end',
             fromPrice: 'From 30%'
+        },
+        {
+            key: 'premium',
+            emoji: '\u{1F451}',
+            name: 'Premium',
+            description: 'Full management plus paid ads, with a fee tied to results',
+            fromPrice: '30% + bonus'
         }
     ];
 
     const tabTaglines = {
         newhost: "Just getting started? We'll set you up for success on the world's biggest travel platforms.",
         cohosting: "You own the property, we manage the bookings. Maximum revenue, minimum effort.",
-        complete: "Sit back while we handle everything \u2014 from guest check-in to checkout and beyond."
+        complete: "Sit back while we handle everything \u2014 from guest check-in to checkout and beyond.",
+        premium: "For larger villas and farmhouses: everything in full management, plus paid ads to fill more nights. We earn extra only when your home beats the target we agree together."
     };
 
     const plans = {
@@ -164,6 +172,25 @@ export default function Services() {
                 cta: "Choose Plan",
                 popular: false
             }
+        ],
+        premium: [
+            {
+                name: "Signature",
+                price: "30% + bonus",
+                period: "Of net revenue, plus 15% of revenue above your yearly target",
+                description: "For villas and farmhouses with 3 or more bedrooms — full management, plus paid ads to bring in more direct bookings.",
+                features: [
+                    "Everything in TotalCare360",
+                    "Paid ad campaigns for direct bookings",
+                    "Branded booking page for your property",
+                    "Yearly revenue target agreed with you upfront",
+                    "Bonus applies only to revenue above that target",
+                    "Delhi NCR, Uttarakhand, Himachal Pradesh and Uttar Pradesh"
+                ],
+                note: "The ad budget is agreed with you before campaigns start. You pay running costs, as on TotalCare360.",
+                cta: "Talk to us",
+                popular: false
+            }
         ]
     };
 
@@ -175,12 +202,12 @@ export default function Services() {
     ];
 
     const faqs = [
-        { q: "How is revenue share calculated?", a: "Revenue share is calculated on net revenue (gross booking value minus OTA service fees). ChannelPro (revenue option) is 15%, Hybrid Core 20% and TotalCare360 30% of net revenue; StayPrime is a 50-50 split of net revenue." },
+        { q: "How is revenue share calculated?", a: "Revenue share is calculated on net revenue (gross booking value minus OTA service fees). ChannelPro (revenue option) is 15%, Hybrid Core 20% and TotalCare360 30% of net revenue; StayPrime is a 50-50 split of net revenue. Signature is 30% of net revenue plus 15% of any revenue above the yearly target we agree with you." },
         { q: "Can I upgrade or downgrade my plan later?", a: "Yes! We offer flexibility. You can switch plans with 30 days notice to suit your changing needs." },
         { q: "What if I only need marketing services?", a: "Our Add-ons like 'Social Media' or 'Premium Digital' are perfect for hosts who need marketing boost without full management." },
         { q: "Do you provide housekeeping and maintenance?", a: "Yes, our 'TotalCare360' and 'StayPrime' plans include full coordination of housekeeping, laundry, and maintenance." },
         { q: "How does JuxTravel relate to Hostizzy?", a: "JuxTravel, our traveller app, has been live across India since 15 September 2026. Hostizzy-managed homes are listed on it on the same terms as every other independent host." },
-        { q: "What locations do you serve?", a: "We offer Complete Management (TotalCare360 and StayPrime) in Delhi NCR, Uttarakhand, Himachal Pradesh and Uttar Pradesh, and it is coming soon to Rajasthan, Goa and North East India. Co-Hosting services are available across all major Indian leisure markets including Goa, Kerala, and Karnataka." },
+        { q: "What locations do you serve?", a: "We offer Complete Management (TotalCare360, StayPrime and Signature) in Delhi NCR, Uttarakhand, Himachal Pradesh and Uttar Pradesh, and it is coming soon to Rajasthan, Goa and North East India. Co-Hosting services are available across all major Indian leisure markets including Goa, Kerala, and Karnataka." },
         { q: "Is there a minimum contract period?", a: "Standard contracts are 1 year, ensuring we have time to optimize and grow your property's performance effectively." }
     ];
 
@@ -401,7 +428,7 @@ export default function Services() {
                     </div>
                 </ScrollReveal>
 
-                <div className="grid desktop-3-col" style={{ gap: '1.5rem', marginBottom: '2rem' }}>
+                <div className="grid desktop-4-col" style={{ gap: '1.5rem', marginBottom: '2rem' }}>
                     {overviewCards.map((card, i) => (
                         <ScrollReveal key={card.key} delay={i * 0.1}>
                             <div
@@ -457,7 +484,8 @@ export default function Services() {
                             {[
                                 { id: 'newhost', label: 'New Host' },
                                 { id: 'cohosting', label: 'Co-Hosting' },
-                                { id: 'complete', label: 'Complete Management' }
+                                { id: 'complete', label: 'Complete Management' },
+                                { id: 'premium', label: 'Premium' }
                             ].map(tab => (
                                 <button
                                     key={tab.id}
@@ -633,10 +661,10 @@ export default function Services() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {['newhost', 'cohosting', 'complete'].flatMap((k) => plans[k]).map((plan) => (
+                                    {['newhost', 'cohosting', 'complete', 'premium'].flatMap((k) => plans[k]).map((plan) => (
                                         <tr key={plan.name} style={{ borderTop: '1px solid #e2e8f0' }}>
                                             <td style={{ padding: '0.9rem 1rem', fontWeight: 700, color: '#1e293b' }}>{plan.name}</td>
-                                            <td style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>{plan.price} <span style={{ color: '#64748b', fontSize: '0.85rem' }}>{plan.period}</span></td>
+                                            <td style={{ padding: '0.9rem 1rem', minWidth: '11rem' }}><span style={{ whiteSpace: 'nowrap' }}>{plan.price}</span> <span style={{ color: '#64748b', fontSize: '0.85rem' }}>{plan.period}</span></td>
                                             <td style={{ padding: '0.9rem 1rem', color: '#475569' }}>{plan.description}</td>
                                         </tr>
                                     ))}
@@ -644,7 +672,7 @@ export default function Services() {
                             </table>
                         </div>
                         <p style={{ textAlign: 'center', marginTop: '1rem', color: '#64748b', fontSize: '0.9rem' }}>
-                            On SmartStart, ChannelPro and Hybrid Core, the direct booking site and channel manager are extra and billed at actual cost. TotalCare360 and StayPrime include them.
+                            On SmartStart, ChannelPro and Hybrid Core, the direct booking site and channel manager are extra and billed at actual cost. TotalCare360, StayPrime and Signature include them.
                         </p>
                         <p style={{ textAlign: 'center', marginTop: '0.5rem', color: '#64748b' }}>
                             Not sure which fits? <Link href="/calculator" style={{ color: 'var(--color-primary)', fontWeight: 600 }}>Compare them for your home in the revenue calculator</Link>.

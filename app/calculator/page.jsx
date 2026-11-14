@@ -15,7 +15,7 @@ import { Check, Info, MessageCircle } from 'lucide-react';
 import { MARKETS, REGIONS, SOURCES, DATA_PERIOD, DATA_CHECKED } from '../../lib/calculator/markets';
 import {
     PROPERTY_TYPES, FINISH_LEVELS, ASSUMPTIONS, defaultCosts, eligiblePlans,
-    nightlyRate, scenarios, planResult, breakEvenOccupancy,
+    nightlyRate, scenarios, planResult, breakEvenOccupancy, signatureTarget,
 } from '../../lib/calculator/model';
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -146,15 +146,17 @@ export default function Calculator() {
     // Costs follow the market rate, not the price slider, so dragging the
     // price doesn't quietly change the running costs too.
     const costs = costOverride || defaultCosts(propertyType, marketRate, occ.typical);
-    const plans = eligiblePlans(city, propertyType);
-    const plan = plans.find((p) => p.key === planKey) || plans[plans.length - 1];
+    const plans = eligiblePlans(city, propertyType, bedrooms);
+    const plan = plans.find((p) => p.key === planKey) || plans.find((p) => p.key === 'totalcare') || plans[plans.length - 1];
+    // Signature's bonus target: a typical year at the market rate.
+    const target = signatureTarget(marketRate, occ.typical);
 
-    const result = useMemo(() => planResult(plan, { adr, occupancy, costs }), [plan, adr, occupancy, costs]);
+    const result = useMemo(() => planResult(plan, { adr, occupancy, costs, target }), [plan, adr, occupancy, costs, target]);
     const comparison = useMemo(() => plans.map((p) => ({
         plan: p,
-        result: planResult(p, { adr, occupancy, costs }),
-        breakEven: breakEvenOccupancy(p, { adr, baseOcc: occupancy, costs }),
-    })), [plans, adr, occupancy, costs]);
+        result: planResult(p, { adr, occupancy, costs, target }),
+        breakEven: breakEvenOccupancy(p, { adr, baseOcc: occupancy, costs, target }),
+    })), [plans, adr, occupancy, costs, target]);
     const bestKeep = Math.max(...comparison.map((c) => c.result.owner), 1);
 
     const seasonSum = region.season.reduce((a, b) => a + b, 0);
@@ -225,11 +227,12 @@ export default function Calculator() {
                     ))}
                 </ul>
                 {!plan.ownerPaysCosts && <p style={{ fontSize: '0.85rem', color: C.keep, margin: '0.75rem 0 0' }}>On StayPrime, Hostizzy pays the running costs from its half.</p>}
+                {plan.premium && <p style={{ fontSize: '0.85rem', color: C.muted, margin: '0.75rem 0 0' }}>Fee includes 15% of revenue after OTA fees above a {lakhs(target)} yearly target (a typical year here). The ad budget is agreed separately and not included.</p>}
             </div>
 
             <div style={{ marginTop: '1.5rem', paddingTop: '1rem', borderTop: `1px solid ${C.line}`, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem', textAlign: 'center' }}>
                 {[['Quiet year', occ.low], ['Typical', occ.typical], ['Strong', occ.strong]].map(([name, o]) => {
-                    const r = planResult(plan, { adr, occupancy: o, costs });
+                    const r = planResult(plan, { adr, occupancy: o, costs, target });
                     const on = o === occupancy;
                     return (
                         <button key={name} type="button" onClick={() => setOccOverride(o)} style={{ background: on ? '#FFF1F1' : 'transparent', border: `1px solid ${on ? C.coral : 'transparent'}`, borderRadius: '0.75rem', padding: '0.5rem 0.25rem', cursor: 'pointer' }}>
@@ -344,7 +347,7 @@ export default function Calculator() {
                                 <p style={{ fontSize: '0.85rem', color: C.muted, margin: '0.75rem 0 0' }}>In {region.label} we co-host remotely. Full management is available in Delhi NCR, Uttarakhand, Himachal Pradesh and Uttar Pradesh, and coming soon to Rajasthan, Goa and North East India.</p>
                             )}
                             {plans.some((p) => p.fullManagement) && propertyType !== 'apartment' && (
-                                <p style={{ fontSize: '0.85rem', color: C.muted, margin: '0.75rem 0 0' }}>StayPrime, where we also pay the running costs, is for apartments.</p>
+                                <p style={{ fontSize: '0.85rem', color: C.muted, margin: '0.75rem 0 0' }}>StayPrime, where we also pay the running costs, is for apartments.{!plans.some((p) => p.premium) && ' Signature, our premium plan with paid ads, is for villas and farmhouses with 3 or more bedrooms.'}</p>
                             )}
                         </Step>
                     </div>

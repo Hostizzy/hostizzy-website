@@ -14,9 +14,10 @@ SERVICE PLANS:
 3. Hybrid Core (MOST POPULAR) — 20% of net revenue. Everything in ChannelPro plus a direct booking website, dedicated property manager, and revenue optimization. Best value for serious hosts.
 4. TotalCare360 — 30% of net revenue (owner pays running costs). Complete villa and farmhouse management including staff coordination, maintenance, guest experience, and full P&L management. For owners who want zero hassle.
 5. StayPrime — 50-50 revenue split. Full apartment management where Hostizzy covers all operational costs (staff, consumables, maintenance). Truly zero involvement for the owner.
+6. Signature (PREMIUM) — 30% of net revenue plus 15% of any revenue above a yearly target agreed with the owner upfront. For villas and farmhouses with 3+ bedrooms. Everything in TotalCare360 plus paid ad campaigns and a branded booking page for direct bookings; the ad budget is agreed with the owner before campaigns start. Owner pays running costs.
 
 SERVICE AREAS:
-- Full Management (TotalCare360, StayPrime): Delhi NCR, Uttarakhand, Himachal Pradesh and Uttar Pradesh only
+- Full Management (TotalCare360, StayPrime, Signature): Delhi NCR, Uttarakhand, Himachal Pradesh and Uttar Pradesh only
 - Full management coming soon: Rajasthan, Goa and North East India (co-hosting available there now)
 - Co-Hosting (Shared Services): Available pan-India
 

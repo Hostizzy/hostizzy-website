@@ -245,6 +245,14 @@ export default function RootLayout({ children }) {
                       "name": "StayPrime",
                       "description": "Full apartment management (50-50 revenue split)"
                     }
+                  },
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "Signature",
+                      "description": "Premium villa and farmhouse management with paid ads (30% of net revenue plus 15% above an agreed yearly target)"
+                    }
                   }
                 ]
               },

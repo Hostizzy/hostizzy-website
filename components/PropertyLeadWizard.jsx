@@ -57,6 +57,14 @@ const servicePlans = [
         category: 'full',
         features: ['Zero owner involvement', 'All operational costs covered', 'True passive income'],
     },
+    {
+        value: 'Signature',
+        name: 'Signature',
+        price: '30% + bonus',
+        period: '15% above your target',
+        category: 'full',
+        features: ['Everything in TotalCare360', 'Paid ads for direct bookings', 'For 3+ bedroom villas'],
+    },
 ];
 
 const revenueOptions = [

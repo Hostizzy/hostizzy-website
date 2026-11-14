@@ -57,7 +57,7 @@ export default function HomeEarningsTeaser() {
                             What could your home earn?
                         </h2>
                         <p style={{ color: '#64748B', fontSize: '1.05rem', lineHeight: 1.6, margin: '0 0 1.5rem' }}>
-                            Based on what similar homes in 28 Indian markets actually earned ({DATA_PERIOD}). Pick your home and see the range in seconds.
+                            Based on what similar homes in 33 Indian markets actually earned ({DATA_PERIOD}). Pick your home and see the range in seconds.
                         </p>
                         <div className="het-fields">
                             <div className="het-city">

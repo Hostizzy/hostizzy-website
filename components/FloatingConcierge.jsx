@@ -33,7 +33,7 @@ const WELCOME_MSG = {
 
 // Quick reply configs per keyword in AI response
 const QUICK_REPLY_TRIGGERS = [
-    { keywords: ['plan', 'pricing', 'cost', 'fee', 'price'], replies: ['SmartStart', 'ChannelPro', 'Hybrid Core', 'TotalCare360', 'StayPrime'] },
+    { keywords: ['plan', 'pricing', 'cost', 'fee', 'price'], replies: ['SmartStart', 'ChannelPro', 'Hybrid Core', 'TotalCare360', 'StayPrime', 'Signature'] },
     { keywords: ['property', 'villa', 'apartment', 'farmhouse', 'list'], replies: ['List My Property', 'Get Revenue Estimate', 'Talk to Team'] },
     { keywords: ['location', 'city', 'area', 'where'], replies: ['Delhi NCR', 'Himachal Pradesh', 'Uttarakhand', 'Rajasthan'] },
     { keywords: ['contact', 'call', 'speak', 'human', 'team', 'whatsapp'], replies: ['WhatsApp Us', 'Fill Contact Form'] },
