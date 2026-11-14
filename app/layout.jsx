@@ -257,13 +257,23 @@ export default function RootLayout({ children }) {
                 "dynamic pricing",
                 "guest experience management"
               ],
-              "contactPoint": {
-                "@type": "ContactPoint",
-                "contactType": "Customer Service",
-                "email": "stay@hostizzy.com",
-                "telephone": "+91-95604-94001",
-                "availableLanguage": ["en", "hi"]
-              }
+              "contactPoint": [
+                {
+                  "@type": "ContactPoint",
+                  "contactType": "reservations",
+                  "email": "stay@hostizzy.com",
+                  "telephone": "+91-95604-94001",
+                  "availableLanguage": ["en", "hi"]
+                },
+                {
+                  "@type": "ContactPoint",
+                  "contactType": "sales",
+                  "name": "Host onboarding and owner queries",
+                  "email": "partnerships@hostizzy.com",
+                  "telephone": "+91-95604-93335",
+                  "availableLanguage": ["en", "hi"]
+                }
+              ]
             }
           ` }} />
       </head>

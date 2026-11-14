@@ -571,7 +571,7 @@ const Training = () => {
                                 </Link>
                             </div>
                             <p style={{ marginTop: '2rem', opacity: 0.7, fontSize: '0.9rem' }}>
-                                Questions? Email us at training@hostizzy.com or WhatsApp: +91 95604 94001
+                                Questions? Email us at training@hostizzy.com or WhatsApp: +91 95604 93335
                             </p>
                         </div>
                     </ScrollReveal>

@@ -365,7 +365,7 @@ export default function Contact() {
                                             <div style={{ background: '#eff6ff', padding: '1rem', borderRadius: '0.875rem', color: '#3b82f6', flexShrink: 0 }}><Phone size={22} /></div>
                                             <div style={{ flex: 1 }}>
                                                 <div style={{ fontWeight: 700, fontSize: '0.75rem', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '0.25rem' }}>Phone</div>
-                                                <a href={`tel:${dept.phone}`} style={{ color: '#0f172a', fontWeight: 700, fontSize: '1rem', textDecoration: 'none' }}>+91 95604 93335</a>
+                                                <a href={`tel:${dept.phone}`} style={{ color: '#0f172a', fontWeight: 700, fontSize: '1rem', textDecoration: 'none' }}>{dept.phone.replace(/^\+91(\d{5})(\d{5})$/, '+91 $1 $2')}</a>
                                             </div>
                                         </div>
                                     </>

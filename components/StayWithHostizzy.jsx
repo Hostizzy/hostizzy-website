@@ -10,8 +10,8 @@ import { STAY_CITIES, STAY_COLLECTIONS, BOOKING_SITE } from '../lib/bookingLinks
 
 const StayWithHostizzy = ({ variant = 'section' }) => {
     if (variant === 'footer') {
-        const listStyle = { listStyle: 'none', padding: 0, margin: 0, opacity: 0.8, display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: '0.9rem' };
-        const headStyle = { fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em', opacity: 0.6, margin: '0 0 0.75rem', fontWeight: 600 };
+        const listStyle = { listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: '0.9rem' };
+        const headStyle = { fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#94a3b8', margin: '0 0 0.75rem', fontWeight: 700 };
         return (
             <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '2.5rem', marginBottom: '2.5rem' }}>
                 <h4 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: '#f8fafc' }}>Stay with Hostizzy</h4>
@@ -21,13 +21,13 @@ const StayWithHostizzy = ({ variant = 'section' }) => {
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '2rem' }}>
                     <div>
                         <p style={headStyle}>By destination</p>
-                        <ul style={listStyle}>
+                        <ul style={listStyle} className="ft-list">
                             {STAY_CITIES.map((l) => <li key={l.href}><a href={l.href}>{l.label}</a></li>)}
                         </ul>
                     </div>
                     <div>
                         <p style={headStyle}>By occasion</p>
-                        <ul style={listStyle}>
+                        <ul style={listStyle} className="ft-list">
                             {STAY_COLLECTIONS.map((l) => <li key={l.href}><a href={l.href}>{l.label}</a></li>)}
                         </ul>
                     </div>

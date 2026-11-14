@@ -53,7 +53,8 @@ Hostizzy (brand of Hostsphere India Pvt Ltd) is a vertically integrated hospital
 - Website: https://www.hostizzy.com
 - Booking: https://book.hostizzy.com
 - Email: stay@hostizzy.com
-- Phone: +91-95604-94001
+- Phone (bookings): +91-95604-94001
+- Phone (host onboarding & owner queries): +91-95604-93335
 - Address: E 13/29, 1st Floor, Harsha Bhawan, Connaught Place, New Delhi 110001
 
 ## Social

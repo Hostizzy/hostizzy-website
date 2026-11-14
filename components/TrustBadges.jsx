@@ -47,7 +47,7 @@ const TrustBadges = () => {
                                     {badge.icon}
                                 </div>
                                 <div>
-                                    <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.25rem' }}>{badge.title}</h4>
+                                    <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.25rem', color: '#1e293b' }}>{badge.title}</h4>
                                     <p style={{ fontSize: '0.875rem', color: 'var(--color-muted)' }}>{badge.desc}</p>
                                 </div>
                             </div>
