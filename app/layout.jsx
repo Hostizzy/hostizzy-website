@@ -219,7 +219,7 @@ export default function RootLayout({ children }) {
                     "itemOffered": {
                       "@type": "Service",
                       "name": "ChannelPro",
-                      "description": "OTA channel management (₹15,000-40,000/month)"
+                      "description": "OTA channel management (₹15,000-40,000/month or 15% of net revenue)"
                     }
                   },
                   {
@@ -227,7 +227,7 @@ export default function RootLayout({ children }) {
                     "itemOffered": {
                       "@type": "Service",
                       "name": "Hybrid Core",
-                      "description": "Commission-based co-hosting (18% of net revenue)"
+                      "description": "Commission-based co-hosting (20% of net revenue)"
                     }
                   },
                   {
@@ -235,7 +235,7 @@ export default function RootLayout({ children }) {
                     "itemOffered": {
                       "@type": "Service",
                       "name": "TotalCare360",
-                      "description": "Complete villa and farmhouse management (30% profit share)"
+                      "description": "Complete villa and farmhouse management (30% of net revenue)"
                     }
                   },
                   {

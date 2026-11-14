@@ -56,7 +56,7 @@ const Navbar = () => {
     const servicesLinks = [
         { path: "/services", name: "Property Management", desc: "Hosting plans & pricing", icon: <Building2 size={16} /> },
         { path: "/marketing", name: "Digital Marketing", desc: "Social media, ads & SEO", icon: <Megaphone size={16} /> },
-        { path: "/calculator", name: "Revenue Calculator", desc: "AI-powered earnings estimator", icon: <Calculator size={16} /> },
+        { path: "/calculator", name: "Revenue Calculator", desc: "What your home could earn, from real market data", icon: <Calculator size={16} /> },
     ];
 
     const isActivePath = (path) => pathname === path;

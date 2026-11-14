@@ -10,9 +10,9 @@ Hostizzy is India's premier vacation rental management company. We help property
 
 SERVICE PLANS:
 1. SmartStart — ₹14,999 one-time setup fee. Includes listing on 3 OTA channels (Airbnb, Booking.com, MakeMyTrip), listing optimization, and 90-day dynamic pricing setup. Perfect for owners who want a professional launch.
-2. ChannelPro — ₹15,000–40,000/month. Multi-OTA synchronization, dynamic pricing, 24/7 guest messaging, and performance reporting. Ideal for owners who want channel management without full operations.
-3. Hybrid Core (MOST POPULAR) — 18% of net revenue. Everything in ChannelPro plus a direct booking website, dedicated property manager, and revenue optimization. Best value for serious hosts.
-4. TotalCare360 — 30% profit share. Complete villa and farmhouse management including staff coordination, maintenance, guest experience, and full P&L management. For owners who want zero hassle.
+2. ChannelPro — ₹15,000–40,000/month fixed, or 15% of net revenue. Multi-OTA synchronization, dynamic pricing, 24/7 guest messaging, and performance reporting. Ideal for owners who want channel management without full operations.
+3. Hybrid Core (MOST POPULAR) — 20% of net revenue. Everything in ChannelPro plus a direct booking website, dedicated property manager, and revenue optimization. Best value for serious hosts.
+4. TotalCare360 — 30% of net revenue (owner pays running costs). Complete villa and farmhouse management including staff coordination, maintenance, guest experience, and full P&L management. For owners who want zero hassle.
 5. StayPrime — 50-50 revenue split. Full apartment management where Hostizzy covers all operational costs (staff, consumables, maintenance). Truly zero involvement for the owner.
 
 SERVICE AREAS:

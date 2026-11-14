@@ -13,6 +13,7 @@ import VideoSection from '../components/VideoSection';
 import ChannelCarousel from '../components/ChannelCarousel';
 import TrustMetrics from '../components/TrustMetrics';
 import StickyCTABar from '../components/StickyCTABar';
+import HomeEarningsTeaser from '../components/HomeEarningsTeaser';
 import { HOSTSUITE, RESIQ } from '../lib/products';
 
 
@@ -32,6 +33,9 @@ const Home = () => {
 
             {/* Trust Metrics with Animated Counters */}
             <TrustMetrics />
+
+            {/* Revenue calculator entry point */}
+            <HomeEarningsTeaser />
 
             {/* Why Choose Us */}
             <section className="section container">

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight, Star, Building2, Users, ExternalLink } from 'lucide-react';
+import { ArrowRight, Star, Building2, Users, ExternalLink, Calculator } from 'lucide-react';
 import { REVIEW_RATING } from '@/lib/reviews';
 import { motion } from 'framer-motion';
 
@@ -195,6 +195,26 @@ const Hero = () => {
                         Find a stay
                         <ExternalLink size={17} aria-hidden="true" />
                     </a>
+                </motion.div>
+
+                {/* Calculator entry for owners not ready to talk yet */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.8, duration: 0.7 }}
+                    style={{ marginTop: '1.25rem', display: 'flex', justifyContent: 'center' }}
+                >
+                    <Link href="/calculator" style={{
+                        display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+                        color: 'white', fontWeight: 600, fontSize: '1rem', textDecoration: 'none',
+                        padding: '0.55rem 1.1rem', borderRadius: '999px',
+                        background: 'rgba(15,23,42,0.45)', backdropFilter: 'blur(6px)',
+                        border: '1px solid rgba(255,255,255,0.25)'
+                    }}>
+                        <Calculator size={17} aria-hidden="true" />
+                        Own a home? See what it could earn
+                        <ArrowRight size={16} aria-hidden="true" />
+                    </Link>
                 </motion.div>
 
                 {/* Scroll Indicator */}

@@ -28,9 +28,9 @@ export default function ServicesLayout({ children }) {
       "name": "Property Management Plans",
       "itemListElement": [
         { "@type": "Offer", "name": "SmartStart", "description": "One-time onboarding for new hosts", "price": "14999", "priceCurrency": "INR" },
-        { "@type": "Offer", "name": "ChannelPro", "description": "OTA channel management", "price": "15000", "priceCurrency": "INR", "priceSpecification": { "@type": "UnitPriceSpecification", "price": "15000-40000", "priceCurrency": "INR", "unitText": "month" } },
-        { "@type": "Offer", "name": "Hybrid Core", "description": "Commission-based co-hosting at 18% of net revenue" },
-        { "@type": "Offer", "name": "TotalCare360", "description": "Complete villa and farmhouse management at 30% profit share" },
+        { "@type": "Offer", "name": "ChannelPro", "description": "OTA channel management: ₹15,000–40,000 a month or 15% of net revenue", "price": "15000", "priceCurrency": "INR", "priceSpecification": { "@type": "UnitPriceSpecification", "price": "15000-40000", "priceCurrency": "INR", "unitText": "month" } },
+        { "@type": "Offer", "name": "Hybrid Core", "description": "Commission-based co-hosting at 20% of net revenue" },
+        { "@type": "Offer", "name": "TotalCare360", "description": "Complete villa and farmhouse management at 30% of net revenue" },
         { "@type": "Offer", "name": "StayPrime", "description": "Full apartment management with 50-50 revenue split" }
       ]
     }

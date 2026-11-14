@@ -33,9 +33,9 @@ Hostizzy (brand of Hostsphere India Pvt Ltd) is a vertically integrated hospital
 
 ## Service Plans
 - SmartStart: One-time onboarding for new hosts (₹14,999)
-- ChannelPro: OTA channel management (₹15,000-40,000/month or 10-17%)
-- Hybrid Core: OTA + Direct bookings (18% of net revenue)
-- TotalCare360: Complete management for villas/farmhouses (30% profit share)
+- ChannelPro: OTA channel management (₹15,000-40,000/month or 15% of net revenue)
+- Hybrid Core: OTA + Direct bookings (20% of net revenue)
+- TotalCare360: Complete management for villas/farmhouses (30% of net revenue)
 - StayPrime: Complete management for apartments (50-50 revenue split)
 
 ## Digital Marketing Services (https://www.hostizzy.com/marketing)

@@ -122,6 +122,17 @@ export default function Calculator() {
     const [phone, setPhone] = useState('');
     const [leadState, setLeadState] = useState('idle');
 
+    // Start from the homepage widget's choices: ?city=&type=&br=
+    useEffect(() => {
+        const q = new URLSearchParams(window.location.search);
+        const c = q.get('city');
+        if (c && MARKETS[c]) { setCity(c); setRegionKey(MARKETS[c].region); }
+        const t = q.get('type');
+        if (t && PROPERTY_TYPES.some((p) => p.key === t)) setPropertyType(t);
+        const b = Number(q.get('br'));
+        if (b >= 1 && b <= 5) setBedrooms(b);
+    }, []);
+
     // Any change to the home resets the sliders to that market's figures.
     const reset = () => { setOccOverride(null); setAdrOverride(null); setCostOverride(null); };
     const pickRegion = (key) => { setRegionKey(key); setCity(Object.entries(MARKETS).find(([, m]) => m.region === key)[0]); reset(); };

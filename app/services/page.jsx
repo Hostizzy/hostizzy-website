@@ -95,7 +95,7 @@ export default function Services() {
                 name: "ChannelPro",
                 price: "\u20B915,000 \u2013 \u20B940,000",
                 period: "Per month (fixed)",
-                description: "Pricing based on your property's nightly rate. Or choose a 2-night stay equivalent or revenue share from 10\u201317%.",
+                description: "Fixed fee set by your property's nightly rate, or 15% of net revenue \u2014 your choice.",
                 features: [
                     "Multi-OTA channel management & sync",
                     "Dynamic pricing & revenue optimization",
@@ -108,7 +108,7 @@ export default function Services() {
             },
             {
                 name: "Hybrid Core",
-                price: "18%",
+                price: "20%",
                 period: "Of net revenue (Gross - OTA fees)",
                 description: "Everything in ChannelPro plus a direct booking channel and an account manager",
                 features: [
@@ -127,7 +127,7 @@ export default function Services() {
             {
                 name: "TotalCare360",
                 price: "30%",
-                period: "Profit share",
+                period: "Of net revenue (Gross - OTA fees)",
                 description: "For villas, farmhouses & boutique homes — we manage everything, you bear the operational costs.",
                 features: [
                     "Complete booking & reservation management",
@@ -175,7 +175,7 @@ export default function Services() {
     ];
 
     const faqs = [
-        { q: "How is revenue share calculated?", a: "Revenue share is calculated on net revenue (gross booking value minus OTA service fees). For Complete Management plans, it's based on profit share or revenue split depending on your property type." },
+        { q: "How is revenue share calculated?", a: "Revenue share is calculated on net revenue (gross booking value minus OTA service fees). ChannelPro (revenue option) is 15%, Hybrid Core 20% and TotalCare360 30% of net revenue; StayPrime is a 50-50 split of net revenue." },
         { q: "Can I upgrade or downgrade my plan later?", a: "Yes! We offer flexibility. You can switch plans with 30 days notice to suit your changing needs." },
         { q: "What if I only need marketing services?", a: "Our Add-ons like 'Social Media' or 'Premium Digital' are perfect for hosts who need marketing boost without full management." },
         { q: "Do you provide housekeeping and maintenance?", a: "Yes, our 'TotalCare360' and 'StayPrime' plans include full coordination of housekeeping, laundry, and maintenance." },
