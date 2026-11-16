@@ -121,6 +121,8 @@ export default function Calculator() {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [leadState, setLeadState] = useState('idle');
+    const [honeypot, setHoneypot] = useState('');
+    const loadedAt = useRef(Date.now());
 
     // Start from the homepage widget's choices: ?city=&type=&br=
     useEffect(() => {
@@ -190,6 +192,7 @@ export default function Calculator() {
                 body: JSON.stringify({
                     email, phone, city, propertyType, bedrooms, finishes: finish, plan: plan.name,
                     nightlyRate: adr, occupancy, revenue: result.gross, netIncome: result.owner,
+                    _hp_website: honeypot, _formLoadedAt: loadedAt.current,
                 }),
             });
             setLeadState(res.ok ? 'sent' : 'error');
@@ -452,7 +455,8 @@ export default function Calculator() {
                         {leadState === 'sent' ? (
                             <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: C.keep, fontWeight: 600, margin: 0 }}><Check size={18} /> Sent. We'll email your forecast within 24 hours.</p>
                         ) : (
-                            <form onSubmit={submitLead} style={{ display: 'grid', gap: '0.75rem' }}>
+                            <form onSubmit={submitLead} style={{ display: 'grid', gap: '0.75rem', position: 'relative' }}>
+                                <input type="text" name="website_url" tabIndex={-1} autoComplete="off" aria-hidden="true" value={honeypot} onChange={e => setHoneypot(e.target.value)} style={{ position: 'absolute', width: 1, height: 1, padding: 0, border: 0, overflow: 'hidden', clip: 'rect(0 0 0 0)', whiteSpace: 'nowrap' }} />
                                 <input type="email" required placeholder="Email" aria-label="Email" value={email} onChange={(e) => setEmail(e.target.value)} style={{ padding: '0.8rem 1rem', border: `1px solid ${C.line}`, borderRadius: '0.7rem', fontSize: '1rem' }} />
                                 <input type="tel" placeholder="Phone (optional)" aria-label="Phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{ padding: '0.8rem 1rem', border: `1px solid ${C.line}`, borderRadius: '0.7rem', fontSize: '1rem' }} />
                                 <button type="submit" className="btn btn-gradient" disabled={leadState === 'sending'}>{leadState === 'sending' ? 'Sending…' : 'Send my forecast'}</button>

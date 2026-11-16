@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, ArrowLeft, CheckCircle, Home, Building2, TreePine, House, Hotel, MessageCircle, MapPin, Link2, Star, HelpCircle } from 'lucide-react';
 import Link from 'next/link';
@@ -79,6 +79,7 @@ const PropertyLeadWizard = ({ source = 'homepage', prefilledCity = '' }) => {
     const [step, setStep] = useState(1);
     const [direction, setDirection] = useState(1);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const loadedAt = useRef(Date.now());
     const [error, setError] = useState('');
     const [isMobile, setIsMobile] = useState(false);
 
@@ -123,6 +124,7 @@ const PropertyLeadWizard = ({ source = 'homepage', prefilledCity = '' }) => {
                     ...formData,
                     source,
                     timestamp: new Date().toISOString(),
+                    _formLoadedAt: loadedAt.current,
                 }),
             });
             if (!res.ok) throw new Error('Submission failed');

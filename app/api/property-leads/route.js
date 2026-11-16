@@ -5,13 +5,21 @@ import { DATA_FILES, readJson, writeJson } from '@/lib/db';
 import { errorResponse, successResponse, getRequestBody, generateId } from '@/lib/utils';
 import { sendEmail, sendPropertyLeadWelcome } from '@/lib/email';
 import { forwardLeadToHostSuite } from '@/lib/hostsuite';
+import { checkSpam } from '@/lib/antispam';
 
 // POST /api/property-leads — public, captures property owner lead
 export async function POST(request) {
     try {
         const body = await getRequestBody(request);
-        if (!body || !body.name || !body.phone || !body.email) {
-            return errorResponse('Name, phone, and email are required', 400);
+        // The wizard asks for all three; the chat's "call me" form sends only
+        // a name and phone, so email is optional here.
+        if (!body || !body.name || !body.phone) {
+            return errorResponse('Name and phone are required', 400);
+        }
+
+        // Honeypot, fill-time and rate checks. Bots are told it worked.
+        if (checkSpam(body, request, { requireTiming: true }).isSpam) {
+            return successResponse({ success: true, message: 'Lead captured successfully' });
         }
 
         // Determine lead quality
@@ -21,8 +29,9 @@ export async function POST(request) {
             : hasPropertyDetails ? 'medium'
             : 'low';
 
+        const { _hp_website, _formLoadedAt, ...fields } = body; // eslint-disable-line no-unused-vars
         const lead = {
-            ...body,
+            ...fields,
             id: generateId(),
             status: 'new',
             quality,
@@ -74,7 +83,7 @@ export async function POST(request) {
                         `
                     }),
                     // Only send welcome email for high/medium quality leads
-                    ...(quality !== 'low' ? [sendPropertyLeadWelcome(lead)] : []),
+                    ...(quality !== 'low' && lead.email ? [sendPropertyLeadWelcome(lead)] : []),
                 ]).then(results => {
                     results.forEach((r, i) => {
                         if (r.status === 'rejected') console.error(`Email ${i} failed:`, r.reason?.message);

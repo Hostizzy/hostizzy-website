@@ -4,20 +4,27 @@ import { DATA_FILES, readJson, writeJson } from '@/lib/db';
 import { errorResponse, successResponse, getRequestBody, generateId } from '@/lib/utils';
 import { sendCalculatorLeadNotification } from '@/lib/email';
 import { forwardLeadToHostSuite } from '@/lib/hostsuite';
+import { checkSpam } from '@/lib/antispam';
 
 // POST /api/calculator-leads - Submit calculator lead (public - no auth required)
 export async function POST(request) {
   try {
     const body = await getRequestBody(request);
 
-    if (!body) {
-      return errorResponse('Request body is required', 400);
+    if (!body || !body.email) {
+      return errorResponse('Email is required', 400);
     }
+
+    // Honeypot, fill-time and rate checks. Bots are told it worked.
+    if (checkSpam(body, request, { requireTiming: true }).isSpam) {
+      return successResponse({ success: true });
+    }
+    const { _hp_website, _formLoadedAt, ...fields } = body; // eslint-disable-line no-unused-vars
 
     const leads = readJson(DATA_FILES.CALCULATOR_LEADS);
     const newLead = {
       id: generateId(),
-      ...body,
+      ...fields,
       createdAt: new Date().toISOString()
     };
     leads.unshift(newLead);

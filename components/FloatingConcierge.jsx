@@ -58,6 +58,8 @@ const FloatingConcierge = () => {
     const [showLeadForm, setShowLeadForm] = useState(false);
     const [leadData, setLeadData] = useState({ name: '', phone: '' });
     const [leadSubmitted, setLeadSubmitted] = useState(false);
+    const [honeypot, setHoneypot] = useState('');
+    const loadedAt = useRef(Date.now());
     const [messageCount, setMessageCount] = useState(0);
     // Measured after mount, never during render — reading window.innerWidth
     // in the render body makes the server and client disagree and breaks hydration.
@@ -168,19 +170,30 @@ const FloatingConcierge = () => {
 
     const handleLeadSubmit = async () => {
         if (!leadData.name.trim() || !leadData.phone.trim()) return;
+        let ok = false;
         try {
-            await fetch('/api/property-leads', {
+            const res = await fetch('/api/property-leads', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    name: leadData.name,
-                    phone: leadData.phone,
-                    email: '',
+                    name: leadData.name.trim(),
+                    phone: leadData.phone.trim(),
                     source: 'chatbot',
                     timestamp: new Date().toISOString(),
+                    _hp_website: honeypot,
+                    _formLoadedAt: loadedAt.current,
                 }),
             });
-        } catch { /* best effort */ }
+            ok = res.ok;
+        } catch { /* handled below */ }
+        if (!ok) {
+            setMessages(prev => [...prev, {
+                role: 'assistant',
+                content: "Sorry, that didn't go through. Please try again, or message us on WhatsApp at +91 95604 93335.",
+                quickReplies: ['WhatsApp Us'],
+            }]);
+            return;
+        }
         setLeadSubmitted(true);
         setShowLeadForm(false);
         setMessages(prev => [...prev, {
@@ -359,7 +372,8 @@ const FloatingConcierge = () => {
                                     <div style={{ fontSize: '0.7rem', color: '#64748b', marginBottom: '10px' }}>
                                         Share your details — we'll reach out within 24 hours.
                                     </div>
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', position: 'relative' }}>
+                                        <input type="text" name="website_url" tabIndex={-1} autoComplete="off" aria-hidden="true" value={honeypot} onChange={e => setHoneypot(e.target.value)} style={{ position: 'absolute', width: 1, height: 1, padding: 0, border: 0, overflow: 'hidden', clip: 'rect(0 0 0 0)', whiteSpace: 'nowrap' }} />
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#f8fafc', borderRadius: '8px', padding: '6px 10px', border: '1px solid #e2e8f0' }}>
                                             <User size={14} color="#94a3b8" />
                                             <input
